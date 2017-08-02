@@ -1,5 +1,5 @@
 package item;
-public abstract class Item {
+public abstract class Item implements Comparable<Item>{
 
 	private String nome;
 	private double valor;
@@ -32,6 +32,11 @@ public abstract class Item {
 
 	public void setEmprestado(boolean emprestado) {
 		this.emprestado = emprestado;
+	}
+
+	@Override
+	public int compareTo(Item outroItem) {
+		return this.nome.compareTo(outroItem.nome);
 	}
 
 }
