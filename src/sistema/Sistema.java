@@ -10,14 +10,14 @@ public class Sistema {
 	private List<Usuario> usuarios;
 	private Listador listador;
 
-	public Sistema() {
+	public Sistema() 
 		this.usuarios = new ArrayList<>();
 		this.listador = new Listador();
 	}
 
 	public void cadastrarUsuario(String nome, String telefone, String email) {
 		Usuario user = new Usuario(nome, telefone, email);
-
+    
 		if (this.usuarios.contains(user)) {
 			throw new IllegalArgumentException("Usuario ja cadastrado");
 		}
@@ -32,8 +32,8 @@ public class Sistema {
 				return user;
 			}
 		}
+    
 		throw new IllegalArgumentException("Usuario invalido");
-
 	}
 
 	public String getInfoUser(String nome, String telefone, String atributo) {
@@ -43,13 +43,10 @@ public class Sistema {
 
 		case ("Nome"):
 			return user.getNome();
-		
 		case ("Telefone"):
 			return user.getTelefone();
-
 		case ("Email"):
 			return user.getEmail();
-
 		default:
 			throw new IllegalArgumentException();
 
@@ -64,20 +61,16 @@ public class Sistema {
 		case ("Nome"):
 			user.setNome(valor);
 			break;
-
 		case ("Telefone"):
 			user.setTelefone(valor);
 			break;
-
 		case ("Email"):
 			user.setEmail(valor);
-			break;
-
+      break;
 		default:
 			throw new IllegalArgumentException();
 
 		}
-
 	}
 
 	public void removeUsuario(String nome, String telefone) {
