@@ -36,6 +36,10 @@ public class Temporada extends BlueRay {
 	public void setTemporada(int temporada) {
 		this.temporada = temporada;
 	}
+
+	public void addBlueray(int duracao) {
+		// TODO Auto-generated method stub
+	}
 	
 	
 
