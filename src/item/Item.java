@@ -1,5 +1,4 @@
 package item;
-
 public abstract class Item {
 
 	private String nome;
@@ -9,8 +8,6 @@ public abstract class Item {
 	public Item(String nome, double valor) {
 		this.nome = nome;
 		this.valor = valor;
-
-		this.emprestado = false;
 	}
 
 	public String getNome() {
