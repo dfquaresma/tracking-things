@@ -10,7 +10,7 @@ public class Sistema {
 	private List<Usuario> usuarios;
 	private Listador listador;
 
-	public Sistema() 
+	public Sistema() {
 		this.usuarios = new ArrayList<>();
 		this.listador = new Listador();
 	}
