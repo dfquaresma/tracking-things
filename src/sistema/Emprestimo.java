@@ -2,63 +2,62 @@ package sistema;
 
 public class Emprestimo {
 
-	private String donoDoItem;
-	private String quemPegouEmprestado;
-	private String itemEmprestado;
-	private String dataInicial;
-	private int diasCombinadosDoEmprestimo;
+	private String nomeDono;
+	private String nomeRequerente;
+	private String nomeItem;
+	private String dataEmprestimo;
+	private int periodo;
 	private String dataRealDaDevolucaoDoItem;
 
-	public Emprestimo(String donoDoItem, String quemPegouEmprestado, String itemEmprestado, String dataInicial,
-			int diasCombinadosDoEmprestimo, String dataRealDaDevolucaoDoItem) {
+	public Emprestimo(String nomeDono, String nomeRequerente, String nomeItem, String dataEmprestimo, int periodo) {
 
-		this.donoDoItem = donoDoItem;
-		this.quemPegouEmprestado = quemPegouEmprestado;
-		this.itemEmprestado = itemEmprestado;
-		this.dataInicial = dataInicial;
-		this.diasCombinadosDoEmprestimo = diasCombinadosDoEmprestimo;
-		this.dataRealDaDevolucaoDoItem = dataRealDaDevolucaoDoItem;
+		this.nomeDono = nomeDono;
+		this.nomeRequerente = nomeRequerente;
+		this.nomeItem = nomeItem;
+		this.dataEmprestimo = dataEmprestimo;
+		this.dataEmprestimo = dataEmprestimo;
+		this.periodo = periodo;
 
 	}
 
-	public String getDonoDoItem() {
-		return donoDoItem;
+	public String getnomeDono() {
+		return nomeDono;
 	}
 
-	public void setDonoDoItem(String donoDoItem) {
-		this.donoDoItem = donoDoItem;
+	public void setnomeDono(String nomeDono) {
+		this.nomeDono = nomeDono;
 	}
 
-	public String getQuemPegouEmprestado() {
-		return quemPegouEmprestado;
+	public String getnomeRequerente() {
+		return nomeRequerente;
 	}
 
-	public void setQuemPegouEmprestado(String quemPegouEmprestado) {
-		this.quemPegouEmprestado = quemPegouEmprestado;
+	public void setnomeRequerente(String nomeRequerente) {
+		this.nomeRequerente = nomeRequerente;
 	}
 
-	public String getItemEmprestado() {
-		return itemEmprestado;
+	public String getnomeItem() {
+		return nomeItem;
 	}
 
-	public void setItemEmprestado(String itemEmprestado) {
-		this.itemEmprestado = itemEmprestado;
+	public void setnomeItem(String nomeItem) {
+		this.nomeItem = nomeItem;
 	}
 
-	public String getDataInicial() {
-		return dataInicial;
+	public String getdataEmprestimo() {
+		return dataEmprestimo;
 	}
 
-	public void setDataInicial(String dataInicial) {
-		this.dataInicial = dataInicial;
+	public void setdataEmprestimo(String dataEmprestimo) {
+		this.dataEmprestimo = dataEmprestimo;
 	}
 
-	public int getDiasCombinadosDoEmprestimo() {
-		return diasCombinadosDoEmprestimo;
+	public int getperiodo() {
+		return periodo;
 	}
 
-	public void setDiasCombinadosDoEmprestimo(int diasCombinadosDoEmprestimo) {
-		this.diasCombinadosDoEmprestimo = diasCombinadosDoEmprestimo;
+	public void setperiodo(int periodo) {
+		this.periodo = periodo;
 	}
 
 	public String getDataRealDaDevolucaoDoItem() {
@@ -68,8 +67,5 @@ public class Emprestimo {
 	public void setDataRealDaDevolucaoDoItem(String dataRealDaDevolucaoDoItem) {
 		this.dataRealDaDevolucaoDoItem = dataRealDaDevolucaoDoItem;
 	}
-	
-	
-	
 
 }
