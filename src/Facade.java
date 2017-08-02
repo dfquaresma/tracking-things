@@ -21,6 +21,10 @@ public class Facade {
 		this.sistema.attUsuario(nome,telefone,atributo,valor);
 	}
 	
+	public void removerUsuario(String nome, String telefone) {
+		this.sistema.removeUsuario(nome, telefone);		
+	}
+	
 	public void cadastrarEletronico(String nome,String telefone,String nomeItem,double preco,String plataforma){
 		this.sistema.cadastrarEletronico(nome,telefone,nomeItem,preco,plataforma);
 	}
