@@ -6,10 +6,6 @@ public class Facade {
 
 	private Sistema sistema;
 
-	public Facade() {
-		
-	}
-	
 	public void iniciarSistema(){
 		this.sistema = new Sistema();		
 	}
