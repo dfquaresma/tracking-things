@@ -7,6 +7,8 @@ import java.util.Map;
 
 import item.FabricaDeItem;
 import item.Item;
+import item.blueray.BlueRay;
+import item.blueray.Temporada;
 import sistema.Emprestimo;
 
 public class Usuario {
@@ -81,14 +83,18 @@ public class Usuario {
 		
 	}
 
-	public void addBlueray(String nomeBluray, int duracao) {
-		// TODO Auto-generated method stub
-		
+	public void addBlueray(String nomeBlueray, int duracao) {
+		Temporada temporada = (Temporada) this.pegaItem(nomeBlueray);
+		temporada.addBlueray(duracao);
 	}
 
 	public void removerItem(String nomeItem) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public Item pegaItem(String nomeItem) {
+		return this.itens.get(nomeItem);
 	}
 
 	public void attItem(String nomeItem, double valor, String atributo) {
