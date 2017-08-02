@@ -3,13 +3,16 @@ package sistema;
 import java.util.ArrayList;
 import java.util.List;
 
+import item.Item;
 import usuario.Usuario;
 
 public class Sistema {
 	private List<Usuario> usuarios;
+	private Listador listador;
 
 	public Sistema() {
 		this.usuarios = new ArrayList<>();
+		this.listador = new Listador();
 	}
 
 	public void cadastrarUsuario(String nome, String telefone, String email) {
@@ -142,11 +145,21 @@ public class Sistema {
 	}
 
 	public String listarOrdenadosNome() {
-		return null;
+		List<Item> itens = new ArrayList<>();
+
+		for (Usuario user : this.usuarios) {
+			itens.addAll(user.getItens());
+		}
+		return this.listador.listaItensOrdenadosPorNome(itens);
 	}
 
 	public String listarOrdenadosValor() {
-		return null;
+		List<Item> itens = new ArrayList<>();
+
+		for (Usuario user : this.usuarios) {
+			itens.addAll(user.getItens());
+		}
+		return this.listador.listaItensOrdenadosPorValor(itens);
 	}
 
 	public String getDetalhesItem(String nome, String telefone, String nomeItem) {
@@ -157,16 +170,18 @@ public class Sistema {
 	public void registrarEmprestimo(String nomeDono, String telefoneDono, String nomeRequerente,
 			String telefoneRequerente, String nomeItem, String dataEmprestimo, int periodo) {
 		Usuario userEmprestador = getUser(nomeDono, telefoneDono);
-		Usuario userRequerente= getUser(nomeRequerente, telefoneRequerente);
+		Usuario userRequerente = getUser(nomeRequerente, telefoneRequerente);
 		Emprestimo emprestimo = new Emprestimo(nomeDono, nomeRequerente, nomeItem, dataEmprestimo, periodo);
 		userEmprestador.empresta(emprestimo);
 		userRequerente.pegaEmprestado(emprestimo);
-			
+
 	}
 
 	public void devolverItem(String nomeDono, String telefoneDono, String nomeRequerente, String telefoneRequerente,
 			String nomeItem, String dataEmprestimo, String dataDevolucao) {
-		
+		Usuario user = getUser(nomeRequerente, telefoneRequerente);
+		user.devolveItem(nomeDono, telefoneDono, nomeItem, dataEmprestimo, dataDevolucao);
+
 	}
 
 }

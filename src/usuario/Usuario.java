@@ -1,5 +1,7 @@
 package usuario;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -109,6 +111,19 @@ public class Usuario {
 	}
 
 	public void pegaEmprestado(Emprestimo emprestimo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public ArrayList<Item> getItens() {
+		ArrayList<Item> itensToCopy = new ArrayList<>(this.itens.values());
+		ArrayList<Item> itens = new ArrayList<>();
+		Collections.copy(itens, itensToCopy);
+		return itens;
+	}
+
+	public void devolveItem(String nomeDono, String telefoneDono, String nomeItem, String dataEmprestimo,
+			String dataDevolucao) {
 		// TODO Auto-generated method stub
 		
 	}
