@@ -65,6 +65,4 @@ public class Temporada extends BlueRay {
 		return ( duracaoTotalEpisodios == super.getDuracao() );
 	}
 	
-	
-
 }

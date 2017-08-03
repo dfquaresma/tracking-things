@@ -18,7 +18,10 @@ public abstract class Item implements Comparable<Item>
 		this.emprestado = false; //Um item no momento que eh cadastrado nao eh emprestado
 	}
 	
-	public abstract boolean podeSerEmprestado();
+	public boolean podeSerEmprestado()
+	{
+		return true;
+	}
 
 	public String getNome() {
 		return nome;

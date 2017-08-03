@@ -31,11 +31,5 @@ public class Filme extends BlueRay {
 	public void setAnoDeLancamento(int anoDeLancamento) {
 		this.anoDeLancamento = anoDeLancamento;
 	}
-
-	@Override
-	public boolean podeSerEmprestado() {
-		// TODO Auto-generated method stub
-		return true;
-	}
 	
 }
