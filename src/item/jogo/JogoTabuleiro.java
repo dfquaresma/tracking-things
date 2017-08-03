@@ -8,4 +8,10 @@ public class JogoTabuleiro extends Item {
 		super(nome, valor);
 	}
 
+	@Override
+	public boolean podeSerEmprestado() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
 }

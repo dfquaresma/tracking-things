@@ -18,6 +18,12 @@ public class JogoEletronico  extends Item {
 	public void setPlataforma(String plataforma) {
 		this.plataforma = plataforma;
 	}
+
+	@Override
+	public boolean podeSerEmprestado() {
+		// TODO Auto-generated method stub
+		return true;
+	}
 	
 	
 
