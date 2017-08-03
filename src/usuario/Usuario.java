@@ -10,6 +10,11 @@ import item.Item;
 import item.blueray.Temporada;
 import sistema.Emprestimo;
 
+
+/**
+ * Description: 
+ *
+ */
 public class Usuario {
 	
 	private String nome;

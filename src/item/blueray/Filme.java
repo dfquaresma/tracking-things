@@ -3,7 +3,6 @@ package item.blueray;
 /**
  * Description: Os blu rays de filmes devem ainda ter genero e ano de lancamento.
  * 
- * @author paulofelipe
  *
  */
 public class Filme extends BlueRay {
@@ -31,6 +30,12 @@ public class Filme extends BlueRay {
 
 	public void setAnoDeLancamento(int anoDeLancamento) {
 		this.anoDeLancamento = anoDeLancamento;
+	}
+
+	@Override
+	public boolean podeSerEmprestado() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 	
 }

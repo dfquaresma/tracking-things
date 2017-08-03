@@ -3,7 +3,6 @@ package item.blueray;
 /**
  * Description: Os blu rays de shows devem indicar o nome do artista e o número de faixas.
  * 
- * @author paulofelipe
  *
  */
 public class Show extends BlueRay {
@@ -31,6 +30,12 @@ public class Show extends BlueRay {
 
 	public void setArtista(String artista) {
 		this.artista = artista;
+	}
+
+	@Override
+	public boolean podeSerEmprestado() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 	
