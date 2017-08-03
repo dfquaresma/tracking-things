@@ -2,6 +2,12 @@ package item.blueray;
 
 import item.Item;
 
+/**
+ * Description: Alem das informacoes gerais que todo item possui, todo blu ray deve ter uma duracao e uma classificacao
+ * 
+ * @author paulofelipe
+ *
+ */
 public abstract class BlueRay extends Item {
 
 	private int duracao;

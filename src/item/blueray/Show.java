@@ -1,5 +1,11 @@
 package item.blueray;
 
+/**
+ * Description: Os blu rays de shows devem indicar o nome do artista e o número de faixas.
+ * 
+ * @author paulofelipe
+ *
+ */
 public class Show extends BlueRay {
 
 	private int numDeFaixas;

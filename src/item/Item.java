@@ -1,5 +1,11 @@
 package item;
 
+/**
+ * Description: Todo item precisa manter o seu nome, o seu valor (que pode ser o valor de compra) e se esta ou não emprestado no momento.
+ * 
+ * @author paulofelipe
+ *
+ */
 public abstract class Item implements Comparable<Item>
 {
 

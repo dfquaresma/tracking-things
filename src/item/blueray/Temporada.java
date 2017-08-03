@@ -1,5 +1,11 @@
 package item.blueray;
 
+/**
+ * Description: No blu ray de uma temporada você deve guardar a coleção de blu-rays que compõem a temporada.
+ * 
+ * @author paulofelipe
+ *
+ */
 public class Temporada extends BlueRay {
 
 	private String descricao;
