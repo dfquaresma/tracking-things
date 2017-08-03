@@ -16,6 +16,7 @@ public abstract class Item implements Comparable<Item>
 	public Item(String nome, double valor) {
 		this.nome = nome;
 		this.valor = valor;
+		this.emprestado = false;
 	}
 
 	public String getNome() {
