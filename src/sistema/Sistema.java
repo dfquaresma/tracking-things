@@ -1,37 +1,41 @@
 package sistema;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import item.Item;
+import usuario.IdUsuario;
 import usuario.Usuario;
 
 public class Sistema {
-	private List<Usuario> usuarios;
+	private Map<IdUsuario, Usuario> usuarios;
 	private Listador listador;
 
 	public Sistema() {
-		this.usuarios = new ArrayList<>();
+		this.usuarios = new HashMap<>();
 		this.listador = new Listador();
 	}
 
 	public void cadastrarUsuario(String nome, String telefone, String email) {
+		IdUsuario id = new IdUsuario(nome, telefone);
 		Usuario user = new Usuario(nome, telefone, email);
     
-		if (this.usuarios.contains(user)) {
+		if (this.usuarios.containsKey(id)) {
 			throw new IllegalArgumentException("Usuario ja cadastrado");
 		}
-		this.usuarios.add(user);
+		this.usuarios.put(id, user);
 	}
 
 	private Usuario getUser(String nome, String telefone) {
 
-		for (Usuario user : this.usuarios) {
-			if (user.getNome().equals(nome) && user.getTelefone().equals(telefone)) {
-				return user;
-			}
+		IdUsuario id = new IdUsuario(nome, telefone);
+		
+		if (this.usuarios.containsKey(id)) {
+			return this.usuarios.get(id);
 		}
-    
+		
 		throw new IllegalArgumentException("Usuario invalido");
 	}
 
@@ -54,7 +58,8 @@ public class Sistema {
 
 	public void attUsuario(String nome, String telefone, String atributo, String valor) {
 		Usuario user = getUser(nome, telefone);
-
+		IdUsuario idAntigo = new IdUsuario(nome, telefone);
+		
 		switch (atributo) {
 
 		case ("Nome"):
@@ -68,20 +73,22 @@ public class Sistema {
       break;
 		default:
 			throw new IllegalArgumentException();
-
 		}
+		
+		IdUsuario novoId= new IdUsuario(user.getNome(), user.getTelefone());
+		this.usuarios.remove(idAntigo);
+		this.usuarios.put(novoId, user);
+		
 	}
 
 	public void removeUsuario(String nome, String telefone) {
+		IdUsuario id = new IdUsuario(nome, telefone);
+		
+		if (!this.usuarios.containsKey(id)) {
+			throw new IllegalArgumentException("Usuario invalido");
+		} 
 
-		for (int i = 0; i < this.usuarios.size(); i++) {
-			Usuario user = this.usuarios.get(i);
-			if (user.getNome().equals(nome) && user.getTelefone().equals(telefone)) {
-				this.usuarios.remove(i);
-				return;
-			}
-		}
-		throw new IllegalArgumentException("Usuario invalido");
+		this.usuarios.remove(id);
 
 	}
 
@@ -142,7 +149,7 @@ public class Sistema {
 	public String listarOrdenadosNome() {
 		List<Item> itens = new ArrayList<>();
 
-		for (Usuario user : this.usuarios) {
+		for (Usuario user : this.usuarios.values()) {
 			itens.addAll(user.getItens());
 		}
 		return this.listador.listaItensOrdenadosPorNome(itens);
@@ -151,7 +158,7 @@ public class Sistema {
 	public String listarOrdenadosValor() {
 		List<Item> itens = new ArrayList<>();
 
-		for (Usuario user : this.usuarios) {
+		for (Usuario user : this.usuarios.values()) {
 			itens.addAll(user.getItens());
 		}
 		return this.listador.listaItensOrdenadosPorValor(itens);

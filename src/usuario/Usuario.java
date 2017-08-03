@@ -29,6 +29,7 @@ public class Usuario {
 		this.email = email;
 		this.fabricaDeItem = new FabricaDeItem();
 		this.itens = new HashMap<>();
+
 	}
 
 	public String getNome() {
@@ -54,7 +55,7 @@ public class Usuario {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	
 	public void cadastrarEletronico(String nomeItem, double preco, String plataforma) {
 		verificaPreco(preco);
 		Item novoItem = this.fabricaDeItem.criaJogoEletronico(nomeItem, preco, plataforma);
