@@ -5,9 +5,13 @@ import sistema.Sistema;
 public class Facade {
 
 	private Sistema sistema;
+	
+	public Facade(){
+		this.sistema = new Sistema();
+	}
 
 	public void iniciarSistema(){
-		this.sistema = new Sistema();		
+		
 	}
 
 	public void cadastrarUsuario(String nome, String telefone, String email) {
@@ -64,7 +68,7 @@ public class Facade {
 		this.sistema.removerItem(nome, telefone, nomeItem);
 	}
 
-	public void atualizarItem(String nome, String telefone, String nomeItem, double valor, String atributo) {
+	public void atualizarItem(String nome, String telefone, String nomeItem, String valor, String atributo) {
 		this.sistema.attItem(nome, telefone, nomeItem, valor, atributo);
 	}
 

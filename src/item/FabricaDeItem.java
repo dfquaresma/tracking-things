@@ -28,4 +28,7 @@ public class FabricaDeItem {
 		return new Temporada(nome, preco, descricao, duracao, classificacao, genero, temporada);
 	}
 	
+	
+	
+	
 }

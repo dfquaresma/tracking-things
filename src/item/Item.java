@@ -15,7 +15,7 @@ public abstract class Item implements Comparable<Item>
 	public Item(String nome, double valor) {
 		this.nome = nome;
 		this.valor = valor;
-		this.emprestado = false; //Um item no momento que eh cadastrado nao eh emprestado
+		this.emprestado = false;
 	}
 	
 	public boolean podeSerEmprestado()
@@ -50,6 +50,20 @@ public abstract class Item implements Comparable<Item>
 	@Override
 	public int compareTo(Item outroItem) {
 		return this.nome.compareTo(outroItem.nome);
+	}
+	
+	public String getInfo(String atributo) {
+		
+		switch (atributo) {
+		case ("Nome"):
+			return this.nome;
+		case ("Preco"):
+			return String.valueOf(this.valor);
+		default:
+			throw new IllegalArgumentException();
+			
+		}
+		
 	}
 
 }

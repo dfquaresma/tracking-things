@@ -22,7 +22,6 @@ public class Sistema {
 			throw new IllegalArgumentException("Usuario ja cadastrado");
 		}
 		this.usuarios.add(user);
-
 	}
 
 	private Usuario getUser(String nome, String telefone) {
@@ -129,9 +128,9 @@ public class Sistema {
 		user.removerItem(nomeItem);
 	}
 
-	public void attItem(String nome, String telefone, String nomeItem, double valor, String atributo) {
+	public void attItem(String nome, String telefone, String nomeItem, String atributo, String valor) {
 		Usuario user = getUser(nome, telefone);
-		user.attItem(nomeItem, valor, atributo);
+		user.attItem(nomeItem,atributo,valor);
 
 	}
 
