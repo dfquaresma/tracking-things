@@ -19,6 +19,13 @@ public class JogoEletronico  extends Item {
 		this.plataforma = plataforma;
 	}
 	
+	@Override
+	public String getInfo(String atributo){
 	
+		if (atributo.equals("Plataforma")) {
+			return this.plataforma.toString();
+		}
+		return super.getInfo(atributo);
+	}
 
 }

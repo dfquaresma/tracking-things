@@ -33,4 +33,19 @@ public class Filme extends BlueRay {
 		this.anoDeLancamento = anoDeLancamento;
 	}
 	
+
+	@Override
+	public String getInfo(String atributo){
+		
+		switch (atributo) {
+		case("Genero"):
+			return this.genero.toString();
+		case("Lancamento"):
+			return String.valueOf(this.anoDeLancamento);
+		default:
+			return super.getInfo(atributo);
+		}
+		
+	}
+	
 }

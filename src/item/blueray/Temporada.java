@@ -48,5 +48,21 @@ public class Temporada extends BlueRay {
 	}
 	
 	
+	@Override
+	public String getInfo(String atributo){
+		
+		switch (atributo) {
+		case("Descricao"):
+			return this.descricao;
+		case("Genero"):
+			return this.genero.toString();
+		case("Temporada"):
+			return String.valueOf(this.temporada);
+		default:
+			return super.getInfo(atributo);
+		}
+		
+	}
+	
 
 }
