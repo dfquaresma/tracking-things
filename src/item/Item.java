@@ -47,5 +47,19 @@ public abstract class Item implements Comparable<Item>
 	public int compareTo(Item outroItem) {
 		return this.nome.compareTo(outroItem.nome);
 	}
+	
+	public String getInfo(String atributo) {
+		
+		switch (atributo) {
+		case ("Nome"):
+			return this.nome;
+		case ("Preco"):
+			return String.valueOf(this.valor);
+		default:
+			throw new IllegalArgumentException();
+			
+		}
+		
+	}
 
 }
