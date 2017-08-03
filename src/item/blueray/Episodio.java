@@ -1,15 +1,9 @@
 package item.blueray;
 
-public class Episodio {
+public class Episodio extends BlueRay {
 
-	private int duracao;
-	
-	public Episodio(int duracao) {
-		this.duracao = duracao;
-	}
-	
-	public int getDuracao() {
-		return this.duracao;
+	public Episodio(String nome, double valor, int duracao, String classificacao) {
+		super(nome, valor, duracao, classificacao);
 	}
 
 }
