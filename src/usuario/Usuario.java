@@ -164,4 +164,9 @@ public class Usuario {
 		return true;
 	}
 	
+	@Override
+	public String toString()
+	{
+		return this.nome + ", " + this.email + ", " + this.telefone;
+	}
 }
