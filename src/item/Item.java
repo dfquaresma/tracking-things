@@ -1,5 +1,12 @@
 package item;
-public abstract class Item implements Comparable<Item>{
+
+/**
+ * Description: Todo item precisa manter o seu nome, o seu valor (que pode ser o valor de compra) e se esta ou não emprestado no momento.
+ * 
+ *
+ */
+public abstract class Item implements Comparable<Item>
+{
 
 	private String nome;
 	private double valor;
@@ -8,6 +15,12 @@ public abstract class Item implements Comparable<Item>{
 	public Item(String nome, double valor) {
 		this.nome = nome;
 		this.valor = valor;
+		this.emprestado = false;
+	}
+	
+	public boolean podeSerEmprestado()
+	{
+		return true;
 	}
 
 	public String getNome() {
@@ -37,6 +50,20 @@ public abstract class Item implements Comparable<Item>{
 	@Override
 	public int compareTo(Item outroItem) {
 		return this.nome.compareTo(outroItem.nome);
+	}
+	
+	public String getInfo(String atributo) {
+		
+		switch (atributo) {
+		case ("Nome"):
+			return this.nome;
+		case ("Preco"):
+			return String.valueOf(this.valor);
+		default:
+			throw new IllegalArgumentException();
+			
+		}
+		
 	}
 
 }

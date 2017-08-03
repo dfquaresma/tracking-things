@@ -1,5 +1,10 @@
 package item.blueray;
 
+/**
+ * Description: Os blu rays de shows devem indicar o nome do artista e o número de faixas.
+ * 
+ *
+ */
 public class Show extends BlueRay {
 
 	private int numDeFaixas;
@@ -26,7 +31,18 @@ public class Show extends BlueRay {
 	public void setArtista(String artista) {
 		this.artista = artista;
 	}
-
 	
-	
+	@Override
+	public String getInfo(String atributo){
+		
+		switch (atributo) {
+		case("Artista"):
+			return this.artista;
+		case("Numero de Faixas"):
+			return String.valueOf(this.numDeFaixas);
+		default:
+			return super.getInfo(atributo);
+		}
+		
+	}
 }
