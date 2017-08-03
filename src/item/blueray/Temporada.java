@@ -24,6 +24,22 @@ public class Temporada extends BlueRay {
 		this.temporada = temporada;
 		this.episodios = new ArrayList<Episodio>();
 	}
+	
+	public void addBlueray(int duracao) {
+		// NAO COMPLETO
+		this.episodios.add(new Episodio(duracao));
+	}
+
+	@Override
+	public boolean podeSerEmprestado()
+	{
+		int duracaoTotalEpisodios = 0;
+		
+		for(Episodio ep : this.episodios)
+			duracaoTotalEpisodios += ep.getDuracao();
+		
+		return ( duracaoTotalEpisodios == super.getDuracao() );
+	}
 
 	public String getDescricao() {
 		return descricao;
@@ -47,22 +63,6 @@ public class Temporada extends BlueRay {
 
 	public void setTemporada(int temporada) {
 		this.temporada = temporada;
-	}
-
-	public void addBlueray(int duracao) {
-		// NAO COMPLETO
-		this.episodios.add(new Episodio(duracao));
-	}
-
-	@Override
-	public boolean podeSerEmprestado()
-	{
-		int duracaoTotalEpisodios = 0;
-		
-		for(Episodio ep : this.episodios)
-			duracaoTotalEpisodios += ep.getDuracao();
-		
-		return ( duracaoTotalEpisodios == super.getDuracao() );
 	}
 	
 }
