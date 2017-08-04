@@ -172,10 +172,8 @@ public class Sistema {
 	public void registrarEmprestimo(String nomeDono, String telefoneDono, String nomeRequerente,
 			String telefoneRequerente, String nomeItem, String dataEmprestimo, int periodo) {
 		Usuario userEmprestador = getUser(nomeDono, telefoneDono);
-		Usuario userRequerente = getUser(nomeRequerente, telefoneRequerente);
-		Emprestimo emprestimo = new Emprestimo(nomeDono, nomeRequerente, nomeItem, dataEmprestimo, periodo);
-		userEmprestador.empresta(emprestimo);
-		userRequerente.pegaEmprestado(emprestimo);
+		Usuario userRequerente = getUser(nomeRequerente, telefoneRequerente);		
+		userEmprestador.emprestaItem(nomeItem, dataEmprestimo, periodo, userRequerente);
 
 	}
 

@@ -1,7 +1,5 @@
 package item.blueray;
 
-import java.util.Locale;
-
 /**
  * Description: Os blu rays de shows devem indicar o nome do artista e o número
  * de faixas.
@@ -51,7 +49,7 @@ public class Show extends BlueRay {
 
 	@Override
 	public String toString() {
-		return "SHOW: " + this.getNome() + ", R$ " + String.format(Locale.US, "%.2f", this.getValor())
+		return "SHOW: " + this.getNome() + ", R$ " + String.valueOf(this.getValor())
 				+ ", " + this.getEstadoEmprestimo() + ", " + this.getDuracao() + " min, " + this.getClassificacao() + ", "
 				+ this.getArtista() + ", " + this.getNumDeFaixas() + " faixas";
 	}

@@ -1,7 +1,5 @@
 package item.jogo;
 
-import java.util.Locale;
-
 import item.Item;
 
 public class JogoEletronico extends Item {
@@ -32,7 +30,7 @@ public class JogoEletronico extends Item {
 	
 	@Override
 	public String toString() {
-		return "JOGO ELETRONICO: " + this.getNome() + ", R$ " + String.format(Locale.US, "%.2f", this.getValor()) + ", " + this.getEstadoEmprestimo() + ", " + this.getPlataforma();
+		return "JOGO ELETRONICO: " + this.getNome() + ", R$ " + String.valueOf(this.getValor()) + ", " + this.getEstadoEmprestimo() + ", " + this.getPlataforma();
 	}
 	
 }

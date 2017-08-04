@@ -80,7 +80,7 @@ public class Facade {
 		return this.sistema.listarOrdenadosNome();
 	}
 
-	public String listarOrdenadosPorValor() {
+	public String listarItensOrdenadosPorValor() {
 		return this.sistema.listarOrdenadosValor();
 	}
 

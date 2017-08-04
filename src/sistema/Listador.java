@@ -25,6 +25,7 @@ public class Listador {
 		while (itr.hasNext()) {
 			repr += itr.next() + "|";
 		}
+		
 		return repr;
 	}
 

@@ -1,7 +1,5 @@
 package item.blueray;
 
-import java.util.Locale;
-
 /**
  * Description: Os blu rays de filmes devem ainda ter genero e ano de
  * lancamento.
@@ -51,7 +49,7 @@ public class Filme extends BlueRay {
 
 	@Override
 	public String toString() {
-		return "FILME: " + this.getNome() + ", R$ " + String.format(Locale.US, "%.2f", this.getValor())
+		return "FILME: " + this.getNome() + ", R$ " + String.valueOf(this.getValor())
 				+ ", " + this.getEstadoEmprestimo() + ", " + this.getDuracao() + " min, " + this.getClassificacao() + ", " + this.getGenero() + ", " + this.getAnoDeLancamento();
 	}
 

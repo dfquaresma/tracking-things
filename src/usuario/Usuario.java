@@ -1,9 +1,10 @@
 package usuario;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import item.Item;
 import item.blueray.Filme;
@@ -24,12 +25,16 @@ public class Usuario {
 	private String telefone;
 	private String email;
 	private Map<String, Item> itens;
+	private Set<Emprestimo> emprestimosComoEmprestador;
+	private Set<Emprestimo> emprestimosComoRequerente;
 
 	public Usuario(String nome, String telefone, String email){
 		this.nome = nome;
 		this.telefone = telefone;
 		this.email = email;
 		this.itens = new HashMap<>();
+		this.emprestimosComoEmprestador = new HashSet<>();
+		this.emprestimosComoRequerente = new HashSet<>();
 
 	}
 
@@ -59,39 +64,48 @@ public class Usuario {
 	
 	public void cadastrarEletronico(String nomeItem, double preco, String plataforma) {
 		verificaPreco(preco);
-		Item novoItem = new JogoEletronico(nome, preco, plataforma);
+		Item novoItem = new JogoEletronico(nomeItem, preco, plataforma);
 		this.itens.put(nomeItem, novoItem);
 	}
 
 	public void cadastrarJogoTabuleiro(String nomeItem, double preco) {
 		verificaPreco(preco);
-		Item novoItem = new JogoTabuleiro(nome, preco);
+		Item novoItem = new JogoTabuleiro(nomeItem, preco);
 		this.itens.put(nomeItem, novoItem);
 	}
 
 	public void addPecaPerdida(String nomeItem, String nomePeca) {
+		contemItem(nomeItem);
+
+		Item item = this.itens.get(nomeItem);
 		
+		if (!(item instanceof JogoTabuleiro)) {
+			throw new IllegalArgumentException();			
+		}
+		
+		JogoTabuleiro jogo = (JogoTabuleiro) item;
+		jogo.adicionarPecaPerdida(nomePeca);
 		
 	}
 
 	public void cadastrarBlurayFilme(String nomeItem, double preco, int duracao, String genero, String classificacao,
 			int anoLancamento) {
 		verificaPreco(preco);
-		Item novoItem = new Filme(nome, preco, duracao, genero, classificacao, anoLancamento);
+		Item novoItem = new Filme(nomeItem, preco, duracao, genero, classificacao, anoLancamento);
 		itens.put(nomeItem, novoItem);
 	}
 
 	public void cadastrarBluRaySerie(String nomeItem, double preco, String descricao, int duracao, String classificacao,
 			String genero, int temporada) {
 		verificaPreco(preco);
-		Item novoItem = new Temporada(nome, preco, descricao, duracao, classificacao, genero, temporada);
+		Item novoItem = new Temporada(nomeItem, preco, descricao, duracao, classificacao, genero, temporada);
 		itens.put(nomeItem, novoItem);
 	}
 
 	public void cadastrarBlurayShow(String nomeItem, double preco, int duracao, int numeroFaixas, String artista,
 			String classificacao) {
 		verificaPreco(preco);
-		Item novoItem = new Show(nome, preco, duracao, numeroFaixas, artista, classificacao);
+		Item novoItem = new Show(nomeItem, preco, duracao, numeroFaixas, artista, classificacao);
 		itens.put(nomeItem, novoItem);
 	}
 
@@ -126,37 +140,46 @@ public class Usuario {
 
 	public String getInfoItem(String nomeItem, String atributo) {
 		contemItem(nomeItem);
-		
 		Item item = itens.get(nomeItem);
 		return item.getInfo(atributo);
 	}
 
 	public String getDetalhesItem(String nomeItem) {
-		// TODO Auto-generated method stub
-		return null;
+		contemItem(nomeItem);
+		Item item = itens.get(nomeItem);
+		return item.toString();
 	}
 
-	public void empresta(Emprestimo emprestimo) {
-		
+	public void emprestaItem(String nomeItem, String dataEmprestimo, int periodo, Usuario userRequerente) {
+		Emprestimo emprestimo = new Emprestimo(this.nome, userRequerente.nome, nomeItem, dataEmprestimo, periodo);
+		userRequerente.pegaEmprestado(emprestimo);
+		this.emprestimosComoEmprestador.add(emprestimo);
 	}
 
-	public void pegaEmprestado(Emprestimo emprestimo) {
-		// TODO Auto-generated method stub
-		
+	private void pegaEmprestado(Emprestimo emprestimo) {
+		this.emprestimosComoRequerente.add(emprestimo);	
 	}
 
 	public ArrayList<Item> getItens() {
 		ArrayList<Item> itensToCopy = new ArrayList<>(this.itens.values());
-		ArrayList<Item> itens = new ArrayList<>();
-		Collections.copy(itens, itensToCopy);
-		return itens;
+		//ArrayList<Item> itens = new ArrayList<>();
+		//Collections.copy(itens, itensToCopy); Pretendo retornar uma cópia, assim que conseguir fazer sem dar "source does not fit in dest"
+		return itensToCopy;
 	}
 
 	public void devolveItem(String nomeDono, String telefoneDono, String nomeItem, String dataEmprestimo,
 			String dataDevolucao) {
-		// TODO Auto-generated method stub
-		
+		Emprestimo emprestimo = encontraEmprestimo(nomeDono, telefoneDono, nomeItem, dataEmprestimo);
+		emprestimo.finaliza(dataDevolucao);
+	
 	}
+
+	private Emprestimo encontraEmprestimo(String nomeDono, String telefoneDono, String nomeItem,
+			String dataEmprestimo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 
 	@Override
 	public int hashCode() {
@@ -206,6 +229,8 @@ public class Usuario {
 			throw new IllegalArgumentException("Item nao encontrado");
 		}
 	}
+
+	
 	
 	
 }

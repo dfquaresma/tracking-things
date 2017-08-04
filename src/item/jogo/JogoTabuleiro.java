@@ -1,7 +1,6 @@
 package item.jogo;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 import item.Item;
 
@@ -58,9 +57,9 @@ public class JogoTabuleiro extends Item {
 
 	@Override
 	public String toString() {
-		return "JOGO DE TABULEIRO: " + this.getNome() + ", R$ " + String.format(Locale.US, "%.2f", this.getValor())
+		return "JOGO DE TABULEIRO: " + this.getNome() + ", R$ " + String.valueOf(this.getValor())
 				+ ", " + this.getEstadoEmprestimo() + ", "
-				+ (this.isCompleto() ? "SEM PECAS PERDIDAS" : "COM PECAS PERDIDAS");
+				+ (this.isCompleto() ? "COMPLETO" : "COM PECAS PERDIDAS");
 	}
 
 }

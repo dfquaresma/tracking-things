@@ -1,7 +1,6 @@
 package item.blueray;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 /**
  * Description: No blu ray de uma temporada você deve guardar a coleção de
@@ -87,9 +86,9 @@ public class Temporada extends BlueRay {
 
 	@Override
 	public String toString() {
-		return "SERIE: " + this.getNome() + ", R$ " + String.format(Locale.US, "%.2f", this.getValor()) + ", "
+		return "SERIE: " + this.getNome() + ", R$ " + String.valueOf(this.getValor()) + ", "
 				+ this.getEstadoEmprestimo() + ", " + this.getDuracao() + " min, " + this.getClassificacao() + ", "
-				+ this.getGenero() + ", " + this.getTemporada();
+				+ this.getGenero() + ", Temporada " + this.getTemporada();
 	}
 
 }
