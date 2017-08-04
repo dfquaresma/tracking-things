@@ -1,7 +1,10 @@
 package item.blueray;
 
+import java.util.Locale;
+
 /**
- * Description: Os blu rays de filmes devem ainda ter genero e ano de lancamento.
+ * Description: Os blu rays de filmes devem ainda ter genero e ano de
+ * lancamento.
  * 
  *
  */
@@ -12,7 +15,7 @@ public class Filme extends BlueRay {
 
 	public Filme(String nome, double valor, int duracao, String genero, String classificacao, int anoDeLancamento) {
 		super(nome, valor, duracao, classificacao);
-		this.genero = ajustatGenero(genero);
+		this.genero = Genero.valueOf(genero);
 		this.anoDeLancamento = anoDeLancamento;
 	}
 
@@ -21,7 +24,7 @@ public class Filme extends BlueRay {
 	}
 
 	public void setGenero(String genero) {
-		this.genero = ajustatGenero(genero);
+		this.genero = Genero.valueOf(genero);
 	}
 
 	public int getAnoDeLancamento() {
@@ -31,77 +34,25 @@ public class Filme extends BlueRay {
 	public void setAnoDeLancamento(int anoDeLancamento) {
 		this.anoDeLancamento = anoDeLancamento;
 	}
-	
+
 	@Override
-	public String getInfo(String atributo){
-		
+	public String getInfo(String atributo) {
+
 		switch (atributo) {
-		case("Genero"):
+		case ("Genero"):
 			return this.genero.toString();
-		case("Lancamento"):
+		case ("Lancamento"):
 			return String.valueOf(this.anoDeLancamento);
 		default:
 			return super.getInfo(atributo);
 		}
-		
+
 	}
-	
-	
 
-	private Genero ajustatGenero(String genero) {
-		
-		switch (genero) {
-		
-		case  ("ACAO"):
-			return Genero.ACAO;
-
-		case  ("ANIMACAO"):
-			return Genero.ANIMACAO;
-
-		case  ("AVENTURA"):
-			return Genero.AVENTURA;
-
-		case  ("COMEDIA"):
-			return Genero.COMEDIA;
-
-		case  ("DOCUMENTARIO"):
-			return Genero.DOCUMENTARIO;
-
-		case  ("DRAMA"):
-			return Genero.DRAMA;
-			
-		case  ("EROTICO"):
-			return Genero.EROTICO;
-			
-		case  ("FAROESTE"):
-			return Genero.FAROESTE;
-			
-		case  ("FICCAO"):
-			return Genero.FICCAO;
-			
-		case  ("MUSICAL"):
-			return Genero.MUSICAL;
-			
-		case  ("POLICIAL"):
-			return Genero.POLICIAL;
-			
-		case  ("ROMANCE"):
-			return Genero.ROMANCE;
-			
-		case  ("SUSPENSE"):
-			return Genero.SUSPENSE;
-
-		case  ("TERROR"):
-			return Genero.TERROR;
-			
-		case  ("OUTRO"):		
-			return Genero.OUTRO;
-			
-		default:
-			throw new IllegalArgumentException();
-	
-		}
-		
+	@Override
+	public String toString() {
+		return "FILME: " + this.getNome() + ", R$ " + String.format(Locale.US, "%.2f", this.getValor())
+				+ ", " + this.getEstadoEmprestimo() + ", " + this.getDuracao() + " min, " + this.getClassificacao() + ", " + this.getGenero() + ", " + this.getAnoDeLancamento();
 	}
-	
+
 }

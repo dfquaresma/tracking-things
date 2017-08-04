@@ -16,7 +16,7 @@ public abstract class BlueRay extends Item {
 	public BlueRay(String nome, double valor, int duracao, String classificacao) {
 		super(nome, valor);
 		this.duracao = duracao;
-		this.classificacao = this.ajustaClassificacao(classificacao);
+		this.classificacao = Classificacao.valueOf(classificacao);
 
 	}
 
@@ -33,7 +33,7 @@ public abstract class BlueRay extends Item {
 	}
 
 	public void setClassificacao(String classificacao) {
-		this.classificacao = this.ajustaClassificacao(classificacao);
+		this.classificacao = Classificacao.valueOf(classificacao);
 	}
 
 	@Override
@@ -48,29 +48,6 @@ public abstract class BlueRay extends Item {
 			return super.getInfo(atributo);
 		}
 
-	}
-
-	private Classificacao ajustaClassificacao(String classificacao) {
-		
-		switch (classificacao) {
-		
-		case  ("LIVRE"):
-			return Classificacao.LIVRE;
-		case  ("DEZ_ANOS"):
-			return Classificacao.DEZ_ANOS;
-		case  ("DOZE_ANOS"):
-			return Classificacao.DOZE_ANOS;
-		case  ("QUATORZE_ANOS"):
-			return Classificacao.QUATORZE_ANOS;
-		case  ("DEZESSEIS_ANOS"):
-			return Classificacao.DEZESSEIS_ANOS;
-		case  ("DEZOITO_ANOS"):
-			return Classificacao.DEZOITO_ANOS;
-		default:
-			throw new IllegalArgumentException();
-	
-		}
-		
 	}
 	
 }
