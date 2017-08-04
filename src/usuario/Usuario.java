@@ -6,11 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import item.Item;
-<<<<<<< HEAD
-=======
 import item.blueray.Filme;
 import item.blueray.Show;
->>>>>>> master
 import item.blueray.Temporada;
 import item.jogo.JogoEletronico;
 import item.jogo.JogoTabuleiro;
