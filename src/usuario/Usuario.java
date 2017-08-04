@@ -5,9 +5,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import item.FabricaDeItem;
 import item.Item;
+import item.blueray.Filme;
+import item.blueray.Show;
 import item.blueray.Temporada;
+import item.jogo.JogoEletronico;
+import item.jogo.JogoTabuleiro;
 import sistema.Emprestimo;
 
 
@@ -20,15 +23,14 @@ public class Usuario {
 	private String nome;
 	private String telefone;
 	private String email;
-	private FabricaDeItem fabricaDeItem;
 	private Map<String, Item> itens;
 
 	public Usuario(String nome, String telefone, String email){
 		this.nome = nome;
 		this.telefone = telefone;
 		this.email = email;
-		this.fabricaDeItem = new FabricaDeItem();
 		this.itens = new HashMap<>();
+
 	}
 
 	public String getNome() {
@@ -54,16 +56,16 @@ public class Usuario {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	
 	public void cadastrarEletronico(String nomeItem, double preco, String plataforma) {
 		verificaPreco(preco);
-		Item novoItem = this.fabricaDeItem.criaJogoEletronico(nomeItem, preco, plataforma);
+		Item novoItem = new JogoEletronico(nome, preco, plataforma);
 		this.itens.put(nomeItem, novoItem);
 	}
 
 	public void cadastrarJogoTabuleiro(String nomeItem, double preco) {
 		verificaPreco(preco);
-		Item novoItem = this.fabricaDeItem.criaJogoTabuleiro(nomeItem, preco);
+		Item novoItem = new JogoTabuleiro(nome, preco);
 		this.itens.put(nomeItem, novoItem);
 	}
 
@@ -75,21 +77,21 @@ public class Usuario {
 	public void cadastrarBlurayFilme(String nomeItem, double preco, int duracao, String genero, String classificacao,
 			int anoLancamento) {
 		verificaPreco(preco);
-		Item novoItem = this.fabricaDeItem.criaFilme(nomeItem, preco, duracao, genero, classificacao, anoLancamento);
+		Item novoItem = new Filme(nome, preco, duracao, genero, classificacao, anoLancamento);
 		itens.put(nomeItem, novoItem);
 	}
 
 	public void cadastrarBluRaySerie(String nomeItem, double preco, String descricao, int duracao, String classificacao,
 			String genero, int temporada) {
 		verificaPreco(preco);
-		Item novoItem = this.fabricaDeItem.criaTemporada(nomeItem, preco, descricao, duracao, classificacao, genero, temporada);
+		Item novoItem = new Temporada(nome, preco, descricao, duracao, classificacao, genero, temporada);
 		itens.put(nomeItem, novoItem);
 	}
 
 	public void cadastrarBlurayShow(String nomeItem, double preco, int duracao, int numeroFaixas, String artista,
 			String classificacao) {
 		verificaPreco(preco);
-		Item novoItem = this.fabricaDeItem.criaShow(nomeItem, preco, duracao, numeroFaixas, artista, classificacao);
+		Item novoItem = new Show(nome, preco, duracao, numeroFaixas, artista, classificacao);
 		itens.put(nomeItem, novoItem);
 	}
 
