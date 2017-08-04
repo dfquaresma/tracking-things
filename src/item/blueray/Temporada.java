@@ -23,6 +23,12 @@ public class Temporada extends BlueRay {
 		this.genero = ajustatGenero(genero);
 		this.temporada = temporada;
 		this.episodios = new ArrayList<Episodio>();
+		
+	}
+	
+	public void addBlueray(int duracao) {
+		// NAO COMPLETO
+		this.episodios.add(new Episodio(duracao));
 	}
 
 	public String getDescricao() {

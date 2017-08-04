@@ -8,10 +8,6 @@ import item.ComparadorPorValor;
 import item.Item;
 
 public class Listador {
-	
-	public Listador() {
-		
-	}
 
 	public String listaItensOrdenadosPorNome(List<Item> itens) {
 		Collections.sort(itens);
@@ -27,11 +23,7 @@ public class Listador {
 		String repr = "";
 		Iterator<Item> itr = itens.iterator();
 		while (itr.hasNext()) {
-			repr += itr.next();
-			
-			if (itr.hasNext()) {
-				repr += System.lineSeparator(); 
-			}
+			repr += itr.next() + "|";
 		}
 		return repr;
 	}
