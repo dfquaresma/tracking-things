@@ -5,9 +5,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import item.FabricaDeItem;
 import item.Item;
+import item.blueray.Filme;
+import item.blueray.Show;
 import item.blueray.Temporada;
+import item.jogo.JogoEletronico;
+import item.jogo.JogoTabuleiro;
 import sistema.Emprestimo;
 
 
@@ -20,15 +23,14 @@ public class Usuario {
 	private String nome;
 	private String telefone;
 	private String email;
-	private FabricaDeItem fabricaDeItem;
 	private Map<String, Item> itens;
 
 	public Usuario(String nome, String telefone, String email){
 		this.nome = nome;
 		this.telefone = telefone;
 		this.email = email;
-		this.fabricaDeItem = new FabricaDeItem();
 		this.itens = new HashMap<>();
+
 	}
 
 	public String getNome() {
@@ -54,37 +56,43 @@ public class Usuario {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	
 	public void cadastrarEletronico(String nomeItem, double preco, String plataforma) {
-		this.fabricaDeItem.criaJogoEletronico(nomeItem, preco, plataforma);
-		
+		verificaPreco(preco);
+		Item novoItem = new JogoEletronico(nome, preco, plataforma);
+		this.itens.put(nomeItem, novoItem);
 	}
 
 	public void cadastrarJogoTabuleiro(String nomeItem, double preco) {
-		this.fabricaDeItem.criaJogoTabuleiro(nomeItem, preco);
-		
+		verificaPreco(preco);
+		Item novoItem = new JogoTabuleiro(nome, preco);
+		this.itens.put(nomeItem, novoItem);
 	}
 
 	public void addPecaPerdida(String nomeItem, String nomePeca) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	public void cadastrarBlurayFilme(String nomeItem, double preco, int duracao, String genero, String classificacao,
 			int anoLancamento) {
-		this.fabricaDeItem.criaFilme(nomeItem, preco, duracao, genero, classificacao, anoLancamento);
-		
+		verificaPreco(preco);
+		Item novoItem = new Filme(nome, preco, duracao, genero, classificacao, anoLancamento);
+		itens.put(nomeItem, novoItem);
 	}
 
 	public void cadastrarBluRaySerie(String nomeItem, double preco, String descricao, int duracao, String classificacao,
 			String genero, int temporada) {
-		this.fabricaDeItem.criaTemporada(nomeItem, preco, descricao, duracao, classificacao, genero, temporada);
+		verificaPreco(preco);
+		Item novoItem = new Temporada(nome, preco, descricao, duracao, classificacao, genero, temporada);
+		itens.put(nomeItem, novoItem);
 	}
 
 	public void cadastrarBlurayShow(String nomeItem, double preco, int duracao, int numeroFaixas, String artista,
 			String classificacao) {
-		this.fabricaDeItem.criaShow(nomeItem, preco, duracao, numeroFaixas, artista, classificacao);
-		
+		verificaPreco(preco);
+		Item novoItem = new Show(nome, preco, duracao, numeroFaixas, artista, classificacao);
+		itens.put(nomeItem, novoItem);
 	}
 
 	public void addBlueray(String nomeBlueray, int duracao) {
@@ -93,22 +101,34 @@ public class Usuario {
 	}
 
 	public void removerItem(String nomeItem) {
-		// TODO Auto-generated method stub
-		
+		if(!(itens.containsKey(nomeItem))){
+			throw new IllegalArgumentException("Item nao encontrado");
+		}
+		itens.remove(nomeItem);
 	}
 	
 	public Item pegaItem(String nomeItem) {
 		return this.itens.get(nomeItem);
 	}
 
-	public void attItem(String nomeItem, double valor, String atributo) {
-		// TODO Auto-generated method stub
+	public void attItem(String nomeItem, String atributo, String valor) {
+		contemItem(nomeItem);
 		
+		if(atributo.equals("Nome")){
+			Item itemAtt = this.itens.get(nomeItem);
+			itemAtt.setNome(valor);
+			this.itens.remove(nomeItem);
+			this.itens.put(valor,itemAtt);
+		} else if (atributo.equals("Preco")){
+			this.itens.get(nomeItem).setValor(Double.parseDouble(valor));
+		} 
 	}
 
 	public String getInfoItem(String nomeItem, String atributo) {
-		// TODO Auto-generated method stub
-		return null;
+		contemItem(nomeItem);
+		
+		Item item = itens.get(nomeItem);
+		return item.getInfo(atributo);
 	}
 
 	public String getDetalhesItem(String nomeItem) {
@@ -174,4 +194,18 @@ public class Usuario {
 	{
 		return this.nome + ", " + this.email + ", " + this.telefone;
 	}
+	
+	public void verificaPreco(double preco){
+		if(preco < 0){
+			throw new IllegalArgumentException("Preco invalido");
+		}
+	}
+	
+	public void contemItem(String nomeItem){
+		if(!(itens.containsKey(nomeItem))){
+			throw new IllegalArgumentException("Item nao encontrado");
+		}
+	}
+	
+	
 }
