@@ -62,4 +62,20 @@ public class JogoEletronico  extends Item {
 		}
 		
 	}
+
+	private String isEmprestadoString() {
+		if(super.isEmprestado()){
+			return "Emprestado";
+		} else {
+			return "Nao emprestado";
+		}
+	}
+
+	@Override
+	public String toString() {
+		return "JOGO ELETRONICO: " + super.getNome() + ", R$ " + super.getValor() + ", " + this.isEmprestadoString()
+		+ ", " + this.getPlataforma();
+	}
+
+	
 }

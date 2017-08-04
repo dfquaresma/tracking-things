@@ -6,11 +6,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import item.Item;
-<<<<<<< HEAD
-=======
+/*<<<<<<< HEAD
+=======*/
 import item.blueray.Filme;
 import item.blueray.Show;
->>>>>>> master
+/*>>>>>>> master*/
 import item.blueray.Temporada;
 import item.jogo.JogoEletronico;
 import item.jogo.JogoTabuleiro;
@@ -80,21 +80,21 @@ public class Usuario {
 	public void cadastrarBlurayFilme(String nomeItem, double preco, int duracao, String genero, String classificacao,
 			int anoLancamento) {
 		verificaPreco(preco);
-		Item novoItem = new Filme(nome, preco, duracao, genero, classificacao, anoLancamento);
+		Item novoItem = new Filme(nomeItem, preco, duracao, genero, classificacao, anoLancamento);
 		itens.put(nomeItem, novoItem);
 	}
 
 	public void cadastrarBluRaySerie(String nomeItem, double preco, String descricao, int duracao, String classificacao,
 			String genero, int temporada) {
 		verificaPreco(preco);
-		Item novoItem = new Temporada(nome, preco, descricao, duracao, classificacao, genero, temporada);
+		Item novoItem = new Temporada(nomeItem, preco, descricao, duracao, classificacao, genero, temporada);
 		itens.put(nomeItem, novoItem);
 	}
 
 	public void cadastrarBlurayShow(String nomeItem, double preco, int duracao, int numeroFaixas, String artista,
 			String classificacao) {
 		verificaPreco(preco);
-		Item novoItem = new Show(nome, preco, duracao, numeroFaixas, artista, classificacao);
+		Item novoItem = new Show(nomeItem, preco, duracao, numeroFaixas, artista, classificacao);
 		itens.put(nomeItem, novoItem);
 	}
 
@@ -135,8 +135,8 @@ public class Usuario {
 	}
 
 	public String getDetalhesItem(String nomeItem) {
-		// TODO Auto-generated method stub
-		return null;
+		contemItem(nomeItem);
+		return this.itens.get(nomeItem).toString();
 	}
 
 	public void empresta(Emprestimo emprestimo) {

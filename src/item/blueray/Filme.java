@@ -1,7 +1,8 @@
 package item.blueray;
 
 /**
- * Description: Os blu rays de filmes devem ainda ter genero e ano de lancamento.
+ * Description: Os blu rays de filmes devem ainda ter genero e ano de
+ * lancamento.
  * 
  *
  */
@@ -31,77 +32,81 @@ public class Filme extends BlueRay {
 	public void setAnoDeLancamento(int anoDeLancamento) {
 		this.anoDeLancamento = anoDeLancamento;
 	}
-	
+
 	@Override
-	public String getInfo(String atributo){
-		
+	public String getInfo(String atributo) {
+
 		switch (atributo) {
-		case("Genero"):
+		case ("Genero"):
 			return this.genero.toString();
-		case("Lancamento"):
+		case ("Lancamento"):
 			return String.valueOf(this.anoDeLancamento);
 		default:
 			return super.getInfo(atributo);
 		}
-		
+
 	}
-	
-	
 
 	private Genero ajustatGenero(String genero) {
-		
+
 		switch (genero) {
-		
-		case  ("ACAO"):
+
+		case ("ACAO"):
 			return Genero.ACAO;
 
-		case  ("ANIMACAO"):
+		case ("ANIMACAO"):
 			return Genero.ANIMACAO;
 
-		case  ("AVENTURA"):
+		case ("AVENTURA"):
 			return Genero.AVENTURA;
 
-		case  ("COMEDIA"):
+		case ("COMEDIA"):
 			return Genero.COMEDIA;
 
-		case  ("DOCUMENTARIO"):
+		case ("DOCUMENTARIO"):
 			return Genero.DOCUMENTARIO;
 
-		case  ("DRAMA"):
+		case ("DRAMA"):
 			return Genero.DRAMA;
-			
-		case  ("EROTICO"):
+
+		case ("EROTICO"):
 			return Genero.EROTICO;
-			
-		case  ("FAROESTE"):
+
+		case ("FAROESTE"):
 			return Genero.FAROESTE;
-			
-		case  ("FICCAO"):
+
+		case ("FICCAO"):
 			return Genero.FICCAO;
-			
-		case  ("MUSICAL"):
+
+		case ("MUSICAL"):
 			return Genero.MUSICAL;
-			
-		case  ("POLICIAL"):
+
+		case ("POLICIAL"):
 			return Genero.POLICIAL;
-			
-		case  ("ROMANCE"):
+
+		case ("ROMANCE"):
 			return Genero.ROMANCE;
-			
-		case  ("SUSPENSE"):
+
+		case ("SUSPENSE"):
 			return Genero.SUSPENSE;
 
-		case  ("TERROR"):
+		case ("TERROR"):
 			return Genero.TERROR;
-			
-		case  ("OUTRO"):		
+
+		case ("OUTRO"):
 			return Genero.OUTRO;
-			
+
 		default:
 			throw new IllegalArgumentException();
-	
+
 		}
-		
+
 	}
-	
+
+	@Override
+	public String toString() {
+		return "FILME: " + super.getNome() + ", R$ " + super.getValor() + ", " + super.isEmprestadoString() + ", "
+				+ super.getDuracao() + " min, " + super.getClassificacao() + ", " + this.getGenero() + ", " + this.anoDeLancamento;
+	}
+
 }

@@ -72,5 +72,13 @@ public abstract class BlueRay extends Item {
 		}
 		
 	}
+
+	public String isEmprestadoString(){
+		if(super.isEmprestado()){
+			return "Emprestado";
+		} else {
+			return "Nao emprestado";
+		}
+	}
 	
 }
