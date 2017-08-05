@@ -8,12 +8,13 @@ import java.util.Map;
 import item.Item;
 import usuario.IdUsuario;
 import usuario.Usuario;
+import util.Listador;
 
-public class Sistema {
+public class Controller {
 	private Map<IdUsuario, Usuario> usuarios;
 	private Listador listador;
 
-	public Sistema() {
+	public Controller() {
 		this.usuarios = new HashMap<>();
 		this.listador = new Listador();
 	}
@@ -21,7 +22,7 @@ public class Sistema {
 	public void cadastrarUsuario(String nome, String telefone, String email) {
 		IdUsuario id = new IdUsuario(nome, telefone);
 		Usuario user = new Usuario(nome, telefone, email);
-    
+
 		if (this.usuarios.containsKey(id)) {
 			throw new IllegalArgumentException("Usuario ja cadastrado");
 		}
@@ -29,14 +30,15 @@ public class Sistema {
 	}
 
 	private Usuario getUser(String nome, String telefone) {
-
 		IdUsuario id = new IdUsuario(nome, telefone);
-		
-		if (this.usuarios.containsKey(id)) {
-			return this.usuarios.get(id);
+		validaIdeParaUso(id);
+		return this.usuarios.get(id);
+	}
+
+	private void validaIdeParaUso(IdUsuario id) {
+		if (!this.usuarios.containsKey(id)) {
+			throw new IllegalArgumentException("Usuario invalido");
 		}
-		
-		throw new IllegalArgumentException("Usuario invalido");
 	}
 
 	public String getInfoUser(String nome, String telefone, String atributo) {
@@ -57,11 +59,12 @@ public class Sistema {
 	}
 
 	public void attUsuario(String nome, String telefone, String atributo, String valor) {
-		Usuario user = getUser(nome, telefone);
-		IdUsuario idAntigo = new IdUsuario(nome, telefone);
-		
-		switch (atributo) {
 
+		Usuario user = getUser(nome, telefone);
+		validaAtualizacao(user, atributo, valor);
+		IdUsuario idAntigo = new IdUsuario(nome, telefone);
+
+		switch (atributo) {
 		case ("Nome"):
 			user.setNome(valor);
 			break;
@@ -70,24 +73,38 @@ public class Sistema {
 			break;
 		case ("Email"):
 			user.setEmail(valor);
-      break;
+			break;
 		default:
 			throw new IllegalArgumentException();
 		}
-		
-		IdUsuario novoId= new IdUsuario(user.getNome(), user.getTelefone());
+
+		IdUsuario novoId = new IdUsuario(user.getNome(), user.getTelefone());
 		this.usuarios.remove(idAntigo);
 		this.usuarios.put(novoId, user);
-		
+
+	}
+
+	private void validaAtualizacao(Usuario user, String atributo, String valor) {
+		if (atributo.equals("Nome")) {
+			IdUsuario id = new IdUsuario(valor, user.getTelefone());
+			validaIdeParaAtt(id);
+
+		} else if (atributo.equals("Telefone")) {
+			IdUsuario id = new IdUsuario(user.getNome(), valor);
+			validaIdeParaAtt(id);
+		}
+
+	}
+
+	private void validaIdeParaAtt(IdUsuario id) {
+		if (this.usuarios.containsKey(id)) {
+			throw new IllegalArgumentException("Usuario invalido");
+		}
 	}
 
 	public void removeUsuario(String nome, String telefone) {
 		IdUsuario id = new IdUsuario(nome, telefone);
-		
-		if (!this.usuarios.containsKey(id)) {
-			throw new IllegalArgumentException("Usuario invalido");
-		} 
-
+		validaIdeParaUso(id);
 		this.usuarios.remove(id);
 
 	}
@@ -137,7 +154,7 @@ public class Sistema {
 
 	public void attItem(String nome, String telefone, String nomeItem, String atributo, String valor) {
 		Usuario user = getUser(nome, telefone);
-		user.attItem(nomeItem,atributo,valor);
+		user.attItem(nomeItem, atributo, valor);
 
 	}
 
@@ -173,9 +190,7 @@ public class Sistema {
 			String telefoneRequerente, String nomeItem, String dataEmprestimo, int periodo) {
 		Usuario userEmprestador = getUser(nomeDono, telefoneDono);
 		Usuario userRequerente = getUser(nomeRequerente, telefoneRequerente);
-		Emprestimo emprestimo = new Emprestimo(nomeDono, nomeRequerente, nomeItem, dataEmprestimo, periodo);
-		userEmprestador.empresta(emprestimo);
-		userRequerente.pegaEmprestado(emprestimo);
+		userEmprestador.emprestaItem(nomeItem, dataEmprestimo, periodo, userRequerente);
 
 	}
 

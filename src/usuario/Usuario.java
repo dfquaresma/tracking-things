@@ -1,20 +1,17 @@
 package usuario;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import item.Item;
-/*<<<<<<< HEAD
-=======*/
 import item.blueray.Filme;
 import item.blueray.Show;
-/*>>>>>>> master*/
 import item.blueray.Temporada;
 import item.jogo.JogoEletronico;
 import item.jogo.JogoTabuleiro;
-import sistema.Emprestimo;
 
 
 /**
@@ -27,12 +24,16 @@ public class Usuario {
 	private String telefone;
 	private String email;
 	private Map<String, Item> itens;
+	private Set<Emprestimo> emprestimosComoEmprestador;
+	private Set<Emprestimo> emprestimosComoRequerente;
 
 	public Usuario(String nome, String telefone, String email){
 		this.nome = nome;
 		this.telefone = telefone;
 		this.email = email;
 		this.itens = new HashMap<>();
+		this.emprestimosComoEmprestador = new HashSet<>();
+		this.emprestimosComoRequerente = new HashSet<>();
 
 	}
 
@@ -62,18 +63,27 @@ public class Usuario {
 	
 	public void cadastrarEletronico(String nomeItem, double preco, String plataforma) {
 		verificaPreco(preco);
-		Item novoItem = new JogoEletronico(nome, preco, plataforma);
+		Item novoItem = new JogoEletronico(nomeItem, preco, plataforma);
 		this.itens.put(nomeItem, novoItem);
 	}
 
 	public void cadastrarJogoTabuleiro(String nomeItem, double preco) {
 		verificaPreco(preco);
-		Item novoItem = new JogoTabuleiro(nome, preco);
+		Item novoItem = new JogoTabuleiro(nomeItem, preco);
 		this.itens.put(nomeItem, novoItem);
 	}
 
 	public void addPecaPerdida(String nomeItem, String nomePeca) {
+		validaItemParaUso(nomeItem);
+
+		Item item = this.itens.get(nomeItem);
 		
+		if (!(item instanceof JogoTabuleiro)) {
+			throw new IllegalArgumentException();			
+		}
+		
+		JogoTabuleiro jogo = (JogoTabuleiro) item;
+		jogo.adicionarPecaPerdida(nomePeca);
 		
 	}
 
@@ -115,52 +125,81 @@ public class Usuario {
 	}
 
 	public void attItem(String nomeItem, String atributo, String valor) {
-		contemItem(nomeItem);
+		validaItemParaUso(nomeItem);
 		
 		if(atributo.equals("Nome")){
+			validaAttNomeDeItem(valor);  
 			Item itemAtt = this.itens.get(nomeItem);
 			itemAtt.setNome(valor);
 			this.itens.remove(nomeItem);
 			this.itens.put(valor,itemAtt);
 		} else if (atributo.equals("Preco")){
 			this.itens.get(nomeItem).setValor(Double.parseDouble(valor));
-		} 
+		} else {
+			throw new IllegalArgumentException("Atributo invalido"); 
+		}
+	}
+
+	private void validaAttNomeDeItem(String nomeItem) {
+		if (this.itens.containsKey(nomeItem)) {
+			throw new IllegalArgumentException();
+		}
+		
 	}
 
 	public String getInfoItem(String nomeItem, String atributo) {
-		contemItem(nomeItem);
-		
+		validaItemParaUso(nomeItem);
 		Item item = itens.get(nomeItem);
 		return item.getInfo(atributo);
 	}
 
 	public String getDetalhesItem(String nomeItem) {
-		contemItem(nomeItem);
-		return this.itens.get(nomeItem).toString();
+		validaItemParaUso(nomeItem);
+		Item item = itens.get(nomeItem);
+		return item.toString();
 	}
 
-	public void empresta(Emprestimo emprestimo) {
-		
+	public void emprestaItem(String nomeItem, String dataEmprestimo, int periodo, Usuario userRequerente) {
+		validaItemParaUso(nomeItem);
+		Emprestimo emprestimo = new Emprestimo(this.nome, userRequerente.nome, nomeItem, dataEmprestimo, periodo);
+		if(emprestimosComoEmprestador.contains(emprestimo)){
+			throw new IllegalArgumentException("Item emprestado no momento");
+		}
+		userRequerente.pegaEmprestado(emprestimo);
+		this.emprestimosComoEmprestador.add(emprestimo);
 	}
 
-	public void pegaEmprestado(Emprestimo emprestimo) {
-		// TODO Auto-generated method stub
-		
+	private void pegaEmprestado(Emprestimo emprestimo) {
+		this.emprestimosComoRequerente.add(emprestimo);	
 	}
 
 	public ArrayList<Item> getItens() {
 		ArrayList<Item> itensToCopy = new ArrayList<>(this.itens.values());
-		ArrayList<Item> itens = new ArrayList<>();
-		Collections.copy(itens, itensToCopy);
-		return itens;
+		//ArrayList<Item> itens = new ArrayList<>();
+		//Collections.copy(itens, itensToCopy); Pretendo retornar uma cópia, assim que conseguir fazer sem dar "source does not fit in dest"
+		return itensToCopy;
 	}
 
 	public void devolveItem(String nomeDono, String telefoneDono, String nomeItem, String dataEmprestimo,
 			String dataDevolucao) {
-		// TODO Auto-generated method stub
+		Emprestimo emprestimo = encontraEmprestimo(nomeDono, telefoneDono, nomeItem, dataEmprestimo);
 		
+		emprestimo.finaliza(dataDevolucao);
+	
 	}
 
+	private Emprestimo encontraEmprestimo(String nomeDono, String telefoneDono, String nomeItem,
+			String dataEmprestimo) {
+		
+			for (Emprestimo emprestimo : emprestimosComoEmprestador) {
+				if(emprestimo.getnomeItem().equals(nomeItem) && emprestimo.getnomeDono().equals(nomeDono)){
+					return emprestimo;
+				}
+			}
+		
+		throw new IllegalArgumentException("Emprestimo nao encontrado");
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -204,11 +243,13 @@ public class Usuario {
 		}
 	}
 	
-	public void contemItem(String nomeItem){
+	private void validaItemParaUso(String nomeItem){
 		if(!(itens.containsKey(nomeItem))){
 			throw new IllegalArgumentException("Item nao encontrado");
 		}
 	}
+
+	
 	
 	
 }

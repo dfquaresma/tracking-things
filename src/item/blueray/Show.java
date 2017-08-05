@@ -49,8 +49,9 @@ public class Show extends BlueRay {
 
 	@Override
 	public String toString() {
-		return "SHOW: " + super.getNome() + ", R$ " + super.getValor() + ", " + super.isEmprestadoString() + ", "
-				+ super.getDuracao() + "min, " + super.getClassificacao() + this.numDeFaixas + ", " + this.artista;
+		return "SHOW: " + this.getNome() + ", R$ " + String.valueOf(this.getValor())
+				+ ", " + this.getEstadoEmprestimo() + ", " + this.getDuracao() + " min, " + this.getClassificacao() + ", "
+				+ this.getArtista() + ", " + this.getNumDeFaixas() + " faixas";
 	}
 
 }

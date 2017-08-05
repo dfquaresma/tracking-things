@@ -24,16 +24,10 @@ public class Temporada extends BlueRay {
 			int temporada) {
 		super(nome, valor, duracao, classificacao);
 		this.descricao = descricao;
-		this.genero = ajustatGenero(genero);
+		this.genero = Genero.valueOf(genero);
 		this.temporada = temporada;
 		this.episodios = new ArrayList<Episodio>();
-
 	}
-
-	/*
-	 * public void addBlueray(int duracao) { // NAO COMPLETO
-	 * this.episodios.add(new Episodio(duracao)); }
-	 */
 
 	public String getDescricao() {
 		return descricao;
@@ -48,7 +42,7 @@ public class Temporada extends BlueRay {
 	}
 
 	public void setGenero(String genero) {
-		this.genero = ajustatGenero(genero);
+		this.genero = Genero.valueOf(genero);
 	}
 
 	public int getTemporada() {
@@ -80,66 +74,6 @@ public class Temporada extends BlueRay {
 
 	}
 
-	private Genero ajustatGenero(String genero) {
-
-		switch (genero) {
-
-		case ("ACAO"):
-			return Genero.ACAO;
-
-		case ("ANIMACAO"):
-			return Genero.ANIMACAO;
-
-		case ("AVENTURA"):
-			return Genero.AVENTURA;
-
-		case ("COMEDIA"):
-			return Genero.COMEDIA;
-
-		case ("DOCUMENTARIO"):
-			return Genero.DOCUMENTARIO;
-
-		case ("DRAMA"):
-			return Genero.DRAMA;
-
-		case ("EROTICO"):
-			return Genero.EROTICO;
-
-		case ("FAROESTE"):
-			return Genero.FAROESTE;
-
-		case ("FICCAO"):
-			return Genero.FICCAO;
-
-		case ("MUSICAL"):
-			return Genero.MUSICAL;
-
-		case ("POLICIAL"):
-			return Genero.POLICIAL;
-
-		case ("ROMANCE"):
-			return Genero.ROMANCE;
-
-		case ("SUSPENSE"):
-			return Genero.SUSPENSE;
-
-		case ("TERROR"):
-			return Genero.TERROR;
-
-		case ("OUTRO"):
-			return Genero.OUTRO;
-
-		default:
-			throw new IllegalArgumentException();
-
-		}
-
-	}
-
-	public int getQtdEpisodios() {
-		return this.episodios.size();
-	}
-
 	@Override
 	public boolean podeSerEmprestado() {
 		int duracaoTotalEpisodios = 0;
@@ -152,9 +86,9 @@ public class Temporada extends BlueRay {
 
 	@Override
 	public String toString() {
-		return "SERIE: " + super.getNome() + ", " + this.descricao + ", R$ " + super.getValor() + ", "
-				+ super.isEmprestadoString() + ", " + super.getDuracao() + "min, " + super.getClassificacao() + ", "
-				+ this.temporada + ", " + getQtdEpisodios();
+		return "SERIE: " + this.getNome() + ", R$ " + String.valueOf(this.getValor()) + ", "
+				+ this.getEstadoEmprestimo() + ", " + this.getDuracao() + " min, " + this.getClassificacao() + ", "
+				+ this.getGenero() + ", Temporada " + this.getTemporada();
 	}
 
 }

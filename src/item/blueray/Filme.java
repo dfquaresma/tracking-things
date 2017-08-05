@@ -13,7 +13,7 @@ public class Filme extends BlueRay {
 
 	public Filme(String nome, double valor, int duracao, String genero, String classificacao, int anoDeLancamento) {
 		super(nome, valor, duracao, classificacao);
-		this.genero = ajustatGenero(genero);
+		this.genero = Genero.valueOf(genero);
 		this.anoDeLancamento = anoDeLancamento;
 	}
 
@@ -22,7 +22,7 @@ public class Filme extends BlueRay {
 	}
 
 	public void setGenero(String genero) {
-		this.genero = ajustatGenero(genero);
+		this.genero = Genero.valueOf(genero);
 	}
 
 	public int getAnoDeLancamento() {
@@ -47,66 +47,10 @@ public class Filme extends BlueRay {
 
 	}
 
-	private Genero ajustatGenero(String genero) {
-
-		switch (genero) {
-
-		case ("ACAO"):
-			return Genero.ACAO;
-
-		case ("ANIMACAO"):
-			return Genero.ANIMACAO;
-
-		case ("AVENTURA"):
-			return Genero.AVENTURA;
-
-		case ("COMEDIA"):
-			return Genero.COMEDIA;
-
-		case ("DOCUMENTARIO"):
-			return Genero.DOCUMENTARIO;
-
-		case ("DRAMA"):
-			return Genero.DRAMA;
-
-		case ("EROTICO"):
-			return Genero.EROTICO;
-
-		case ("FAROESTE"):
-			return Genero.FAROESTE;
-
-		case ("FICCAO"):
-			return Genero.FICCAO;
-
-		case ("MUSICAL"):
-			return Genero.MUSICAL;
-
-		case ("POLICIAL"):
-			return Genero.POLICIAL;
-
-		case ("ROMANCE"):
-			return Genero.ROMANCE;
-
-		case ("SUSPENSE"):
-			return Genero.SUSPENSE;
-
-		case ("TERROR"):
-			return Genero.TERROR;
-
-		case ("OUTRO"):
-			return Genero.OUTRO;
-
-		default:
-			throw new IllegalArgumentException();
-
-		}
-
-	}
-
 	@Override
 	public String toString() {
-		return "FILME: " + super.getNome() + ", R$ " + super.getValor() + ", " + super.isEmprestadoString() + ", "
-				+ super.getDuracao() + " min, " + super.getClassificacao() + ", " + this.getGenero() + ", " + this.anoDeLancamento;
+		return "FILME: " + this.getNome() + ", R$ " + String.valueOf(this.getValor())
+				+ ", " + this.getEstadoEmprestimo() + ", " + this.getDuracao() + " min, " + this.getClassificacao() + ", " + this.getGenero() + ", " + this.getAnoDeLancamento();
 	}
 
 }

@@ -1,43 +1,65 @@
 package item.jogo;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import item.Item;
 
 public class JogoTabuleiro extends Item {
 
-	List<String> pecasPerdidas;
+	private ArrayList<String> pecasPerdidas;
 
 	public JogoTabuleiro(String nome, double valor) {
 		super(nome, valor);
+
 		this.pecasPerdidas = new ArrayList<>();
 	}
 
-	public void addPecaPerdida(String peca) {
-		this.pecasPerdidas.add(peca);
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		JogoTabuleiro other = (JogoTabuleiro) obj;
+		if (pecasPerdidas == null) {
+			if (other.pecasPerdidas != null) {
+				return false;
+			}
+		} else if (!pecasPerdidas.equals(other.pecasPerdidas)) {
+			return false;
+		}
+		if (this.getNome() == null) {
+			if (other.getNome() != null) {
+				return false;
+			}
+		} else if (!this.getNome().equals(other.getNome())) {
+			return false;
+		}
+		return true;
 	}
 
-	public String existePecaPerdida() {
-		if (this.pecasPerdidas.size() > 0) {
-			return "COM PECAS PERDIDAS";
-		} else {
-			return "COM TODAS AS PECAS";
-		}
+	public void adicionarPecaPerdida(String nomePeca) {
+		this.getPecasPerdidas().add(nomePeca);
 	}
 
-	public String isEmprestadoString() {
-		if (super.isEmprestado()) {
-			return "Emprestado";
-		} else {
-			return "Nao emprestado";
-		}
+	private ArrayList<String> getPecasPerdidas() {
+		return this.pecasPerdidas;
+	}
+
+	public boolean isCompleto() {
+		return this.getPecasPerdidas().size() == 0;
 	}
 
 	@Override
 	public String toString() {
-		return "JOGO DE TABULEIRO: " + super.getNome() + ", R$ " + super.getValor() + ", " + this.isEmprestadoString()
-				+ ", " + this.existePecaPerdida();
+		return "JOGO DE TABULEIRO: " + this.getNome() + ", R$ " + String.valueOf(this.getValor())
+				+ ", " + this.getEstadoEmprestimo() + ", "
+				+ (this.isCompleto() ? "COMPLETO" : "COM PECAS PERDIDAS");
 	}
 
 }
