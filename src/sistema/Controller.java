@@ -8,12 +8,13 @@ import java.util.Map;
 import item.Item;
 import usuario.IdUsuario;
 import usuario.Usuario;
+import util.Listador;
 
-public class Sistema {
+public class Controller {
 	private Map<IdUsuario, Usuario> usuarios;
 	private Listador listador;
 
-	public Sistema() {
+	public Controller() {
 		this.usuarios = new HashMap<>();
 		this.listador = new Listador();
 	}

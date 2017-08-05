@@ -1,4 +1,4 @@
-package sistema;
+package usuario;
 
 public class Emprestimo {
 
