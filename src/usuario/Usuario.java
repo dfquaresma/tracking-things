@@ -75,7 +75,7 @@ public class Usuario {
 	}
 
 	public void addPecaPerdida(String nomeItem, String nomePeca) {
-		contemItem(nomeItem);
+		validaItemParaUso(nomeItem);
 
 		Item item = this.itens.get(nomeItem);
 		
@@ -126,26 +126,36 @@ public class Usuario {
 	}
 
 	public void attItem(String nomeItem, String atributo, String valor) {
-		contemItem(nomeItem);
+		validaItemParaUso(nomeItem);
 		
 		if(atributo.equals("Nome")){
+			validaAttNomeDeItem(valor); // VERIFICAR SE JA EXISTE ALGUM ITEM COM ESSE NOME NO SISTEMA. 
 			Item itemAtt = this.itens.get(nomeItem);
 			itemAtt.setNome(valor);
 			this.itens.remove(nomeItem);
 			this.itens.put(valor,itemAtt);
 		} else if (atributo.equals("Preco")){
 			this.itens.get(nomeItem).setValor(Double.parseDouble(valor));
-		} 
+		} else {
+			throw new IllegalArgumentException(); // AMANDA COMPLETA!
+		}
+	}
+
+	private void validaAttNomeDeItem(String nomeItem) {
+		if (this.itens.containsKey(nomeItem)) {
+			throw new IllegalArgumentException();
+		}
+		
 	}
 
 	public String getInfoItem(String nomeItem, String atributo) {
-		contemItem(nomeItem);
+		validaItemParaUso(nomeItem);
 		Item item = itens.get(nomeItem);
 		return item.getInfo(atributo);
 	}
 
 	public String getDetalhesItem(String nomeItem) {
-		contemItem(nomeItem);
+		validaItemParaUso(nomeItem);
 		Item item = itens.get(nomeItem);
 		return item.toString();
 	}
@@ -180,7 +190,6 @@ public class Usuario {
 		return null;
 	}
 	
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -224,7 +233,7 @@ public class Usuario {
 		}
 	}
 	
-	public void contemItem(String nomeItem){
+	private void validaItemParaUso(String nomeItem){
 		if(!(itens.containsKey(nomeItem))){
 			throw new IllegalArgumentException("Item nao encontrado");
 		}
