@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 /item/
+=======
+>>>>>>> master
 /sistema/
 /us1_test.txt
 /us2_test.txt
@@ -6,3 +9,8 @@
 /us4_test.txt
 /usuario/
 /util/
+<<<<<<< HEAD
+=======
+/main/
+/facade/
+>>>>>>> master

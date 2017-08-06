@@ -1,4 +1,3 @@
-package usuario;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -183,9 +182,7 @@ public class Usuario {
 	public void devolveItem(String nomeDono, String telefoneDono, String nomeItem, String dataEmprestimo,
 			String dataDevolucao) {
 		Emprestimo emprestimo = encontraEmprestimo(nomeDono, nomeItem);
-		
 		emprestimo.finaliza(dataDevolucao);
-	
 	}
 
 	private Emprestimo encontraEmprestimo(String nomeDono, String nomeItem) {
