@@ -21,9 +21,8 @@ public class Listador {
 	
 	private String listagemDeItens(List<Item> itens) {
 		String repr = "";
-		Iterator<Item> itr = itens.iterator();
-		while (itr.hasNext()) {
-			repr += itr.next() + "|";
+		for (Item item: itens) {
+			repr += item + "|";
 		}
 		
 		return repr;

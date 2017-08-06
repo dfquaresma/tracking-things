@@ -99,7 +99,6 @@ public class Emprestimo {
 	}
 
 	public void finaliza(String dataDevolucao) {
-		// TODO Auto-generated method stub
 		
 	}
 	
