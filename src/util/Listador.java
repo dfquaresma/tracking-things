@@ -1,7 +1,6 @@
 package util;
 
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 import item.ComparadorPorValor;
@@ -18,14 +17,13 @@ public class Listador {
 		Collections.sort(itens, new ComparadorPorValor());
 		return listagemDeItens(itens);
 	}
-	
+
 	private String listagemDeItens(List<Item> itens) {
 		String repr = "";
-		Iterator<Item> itr = itens.iterator();
-		while (itr.hasNext()) {
-			repr += itr.next() + "|";
+		for (Item item : itens) {
+			repr += item + "|";
 		}
-		
+
 		return repr;
 	}
 
