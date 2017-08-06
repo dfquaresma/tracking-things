@@ -1,4 +1,3 @@
-package usuario;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -128,7 +127,7 @@ public class Usuario {
 		validaItemParaUso(nomeItem);
 		
 		if(atributo.equals("Nome")){
-			validaAttNomeDeItem(valor); // VERIFICAR SE JA EXISTE ALGUM ITEM COM ESSE NOME NO SISTEMA. 
+			validaAttNomeDeItem(valor);  
 			Item itemAtt = this.itens.get(nomeItem);
 			itemAtt.setNome(valor);
 			this.itens.remove(nomeItem);
@@ -136,7 +135,7 @@ public class Usuario {
 		} else if (atributo.equals("Preco")){
 			this.itens.get(nomeItem).setValor(Double.parseDouble(valor));
 		} else {
-			throw new IllegalArgumentException(); // AMANDA COMPLETA!
+			throw new IllegalArgumentException("Atributo invalido"); 
 		}
 	}
 
@@ -160,7 +159,11 @@ public class Usuario {
 	}
 
 	public void emprestaItem(String nomeItem, String dataEmprestimo, int periodo, Usuario userRequerente) {
+		validaItemParaUso(nomeItem);
 		Emprestimo emprestimo = new Emprestimo(this.nome, userRequerente.nome, nomeItem, dataEmprestimo, periodo);
+		if(emprestimosComoEmprestador.contains(emprestimo)){
+			throw new IllegalArgumentException("Item emprestado no momento");
+		}
 		userRequerente.pegaEmprestado(emprestimo);
 		this.emprestimosComoEmprestador.add(emprestimo);
 	}
@@ -178,15 +181,19 @@ public class Usuario {
 
 	public void devolveItem(String nomeDono, String telefoneDono, String nomeItem, String dataEmprestimo,
 			String dataDevolucao) {
-		Emprestimo emprestimo = encontraEmprestimo(nomeDono, telefoneDono, nomeItem, dataEmprestimo);
+		Emprestimo emprestimo = encontraEmprestimo(nomeDono, nomeItem);
 		emprestimo.finaliza(dataDevolucao);
-	
 	}
 
-	private Emprestimo encontraEmprestimo(String nomeDono, String telefoneDono, String nomeItem,
-			String dataEmprestimo) {
-		// TODO Auto-generated method stub
-		return null;
+	private Emprestimo encontraEmprestimo(String nomeDono, String nomeItem) {
+		
+			for (Emprestimo emprestimo : emprestimosComoRequerente) {
+				if(emprestimo.getnomeItem().equals(nomeItem) && emprestimo.getnomeDono().equals(nomeDono)){
+					return emprestimo;
+				}
+			}
+		
+		throw new IllegalArgumentException("Emprestimo nao encontrado");
 	}
 	
 	@Override
