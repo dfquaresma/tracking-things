@@ -182,14 +182,13 @@ public class Usuario {
 
 	public void devolveItem(String nomeDono, String telefoneDono, String nomeItem, String dataEmprestimo,
 			String dataDevolucao) {
-		Emprestimo emprestimo = encontraEmprestimo(nomeDono, telefoneDono, nomeItem, dataEmprestimo);
+		Emprestimo emprestimo = encontraEmprestimo(nomeDono, nomeItem);
 		
 		emprestimo.finaliza(dataDevolucao);
 	
 	}
 
-	private Emprestimo encontraEmprestimo(String nomeDono, String telefoneDono, String nomeItem,
-			String dataEmprestimo) {
+	private Emprestimo encontraEmprestimo(String nomeDono, String nomeItem) {
 		
 			for (Emprestimo emprestimo : emprestimosComoEmprestador) {
 				if(emprestimo.getnomeItem().equals(nomeItem) && emprestimo.getnomeDono().equals(nomeDono)){
