@@ -99,7 +99,9 @@ public class Emprestimo {
 	}
 
 	public void finaliza(String dataDevolucao) {
+		this.dataRealDaDevolucaoDoItem = dataDevolucao;
 		
+		// Continua no us5.
 	}
 	
 }
