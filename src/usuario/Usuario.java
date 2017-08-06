@@ -190,7 +190,7 @@ public class Usuario {
 
 	private Emprestimo encontraEmprestimo(String nomeDono, String nomeItem) {
 		
-			for (Emprestimo emprestimo : emprestimosComoEmprestador) {
+			for (Emprestimo emprestimo : emprestimosComoRequerente) {
 				if(emprestimo.getnomeItem().equals(nomeItem) && emprestimo.getnomeDono().equals(nomeDono)){
 					return emprestimo;
 				}
