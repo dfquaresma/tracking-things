@@ -15,7 +15,6 @@ public class Emprestimo {
 		this.nomeRequerente = nomeRequerente;
 		this.nomeItem = nomeItem;
 		this.dataEmprestimo = dataEmprestimo;
-		this.dataEmprestimo = dataEmprestimo;
 		this.periodo = periodo;
 
 	}
