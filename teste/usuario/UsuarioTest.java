@@ -72,7 +72,7 @@ public class UsuarioTest {
 	public void testPegaItem() {
 		this.testCadastrarBlurayFilme();
 		
-		Item item = this.usuario.pegaItem("O Senhor dos Anéis I");
+		Item item = this.usuario.getItem("O Senhor dos Anéis I");
 		
 		assertEquals("O nome do Item não confere.", "O Senhor dos Anéis I", item.getNome());
 	}
@@ -84,7 +84,7 @@ public class UsuarioTest {
 		this.usuario.attItem("O Senhor dos Anéis I", "Nome", "The Lord of the Rings I");
 		this.usuario.attItem("The Lord of the Rings I", "Preco", "30");
 		
-		Item item = this.usuario.pegaItem("The Lord of the Rings I");
+		Item item = this.usuario.getItem("The Lord of the Rings I");
 		
 		assertEquals("O valor difere.", 30, item.getValor(), 0.00001);
 	}
@@ -115,8 +115,7 @@ public class UsuarioTest {
 
 	@Test
 	public void testDevolveItem() {
-		this.testEmprestaItem();
-		
+		this.testEmprestaItem();	
 		this.usuario2.devolveItem("Ícaro", "+55 (83) 9.9384-7651", "GTA San Andreas", "06/08/2017", "07/08/2017");
 	}
 

@@ -75,8 +75,7 @@ public class Usuario {
 	public void addPecaPerdida(String nomeItem, String nomePeca) {
 		validaItemParaUso(nomeItem);
 
-		Item item = this.itens.get(nomeItem);
-
+		Item item = getItem(nomeItem);
 		if (!(item instanceof JogoTabuleiro)) {
 			throw new IllegalArgumentException();
 		}
@@ -108,7 +107,7 @@ public class Usuario {
 	}
 
 	public void addBlueray(String nomeBlueray, int duracao) {
-		Temporada temporada = (Temporada) this.pegaItem(nomeBlueray);
+		Temporada temporada = (Temporada) this.getItem(nomeBlueray);
 		temporada.addBlueray(duracao);
 	}
 
@@ -118,22 +117,23 @@ public class Usuario {
 		}
 		itens.remove(nomeItem);
 	}
-
-	public Item pegaItem(String nomeItem) {
+	
+	public Item getItem(String nomeItem) {
+		this.validaItemParaUso(nomeItem);
 		return this.itens.get(nomeItem);
 	}
 
 	public void attItem(String nomeItem, String atributo, String valor) {
 		validaItemParaUso(nomeItem);
-
-		if (atributo.equals("Nome")) {
-			validaAttNomeDeItem(valor);
-			Item itemAtt = this.itens.get(nomeItem);
+		
+		if(atributo.equals("Nome")){
+			validaAttNomeDeItem(valor);  
+			Item itemAtt = getItem(nomeItem);
 			itemAtt.setNome(valor);
 			this.itens.remove(nomeItem);
-			this.itens.put(valor, itemAtt);
-		} else if (atributo.equals("Preco")) {
-			this.itens.get(nomeItem).setValor(Double.parseDouble(valor));
+			this.itens.put(valor,itemAtt);
+		} else if (atributo.equals("Preco")){
+			getItem(nomeItem).setValor(Double.parseDouble(valor));
 		} else {
 			throw new IllegalArgumentException("Atributo invalido");
 		}
@@ -148,18 +148,19 @@ public class Usuario {
 
 	public String getInfoItem(String nomeItem, String atributo) {
 		validaItemParaUso(nomeItem);
-		Item item = itens.get(nomeItem);
+		Item item = getItem(nomeItem);
 		return item.getInfo(atributo);
 	}
 
 	public String getDetalhesItem(String nomeItem) {
 		validaItemParaUso(nomeItem);
-		Item item = itens.get(nomeItem);
+		Item item = getItem(nomeItem);
 		return item.toString();
 	}
 
 	public void emprestaItem(String nomeItem, String dataEmprestimo, int periodo, Usuario userRequerente) {
 		validaItemParaUso(nomeItem);
+		getItem(nomeItem).setEmprestado(true);
 		Emprestimo emprestimo = new Emprestimo(this.nome, userRequerente.nome, nomeItem, dataEmprestimo, periodo);
 		if (emprestimosComoEmprestador.contains(emprestimo)) {
 			throw new IllegalArgumentException("Item emprestado no momento");
@@ -184,6 +185,7 @@ public class Usuario {
 			String dataDevolucao) {
 		Emprestimo emprestimo = encontraEmprestimo(nomeDono, nomeItem);
 		emprestimo.finaliza(dataDevolucao);
+		getItem(nomeItem).setEmprestado(false);
 	}
 
 	private Emprestimo encontraEmprestimo(String nomeDono, String nomeItem) {
@@ -193,7 +195,6 @@ public class Usuario {
 				return emprestimo;
 			}
 		}
-
 		throw new IllegalArgumentException("Emprestimo nao encontrado");
 	}
 
@@ -244,5 +245,4 @@ public class Usuario {
 			throw new IllegalArgumentException("Item nao encontrado");
 		}
 	}
-
 }
