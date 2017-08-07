@@ -277,8 +277,7 @@ public class Controller {
 	public void devolverItem(String nomeDono, String telefoneDono, String nomeRequerente, String telefoneRequerente,
 			String nomeItem, String dataEmprestimo, String dataDevolucao) {
 		Usuario user = getUser(nomeRequerente, telefoneRequerente);
-		user.devolveItem(nomeDono, telefoneDono, nomeItem, dataEmprestimo, dataDevolucao);
-
+		user.devolveItem(nomeDono, telefoneDono, nomeItem, dataEmprestimo, dataDevolucao);			
 	}
 
 }

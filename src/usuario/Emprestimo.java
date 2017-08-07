@@ -15,7 +15,6 @@ public class Emprestimo {
 		this.nomeRequerente = nomeRequerente;
 		this.nomeItem = nomeItem;
 		this.dataEmprestimo = dataEmprestimo;
-		this.dataEmprestimo = dataEmprestimo;
 		this.periodo = periodo;
 
 	}
@@ -100,8 +99,9 @@ public class Emprestimo {
 	}
 
 	public void finaliza(String dataDevolucao) {
-		// TODO Auto-generated method stub
+		this.dataRealDaDevolucaoDoItem = dataDevolucao;
 		
+		// Continua no us5.
 	}
 	
 }
