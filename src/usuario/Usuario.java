@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import excecoes.ExcecaoItemNaoEhDoTipoEsperado;
 import item.Item;
 import item.blueray.Filme;
 import item.blueray.Show;
@@ -57,8 +58,7 @@ public class Usuario {
 		ArrayList<Item> itensToCopy = new ArrayList<>(this.itens.values());
 		// ArrayList<Item> itens = new ArrayList<>();
 		// Collections.copy(itens, itensToCopy); Pretendo retornar uma cópia,
-		// assim que
-		// conseguir fazer sem dar "source does not fit in dest"
+		// assim que conseguir fazer sem dar "source does not fit in dest"
 		return itensToCopy;
 	}
 
@@ -95,34 +95,29 @@ public class Usuario {
 	}
 
 	public void cadastrarEletronico(String nomeItem, double preco, String plataforma) {
-		verificaPreco(preco);
 		Item novoItem = new JogoEletronico(nomeItem, preco, plataforma);
 		this.itens.put(nomeItem, novoItem);
 	}
 
 	public void cadastrarJogoTabuleiro(String nomeItem, double preco) {
-		verificaPreco(preco);
 		Item novoItem = new JogoTabuleiro(nomeItem, preco);
 		this.itens.put(nomeItem, novoItem);
 	}
 
 	public void cadastrarBlurayFilme(String nomeItem, double preco, int duracao, String genero, String classificacao,
 			int anoLancamento) {
-		verificaPreco(preco);
 		Item novoItem = new Filme(nomeItem, preco, duracao, genero, classificacao, anoLancamento);
 		itens.put(nomeItem, novoItem);
 	}
 
 	public void cadastrarBluRaySerie(String nomeItem, double preco, String descricao, int duracao, String classificacao,
 			String genero, int temporada) {
-		verificaPreco(preco);
 		Item novoItem = new Temporada(nomeItem, preco, descricao, duracao, classificacao, genero, temporada);
 		itens.put(nomeItem, novoItem);
 	}
 
 	public void cadastrarBlurayShow(String nomeItem, double preco, int duracao, int numeroFaixas, String artista,
 			String classificacao) {
-		verificaPreco(preco);
 		Item novoItem = new Show(nomeItem, preco, duracao, numeroFaixas, artista, classificacao);
 		itens.put(nomeItem, novoItem);
 	}
@@ -132,7 +127,7 @@ public class Usuario {
 
 		Item item = getItem(nomeItem);
 		if (!(item instanceof JogoTabuleiro)) {
-			throw new IllegalArgumentException();
+			throw new ExcecaoItemNaoEhDoTipoEsperado("O nome do item informad nao pertence a um tabuleiro");
 		}
 
 		JogoTabuleiro jogo = (JogoTabuleiro) item;
@@ -214,10 +209,13 @@ public class Usuario {
 		this.emprestimosComoRequerente.add(emprestimo);
 	}
 
-	public void devolveItem(String nomeDono, String telefoneDono, String nomeItem, String dataEmprestimo,
-			String dataDevolucao) {
-		Emprestimo emprestimo = encontraEmprestimo(nomeDono, nomeItem, dataEmprestimo);
+	public void devolveItem(String nomeItem, String dataEmprestimo, String dataDevolucao, Usuario userEmprestador) {
+		Emprestimo emprestimo = encontraEmprestimo(userEmprestador.nome, nomeItem, dataEmprestimo);
 		emprestimo.finaliza(dataDevolucao);
+		userEmprestador.recebeItem(nomeItem);
+	}
+
+	private void recebeItem(String nomeItem) {
 		getItem(nomeItem).setEmprestado(false);
 	}
 
@@ -266,12 +264,6 @@ public class Usuario {
 	@Override
 	public String toString() {
 		return this.nome + ", " + this.email + ", " + this.telefone;
-	}
-
-	private void verificaPreco(double preco) {
-		if (preco < 0) {
-			throw new IllegalArgumentException("Preco invalido");
-		}
 	}
 
 	private void validaItemParaUso(String nomeItem) {

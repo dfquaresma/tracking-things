@@ -116,7 +116,8 @@ public class UsuarioTest {
 	@Test
 	public void testDevolveItem() {
 		this.testEmprestaItem();	
-		this.usuario2.devolveItem("Ícaro", "+55 (83) 9.9384-7651", "GTA San Andreas", "06/08/2017", "07/08/2017");
+		Usuario user = new Usuario("Ícaro", "+55 (83) 9.9384-7651", "icaro.gamer@gmail.com");
+		this.usuario2.devolveItem("GTA San Andreas", "06/08/2017", "07/08/2017", user);
 	}
 
 	@Test

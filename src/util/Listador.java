@@ -8,6 +8,7 @@ import item.Item;
 
 public class Listador {
 
+	
 	public String listaItensOrdenadosPorNome(List<Item> itens) {
 		Collections.sort(itens);
 		return listagemDeItens(itens);
@@ -23,7 +24,6 @@ public class Listador {
 		for (Item item : itens) {
 			repr += item + "|";
 		}
-
 		return repr;
 	}
 

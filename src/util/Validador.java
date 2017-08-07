@@ -1,13 +1,15 @@
 package util;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import item.Item;
 import item.blueray.Classificacao;
 import item.blueray.Genero;
 import item.jogo.Plataforma;
 
-public class Validacoes {
+public class Validador {
 
 	private void validaString(String atributo, String atributoMsg) {
 		if (atributo == null) {
@@ -56,7 +58,7 @@ public class Validacoes {
 	private void validaClassificacao(Classificacao[] values, String classificacao) {
 		Set<String> classificacoes = new HashSet<>();
 		for (Classificacao c : values) {
-			classificacoes.add(c.toString());		
+			classificacoes.add(c.toString());
 		}
 		if (!classificacoes.contains(classificacao)) {
 			throw new IllegalArgumentException("Classificacao inválida");
@@ -71,24 +73,24 @@ public class Validacoes {
 		this.validaString(genero, "Genero");
 		this.validaGenero(Genero.values(), genero);
 	}
-	
+
 	private void validaGenero(Genero[] values, String genero) {
 		Set<String> generos = new HashSet<>();
 		for (Genero g : values) {
-			generos.add(g.toString());		
+			generos.add(g.toString());
 		}
 		if (!generos.contains(genero)) {
 			throw new IllegalArgumentException("Genero inválido");
-		}	
+		}
 	}
 
-	public void validaTemporada(int temporada){
-		if(temporada <= 0){
+	public void validaTemporada(int temporada) {
+		if (temporada <= 0) {
 			throw new IllegalArgumentException("Temporada nao pode ser negativa");
 		}
 
 	}
-		
+
 	public void validaPlataforma(String plataforma) {
 		this.validaString(plataforma, "Plataforma");
 		this.validaPlataforma(Plataforma.values(), plataforma);
@@ -97,12 +99,12 @@ public class Validacoes {
 	private void validaPlataforma(Plataforma[] values, String plataforma) {
 		Set<String> plataformas = new HashSet<>();
 		for (Plataforma p : values) {
-			plataformas.add(p.toString());		
+			plataformas.add(p.toString());
 		}
 		if (!plataformas.contains(plataforma)) {
 			throw new IllegalArgumentException("Plataforma inválida");
-		}	
-		
+		}
+
 	}
 
 	public void validaAnoLancamento(int ano) {
@@ -114,10 +116,46 @@ public class Validacoes {
 	public void validaData(String data) {
 		this.validaString(data, "Data");
 	}
-	
-	public void validaPreco(double preco){
-		if(preco < 0){
+
+	public void validaPreco(double preco) {
+		if (preco < 0) {
 			throw new IllegalArgumentException("Preco invalido");
 		}
 	}
+
+	public void validaItensParaListagem(List<Item> itens) {
+		if (itens == null) {
+			throw new NullPointerException("A lista de itens para listagem nao pode ser nula");
+		}
+	}
+
+	public void validaPeriodo(int periodo) {
+		if (periodo <= 0) {
+			throw new IllegalArgumentException("Periodo nao pode ser menor ou iguals a zero.");
+		}
+
+	}
+
+	public void validaDescricao(String descricao) {
+		this.validaString(descricao, "Descricao");
+
+	}
+
+	public void validaNumeroDeFaixas(int numeroFaixas) {
+		if (numeroFaixas <= 0) {
+			throw new IllegalArgumentException("Numero de faixar nao pode ser menor ou igual a zero.");
+		}
+
+	}
+
+	public void validaAtributo(String atributo) {
+		this.validaString(atributo, "Atributo");
+		
+	}
+
+	public void validaPeca(String nomePeca) {
+		this.validaString(nomePeca, "Peca");
+		
+	}
+
 }
