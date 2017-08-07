@@ -75,7 +75,7 @@ public class Usuario {
 	public void addPecaPerdida(String nomeItem, String nomePeca) {
 		validaItemParaUso(nomeItem);
 
-		Item item = this.itens.get(nomeItem);
+		Item item = getItem(nomeItem);
 		
 		if (!(item instanceof JogoTabuleiro)) {
 			throw new IllegalArgumentException();			
@@ -108,7 +108,7 @@ public class Usuario {
 	}
 
 	public void addBlueray(String nomeBlueray, int duracao) {
-		Temporada temporada = (Temporada) this.pegaItem(nomeBlueray);
+		Temporada temporada = (Temporada) this.getItem(nomeBlueray);
 		temporada.addBlueray(duracao);
 	}
 
@@ -119,7 +119,8 @@ public class Usuario {
 		itens.remove(nomeItem);
 	}
 	
-	public Item pegaItem(String nomeItem) {
+	private Item getItem(String nomeItem) {
+		this.validaItemParaUso(nomeItem);
 		return this.itens.get(nomeItem);
 	}
 
@@ -128,12 +129,12 @@ public class Usuario {
 		
 		if(atributo.equals("Nome")){
 			validaAttNomeDeItem(valor);  
-			Item itemAtt = this.itens.get(nomeItem);
+			Item itemAtt = getItem(nomeItem);
 			itemAtt.setNome(valor);
 			this.itens.remove(nomeItem);
 			this.itens.put(valor,itemAtt);
 		} else if (atributo.equals("Preco")){
-			this.itens.get(nomeItem).setValor(Double.parseDouble(valor));
+			getItem(nomeItem).setValor(Double.parseDouble(valor));
 		} else {
 			throw new IllegalArgumentException("Atributo invalido"); 
 		}
@@ -150,10 +151,6 @@ public class Usuario {
 		validaItemParaUso(nomeItem);
 		Item item = getItem(nomeItem);
 		return item.getInfo(atributo);
-	}
-
-	private Item getItem(String nomeItem) {
-		return itens.get(nomeItem);
 	}
 
 	public String getDetalhesItem(String nomeItem) {
