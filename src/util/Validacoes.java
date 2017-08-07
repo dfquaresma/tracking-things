@@ -52,11 +52,14 @@ public class Validacoes {
 	public void validaGenero(String genero) {
 		this.validaString(genero, "Genero");
 	}
+	
+	public void validaTemporada(int temporada){
+		if(temporada <= 0){
+			throw new IllegalArgumentException("Temporada nao pode ser negativa");
+		}
 
-	public void validaTemporada(String temporada) {
-		this.validaString(temporada, "Temporada");
 	}
-
+		
 	public void validaPlataforma(String plataforma) {
 		this.validaString(plataforma, "Plataforma");
 	}
@@ -70,5 +73,10 @@ public class Validacoes {
 	public void validaData(String data) {
 		this.validaString(data, "Data");
 	}
-
+	
+	public void validaPreco(double preco){
+		if(preco < 0){
+			throw new IllegalArgumentException("Preco invalido");
+		}
+	}
 }

@@ -13,7 +13,6 @@ import item.blueray.Temporada;
 import item.jogo.JogoEletronico;
 import item.jogo.JogoTabuleiro;
 
-
 /**
  * Description: 
  *
@@ -149,18 +148,23 @@ public class Usuario {
 
 	public String getInfoItem(String nomeItem, String atributo) {
 		validaItemParaUso(nomeItem);
-		Item item = itens.get(nomeItem);
+		Item item = getItem(nomeItem);
 		return item.getInfo(atributo);
+	}
+
+	private Item getItem(String nomeItem) {
+		return itens.get(nomeItem);
 	}
 
 	public String getDetalhesItem(String nomeItem) {
 		validaItemParaUso(nomeItem);
-		Item item = itens.get(nomeItem);
+		Item item = getItem(nomeItem);
 		return item.toString();
 	}
 
 	public void emprestaItem(String nomeItem, String dataEmprestimo, int periodo, Usuario userRequerente) {
 		validaItemParaUso(nomeItem);
+		getItem(nomeItem).setEmprestado(true);
 		Emprestimo emprestimo = new Emprestimo(this.nome, userRequerente.nome, nomeItem, dataEmprestimo, periodo);
 		if(emprestimosComoEmprestador.contains(emprestimo)){
 			throw new IllegalArgumentException("Item emprestado no momento");
@@ -184,16 +188,15 @@ public class Usuario {
 			String dataDevolucao) {
 		Emprestimo emprestimo = encontraEmprestimo(nomeDono, nomeItem);
 		emprestimo.finaliza(dataDevolucao);
+		getItem(nomeItem).setEmprestado(false);
 	}
 
 	private Emprestimo encontraEmprestimo(String nomeDono, String nomeItem) {
-		
-			for (Emprestimo emprestimo : emprestimosComoRequerente) {
-				if(emprestimo.getnomeItem().equals(nomeItem) && emprestimo.getnomeDono().equals(nomeDono)){
-					return emprestimo;
+		for (Emprestimo emprestimo : emprestimosComoRequerente) {
+			if(emprestimo.getnomeItem().equals(nomeItem) && emprestimo.getnomeDono().equals(nomeDono)){
+				return emprestimo;
 				}
 			}
-		
 		throw new IllegalArgumentException("Emprestimo nao encontrado");
 	}
 	
@@ -245,8 +248,4 @@ public class Usuario {
 			throw new IllegalArgumentException("Item nao encontrado");
 		}
 	}
-
-	
-	
-	
 }
