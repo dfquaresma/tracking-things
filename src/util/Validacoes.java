@@ -1,5 +1,12 @@
 package util;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import item.blueray.Classificacao;
+import item.blueray.Genero;
+import item.jogo.Plataforma;
+
 public class Validacoes {
 
 	private void validaString(String atributo, String atributoMsg) {
@@ -43,6 +50,17 @@ public class Validacoes {
 
 	public void validaClassificacao(String classificacao) {
 		this.validaString(classificacao, "Classificacao");
+		this.validaClassificacao(Classificacao.values(), classificacao);
+	}
+
+	private void validaClassificacao(Classificacao[] values, String classificacao) {
+		Set<String> classificacoes = new HashSet<>();
+		for (Classificacao c : values) {
+			classificacoes.add(c.toString());		
+		}
+		if (!classificacoes.contains(classificacao)) {
+			throw new IllegalArgumentException("Classificacao inválida");
+		}
 	}
 
 	public void validaNomeBluray(String nomeBluray) {
@@ -51,8 +69,19 @@ public class Validacoes {
 
 	public void validaGenero(String genero) {
 		this.validaString(genero, "Genero");
+		this.validaGenero(Genero.values(), genero);
 	}
 	
+	private void validaGenero(Genero[] values, String genero) {
+		Set<String> generos = new HashSet<>();
+		for (Genero g : values) {
+			generos.add(g.toString());		
+		}
+		if (!generos.contains(genero)) {
+			throw new IllegalArgumentException("Genero inválido");
+		}	
+	}
+
 	public void validaTemporada(int temporada){
 		if(temporada <= 0){
 			throw new IllegalArgumentException("Temporada nao pode ser negativa");
@@ -62,6 +91,18 @@ public class Validacoes {
 		
 	public void validaPlataforma(String plataforma) {
 		this.validaString(plataforma, "Plataforma");
+		this.validaPlataforma(Plataforma.values(), plataforma);
+	}
+
+	private void validaPlataforma(Plataforma[] values, String plataforma) {
+		Set<String> plataformas = new HashSet<>();
+		for (Plataforma p : values) {
+			plataformas.add(p.toString());		
+		}
+		if (!plataformas.contains(plataforma)) {
+			throw new IllegalArgumentException("Plataforma inválida");
+		}	
+		
 	}
 
 	public void validaAnoLancamento(int ano) {

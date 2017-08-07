@@ -3,59 +3,63 @@ package usuario;
 public class Emprestimo {
 
 	private String nomeDono;
+	private String telefoneDono;
 	private String nomeRequerente;
+	private String telefoneRequerente;
 	private String nomeItem;
 	private String dataEmprestimo;
 	private int periodo;
 	private String dataRealDaDevolucaoDoItem;
 
-	public Emprestimo(String nomeDono, String nomeRequerente, String nomeItem, String dataEmprestimo, int periodo) {
-
+	public Emprestimo(String nomeDono, String telefoneDono, String telefoneRequerente, String nomeRequerente,
+			String nomeItem, String dataEmprestimo, int periodo) {
 		this.nomeDono = nomeDono;
+		this.telefoneDono = telefoneDono;
 		this.nomeRequerente = nomeRequerente;
+		this.telefoneRequerente = telefoneRequerente;
 		this.nomeItem = nomeItem;
 		this.dataEmprestimo = dataEmprestimo;
 		this.periodo = periodo;
 
 	}
 
-	public String getnomeDono() {
+	public String getNomeDono() {
 		return nomeDono;
 	}
 
-	public void setnomeDono(String nomeDono) {
+	public void setNomeDono(String nomeDono) {
 		this.nomeDono = nomeDono;
 	}
 
-	public String getnomeRequerente() {
+	public String getNomeRequerente() {
 		return nomeRequerente;
 	}
 
-	public void setnomeRequerente(String nomeRequerente) {
+	public void setNomeRequerente(String nomeRequerente) {
 		this.nomeRequerente = nomeRequerente;
 	}
 
-	public String getnomeItem() {
+	public String getNomeItem() {
 		return nomeItem;
 	}
 
-	public void setnomeItem(String nomeItem) {
+	public void setNomeItem(String nomeItem) {
 		this.nomeItem = nomeItem;
 	}
 
-	public String getdataEmprestimo() {
+	public String getDataEmprestimo() {
 		return dataEmprestimo;
 	}
 
-	public void setdataEmprestimo(String dataEmprestimo) {
+	public void setDataEmprestimo(String dataEmprestimo) {
 		this.dataEmprestimo = dataEmprestimo;
 	}
 
-	public int getperiodo() {
+	public int getPeriodo() {
 		return periodo;
 	}
 
-	public void setperiodo(int periodo) {
+	public void setPeriodo(int periodo) {
 		this.periodo = periodo;
 	}
 
@@ -66,7 +70,23 @@ public class Emprestimo {
 	public void setDataRealDaDevolucaoDoItem(String dataRealDaDevolucaoDoItem) {
 		this.dataRealDaDevolucaoDoItem = dataRealDaDevolucaoDoItem;
 	}
-	
+
+	public String getTelefoneDono() {
+		return telefoneDono;
+	}
+
+	public String getTelefoneRequerente() {
+		return telefoneRequerente;
+	}
+
+	public void setTelefoneDono(String telefoneDono) {
+		this.telefoneDono = telefoneDono;
+	}
+
+	public void setTelefoneRequerente(String telefoneRequerente) {
+		this.telefoneRequerente = telefoneRequerente;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -100,8 +120,7 @@ public class Emprestimo {
 
 	public void finaliza(String dataDevolucao) {
 		this.dataRealDaDevolucaoDoItem = dataDevolucao;
-		
 		// Continua no us5.
 	}
-	
+
 }

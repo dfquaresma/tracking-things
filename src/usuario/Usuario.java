@@ -40,20 +40,54 @@ public class Usuario {
 		return nome;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
 	public String getTelefone() {
 		return telefone;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public Item getItem(String nomeItem) {
+		this.validaItemParaUso(nomeItem);
+		return this.itens.get(nomeItem);
+	}
+
+	public ArrayList<Item> getItens() {
+		ArrayList<Item> itensToCopy = new ArrayList<>(this.itens.values());
+		// ArrayList<Item> itens = new ArrayList<>();
+		// Collections.copy(itens, itensToCopy); Pretendo retornar uma cópia,
+		// assim que
+		// conseguir fazer sem dar "source does not fit in dest"
+		return itensToCopy;
+	}
+
+	public void setNome(String nome) {
+		this.attNomeNosEmprestimos(this.nome, nome);
+		this.nome = nome;
+	}
+
+	private void attNomeNosEmprestimos(String nomeAntigo, String novoNome) {
+		for (Emprestimo emprestimo : this.emprestimosComoEmprestador) {
+			emprestimo.setNomeDono(novoNome);
+		}
+		for (Emprestimo emprestimo : this.emprestimosComoRequerente) {
+			emprestimo.setNomeRequerente(novoNome);
+		}
+	}
+
 	public void setTelefone(String telefone) {
+		this.attTelefoneNosEmprestimos(this.telefone, telefone);
 		this.telefone = telefone;
 	}
 
-	public String getEmail() {
-		return email;
+	private void attTelefoneNosEmprestimos(String telefoneAntigo, String novoTelefone) {
+		for (Emprestimo emprestimo : this.emprestimosComoEmprestador) {
+			emprestimo.setTelefoneDono(novoTelefone);
+		}
+		for (Emprestimo emprestimo : this.emprestimosComoRequerente) {
+			emprestimo.setTelefoneRequerente(novoTelefone);
+		}
 	}
 
 	public void setEmail(String email) {
@@ -70,19 +104,6 @@ public class Usuario {
 		verificaPreco(preco);
 		Item novoItem = new JogoTabuleiro(nomeItem, preco);
 		this.itens.put(nomeItem, novoItem);
-	}
-
-	public void addPecaPerdida(String nomeItem, String nomePeca) {
-		validaItemParaUso(nomeItem);
-
-		Item item = getItem(nomeItem);
-		if (!(item instanceof JogoTabuleiro)) {
-			throw new IllegalArgumentException();
-		}
-
-		JogoTabuleiro jogo = (JogoTabuleiro) item;
-		jogo.adicionarPecaPerdida(nomePeca);
-
 	}
 
 	public void cadastrarBlurayFilme(String nomeItem, double preco, int duracao, String genero, String classificacao,
@@ -106,6 +127,19 @@ public class Usuario {
 		itens.put(nomeItem, novoItem);
 	}
 
+	public void addPecaPerdida(String nomeItem, String nomePeca) {
+		validaItemParaUso(nomeItem);
+
+		Item item = getItem(nomeItem);
+		if (!(item instanceof JogoTabuleiro)) {
+			throw new IllegalArgumentException();
+		}
+
+		JogoTabuleiro jogo = (JogoTabuleiro) item;
+		jogo.adicionarPecaPerdida(nomePeca);
+
+	}
+
 	public void addBlueray(String nomeBlueray, int duracao) {
 		Temporada temporada = (Temporada) this.getItem(nomeBlueray);
 		temporada.addBlueray(duracao);
@@ -117,25 +151,31 @@ public class Usuario {
 		}
 		itens.remove(nomeItem);
 	}
-	
-	public Item getItem(String nomeItem) {
-		this.validaItemParaUso(nomeItem);
-		return this.itens.get(nomeItem);
-	}
 
 	public void attItem(String nomeItem, String atributo, String valor) {
 		validaItemParaUso(nomeItem);
-		
-		if(atributo.equals("Nome")){
-			validaAttNomeDeItem(valor);  
+
+		if (atributo.equals("Nome")) {
+			validaAttNomeDeItem(valor);
 			Item itemAtt = getItem(nomeItem);
 			itemAtt.setNome(valor);
 			this.itens.remove(nomeItem);
-			this.itens.put(valor,itemAtt);
-		} else if (atributo.equals("Preco")){
+			this.itens.put(valor, itemAtt);
+			this.attItensDosEmprestimos(nomeItem, valor);
+
+		} else if (atributo.equals("Preco")) {
 			getItem(nomeItem).setValor(Double.parseDouble(valor));
+
 		} else {
 			throw new IllegalArgumentException("Atributo invalido");
+		}
+	}
+
+	private void attItensDosEmprestimos(String nomeItem, String novoNomeItem) {
+		for (Emprestimo emprestimo : this.emprestimosComoEmprestador) {
+			if (emprestimo.getNomeItem().equals(nomeItem)) {
+				emprestimo.setNomeItem(novoNomeItem);
+			}
 		}
 	}
 
@@ -160,11 +200,12 @@ public class Usuario {
 
 	public void emprestaItem(String nomeItem, String dataEmprestimo, int periodo, Usuario userRequerente) {
 		validaItemParaUso(nomeItem);
-		getItem(nomeItem).setEmprestado(true);
-		Emprestimo emprestimo = new Emprestimo(this.nome, userRequerente.nome, nomeItem, dataEmprestimo, periodo);
+		Emprestimo emprestimo = new Emprestimo(this.nome, this.telefone, userRequerente.nome, userRequerente.telefone,
+				nomeItem, dataEmprestimo, periodo);
 		if (emprestimosComoEmprestador.contains(emprestimo)) {
 			throw new IllegalArgumentException("Item emprestado no momento");
 		}
+		getItem(nomeItem).setEmprestado(true);
 		userRequerente.pegaEmprestado(emprestimo);
 		this.emprestimosComoEmprestador.add(emprestimo);
 	}
@@ -173,25 +214,18 @@ public class Usuario {
 		this.emprestimosComoRequerente.add(emprestimo);
 	}
 
-	public ArrayList<Item> getItens() {
-		ArrayList<Item> itensToCopy = new ArrayList<>(this.itens.values());
-		// ArrayList<Item> itens = new ArrayList<>();
-		// Collections.copy(itens, itensToCopy); Pretendo retornar uma cópia, assim que
-		// conseguir fazer sem dar "source does not fit in dest"
-		return itensToCopy;
-	}
-
 	public void devolveItem(String nomeDono, String telefoneDono, String nomeItem, String dataEmprestimo,
 			String dataDevolucao) {
-		Emprestimo emprestimo = encontraEmprestimo(nomeDono, nomeItem);
+		Emprestimo emprestimo = encontraEmprestimo(nomeDono, nomeItem, dataEmprestimo);
 		emprestimo.finaliza(dataDevolucao);
 		getItem(nomeItem).setEmprestado(false);
 	}
 
-	private Emprestimo encontraEmprestimo(String nomeDono, String nomeItem) {
+	private Emprestimo encontraEmprestimo(String nomeDono, String nomeItem, String dataEmprestimo) {
 
 		for (Emprestimo emprestimo : emprestimosComoRequerente) {
-			if (emprestimo.getnomeItem().equals(nomeItem) && emprestimo.getnomeDono().equals(nomeDono)) {
+			if (emprestimo.getNomeItem().equals(nomeItem) && emprestimo.getNomeDono().equals(nomeDono)
+					&& emprestimo.getDataEmprestimo().equals(dataEmprestimo)) {
 				return emprestimo;
 			}
 		}
@@ -234,7 +268,7 @@ public class Usuario {
 		return this.nome + ", " + this.email + ", " + this.telefone;
 	}
 
-	public void verificaPreco(double preco) {
+	private void verificaPreco(double preco) {
 		if (preco < 0) {
 			throw new IllegalArgumentException("Preco invalido");
 		}
@@ -245,4 +279,5 @@ public class Usuario {
 			throw new IllegalArgumentException("Item nao encontrado");
 		}
 	}
+
 }

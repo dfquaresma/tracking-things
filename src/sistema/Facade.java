@@ -9,7 +9,7 @@ public class Facade {
 	}
 
 	public void iniciarSistema(){
-		
+		this.controller.iniciaSistema();
 	}
 
 	public void cadastrarUsuario(String nome, String telefone, String email) {
@@ -99,6 +99,7 @@ public class Facade {
 	}
 	
 	public void fecharSistema(){
+		this.controller.fechaSistema();
 		
 	}
 

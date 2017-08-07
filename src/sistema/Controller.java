@@ -12,7 +12,7 @@ import util.Listador;
 import util.Validacoes;
 
 public class Controller {
-	
+
 	private Map<IdUsuario, Usuario> usuarios;
 	private Listador listador;
 	private Validacoes valida;
@@ -20,14 +20,14 @@ public class Controller {
 	public Controller() {
 		this.usuarios = new HashMap<>();
 		this.listador = new Listador();
-		this.valida =  new Validacoes();
+		this.valida = new Validacoes();
 	}
 
 	public void cadastrarUsuario(String nome, String telefone, String email) {
 		valida.validaNome(nome);
 		valida.validaTelefone(telefone);
 		valida.validaEmail(email);
-		
+
 		IdUsuario id = new IdUsuario(nome, telefone);
 		Usuario user = new Usuario(nome, telefone, email);
 
@@ -37,25 +37,81 @@ public class Controller {
 		this.usuarios.put(id, user);
 	}
 
+	public void cadastrarEletronico(String nome, String telefone, String nomeItem, double preco, String plataforma) {
+		valida.validaNome(nome);
+		valida.validaTelefone(telefone);
+		valida.validaNomeItem(nomeItem);
+		valida.validaPreco(preco);
+
+		Usuario user = getUser(nome, telefone);
+		user.cadastrarEletronico(nomeItem, preco, plataforma);
+	}
+
+	public void cadastrarJogoTabuleiro(String nome, String telefone, String nomeItem, double preco) {
+		valida.validaNome(nome);
+		valida.validaTelefone(telefone);
+		valida.validaNomeItem(nomeItem);
+		valida.validaPreco(preco);
+
+		Usuario user = getUser(nome, telefone);
+		user.cadastrarJogoTabuleiro(nomeItem, preco);
+	}
+
+	public void cadastrarBlurayFilme(String nome, String telefone, String nomeItem, double preco, int duracao,
+			String genero, String classificacao, int anoLancamento) {
+		valida.validaNome(nome);
+		valida.validaTelefone(telefone);
+		valida.validaNomeItem(nomeItem);
+		valida.validaDuracao(duracao);
+		valida.validaGenero(genero);
+		valida.validaClassificacao(classificacao);
+		valida.validaAnoLancamento(anoLancamento);
+		valida.validaPreco(preco);
+
+		Usuario user = getUser(nome, telefone);
+		user.cadastrarBlurayFilme(nomeItem, preco, duracao, genero, classificacao, anoLancamento);
+	}
+
+	public void cadastrarBluRaySerie(String nome, String telefone, String nomeItem, double preco, String descricao,
+			int duracao, String classificacao, String genero, int temporada) {
+		valida.validaNome(nome);
+		valida.validaTelefone(telefone);
+		valida.validaNomeItem(nomeItem);
+		valida.validaDuracao(duracao);
+		valida.validaGenero(genero);
+		valida.validaClassificacao(classificacao);
+		valida.validaTemporada(temporada);
+		valida.validaPreco(preco);
+
+		Usuario user = getUser(nome, telefone);
+		user.cadastrarBluRaySerie(nomeItem, preco, descricao, duracao, classificacao, genero, temporada);
+	}
+
+	public void cadastrarBlurayShow(String nome, String telefone, String nomeItem, double preco, int duracao,
+			int numeroFaixas, String artista, String classificacao) {
+		valida.validaNome(nome);
+		valida.validaTelefone(telefone);
+		valida.validaNomeItem(nomeItem);
+		valida.validaDuracao(duracao);
+		valida.validaClassificacao(classificacao);
+
+		Usuario user = getUser(nome, telefone);
+		user.cadastrarBlurayShow(nomeItem, preco, duracao, numeroFaixas, artista, classificacao);
+	}
+
 	private Usuario getUser(String nome, String telefone) {
 		valida.validaNome(nome);
 		valida.validaTelefone(telefone);
-		
+
 		IdUsuario id = new IdUsuario(nome, telefone);
 		validaIdeParaUso(id);
 		return this.usuarios.get(id);
 	}
 
-	private void validaIdeParaUso(IdUsuario id) {
-		if (!this.usuarios.containsKey(id)) {
-			throw new IllegalArgumentException("Usuario invalido");
-		}
-	}
-
 	public String getInfoUser(String nome, String telefone, String atributo) {
 		valida.validaNome(nome);
 		valida.validaTelefone(telefone);
-		
+
 		Usuario user = getUser(nome, telefone);
 
 		switch (atributo) {
@@ -72,11 +128,29 @@ public class Controller {
 		}
 	}
 
+	public String getInfoItem(String nome, String telefone, String nomeItem, String atributo) {
+		valida.validaNome(nome);
+		valida.validaTelefone(telefone);
+		valida.validaNomeItem(nomeItem);
+
+		Usuario user = getUser(nome, telefone);
+		return user.getInfoItem(nomeItem, atributo);
+	}
+
+	public String getDetalhesItem(String nome, String telefone, String nomeItem) {
+		valida.validaNome(nome);
+		valida.validaTelefone(telefone);
+		valida.validaNomeItem(nomeItem);
+
+		Usuario user = getUser(nome, telefone);
+		return user.getDetalhesItem(nomeItem);
+	}
+
 	public void attUsuario(String nome, String telefone, String atributo, String valor) {
 		valida.validaNome(nome);
 		valida.validaTelefone(telefone);
 		valida.validaValor(valor);
-		
+
 		Usuario user = getUser(nome, telefone);
 		validaAtualizacao(user, atributo, valor);
 		IdUsuario idAntigo = new IdUsuario(nome, telefone);
@@ -101,6 +175,12 @@ public class Controller {
 
 	}
 
+	private void validaIdeParaUso(IdUsuario id) {
+		if (!this.usuarios.containsKey(id)) {
+			throw new IllegalArgumentException("Usuario invalido");
+		}
+	}
+
 	private void validaAtualizacao(Usuario user, String atributo, String valor) {
 		if (atributo.equals("Nome")) {
 			IdUsuario id = new IdUsuario(valor, user.getTelefone());
@@ -122,83 +202,20 @@ public class Controller {
 	public void removeUsuario(String nome, String telefone) {
 		valida.validaNome(nome);
 		valida.validaTelefone(telefone);
-		
+
 		IdUsuario id = new IdUsuario(nome, telefone);
 		validaIdeParaUso(id);
 		this.usuarios.remove(id);
 
 	}
 
-	public void cadastrarEletronico(String nome, String telefone, String nomeItem, double preco, String plataforma) {
-		valida.validaNome(nome);
-		valida.validaTelefone(telefone);
-		valida.validaNomeItem(nomeItem);
-		valida.validaPreco(preco);
-		
-		Usuario user = getUser(nome, telefone);
-		user.cadastrarEletronico(nomeItem, preco, plataforma);
-	}
-
-	public void cadastrarJogoTabuleiro(String nome, String telefone, String nomeItem, double preco) {
-		valida.validaNome(nome);
-		valida.validaTelefone(telefone);
-		valida.validaNomeItem(nomeItem);
-		valida.validaPreco(preco);
-		
-		Usuario user = getUser(nome, telefone);
-		user.cadastrarJogoTabuleiro(nomeItem, preco);
-	}
-
 	public void addPecaPerdida(String nome, String telefone, String nomeItem, String nomePeca) {
 		valida.validaNome(nome);
 		valida.validaTelefone(telefone);
 		valida.validaNomeItem(nomeItem);
-		
+
 		Usuario user = getUser(nome, telefone);
 		user.addPecaPerdida(nomeItem, nomePeca);
-	}
-
-	public void cadastrarBlurayFilme(String nome, String telefone, String nomeItem, double preco, int duracao,
-			String genero, String classificacao, int anoLancamento) {
-		valida.validaNome(nome);
-		valida.validaTelefone(telefone);
-		valida.validaNomeItem(nomeItem);
-		valida.validaDuracao(duracao);
-		valida.validaGenero(genero);
-		valida.validaClassificacao(classificacao);
-		valida.validaAnoLancamento(anoLancamento);
-		valida.validaPreco(preco);
-		
-		Usuario user = getUser(nome, telefone);
-		user.cadastrarBlurayFilme(nomeItem, preco, duracao, genero, classificacao, anoLancamento);
-	}
-
-	public void cadastrarBluRaySerie(String nome, String telefone, String nomeItem, double preco, String descricao,
-			int duracao, String classificacao, String genero, int temporada) {
-		valida.validaNome(nome);
-		valida.validaTelefone(telefone);
-		valida.validaNomeItem(nomeItem);
-		valida.validaDuracao(duracao);
-		valida.validaGenero(genero);
-		valida.validaClassificacao(classificacao);
-		valida.validaTemporada(temporada);
-		valida.validaPreco(preco);
-		
-		Usuario user = getUser(nome, telefone);
-		user.cadastrarBluRaySerie(nomeItem, preco, descricao, duracao, classificacao, genero, temporada);
-	}
-
-	public void cadastrarBlurayShow(String nome, String telefone, String nomeItem, double preco, int duracao,
-			int numeroFaixas, String artista, String classificacao) {
-		valida.validaNome(nome);
-		valida.validaTelefone(telefone);
-		valida.validaNomeItem(nomeItem);
-		valida.validaDuracao(duracao);
-		valida.validaClassificacao(classificacao);
-		
-		
-		Usuario user = getUser(nome, telefone);
-		user.cadastrarBlurayShow(nomeItem, preco, duracao, numeroFaixas, artista, classificacao);
 	}
 
 	public void addBluray(String nome, String telefone, String nomeBluray, int duracao) {
@@ -206,7 +223,7 @@ public class Controller {
 		valida.validaTelefone(telefone);
 		valida.validaNomeBluray(nomeBluray);
 		valida.validaDuracao(duracao);
-		
+
 		Usuario user = getUser(nome, telefone);
 		user.addBlueray(nomeBluray, duracao);
 	}
@@ -215,7 +232,7 @@ public class Controller {
 		valida.validaNome(nome);
 		valida.validaTelefone(telefone);
 		valida.validaNomeItem(nomeItem);
-		
+
 		Usuario user = getUser(nome, telefone);
 		user.removerItem(nomeItem);
 	}
@@ -225,18 +242,9 @@ public class Controller {
 		valida.validaTelefone(telefone);
 		valida.validaNomeItem(nomeItem);
 		valida.validaValor(valor);
-		
+
 		Usuario user = getUser(nome, telefone);
 		user.attItem(nomeItem, atributo, valor);
-	}
-
-	public String getInfoItem(String nome, String telefone, String nomeItem, String atributo) {
-		valida.validaNome(nome);
-		valida.validaTelefone(telefone);
-		valida.validaNomeItem(nomeItem);
-		
-		Usuario user = getUser(nome, telefone);
-		return user.getInfoItem(nomeItem, atributo);
 	}
 
 	public String listarOrdenadosNome() {
@@ -257,15 +265,6 @@ public class Controller {
 		return this.listador.listaItensOrdenadosPorValor(itens);
 	}
 
-	public String getDetalhesItem(String nome, String telefone, String nomeItem) {
-		valida.validaNome(nome);
-		valida.validaTelefone(telefone);
-		valida.validaNomeItem(nomeItem);
-		
-		Usuario user = getUser(nome, telefone);
-		return user.getDetalhesItem(nomeItem);
-	}
-
 	public void registrarEmprestimo(String nomeDono, String telefoneDono, String nomeRequerente,
 			String telefoneRequerente, String nomeItem, String dataEmprestimo, int periodo) {
 		Usuario userEmprestador = getUser(nomeDono, telefoneDono);
@@ -277,7 +276,18 @@ public class Controller {
 	public void devolverItem(String nomeDono, String telefoneDono, String nomeRequerente, String telefoneRequerente,
 			String nomeItem, String dataEmprestimo, String dataDevolucao) {
 		Usuario user = getUser(nomeRequerente, telefoneRequerente);
-		user.devolveItem(nomeDono, telefoneDono, nomeItem, dataEmprestimo, dataDevolucao);			
+		user.devolveItem(nomeDono, telefoneDono, nomeItem, dataEmprestimo, dataDevolucao);
+	}
+
+
+	public void iniciaSistema() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void fechaSistema() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
