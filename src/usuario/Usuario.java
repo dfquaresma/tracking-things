@@ -14,11 +14,11 @@ import item.jogo.JogoEletronico;
 import item.jogo.JogoTabuleiro;
 
 /**
- * Description: 
+ * Description:
  *
  */
 public class Usuario {
-	
+
 	private String nome;
 	private String telefone;
 	private String email;
@@ -26,7 +26,7 @@ public class Usuario {
 	private Set<Emprestimo> emprestimosComoEmprestador;
 	private Set<Emprestimo> emprestimosComoRequerente;
 
-	public Usuario(String nome, String telefone, String email){
+	public Usuario(String nome, String telefone, String email) {
 		this.nome = nome;
 		this.telefone = telefone;
 		this.email = email;
@@ -59,7 +59,7 @@ public class Usuario {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	public void cadastrarEletronico(String nomeItem, double preco, String plataforma) {
 		verificaPreco(preco);
 		Item novoItem = new JogoEletronico(nomeItem, preco, plataforma);
@@ -76,14 +76,13 @@ public class Usuario {
 		validaItemParaUso(nomeItem);
 
 		Item item = getItem(nomeItem);
-		
 		if (!(item instanceof JogoTabuleiro)) {
-			throw new IllegalArgumentException();			
+			throw new IllegalArgumentException();
 		}
-		
+
 		JogoTabuleiro jogo = (JogoTabuleiro) item;
 		jogo.adicionarPecaPerdida(nomePeca);
-		
+
 	}
 
 	public void cadastrarBlurayFilme(String nomeItem, double preco, int duracao, String genero, String classificacao,
@@ -113,13 +112,13 @@ public class Usuario {
 	}
 
 	public void removerItem(String nomeItem) {
-		if(!(itens.containsKey(nomeItem))){
+		if (!(itens.containsKey(nomeItem))) {
 			throw new IllegalArgumentException("Item nao encontrado");
 		}
 		itens.remove(nomeItem);
 	}
 	
-	private Item getItem(String nomeItem) {
+	public Item getItem(String nomeItem) {
 		this.validaItemParaUso(nomeItem);
 		return this.itens.get(nomeItem);
 	}
@@ -136,7 +135,7 @@ public class Usuario {
 		} else if (atributo.equals("Preco")){
 			getItem(nomeItem).setValor(Double.parseDouble(valor));
 		} else {
-			throw new IllegalArgumentException("Atributo invalido"); 
+			throw new IllegalArgumentException("Atributo invalido");
 		}
 	}
 
@@ -144,7 +143,7 @@ public class Usuario {
 		if (this.itens.containsKey(nomeItem)) {
 			throw new IllegalArgumentException();
 		}
-		
+
 	}
 
 	public String getInfoItem(String nomeItem, String atributo) {
@@ -163,7 +162,7 @@ public class Usuario {
 		validaItemParaUso(nomeItem);
 		getItem(nomeItem).setEmprestado(true);
 		Emprestimo emprestimo = new Emprestimo(this.nome, userRequerente.nome, nomeItem, dataEmprestimo, periodo);
-		if(emprestimosComoEmprestador.contains(emprestimo)){
+		if (emprestimosComoEmprestador.contains(emprestimo)) {
 			throw new IllegalArgumentException("Item emprestado no momento");
 		}
 		userRequerente.pegaEmprestado(emprestimo);
@@ -171,13 +170,14 @@ public class Usuario {
 	}
 
 	private void pegaEmprestado(Emprestimo emprestimo) {
-		this.emprestimosComoRequerente.add(emprestimo);	
+		this.emprestimosComoRequerente.add(emprestimo);
 	}
 
 	public ArrayList<Item> getItens() {
 		ArrayList<Item> itensToCopy = new ArrayList<>(this.itens.values());
-		//ArrayList<Item> itens = new ArrayList<>();
-		//Collections.copy(itens, itensToCopy); Pretendo retornar uma cópia, assim que conseguir fazer sem dar "source does not fit in dest"
+		// ArrayList<Item> itens = new ArrayList<>();
+		// Collections.copy(itens, itensToCopy); Pretendo retornar uma cópia, assim que
+		// conseguir fazer sem dar "source does not fit in dest"
 		return itensToCopy;
 	}
 
@@ -189,14 +189,15 @@ public class Usuario {
 	}
 
 	private Emprestimo encontraEmprestimo(String nomeDono, String nomeItem) {
+
 		for (Emprestimo emprestimo : emprestimosComoRequerente) {
-			if(emprestimo.getnomeItem().equals(nomeItem) && emprestimo.getnomeDono().equals(nomeDono)){
+			if (emprestimo.getnomeItem().equals(nomeItem) && emprestimo.getnomeDono().equals(nomeDono)) {
 				return emprestimo;
-				}
 			}
+		}
 		throw new IllegalArgumentException("Emprestimo nao encontrado");
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -227,21 +228,20 @@ public class Usuario {
 			return false;
 		return true;
 	}
-	
+
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return this.nome + ", " + this.email + ", " + this.telefone;
 	}
-	
-	public void verificaPreco(double preco){
-		if(preco < 0){
+
+	public void verificaPreco(double preco) {
+		if (preco < 0) {
 			throw new IllegalArgumentException("Preco invalido");
 		}
 	}
-	
-	private void validaItemParaUso(String nomeItem){
-		if(!(itens.containsKey(nomeItem))){
+
+	private void validaItemParaUso(String nomeItem) {
+		if (!(itens.containsKey(nomeItem))) {
 			throw new IllegalArgumentException("Item nao encontrado");
 		}
 	}
