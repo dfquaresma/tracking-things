@@ -10,10 +10,12 @@ import item.Item;
 public class UsuarioTest {
 
 	Usuario usuario;
+	Usuario usuario2;
 	
 	@Before
 	public void Inicializa() {
 		this.usuario = new Usuario("Ícaro", "+55 (83) 9.9384-7651", "icaro.lima@ccc.ufcg.edu.br"); 
+		this.usuario2 = new Usuario("David", "+55 (83) 9.1234-5678", "david.quaresma@ccc.ufcg.edu.br");
 	}
 
 	@Test
@@ -88,28 +90,34 @@ public class UsuarioTest {
 	}
 
 	@Test
-	public void testGetInfoItem() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	public void testGetDetalhesItem() {
-		fail("Not yet implemented");
+		this.testCadastrarBlurayFilme();
+		this.testCadastrarBluRaySerie();
+		this.testCadastrarJogoTabuleiro();
+		this.testCadastrarBlurayShow();
+		this.testCadastrarEletronico();
+		
+		assertEquals("FILME: O Senhor dos Anéis I, R$ 230.0, Nao emprestado, 95 min, QUATORZE_ANOS, FICCAO, 2001", this.usuario.getDetalhesItem("O Senhor dos Anéis I"));
+		assertEquals("SERIE: Game of Thrones, R$ 12.0, Nao emprestado, 1200 min, DEZESSEIS_ANOS, AVENTURA, Temporada 8", this.usuario.getDetalhesItem("Game of Thrones"));
+		assertEquals("JOGO DE TABULEIRO: Jogo da Vida, R$ 100.0, Nao emprestado, COMPLETO", this.usuario.getDetalhesItem("Jogo da Vida"));
+		assertEquals("SHOW: Show do Safadão, R$ 49.99, Nao emprestado, 120 min, DEZ_ANOS, Wesley Safadão, 20 faixas", this.usuario.getDetalhesItem("Show do Safadão"));
+		assertEquals("JOGO ELETRONICO: GTA San Andreas, R$ 34.99, Nao emprestado, PC", this.usuario.getDetalhesItem("GTA San Andreas"));
 	}
 
 	@Test
 	public void testEmprestaItem() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetItens() {
-		fail("Not yet implemented");
+		this.testCadastrarEletronico();
+	
+		this.usuario.emprestaItem("GTA San Andreas", "06/08/2017", 4, this.usuario2);
+		
+		//assertEquals(true, this.usuario.getItens().get(0).isEmprestado());
 	}
 
 	@Test
 	public void testDevolveItem() {
-		fail("Not yet implemented");
+		this.testEmprestaItem();
+		
+		this.usuario2.devolveItem("Ícaro", "+55 (83) 9.9384-7651", "GTA San Andreas", "06/08/2017", "07/08/2017");
 	}
 
 	@Test
