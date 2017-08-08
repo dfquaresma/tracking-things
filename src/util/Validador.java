@@ -154,7 +154,7 @@ public class Validador {
 	}
 
 	public void validaPeca(String nomePeca) {
-		this.validaString(nomePeca, "Peca");
+		this.validaString(nomePeca, "Nome da peca");
 		
 	}
 
