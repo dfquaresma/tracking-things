@@ -63,31 +63,11 @@ public class Usuario {
 	}
 
 	public void setNome(String nome) {
-		this.attNomeNosEmprestimos(this.nome, nome);
 		this.nome = nome;
 	}
 
-	private void attNomeNosEmprestimos(String nomeAntigo, String novoNome) {
-		for (Emprestimo emprestimo : this.emprestimosComoEmprestador) {
-			emprestimo.setNomeDono(novoNome);
-		}
-		for (Emprestimo emprestimo : this.emprestimosComoRequerente) {
-			emprestimo.setNomeRequerente(novoNome);
-		}
-	}
-
 	public void setTelefone(String telefone) {
-		this.attTelefoneNosEmprestimos(this.telefone, telefone);
 		this.telefone = telefone;
-	}
-
-	private void attTelefoneNosEmprestimos(String telefoneAntigo, String novoTelefone) {
-		for (Emprestimo emprestimo : this.emprestimosComoEmprestador) {
-			emprestimo.setTelefoneDono(novoTelefone);
-		}
-		for (Emprestimo emprestimo : this.emprestimosComoRequerente) {
-			emprestimo.setTelefoneRequerente(novoTelefone);
-		}
 	}
 
 	public void setEmail(String email) {
@@ -156,21 +136,12 @@ public class Usuario {
 			itemAtt.setNome(valor);
 			this.itens.remove(nomeItem);
 			this.itens.put(valor, itemAtt);
-			this.attItensDosEmprestimos(nomeItem, valor);
 
 		} else if (atributo.equals("Preco")) {
 			getItem(nomeItem).setValor(Double.parseDouble(valor));
 
 		} else {
 			throw new IllegalArgumentException("Atributo invalido");
-		}
-	}
-
-	private void attItensDosEmprestimos(String nomeItem, String novoNomeItem) {
-		for (Emprestimo emprestimo : this.emprestimosComoEmprestador) {
-			if (emprestimo.getNomeItem().equals(nomeItem)) {
-				emprestimo.setNomeItem(novoNomeItem);
-			}
 		}
 	}
 
@@ -193,10 +164,9 @@ public class Usuario {
 		return item.toString();
 	}
 
-	public void emprestaItem(String nomeItem, String dataEmprestimo, int periodo, Usuario userRequerente) {
+	public void emprestaItem(String nomeItem, Usuario userRequerente, Emprestimo emprestimo) {
 		validaItemParaUso(nomeItem);
-		Emprestimo emprestimo = new Emprestimo(this.nome, this.telefone, userRequerente.nome, userRequerente.telefone,
-				nomeItem, dataEmprestimo, periodo);
+		
 		if (emprestimosComoEmprestador.contains(emprestimo)) {
 			throw new IllegalArgumentException("Item emprestado no momento");
 		}
