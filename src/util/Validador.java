@@ -56,13 +56,17 @@ public class Validador {
 	}
 
 	private void validaClassificacao(Classificacao[] values, String classificacao) {
-		Set<String> classificacoes = new HashSet<>();
-		for (Classificacao c : values) {
-			classificacoes.add(c.toString());
+		//Set<String> classificacoes = new HashSet<>();
+		boolean hasClassificacao = false;
+		for (Classificacao c : values)
+		{
+			if(classificacao.equals(c.toString()))
+				hasClassificacao = true;
+			//classificacoes.add(c.toString());
 		}
-		if (!classificacoes.contains(classificacao)) {
+		
+		if (!hasClassificacao)
 			throw new IllegalArgumentException("Classificacao inválida");
-		}
 	}
 
 	public void validaNomeBluray(String nomeBluray) {

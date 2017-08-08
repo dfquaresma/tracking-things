@@ -15,6 +15,12 @@ public class ValidadorTest {
 		this.validador = new Validador();
 	}
 	
+	@Test
+	public void testValidaNome()
+	{
+		this.validador.validaNome("paulofelipe");
+	}
+	
 	@Test(expected=NullPointerException.class)
 	public void testValidaNomeNull()
 	{
@@ -27,6 +33,12 @@ public class ValidadorTest {
 		this.validador.validaNome("       ");
 	}
 	
+	@Test
+	public void testValidaTelefone()
+	{
+		this.validador.validaTelefone("chama no zap bb: 8398777777");
+	}
+	
 	@Test(expected=NullPointerException.class)
 	public void testValidaTelefoneNull()
 	{
@@ -37,6 +49,12 @@ public class ValidadorTest {
 	public void testValidaTelefoneInvalido()
 	{
 		this.validador.validaTelefone("       ");
+	}
+	
+	@Test
+	public void testValidaEmail()
+	{
+		this.validador.validaEmail(null);
 	}
 	
 	@Test(expected=NullPointerException.class)
@@ -74,24 +92,69 @@ public class ValidadorTest {
 	{
 		this.validador.validaNomeItem("       ");
 	}
-
+	
+	@Test(expected=NullPointerException.class)
+	public void testValidaArtistaNull()
+	{
+		this.validador.validaArtista(null);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testValidaArtistaInvalido()
+	{
+		this.validador.validaArtista("       ");
+	}
+	
 	@Test
-	public void testValidaDuracao() {
-		fail("Not yet implemented");
+	public void testValidaClassificacao()
+	{
+		this.validador.validaClassificacao("LIVRE");
+		this.validador.validaClassificacao("DEZ_ANOS");
+		this.validador.validaClassificacao("DOZE_ANOS");
+		this.validador.validaClassificacao("QUATORZE_ANOS");
+		this.validador.validaClassificacao("DEZESSEIS_ANOS");
+		this.validador.validaClassificacao("DEZOITO_ANOS");
+	}
+	
+	@Test(expected=NullPointerException.class)
+	public void testValidaClassificacaoNull()
+	{
+		this.validador.validaClassificacao(null);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testValidaClassificacaoInvalido()
+	{
+		this.validador.validaClassificacao("       ");
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testValidaClassificacaoNotInside()
+	{
+		this.validador.validaClassificacao("livre");
+	}
+
+	@Test(expected=IllegalArgumentException.class)
+	public void testValidaDuracaoInvalida()
+	{
+		this.validador.validaDuracao(0);	//upper bound of (-inf, 0]
+	}
+
+	@Test(expected=NullPointerException.class)
+	public void testValidaNomeBlurayNull()
+	{
+		this.validador.validaNomeBluray(null);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testValidaNomeBlurayInvalido()
+	{
+		this.validador.validaNomeBluray("       ");
 	}
 
 	@Test
-	public void testValidaArtista() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testValidaClassificacao() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testValidaNomeBluray() {
+	public void testValidaNomeBluray()
+	{
 		fail("Not yet implemented");
 	}
 
