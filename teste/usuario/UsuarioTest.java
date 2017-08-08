@@ -108,7 +108,7 @@ public class UsuarioTest {
 	public void testEmprestaItem() {
 		this.testCadastrarEletronico();
 	
-		this.usuario.emprestaItem("GTA San Andreas", "06/08/2017", 4, this.usuario2);
+		//this.usuario.emprestaItem("GTA San Andreas", "06/08/2017", 4, this.usuario2);
 		
 		//assertEquals(true, this.usuario.getItens().get(0).isEmprestado());
 	}
