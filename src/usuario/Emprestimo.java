@@ -1,50 +1,37 @@
 package usuario;
 
+import item.Item;
+
 public class Emprestimo {
 
-	private String nomeDono;
-	private String telefoneDono;
-	private String nomeRequerente;
-	private String telefoneRequerente;
-	private String nomeItem;
+	private Usuario dono;
+	private Usuario requerente;
+	private Item item;
 	private String dataEmprestimo;
 	private int periodo;
 	private String dataRealDaDevolucaoDoItem;
 
-	public Emprestimo(String nomeDono, String telefoneDono, String telefoneRequerente, String nomeRequerente,
-			String nomeItem, String dataEmprestimo, int periodo) {
-		this.nomeDono = nomeDono;
-		this.telefoneDono = telefoneDono;
-		this.nomeRequerente = nomeRequerente;
-		this.telefoneRequerente = telefoneRequerente;
-		this.nomeItem = nomeItem;
+	public Emprestimo(Usuario dono, Usuario requerente, Item item, String dataEmprestimo, int periodo) {
+		this.dono = dono;
+		this.requerente = requerente;
+		this.item = item;
 		this.dataEmprestimo = dataEmprestimo;
 		this.periodo = periodo;
 
 	}
 
 	public String getNomeDono() {
-		return nomeDono;
+		return dono.getNome();
 	}
 
-	public void setNomeDono(String nomeDono) {
-		this.nomeDono = nomeDono;
-	}
 
 	public String getNomeRequerente() {
-		return nomeRequerente;
+		return requerente.getNome();
 	}
 
-	public void setNomeRequerente(String nomeRequerente) {
-		this.nomeRequerente = nomeRequerente;
-	}
 
 	public String getNomeItem() {
-		return nomeItem;
-	}
-
-	public void setNomeItem(String nomeItem) {
-		this.nomeItem = nomeItem;
+		return item.getNome();
 	}
 
 	public String getDataEmprestimo() {
@@ -70,29 +57,13 @@ public class Emprestimo {
 	public void setDataRealDaDevolucaoDoItem(String dataRealDaDevolucaoDoItem) {
 		this.dataRealDaDevolucaoDoItem = dataRealDaDevolucaoDoItem;
 	}
-
-	public String getTelefoneDono() {
-		return telefoneDono;
-	}
-
-	public String getTelefoneRequerente() {
-		return telefoneRequerente;
-	}
-
-	public void setTelefoneDono(String telefoneDono) {
-		this.telefoneDono = telefoneDono;
-	}
-
-	public void setTelefoneRequerente(String telefoneRequerente) {
-		this.telefoneRequerente = telefoneRequerente;
-	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((nomeDono == null) ? 0 : nomeDono.hashCode());
-		result = prime * result + ((nomeItem == null) ? 0 : nomeItem.hashCode());
+		result = prime * result + ((dono.getNome() == null) ? 0 : dono.getNome().hashCode());
+		result = prime * result + ((item.getNome() == null) ? 0 : item.getNome().hashCode());
 		return result;
 	}
 
@@ -105,15 +76,15 @@ public class Emprestimo {
 		if (getClass() != obj.getClass())
 			return false;
 		Emprestimo other = (Emprestimo) obj;
-		if (nomeDono == null) {
-			if (other.nomeDono != null)
+		if (dono.getNome() == null) {
+			if (other.dono.getNome() != null)
 				return false;
-		} else if (!nomeDono.equals(other.nomeDono))
+		} else if (!dono.getNome().equals(other.dono.getNome()))
 			return false;
-		if (nomeItem == null) {
-			if (other.nomeItem != null)
+		if (item.getNome() == null) {
+			if (other.item.getNome() != null)
 				return false;
-		} else if (!nomeItem.equals(other.nomeItem))
+		} else if (!item.getNome().equals(other.item.getNome()))
 			return false;
 		return true;
 	}

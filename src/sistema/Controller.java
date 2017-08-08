@@ -8,6 +8,7 @@ import java.util.Map;
 import excecoes.ExcecaoOperacaoNaoPermitidaNoMomento;
 import excecoes.ExcecaoUsuarioJaExistente;
 import item.Item;
+import usuario.Emprestimo;
 import usuario.IdUsuario;
 import usuario.Usuario;
 import util.Listador;
@@ -285,7 +286,9 @@ public class Controller {
 			String telefoneRequerente, String nomeItem, String dataEmprestimo, int periodo) {
 		Usuario userEmprestador = getUser(nomeDono, telefoneDono);
 		Usuario userRequerente = getUser(nomeRequerente, telefoneRequerente);
-		userEmprestador.emprestaItem(nomeItem, dataEmprestimo, periodo, userRequerente);
+		Item item = userEmprestador.getItem(nomeItem);
+		Emprestimo emprestimo = new Emprestimo(userEmprestador, userRequerente, item, dataEmprestimo, periodo);
+		userEmprestador.emprestaItem(nomeItem, userRequerente, emprestimo);
 
 	}
 
