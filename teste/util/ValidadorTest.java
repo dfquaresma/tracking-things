@@ -54,7 +54,7 @@ public class ValidadorTest {
 	@Test
 	public void testValidaEmail()
 	{
-		this.validador.validaEmail(null);
+		this.validador.validaEmail("paulopaulopaulo@gmail.com");
 	}
 	
 	@Test(expected=NullPointerException.class)
@@ -69,6 +69,12 @@ public class ValidadorTest {
 		this.validador.validaEmail("       ");
 	}
 	
+	@Test
+	public void testValidaValor()
+	{
+		this.validador.validaValor("Nome");
+	}
+	
 	@Test(expected=NullPointerException.class)
 	public void testValidaValorNull()
 	{
@@ -81,6 +87,12 @@ public class ValidadorTest {
 		this.validador.validaValor("       ");
 	}
 	
+	@Test
+	public void testValidaNomeItem()
+	{
+		this.validador.validaNomeItem("parafuso");
+	}
+	
 	@Test(expected=NullPointerException.class)
 	public void testValidaNomeItemNull()
 	{
@@ -91,6 +103,12 @@ public class ValidadorTest {
 	public void testValidaNomeItemInvalido()
 	{
 		this.validador.validaNomeItem("       ");
+	}
+	
+	@Test
+	public void testValidaArtista()
+	{
+		this.validador.validaArtista("REBELDES");
 	}
 	
 	@Test(expected=NullPointerException.class)
@@ -134,12 +152,24 @@ public class ValidadorTest {
 		this.validador.validaClassificacao("livre");
 	}
 
+	@Test
+	public void testValidaDuracao()
+	{
+		this.validador.validaDuracao(1);
+	}
+	
 	@Test(expected=IllegalArgumentException.class)
 	public void testValidaDuracaoInvalida()
 	{
 		this.validador.validaDuracao(0);	//upper bound of (-inf, 0]
 	}
 
+	@Test
+	public void testValidaNomeBluray()
+	{
+		this.validador.validaNomeBluray("GoT");
+	}
+	
 	@Test(expected=NullPointerException.class)
 	public void testValidaNomeBlurayNull()
 	{
@@ -153,14 +183,37 @@ public class ValidadorTest {
 	}
 
 	@Test
-	public void testValidaNomeBluray()
+	public void testValidaGenero()
 	{
-		fail("Not yet implemented");
+		this.validador.validaGenero("DOCUMENTARIO");
+		this.validador.validaGenero("DRAMA");
+		this.validador.validaGenero("EROTICO");
+		this.validador.validaGenero("FAROESTE");
+		this.validador.validaGenero("FICCAO");
+		this.validador.validaGenero("MUSICAL");
+		this.validador.validaGenero("POLICIAL");
+		this.validador.validaGenero("ROMANCE");
+		this.validador.validaGenero("SUSPENSE");
+		this.validador.validaGenero("TERROR");
+		this.validador.validaGenero("OUTRO");
 	}
-
-	@Test
-	public void testValidaGenero() {
-		fail("Not yet implemented");
+	
+	@Test(expected=NullPointerException.class)
+	public void testValidaGeneroNull()
+	{
+		this.validador.validaGenero(null);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testValidaGeneroInvalido()
+	{
+		this.validador.validaGenero("       ");
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testValidaGeneroNotInside()
+	{
+		this.validador.validaGenero("livre");
 	}
 
 	@Test

@@ -56,13 +56,11 @@ public class Validador {
 	}
 
 	private void validaClassificacao(Classificacao[] values, String classificacao) {
-		//Set<String> classificacoes = new HashSet<>();
 		boolean hasClassificacao = false;
 		for (Classificacao c : values)
 		{
 			if(classificacao.equals(c.toString()))
 				hasClassificacao = true;
-			//classificacoes.add(c.toString());
 		}
 		
 		if (!hasClassificacao)
