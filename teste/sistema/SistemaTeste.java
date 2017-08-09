@@ -236,9 +236,9 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.removeUsuario("Rick", "4002-8922");
-
-		} catch (NullPointerException npe) {
-
+			sistema.getInfoUser("Rick", "4002-8922", "Nome");
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Usuario invalido", iae.getMessage());
 		}
 	}
 
@@ -1189,7 +1189,9 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 50.00, "Loucura total", 100, "DEZESSEIS_ANOS", "FICCAO", 1);
 			sistema.removerItem("Rick", "4002-8922", "Rick e Morty");
-		} catch (NullPointerException npe) {
+			sistema.getInfoItem("Rick", "4002-8922", "Rick e Morty", "Nome");
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Item nao encontrado", iae.getMessage());
 		}
 	}
 	
@@ -1276,14 +1278,14 @@ public class SistemaTeste {
 			assertEquals("Usuario invalido", iae.getMessage());
 		}
 	}
-	/*
-	@Test
+	
+	/*@Test
 	public void attNomeItem() { //DEU ERRO AQUI
-		Controller controle = new Controller();
-		controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
-		controle.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
-		controle.attItem("Rick", "4002-8922", "Overwatch", "Nome", "Jogo caro da Bizzard");
-		assertEquals("Jogo caro da Blizzard", controle.getInfoItem("Rick", "4002-8922", "Jogo caro da Blizzard", "Nome"));
+		
+		sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+		sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+		sistema.attItem("Rick", "4002-8922", "Overwatch", "Nome", "Jogo caro da Bizzard");
+		assertEquals("Jogo caro da Blizzard", sistema.getInfoItem("Rick", "4002-8922", "Jogo caro da Blizzard", "Nome"));
 	}*/
 	@Test
 	public void attPrecoItem() { 
@@ -1435,5 +1437,456 @@ public class SistemaTeste {
 		} catch (NullPointerException npe) {
 			assertEquals("Valor nao pode ser nulo", npe.getMessage());
 		}
-	} //FALTA TESTAR REALIZAR EMPRESTIMO E DEVOLVER ITEM
+	} 
+	
+	@Test
+	public void emprestarItem(){
+		sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+		sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
+		sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+		sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
+		assertEquals("JOGO ELETRONICO: Overwatch, R$ 200.0, Emprestado, PC", sistema.getDetalhesItem("Rick", "4002-8922", "Overwatch"));
+		//sistema.devolverItem("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", "11/08/2017");
+	}
+	
+	@Test
+	public void emprestarItemNomeDonoVazio(){
+		try {
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
+			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			sistema.registrarEmprestimo(" ", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
+			
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Nome nao pode ser vazio", iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void emprestarItemNomeRequerenteVazio(){
+		try {
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
+			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			sistema.registrarEmprestimo("Rick", "4002-8922", " ", "4220", "Overwatch", "09/08/2017", 3);
+			
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Nome nao pode ser vazio", iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void emprestarItemTelefoneDonoVazio(){
+		try {
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
+			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			sistema.registrarEmprestimo("Rick", " ", "Morty", "4220", "Overwatch", "09/08/2017", 3);
+			
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Telefone nao pode ser vazio", iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void emprestarItemTelefoneRequerenteVazio(){
+		try {
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
+			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "  ", "Overwatch", "09/08/2017", 3);
+			
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Telefone nao pode ser vazio", iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void emprestarItemNomeItemVazio(){
+		try {
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
+			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "  ", "09/08/2017", 3);
+			
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Nome do item nao pode ser vazio", iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void emprestarItemDataVazia(){
+		try {
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
+			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", " ", 3);
+			
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Data nao pode ser vazio", iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void emprestarItemPeriodoInvalido(){
+		try {
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
+			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", -3);
+			
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Periodo nao pode ser menor ou iguals a zero.", iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void emprestarItemNomeEmprestadorNulo(){
+		try {
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
+			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			sistema.registrarEmprestimo(null, "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
+			
+		} catch (NullPointerException npe) {
+			assertEquals("Nome nao pode ser nulo", npe.getMessage());
+		}
+	}
+	
+	@Test
+	public void emprestarItemNomeRequerenteNulo(){
+		try {
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
+			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			sistema.registrarEmprestimo("Rick", "4002-8922", null, "4220", "Overwatch", "09/08/2017", 3);
+			
+		} catch (NullPointerException npe) {
+			assertEquals("Nome nao pode ser nulo", npe.getMessage());
+		}
+	}
+	
+	@Test
+	public void emprestarItemTelefoneEmprestadorNulo(){
+		try {
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
+			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			sistema.registrarEmprestimo("Rick", null, "Morty", "4220", "Overwatch", "09/08/2017", 3);
+			
+		} catch (NullPointerException npe) {
+			assertEquals("Telefone nao pode ser nulo", npe.getMessage());
+		}
+	}
+	
+	@Test
+	public void emprestarItemTelefoneRequerenteNulo(){
+		try {
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
+			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", null, "Overwatch", "09/08/2017", 3);
+			
+		} catch (NullPointerException npe) {
+			assertEquals("Telefone nao pode ser nulo", npe.getMessage());
+		}
+	}
+	
+	@Test
+	public void emprestarItemNomeItemNulo(){
+		try {
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
+			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", null, "09/08/2017", 3);
+			
+		} catch (NullPointerException npe) {
+			assertEquals("Nome do item nao pode ser nulo", npe.getMessage());
+		}
+	}
+	
+	@Test
+	public void emprestarItemDataNula(){
+		try {
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
+			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", null, 3);
+			
+		} catch (NullPointerException npe) {
+			assertEquals("Data nao pode ser nulo", npe.getMessage());
+		}
+	}
+	
+	@Test
+	public void emprestarItemUsuarioRequerenteInvalido(){
+		try {
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
+			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			sistema.registrarEmprestimo("Rick", "4002-8922", "Summer", "4220", "Overwatch", "09/08/2017", 3);
+			
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Usuario invalido", iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void emprestarItemUsuarioEmprestadorInvalido(){
+		try {
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
+			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			sistema.registrarEmprestimo("Summer", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
+			
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Usuario invalido", iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void emprestarItemItemInvalido(){
+		try {
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
+			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Bioshock", "09/08/2017", 3);
+			
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Item nao encontrado", iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void devolverItem(){
+		
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
+			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
+			assertEquals("JOGO ELETRONICO: Overwatch, R$ 200.0, Emprestado, PC",sistema.getDetalhesItem("Rick", "4002-8922", "Overwatch"));
+			sistema.devolverItem("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", "11/08/2017");
+			assertEquals("JOGO ELETRONICO: Overwatch, R$ 200.0, Nao emprestado, PC",sistema.getDetalhesItem("Rick", "4002-8922", "Overwatch"));
+	}
+	
+	@Test
+	public void devolverItemNomeEmprestadorVazio(){
+		try {
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
+			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
+			sistema.devolverItem(" ", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", "11/08/2017");
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Nome nao pode ser vazio",iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void devolverItemNomeRequerenteVazio(){
+		try {
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
+			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
+			sistema.devolverItem("Rick", "4002-8922", " ", "4220", "Overwatch", "09/08/2017", "11/08/2017");
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Nome nao pode ser vazio",iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void devolverItemTelefoneEmprestadorVazio(){
+		try {
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
+			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
+			sistema.devolverItem("Rick", "  ", "Morty", "4220", "Overwatch", "09/08/2017", "11/08/2017");
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Telefone nao pode ser vazio",iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void devolverItemTelefoneRequerenteVazio(){
+		try {
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
+			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
+			sistema.devolverItem("Rick", "4002-8922", "Morty", "  ", "Overwatch", "09/08/2017", "11/08/2017");
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Telefone nao pode ser vazio",iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void devolverItemNomeItemVazio(){
+		try {
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
+			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
+			sistema.devolverItem("Rick", "4002-8922", "Morty", "4220", "  ", "09/08/2017", "11/08/2017");
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Nome do item nao pode ser vazio",iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void devolverItemDataEmprestimoVazia(){
+		try {
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
+			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
+			sistema.devolverItem("Rick", "4002-8922", "Morty", "4220", "Overwatch", " ", "11/08/2017");
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Data nao pode ser vazio",iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void devolverItemDataDevolucaoVazia(){
+		try {
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
+			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
+			sistema.devolverItem("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", " ");
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Data nao pode ser vazio",iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void devolverItemNomeEmprestadorNulo(){
+		try {
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
+			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
+			sistema.devolverItem(null, "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", "11/08/2017");
+		} catch (NullPointerException npe) {
+			assertEquals("Nome nao pode ser nulo",npe.getMessage());
+		}
+	}
+	
+	@Test
+	public void devolverItemNomeRequerenteNulo(){
+		try {
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
+			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
+			sistema.devolverItem("Rick", "4002-8922", null, "4220", "Overwatch", "09/08/2017", "11/08/2017");
+		} catch (NullPointerException npe) {
+			assertEquals("Nome nao pode ser nulo",npe.getMessage());
+		}
+	}
+	
+	@Test
+	public void devolverItemTelefoneEmprestadorNulo(){
+		try {
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
+			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
+			sistema.devolverItem("Rick", null, "Morty", "4220", "Overwatch", "09/08/2017", "11/08/2017");
+		} catch (NullPointerException npe) {
+			assertEquals("Telefone nao pode ser nulo",npe.getMessage());
+		}
+	}
+	
+	@Test
+	public void devolverItemTelefoneRequerenteNulo(){
+		try {
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
+			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
+			sistema.devolverItem("Rick", "4002-8922", "Morty", null, "Overwatch", "09/08/2017", "11/08/2017");
+		} catch (NullPointerException npe) {
+			assertEquals("Telefone nao pode ser nulo",npe.getMessage());
+		}
+	}
+	
+	@Test
+	public void devolverItemNomeItemNulo(){
+		try {
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
+			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
+			sistema.devolverItem("Rick", "4002-8922", "Morty", "4220", null, "09/08/2017", "11/08/2017");
+		} catch (NullPointerException npe) {
+			assertEquals("Nome do item nao pode ser nulo",npe.getMessage());
+		}
+	}
+	
+	@Test
+	public void devolverItemDataEmprestimoNula(){
+		try {
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
+			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
+			sistema.devolverItem("Rick", "4002-8922", "Morty", "4220", "Overwatch", null, "11/08/2017");
+		} catch (NullPointerException npe) {
+			assertEquals("Data nao pode ser nulo",npe.getMessage());
+		}
+	}
+	
+	@Test
+	public void devolverItemDataDevolucaoNula(){
+		try {
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
+			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
+			sistema.devolverItem("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", null);
+		} catch (NullPointerException npe) {
+			assertEquals("Data nao pode ser nulo",npe.getMessage());
+		}
+	}
+	
+	@Test
+	public void devolverItemUsuarioEmprestadorInvalido(){
+		try {
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
+			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
+			sistema.devolverItem("Summer", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", "11/08/2017");
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Usuario invalido",iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void devolverItemUsuarioRequerenteInvalido(){
+		try {
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
+			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
+			sistema.devolverItem("Rick", "4002-8922", "Summer", "4220", "Overwatch", "09/08/2017", "11/08/2017");
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Usuario invalido",iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void devolverItemItemInvalido(){
+		try {
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
+			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
+			sistema.devolverItem("Rick", "4002-8922", "Morty", "4220", "Bioshock", "09/08/2017", "11/08/2017");
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Emprestimo nao encontrado",iae.getMessage());
+		}
+	}
 }
