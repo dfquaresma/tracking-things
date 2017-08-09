@@ -1,6 +1,6 @@
 package sistema;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -341,17 +341,18 @@ public class SistemaTeste {
 		}
 	}
 
-	/*
-	 * @Test VER O RETORNO DISSO AQUI public void
-	 * cadastrarEletronicoPlataformaInvalida() { Controller controle = new
-	 * Controller(); try { controle.cadastrarUsuario("Rick", "4002-8922",
-	 * "rick@mail.com"); controle.cadastrarEletronico("Rick", "4002-8922",
-	 * "Bioshock", 35.00, "Gameboy"); } catch (IllegalArgumentException iae) {
-	 * assertEquals("", iae.getMessage());
-	 * 
-	 * } }
-	 */
-
+	@Test
+	public void cadastrarEletronicoPlataformaInvalida() {
+		try { 
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com"); 
+			sistema.cadastrarEletronico("Rick", "4002-8922", "Bioshock", 35.00, "Gameboy");
+		
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Plataforma inválida", iae.getMessage());
+			
+		} 
+	}
+	
 	@Test
 	public void cadastrarEletronicoPrecoInvalido() {
 		
@@ -1054,17 +1055,18 @@ public class SistemaTeste {
 		assertEquals("PS4",sistema.getInfoItem("Rick", "4002-8922", "GTA V", "Plataforma"));
 	}
 	
-	/*@Test
+	@Test
 	public void getInfoItemAtributoInvalido(){
-		Controller controle = new Controller();
 		try {
-			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
-			controle.cadastrarEletronico("Rick", "4002-8922", "GTA V", 200.00, "PS4");			
-			controle.getInfoItem("Rick", "4002-8922", "GTA V", "Classificacao");
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			sistema.cadastrarEletronico("Rick", "4002-8922", "GTA V", 200.00, "PS4");
+			sistema.getInfoItem("Rick", "4002-8922", "GTA V", "Classificacao");
+			fail();
+			
 		} catch (IllegalArgumentException iae) {
-			assertEquals("Atributo invalido", iae.getMessage());// TÁ SEM MENSAGEM
+			assertEquals("Atributo invalido.", iae.getMessage());// TÁ SEM MENSAGEM
 		}
-	} */
+	} 
 	
 	@Test
 	public void addBluray(){
@@ -1276,15 +1278,18 @@ public class SistemaTeste {
 			assertEquals("Usuario invalido", iae.getMessage());
 		}
 	}
-	/*
+	
 	@Test
 	public void attNomeItem() { //DEU ERRO AQUI
-		Controller controle = new Controller();
-		controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
-		controle.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
-		controle.attItem("Rick", "4002-8922", "Overwatch", "Nome", "Jogo caro da Bizzard");
-		assertEquals("Jogo caro da Blizzard", controle.getInfoItem("Rick", "4002-8922", "Jogo caro da Blizzard", "Nome"));
-	}*/
+		sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+		sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+		assertEquals("Overwatch", sistema.getInfoItem("Rick", "4002-8922", "Overwatch", "Nome"));
+		
+		sistema.attItem("Rick", "4002-8922", "Overwatch", "Nome", "Jogo caro da Blizzard");
+		assertEquals("Jogo caro da Blizzard", sistema.getInfoItem("Rick", "4002-8922", "Jogo caro da Blizzard", "Nome"));
+
+	}
+	
 	@Test
 	public void attPrecoItem() { 
 		
