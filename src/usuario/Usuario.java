@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import excecoes.ItemNaoEhDoTipoEsperadoExcecao;
+import excecoes.OperacaoNaoPermitidaNoMomentoExcecao;
 import item.Item;
 import item.bluray.Filme;
 import item.bluray.Show;
@@ -213,10 +214,13 @@ public class Usuario {
 	public void emprestaItem(String nomeItem, Usuario userRequerente, Emprestimo emprestimo) {
 		this.validaItemParaUso(nomeItem);
 
-		if (emprestimosComoEmprestador.contains(emprestimo)) {
-			throw new IllegalArgumentException("Item emprestado no momento");
+		Item item = this.getItem(nomeItem);
+		
+		if (item.isEmprestado()) {
+			throw new OperacaoNaoPermitidaNoMomentoExcecao("Item emprestado no momento");
 		}
-		this.getItem(nomeItem).setEmprestado(true);
+		
+		item.setEmprestado(true);
 		userRequerente.emprestimosComoRequerente.add(emprestimo);
 		this.emprestimosComoEmprestador.add(emprestimo);
 	}
@@ -273,7 +277,7 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return this.nome + ", " + this.email + ", " + this.telefone;
+		return this.nome + ", " + this.telefone + ", " + this.email;
 	}
 
 	private void validaItemParaUso(String nomeItem) {

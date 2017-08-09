@@ -73,7 +73,6 @@ public class UsuarioTest {
 		this.testCadastrarBlurayFilme();
 		
 		Item item = this.usuario.getItem("O Senhor dos Anéis I");
-		
 		assertEquals("O nome do Item não confere.", "O Senhor dos Anéis I", item.getNome());
 	}
 
@@ -108,31 +107,28 @@ public class UsuarioTest {
 	public void testEmprestaItem() {
 		this.testCadastrarEletronico();
 	
-		//this.usuario.emprestaItem("GTA San Andreas", "06/08/2017", 4, this.usuario2); TEM DE AJEITAR AQUI!!!
-		
-		assertEquals(true, this.usuario.getItens().get(0).isEmprestado());
+		Item item = this.usuario.getItem("GTA San Andreas");
+		Emprestimo emprestimo = new Emprestimo(this.usuario, this.usuario2, item, "06/08/2017", 7);
+		this.usuario.emprestaItem(item.getNome(), this.usuario2, emprestimo);
+		assertTrue(this.usuario.getItem("GTA San Andreas").isEmprestado());
 	}
 
 	@Test
 	public void testDevolveItem() {
 		this.testEmprestaItem();	
-		Usuario user = new Usuario("Ícaro", "+55 (83) 9.9384-7651", "icaro.gamer@gmail.com");
-		this.usuario2.devolveItem("GTA San Andreas", "06/08/2017", "07/08/2017", user);
+		this.usuario2.devolveItem("GTA San Andreas", "06/08/2017", "07/08/2017", this.usuario);
 	}
 
 	@Test
 	public void testEqualsObject() {
-		fail("Not yet implemented");
+		Usuario userTest = new Usuario("Ícaro", "+55 (83) 9.9384-7651", "icaro.lima@ccc.ufcg.edu.br");
+		assertTrue(this.usuario.equals(userTest));
+		assertFalse(this.usuario.equals(this.usuario2));
 	}
 
 	@Test
 	public void testToString() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testVerificaPreco() {
-		fail("Not yet implemented");
+		assertEquals("Ícaro, +55 (83) 9.9384-7651, icaro.lima@ccc.ufcg.edu.br", this.usuario.toString());
 	}
 
 }
