@@ -86,9 +86,27 @@ public class Temporada extends BlueRay {
 
 	@Override
 	public String toString() {
-		return "SERIE: " + this.getNome() + ", R$ " + String.valueOf(this.getValor()) + ", "
+		return "SERIE: " + this.getNome() + ", R$ " + String.valueOf(this.getPreco()) + ", "
 				+ this.getEstadoEmprestimo() + ", " + this.getDuracao() + " min, " + this.getClassificacao() + ", "
 				+ this.getGenero() + ", Temporada " + this.getTemporada();
+	}
+	
+	@Override
+	public void atualizaAtributo(String atributo, String valor) {
+		
+		if (atributo.equals("Descricao")) {
+			this.descricao = valor;
+			
+		} else if (atributo.equals("Genero")) {
+			this.genero = Genero.valueOf(valor);
+			
+		} else if (atributo.equals("Temporada")) {
+			this.temporada = Integer.parseInt(valor);
+			
+		} else {
+			super.atualizaAtributo(atributo, valor);
+		}
+		
 	}
 
 }

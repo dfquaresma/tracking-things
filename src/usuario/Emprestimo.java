@@ -23,12 +23,18 @@ public class Emprestimo {
 	public String getNomeDono() {
 		return dono.getNome();
 	}
-
+	
+	public String getTelefoneDono() {
+		return dono.getTelefone();
+	}
 
 	public String getNomeRequerente() {
 		return requerente.getNome();
 	}
-
+	
+	public String getTelefoneRequerente() {
+		return requerente.getTelefone();
+	}
 
 	public String getNomeItem() {
 		return item.getNome();

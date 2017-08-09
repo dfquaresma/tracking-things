@@ -9,12 +9,12 @@ package item;
 public abstract class Item implements Comparable<Item> {
 
 	private String nome;
-	private double valor;
+	private double preco;
 	private boolean emprestado;
 
-	public Item(String nome, double valor) {
+	public Item(String nome, double preco) {
 		this.nome = nome;
-		this.valor = valor;
+		this.preco = preco;
 		this.emprestado = false;
 	}
 
@@ -30,12 +30,12 @@ public abstract class Item implements Comparable<Item> {
 		this.nome = nome;
 	}
 
-	public double getValor() {
-		return valor;
+	public double getPreco() {
+		return preco;
 	}
 
-	public void setValor(double valor) {
-		this.valor = valor;
+	public void setPreco(double preco) {
+		this.preco = preco;
 	}
 
 	public boolean isEmprestado() {
@@ -91,7 +91,7 @@ public abstract class Item implements Comparable<Item> {
 		case ("Nome"):
 			return this.nome;
 		case ("Preco"):
-			return String.valueOf(this.valor);
+			return String.valueOf(this.preco);
 		default:
 			throw new IllegalArgumentException();
 
@@ -99,4 +99,18 @@ public abstract class Item implements Comparable<Item> {
 
 	}
 
+	public void atualizaAtributo(String atributo, String valor) {
+		
+		if (atributo.equals("Nome")) {
+			setNome(valor);
+
+		} else if (atributo.equals("Preco")) {
+			setPreco(Double.parseDouble(valor));
+
+		} else {
+			throw new IllegalArgumentException("Atributo invalido");
+		}
+		
+	}
+	
 }
