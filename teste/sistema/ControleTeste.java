@@ -840,4 +840,595 @@ public class ControleTeste {
 		}
 	}
 	
+	@Test
+	public void cadastrarBlurayShowEGetDetalhesItem(){
+		Controller controle = new Controller();
+		controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+		controle.cadastrarBlurayShow("Rick", "4002-8922", "Safadao DVD", 30.00, 100, 12, "Safadao", "LIVRE");
+		assertEquals("SHOW: Safadao DVD, R$ 30.0, Nao emprestado, 100 min, LIVRE, Safadao, 12 faixas", controle.getDetalhesItem("Rick", "4002-8922", "Safadao DVD"));
+		
+	}
+	
+	@Test
+	public void cadastrarBlurayShowNomeUserVazio(){
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarBlurayShow(" ", "4002-8922", "Safadao DVD", 30.00, 100, 12, "Safadao", "LIVRE");			
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Nome nao pode ser vazio", iae.getMessage());
+		}
+	}
+		
+	@Test
+	public void cadastrarBlurayShowTelefoneUserVazio(){
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarBlurayShow("Rick", " ", "Safadao DVD", 30.00, 100, 12, "Safadao", "LIVRE");			
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Telefone nao pode ser vazio", iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void cadastrarBlurayShowNomeItemVazio(){
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarBlurayShow("Rick", "4002-8922", " ", 30.00, 100, 12, "Safadao", "LIVRE");			
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Nome do item nao pode ser vazio", iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void cadastrarBlurayShowPrecoInvalido(){
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarBlurayShow("Rick", "4002-8922", "Safadao DVD", -30.00, 100, 12, "Safadao", "LIVRE");			
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Preco invalido", iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void cadastrarBlurayShowDuracaoInvalida(){
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarBlurayShow("Rick", "4002-8922", "Safadao DVD", 30.00, -100, 12, "Safadao", "LIVRE");			
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Duracao nao pode ser negativa", iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void cadastrarBlurayShowFaixasNegativo(){
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarBlurayShow("Rick", "4002-8922", "Safadao DVD", 30.00, 100, -12, "Safadao", "LIVRE");			
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Numero de faixas nao pode ser maior ou igual a zero", iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void cadastrarBlurayShowFaixasZero(){
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarBlurayShow("Rick", "4002-8922", "Safadao DVD", 30.00, 100, 0, "Safadao", "LIVRE");			
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Numero de faixas nao pode ser maior ou igual a zero", iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void cadastrarBlurayShowArtistaVazio(){
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarBlurayShow("Rick", "4002-8922", "Safadao DVD", 30.00, 100, 12, " ", "LIVRE");			
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Artista nao pode ser vazio", iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void cadastrarBlurayShowClassificacaoInvalida(){
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarBlurayShow("Rick", "4002-8922", "Safadao DVD", 30.00, 100, 12, "Safadao", "BATATA");			
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Classificacao inválida", iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void cadastrarBlurayShowClassificacaoVazia(){
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarBlurayShow("Rick", "4002-8922", "Safadao DVD", 30.00, 100, 12, "Safadao", " ");			
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Classificacao nao pode ser vazio", iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void cadastrarBlurayShowClassificacaoNula(){
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarBlurayShow("Rick", "4002-8922", "Safadao DVD", 30.00, 100, 12, "Safadao", null);			
+		} catch (NullPointerException npe) {
+			assertEquals("Classificacao nao pode ser nulo", npe.getMessage());
+		}
+	}
+	
+	@Test
+	public void cadastrarBlurayShowNomeUserNulo(){
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarBlurayShow(null, "4002-8922", "Safadao DVD", 30.00, 100, 12, "Safadao", "LIVRE");			
+		} catch (NullPointerException npe) {
+			assertEquals("Nome nao pode ser nulo", npe.getMessage());
+		}
+	}
+	
+	@Test
+	public void cadastrarBlurayShowTelefoneUserNula(){
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarBlurayShow("Rick", null, "Safadao DVD", 30.00, 100, 12, "Safadao", "LIVRE");			
+		} catch (NullPointerException npe) {
+			assertEquals("Telefone nao pode ser nulo", npe.getMessage());
+		}
+	}
+	
+	@Test
+	public void cadastrarBlurayShowNomeItemNulo(){
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarBlurayShow("Rick", "4002-8922", null, 30.00, 100, 12, "Safadao", "LIVRE");			
+		} catch (NullPointerException npe) {
+			assertEquals("Nome do item nao pode ser nulo", npe.getMessage());
+		}
+	}
+	
+	@Test
+	public void cadastrarBlurayArtistaNulo(){
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarBlurayShow("Rick", "4002-8922", "Safadao DVD", 30.00, 100, 12, null, "LIVRE");			
+		} catch (NullPointerException npe) {
+			assertEquals("Artista nao pode ser nulo", npe.getMessage());
+		}
+	}
+	
+	@Test
+	public void getInfoUserInvalido(){
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.getInfoUser("Morty", "4002-8922", "Nome");
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Usuario invalido", iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void getInfoItemNome(){
+		Controller controle = new Controller();
+		controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+		controle.cadastrarEletronico("Rick", "4002-8922", "GTA V", 200.00, "PS4");
+		assertEquals("GTA V",controle.getInfoItem("Rick", "4002-8922", "GTA V", "Nome") );
+	}
+	
+	@Test
+	public void getInfoItemPreco(){
+		Controller controle = new Controller();
+		controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+		controle.cadastrarEletronico("Rick", "4002-8922", "GTA V", 200.00, "PS4");
+		assertEquals("200.0",controle.getInfoItem("Rick", "4002-8922", "GTA V", "Preco") );
+	}
+	
+	@Test
+	public void getInfoItemPlataforma(){
+		Controller controle = new Controller();
+		controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+		controle.cadastrarEletronico("Rick", "4002-8922", "GTA V", 200.00, "PS4");
+		assertEquals("PS4",controle.getInfoItem("Rick", "4002-8922", "GTA V", "Plataforma"));
+	}
+	
+	/*@Test
+	public void getInfoItemAtributoInvalido(){
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarEletronico("Rick", "4002-8922", "GTA V", 200.00, "PS4");			
+			controle.getInfoItem("Rick", "4002-8922", "GTA V", "Classificacao");
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Atributo invalido", iae.getMessage());// TÁ SEM MENSAGEM
+		}
+	} */
+	
+	@Test
+	public void addBluray(){
+		Controller controle = new Controller();
+		controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+		controle.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 50.00, "Loucura total", 100, "DEZESSEIS_ANOS", "FICCAO", 1);
+		controle.addBluray("Rick", "4002-8922", "Rick e Morty", 22);
+	}
+	
+	@Test
+	public void addBluraySerieInvalida(){
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 50.00, "Loucura total", 100, "DEZESSEIS_ANOS", "FICCAO", 1);
+			controle.addBluray("Rick", "4002-8922", "CDZ", 22);
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Item nao encontrado", iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void addBlurayNomeUserVazio(){
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 50.00, "Loucura total", 100, "DEZESSEIS_ANOS", "FICCAO", 1);
+			controle.addBluray(" ", "4002-8922", "CDZ", 22);
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Nome nao pode ser vazio", iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void addBlurayTelefoneUserVazio(){
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 50.00, "Loucura total", 100, "DEZESSEIS_ANOS", "FICCAO", 1);
+			controle.addBluray("Rick", "  ", "CDZ", 22);
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Telefone nao pode ser vazio", iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void addBlurayEpisodioVazio(){
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 50.00, "Loucura total", 100, "DEZESSEIS_ANOS", "FICCAO", 1);
+			controle.addBluray("Rick", "4002-8922", " ", 22);
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Nome do bluray nao pode ser vazio", iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void addBlurayDuracaoInvalida(){
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 50.00, "Loucura total", 100, "DEZESSEIS_ANOS", "FICCAO", 1);
+			controle.addBluray("Rick", "4002-8922", "Rick e Morty", -22);
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Duracao nao pode ser negativa", iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void addBlurayNomeUserNulo(){
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 50.00, "Loucura total", 100, "DEZESSEIS_ANOS", "FICCAO", 1);
+			controle.addBluray(null, "4002-8922", "Rick e Morty", 22);
+		} catch (NullPointerException npe) {
+			assertEquals("Nome nao pode ser nulo", npe.getMessage());
+		}
+	}
+	
+	@Test
+	public void addBlurayTelefoneUserNulo(){
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 50.00, "Loucura total", 100, "DEZESSEIS_ANOS", "FICCAO", 1);
+			controle.addBluray("Rick", null, "Rick e Morty", 22);
+		} catch (NullPointerException npe) {
+			assertEquals("Telefone nao pode ser nulo", npe.getMessage());
+		}
+	}
+	
+	@Test
+	public void addBlurayNomeBlurayNulo(){
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 50.00, "Loucura total", 100, "DEZESSEIS_ANOS", "FICCAO", 1);
+			controle.addBluray("Rick", "4002-8922", null, 22);
+		} catch (NullPointerException npe) {
+			assertEquals("Nome do bluray nao pode ser nulo", npe.getMessage());
+		}
+	}
+	
+	@Test
+	public void addBlurayUsuarioInvalido(){
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 50.00, "Loucura total", 100, "DEZESSEIS_ANOS", "FICCAO", 1);
+			controle.addBluray("Morty", "4002-8922", "Rick e Morty", 22);
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Usuario invalido", iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void removerItem(){
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 50.00, "Loucura total", 100, "DEZESSEIS_ANOS", "FICCAO", 1);
+			controle.removerItem("Rick", "4002-8922", "Rick e Morty");
+		} catch (NullPointerException npe) {
+		}
+	}
+	
+	@Test
+	public void removerItemNomeNulo(){
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 50.00, "Loucura total", 100, "DEZESSEIS_ANOS", "FICCAO", 1);
+			controle.removerItem(null, "4002-8922", "Rick e Morty");
+		} catch (NullPointerException npe) {
+			assertEquals("Nome nao pode ser nulo", npe.getMessage());
+		}
+	}
+	
+	@Test
+	public void removerItemTelefoneNulo(){
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 50.00, "Loucura total", 100, "DEZESSEIS_ANOS", "FICCAO", 1);
+			controle.removerItem("Rick", null, "Rick e Morty");
+		} catch (NullPointerException npe) {
+			assertEquals("Telefone nao pode ser nulo", npe.getMessage());
+		}
+	}
+	
+	@Test
+	public void removerItemNomeItemNulo(){
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 50.00, "Loucura total", 100, "DEZESSEIS_ANOS", "FICCAO", 1);
+			controle.removerItem("Rick", "4002-8922", null);
+		} catch (NullPointerException npe) {
+			assertEquals("Nome do item nao pode ser nulo", npe.getMessage());
+		}
+	}
+	
+	@Test
+	public void removerItemNomeVazio(){
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 50.00, "Loucura total", 100, "DEZESSEIS_ANOS", "FICCAO", 1);
+			controle.removerItem(" ", "4002-8922", "Rick e Morty");
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Nome nao pode ser vazio", iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void removerItemTelefoneVazio(){
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 50.00, "Loucura total", 100, "DEZESSEIS_ANOS", "FICCAO", 1);
+			controle.removerItem("Rick", "  ", "Rick e Morty");
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Telefone nao pode ser vazio", iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void removerItemNomeItemVazio(){
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 50.00, "Loucura total", 100, "DEZESSEIS_ANOS", "FICCAO", 1);
+			controle.removerItem("Rick", "4002-8922", "  ");
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Nome do item nao pode ser vazio", iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void removerItemUsuarioInvalido(){
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 50.00, "Loucura total", 100, "DEZESSEIS_ANOS", "FICCAO", 1);
+			controle.removerItem("Morty", "4002-8922", "Rick e Morty");
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Usuario invalido", iae.getMessage());
+		}
+	}
+	/*
+	@Test
+	public void attNomeItem() { //DEU ERRO AQUI
+		Controller controle = new Controller();
+		controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+		controle.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+		controle.attItem("Rick", "4002-8922", "Overwatch", "Nome", "Jogo caro da Bizzard");
+		assertEquals("Jogo caro da Blizzard", controle.getInfoItem("Rick", "4002-8922", "Jogo caro da Blizzard", "Nome"));
+	}*/
+	@Test
+	public void attPrecoItem() { 
+		Controller controle = new Controller();
+		controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+		controle.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+		controle.attItem("Rick", "4002-8922", "Overwatch", "Preco", "250.0");
+		assertEquals("250.0", controle.getInfoItem("Rick", "4002-8922", "Overwatch", "Preco"));
+	}
+	
+	@Test
+	public void attItemAtributoInvalido() { 
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			controle.attItem("Rick", "4002-8922", "Overwatch", "Plataforma", "PS4");
+			
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Atributo invalido", iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void attItemNomeVazio() { 
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			controle.attItem(" ", "4002-8922", "Overwatch", "Plataforma", "PS4");
+			
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Nome nao pode ser vazio", iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void attItemTelefoneVazio() { 
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			controle.attItem("Rick", "  ", "Overwatch", "Plataforma", "PS4");
+			
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Telefone nao pode ser vazio", iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void attItemNomeItemVazio() { 
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			controle.attItem("Rick", "4002-8922", " ", "Plataforma", "PS4");
+			
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Nome do item nao pode ser vazio", iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void attItemAtributoVazio() { 
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			controle.attItem("Rick", "4002-8922", "Overwatch", " ", "PS4");
+			
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Atributo nao pode ser vazio", iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void attItemValorVazio() { 
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			controle.attItem("Rick", "4002-8922", "Overwatch", "Plataforma", "  ");
+			
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Valor nao pode ser vazio", iae.getMessage());
+		}
+	}
+	
+	@Test
+	public void attItemNomeNulo() { 
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			controle.attItem(null, "4002-8922", "Overwatch", "Plataforma", "PS4");
+			
+		} catch (NullPointerException npe) {
+			assertEquals("Nome nao pode ser nulo", npe.getMessage());
+		}
+	}
+	
+	@Test
+	public void attItemTelefoneNulo() { 
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			controle.attItem("Rick", null, "Overwatch", "Plataforma", "PS4");
+			
+		} catch (NullPointerException npe) {
+			assertEquals("Telefone nao pode ser nulo", npe.getMessage());
+		}
+	}
+	
+	@Test
+	public void attItemNomeItemNulo() { 
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			controle.attItem("Rick", "4002-8922", null, "Plataforma", "PS4");
+			
+		} catch (NullPointerException npe) {
+			assertEquals("Nome do item nao pode ser nulo", npe.getMessage());
+		}
+	}
+	
+	@Test
+	public void attItemAtributoNulo() { 
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			controle.attItem("Rick", "4002-8922", "Overwatch", null, "PS4");
+			
+		} catch (NullPointerException npe) {
+			assertEquals("Atributo nao pode ser nulo", npe.getMessage());
+		}
+	}
+	
+	@Test
+	public void attItemValorNulo() { 
+		Controller controle = new Controller();
+		try {
+			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			controle.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
+			controle.attItem("Rick", "4002-8922", "Overwatch", "Plataforma", null);
+			
+		} catch (NullPointerException npe) {
+			assertEquals("Valor nao pode ser nulo", npe.getMessage());
+		}
+	} //FALTA TESTAR REALIZAR EMPRESTIMO E DEVOLVER ITEM
 }
