@@ -1,5 +1,6 @@
 package usuario;
 
+import excecoes.OperacaoNaoPermitidaNoMomentoExcecao;
 import item.Item;
 import util.Validador;
 
@@ -12,6 +13,7 @@ public class Emprestimo {
 	private int periodo;
 	private String dataRealDaDevolucaoDoItem;
 	private Validador validador;
+	private boolean finalizado;
 
 	public Emprestimo(Usuario dono, Usuario requerente, Item item, String dataEmprestimo, int periodo) {
 		this.validador = new Validador();
@@ -26,6 +28,7 @@ public class Emprestimo {
 		this.item = item;
 		this.dataEmprestimo = dataEmprestimo;
 		this.periodo = periodo;
+		this.finalizado = false;
 
 	}
 
@@ -53,13 +56,17 @@ public class Emprestimo {
 		return this.dataEmprestimo;
 	}
 
+	public int getPeriodo() {
+		return this.periodo;
+	}
+		
+	public boolean isFinalizado() {
+		return finalizado;
+	}
+
 	public void setDataEmprestimo(String dataEmprestimo) {
 		this.validador.validaData(dataEmprestimo);
 		this.dataEmprestimo = dataEmprestimo;
-	}
-
-	public int getPeriodo() {
-		return this.periodo;
 	}
 
 	public void setPeriodo(int periodo) {
@@ -121,8 +128,11 @@ public class Emprestimo {
 
 	public void finaliza(String dataDevolucao) {
 		this.validador.validaData(dataDevolucao);
+		if (this.finalizado) {
+			throw new OperacaoNaoPermitidaNoMomentoExcecao("Este emprestimo ja foi finalizado.");
+		}
 		this.dataRealDaDevolucaoDoItem = dataDevolucao;
-		// Continua no us5.
+		this.finalizado = true;
 	}
 
 }
