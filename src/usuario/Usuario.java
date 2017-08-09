@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import excecoes.ExcecaoItemNaoEhDoTipoEsperado;
+import excecoes.ItemNaoEhDoTipoEsperadoExcecao;
 import item.Item;
 import item.blueray.Filme;
 import item.blueray.Show;
@@ -104,7 +104,7 @@ public class Usuario {
 
 		Item item = getItem(nomeItem);
 		if (!(item instanceof JogoTabuleiro)) {
-			throw new ExcecaoItemNaoEhDoTipoEsperado("O nome do item informad nao pertence a um tabuleiro");
+			throw new ItemNaoEhDoTipoEsperadoExcecao("O nome do item informad nao pertence a um tabuleiro");
 		}
 
 		JogoTabuleiro jogo = (JogoTabuleiro) item;

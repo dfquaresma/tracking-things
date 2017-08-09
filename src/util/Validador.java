@@ -1,8 +1,6 @@
 package util;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import item.Item;
 import item.blueray.Classificacao;
@@ -53,11 +51,9 @@ public class Validador {
 	public void validaClassificacao(String classificacao) {
 		this.validaString(classificacao, "Classificacao");
 		
-		Set<String> classificacoes = new HashSet<>();
-		for (Classificacao c : Classificacao.values()) {
-			classificacoes.add(c.toString());
-		}
-		if (!classificacoes.contains(classificacao)) {
+		try {
+			Classificacao.valueOf(classificacao);
+		} catch (Exception e) {
 			throw new IllegalArgumentException("Classificacao inválida");
 		}
 				
@@ -71,13 +67,12 @@ public class Validador {
 	public void validaGenero(String genero) {
 		this.validaString(genero, "Genero");
 		
-		Set<String> generos = new HashSet<>();
-		for (Genero g : Genero.values()) {
-			generos.add(g.toString());
+		try {
+			Genero.valueOf(genero);
+		} catch (Exception e) {
+			throw new IllegalArgumentException("Genero inválido");			
 		}
-		if (!generos.contains(genero)) {
-			throw new IllegalArgumentException("Genero inválido");
-		}
+		
 	}
 
 	public void validaTemporada(int temporada) {
@@ -90,13 +85,12 @@ public class Validador {
 	public void validaPlataforma(String plataforma) {
 		this.validaString(plataforma, "Plataforma");
 		
-		Set<String> plataformas = new HashSet<>();
-		for (Plataforma p : Plataforma.values()) {
-			plataformas.add(p.toString());
-		}
-		if (!plataformas.contains(plataforma)) {
+		try {
+			Plataforma.valueOf(plataforma);			
+		} catch (Exception e) {
 			throw new IllegalArgumentException("Plataforma inválida");
 		}
+		
 	}
 
 	public void validaAnoLancamento(int ano) {

@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import excecoes.ExcecaoOperacaoNaoPermitidaNoMomento;
-import excecoes.ExcecaoUsuarioJaExistente;
+import excecoes.OperacaoNaoPermitidaNoMomentoExcecao;
+import excecoes.UsuarioJaExistenteExcecao;
 import item.Item;
 import usuario.Emprestimo;
 import usuario.IdUsuario;
@@ -203,7 +203,7 @@ public class Controller {
 
 	private void validaIdeParaAtt(IdUsuario id) {
 		if (this.usuarios.containsKey(id)) {
-			throw new ExcecaoUsuarioJaExistente("Usuario invalido");
+			throw new UsuarioJaExistenteExcecao("Usuario invalido");
 		}
 	}
 
@@ -278,7 +278,7 @@ public class Controller {
 
 	private void validaListagem(int size) {
 		if (size == 0) {
-			throw new ExcecaoOperacaoNaoPermitidaNoMomento("Nao ha itens para serem listados no momento");
+			throw new OperacaoNaoPermitidaNoMomentoExcecao("Nao ha itens para serem listados no momento");
 		}
 	}
 	
