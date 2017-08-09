@@ -555,7 +555,7 @@ public class Sistema {
 			String telefoneRequerente, String nomeItem, String dataEmprestimo) {
 		this.validador.validaNome(nomeDono);
 		this.validador.validaNome(nomeRequerente);
-		this.validador.validaNome(nomeItem);
+		this.validador.validaNomeItem(nomeItem);
 		this.validador.validaTelefone(telefoneDono);
 		this.validador.validaTelefone(telefoneRequerente);
 		this.validador.validaData(dataEmprestimo);
