@@ -334,10 +334,11 @@ public class Usuario {
 		Item itemAtt = getItem(nomeItem);
 
 		if (atributo.equals("Nome")) {
+			
 			this.validaAttNomeDeItem(valor);
 			itemAtt.atualizaAtributo(atributo, valor);
-			this.itens.remove(nomeItem);
 			this.itens.put(valor, itemAtt);
+			this.itens.remove(nomeItem);
 
 		} else {
 			itemAtt.atualizaAtributo(atributo, valor);
@@ -363,7 +364,6 @@ public class Usuario {
 	 * @return o atributo a ser recuperado.
 	 */
 	public String getInfoItem(String nomeItem, String atributo) {
-		this.validaItemParaUso(nomeItem);
 		this.validador.validaAtributo(atributo);
 
 		Item item = getItem(nomeItem);

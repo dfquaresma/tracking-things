@@ -1,5 +1,10 @@
 package usuario;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import excecoes.OperacaoNaoPermitidaNoMomentoExcecao;
 import item.Item;
 import util.Validador;
@@ -15,15 +20,16 @@ public class Emprestimo {
 	private Usuario dono;
 	private Usuario requerente;
 	private Item item;
-	private String dataEmprestimo;
+	private Date dataEmprestimo;
+	private DateFormat dateFormat;
 	private int periodo;
-	private String dataRealDaDevolucaoDoItem;
+	private Date dataRealDaDevolucaoDoItem;
 	private Validador validador;
 	private boolean finalizado;
 
 	/**
-	 * Constrói um emprestimo com o dono do item, o requerente do item, o item,
-	 * a data de emprestimo e o período de emprestimo.
+	 * Constrói um emprestimo com o dono do item, o requerente do item, o item, a
+	 * data de emprestimo e o período de emprestimo.
 	 * 
 	 * @param dono
 	 * @param requerente
@@ -42,8 +48,15 @@ public class Emprestimo {
 		this.dono = dono;
 		this.requerente = requerente;
 		this.item = item;
-		this.dataEmprestimo = dataEmprestimo;
-		this.periodo = periodo; 
+
+		this.dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		try {
+			this.dataEmprestimo = dateFormat.parse(dataEmprestimo);
+		} catch (ParseException e) {
+			throw new IllegalArgumentException("O formato da data inserido está incorreto, utilize dd/MM/yyyy");
+		}
+
+		this.periodo = periodo;
 		this.finalizado = false;
 
 	}
@@ -99,12 +112,12 @@ public class Emprestimo {
 	 * @return a data em que o item foi emprestado.
 	 */
 	public String getDataEmprestimo() {
-		return this.dataEmprestimo;
+		return this.dateFormat.format(this.dataEmprestimo);
 	}
 
 	/**
-	 * Recupera o período de dias que o item passará (ou passou, caso o
-	 * emprestimo tenha sido finalizado) emprestado.
+	 * Recupera o período de dias que o item passará (ou passou, caso o emprestimo
+	 * tenha sido finalizado) emprestado.
 	 * 
 	 * @return o período de dias.
 	 */
@@ -129,7 +142,12 @@ public class Emprestimo {
 	 */
 	public void setDataEmprestimo(String dataEmprestimo) {
 		this.validador.validaData(dataEmprestimo);
-		this.dataEmprestimo = dataEmprestimo;
+
+		try {
+			this.dataEmprestimo = this.dateFormat.parse(dataEmprestimo);
+		} catch (ParseException e) {
+			throw new IllegalArgumentException("O formato da data inserido está incorreto, utilize dd/MM/yyyy");
+		}
 	}
 
 	/**
@@ -154,7 +172,8 @@ public class Emprestimo {
 		if (!this.finalizado) {
 			throw new OperacaoNaoPermitidaNoMomentoExcecao("Este emprestimo ainda não foi finalizado.");
 		}
-		return this.dataRealDaDevolucaoDoItem;
+
+		return this.dateFormat.format(this.dataRealDaDevolucaoDoItem);
 	}
 
 	/**
@@ -168,7 +187,12 @@ public class Emprestimo {
 		if (!this.finalizado) {
 			throw new OperacaoNaoPermitidaNoMomentoExcecao("Este emprestimo ainda não foi finalizado.");
 		}
-		this.dataRealDaDevolucaoDoItem = dataRealDaDevolucaoDoItem;
+
+		try {
+			this.dataRealDaDevolucaoDoItem = this.dateFormat.parse(dataRealDaDevolucaoDoItem);
+		} catch (ParseException e) {
+			throw new IllegalArgumentException("O formato da data inserido está incorreto, utilize dd/MM/yyyy");
+		}
 	}
 
 	/**
@@ -231,7 +255,12 @@ public class Emprestimo {
 		if (this.finalizado) {
 			throw new OperacaoNaoPermitidaNoMomentoExcecao("Este emprestimo ja foi finalizado.");
 		}
-		this.dataRealDaDevolucaoDoItem = dataDevolucao;
+		
+		try {
+			this.dataRealDaDevolucaoDoItem = this.dateFormat.parse(dataDevolucao);
+		} catch (ParseException e) {
+			throw new IllegalArgumentException("O formato da data inserido está incorreto, utilize dd/MM/yyyy");
+		}
 		this.finalizado = true;
 	}
 

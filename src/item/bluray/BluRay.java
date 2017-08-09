@@ -3,9 +3,9 @@ package item.bluray;
 import item.Item;
 
 /**
- * Description: Alem das informacoes gerais que todo item possui, todo blu ray
- * deve ter uma duracao e uma classificacao
+ * Representação de um Blu-Ray.
  * 
+ * @author David Ferreira
  *
  */
 public abstract class BluRay extends Item {
@@ -13,6 +13,18 @@ public abstract class BluRay extends Item {
 	private int duracao;
 	private Classificacao classificacao;
 
+	/**
+	 * Constrói um blu-ray com nome, preço, duração e classificação.
+	 * 
+	 * @param nome
+	 *            o nome do blu-ray.
+	 * @param preco
+	 *            o preço do blu-ray.
+	 * @param duracao
+	 *            a duração do blu-ray.
+	 * @param classificacao
+	 *            a classificação do blu-ray.
+	 */
 	public BluRay(String nome, double valor, int duracao, String classificacao) {
 		super(nome, valor);
 		this.validador.validaDuracao(duracao);
@@ -23,24 +35,51 @@ public abstract class BluRay extends Item {
 
 	}
 
+	/**
+	 * Recupera a duração deste blu-ray.
+	 * 
+	 * @return a duração.
+	 */
 	public int getDuracao() {
 		return duracao;
 	}
 
+	/**
+	 * Atualiza a duração deste blu-ray.
+	 * 
+	 * @param duracao
+	 *            a nova duração.
+	 */
 	public void setDuracao(int duracao) {
 		this.validador.validaDuracao(duracao);
 		this.duracao = duracao;
 	}
 
+	/**
+	 * Recupera a classificação deste blu-ray.
+	 * 
+	 * @return uma string representando a classificação.
+	 */
 	public String getClassificacao() {
 		return classificacao.toString();
 	}
 
+	/**
+	 * Atualiza a classificação deste blu-ray.
+	 * 
+	 * @param classificacao
+	 *            a nova classificação.
+	 */
 	public void setClassificacao(String classificacao) {
 		this.validador.validaClassificacao(classificacao);
 		this.classificacao = Classificacao.valueOf(classificacao);
 	}
 
+	/**
+	 * Sobrescreve o método da classe mãe para verificar se o atributo a ser
+	 * recuperado pertence a esta classe. Caso não seja, o método da classe mãe
+	 * é chamado.
+	 */
 	@Override
 	public String getInfo(String atributo) {
 		this.validador.validaAtributo(atributo);
@@ -56,6 +95,11 @@ public abstract class BluRay extends Item {
 
 	}
 	
+	/**
+	 * Sobrescreve o método da classe mãe para verificar se o atributo a ser
+	 * atualizado pertence a esta classe. Caso não seja, o método da classe mãe
+	 * é chamado.
+	 */
 	@Override
 	public void atualizaAtributo(String atributo, String valor) {
 		
