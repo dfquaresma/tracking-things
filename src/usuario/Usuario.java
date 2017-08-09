@@ -13,6 +13,7 @@ import item.blueray.Show;
 import item.blueray.Temporada;
 import item.jogo.JogoEletronico;
 import item.jogo.JogoTabuleiro;
+import util.Validador;
 
 /**
  * Description:
@@ -26,8 +27,13 @@ public class Usuario {
 	private Map<String, Item> itens;
 	private Set<Emprestimo> emprestimosComoEmprestador;
 	private Set<Emprestimo> emprestimosComoRequerente;
+	private Validador validador;
 
 	public Usuario(String nome, String telefone, String email) {
+		this.validador = new Validador();
+		this.validador.validaNome(nome);
+		this.validador.validaTelefone(telefone);
+		this.validador.validaEmail(email);
 		this.nome = nome;
 		this.telefone = telefone;
 		this.email = email;
@@ -60,47 +66,80 @@ public class Usuario {
 	}
 
 	public void setNome(String nome) {
+		this.validador.validaNome(nome);
 		this.nome = nome;
 	}
 
 	public void setTelefone(String telefone) {
+		this.validador.validaTelefone(telefone);
 		this.telefone = telefone;
 	}
 
 	public void setEmail(String email) {
+		this.validador.validaEmail(email);
 		this.email = email;
 	}
 
 	public void cadastrarEletronico(String nomeItem, double preco, String plataforma) {
+		this.validaAtributosDeCadastroDeItem(nomeItem, preco);
+		this.validador.validaPlataforma(plataforma);
 		Item novoItem = new JogoEletronico(nomeItem, preco, plataforma);
 		this.itens.put(nomeItem, novoItem);
 	}
 
+	private void validaAtributosDeCadastroDeItem(String nomeItem, double preco) {
+		this.validador.validaNome(nomeItem);
+		this.validador.validaPreco(preco);
+	}
+
 	public void cadastrarJogoTabuleiro(String nomeItem, double preco) {
+		this.validaAtributosDeCadastroDeItem(nomeItem, preco);
 		Item novoItem = new JogoTabuleiro(nomeItem, preco);
 		this.itens.put(nomeItem, novoItem);
 	}
 
+	private void validaAtributosDeCadastroDeBluRays(int duracao, String classificacao) {
+		this.validador.validaDuracao(duracao);
+		this.validador.validaClassificacao(classificacao);
+	}
+	
 	public void cadastrarBlurayFilme(String nomeItem, double preco, int duracao, String genero, String classificacao,
 			int anoLancamento) {
+		this.validaAtributosDeCadastroDeItem(nomeItem, preco);
+		this.validaAtributosDeCadastroDeBluRays(duracao, classificacao);
+		this.validador.validaGenero(genero);
+		this.validador.validaAnoLancamento(anoLancamento);
+		
 		Item novoItem = new Filme(nomeItem, preco, duracao, genero, classificacao, anoLancamento);
 		itens.put(nomeItem, novoItem);
 	}
 
+
 	public void cadastrarBluRaySerie(String nomeItem, double preco, String descricao, int duracao, String classificacao,
 			String genero, int temporada) {
+		this.validaAtributosDeCadastroDeItem(nomeItem, preco);
+		this.validaAtributosDeCadastroDeBluRays(duracao, classificacao);
+		this.validador.validaDescricao(descricao);
+		this.validador.validaGenero(genero);
+		this.validador.validaTemporada(temporada);
 		Item novoItem = new Temporada(nomeItem, preco, descricao, duracao, classificacao, genero, temporada);
 		itens.put(nomeItem, novoItem);
 	}
 
 	public void cadastrarBlurayShow(String nomeItem, double preco, int duracao, int numeroFaixas, String artista,
 			String classificacao) {
+		this.validaAtributosDeCadastroDeItem(nomeItem, preco);
+		this.validaAtributosDeCadastroDeBluRays(duracao, classificacao);
+		this.validador.validaNumeroDeFaixas(numeroFaixas);
+		this.validador.validaArtista(artista);
+		
 		Item novoItem = new Show(nomeItem, preco, duracao, numeroFaixas, artista, classificacao);
 		itens.put(nomeItem, novoItem);
 	}
 
 	public void addPecaPerdida(String nomeItem, String nomePeca) {
-		validaItemParaUso(nomeItem);
+		this.validaItemParaUso(nomeItem);
+		this.validador.validaPeca(nomePeca);
 
 		Item item = getItem(nomeItem);
 		if (!(item instanceof JogoTabuleiro)) {
@@ -113,11 +152,16 @@ public class Usuario {
 	}
 
 	public void addBlueray(String nomeBlueray, int duracao) {
+		this.validador.validaNome(nomeBlueray);
+		this.validador.validaDuracao(duracao);
+		
 		Temporada temporada = (Temporada) this.getItem(nomeBlueray);
 		temporada.addBlueray(duracao);
 	}
 
 	public void removerItem(String nomeItem) {
+		this.validador.validaNome(nomeItem);
+		
 		if (!(itens.containsKey(nomeItem))) {
 			throw new IllegalArgumentException("Item nao encontrado");
 		}
@@ -125,10 +169,14 @@ public class Usuario {
 	}
 
 	public void attItem(String nomeItem, String atributo, String valor) {
+		this.validador.validaNome(nomeItem);
+		this.validador.validaAtributo(atributo);
+		this.validador.validaValor(valor);
+		
 		Item itemAtt = getItem(nomeItem);
 
 		if (atributo.equals("Nome")) {
-			validaAttNomeDeItem(valor);
+			this.validaAttNomeDeItem(valor);
 			itemAtt.atualizaAtributo(atributo, valor);
 			this.itens.remove(nomeItem);
 			this.itens.put(valor, itemAtt);
@@ -140,6 +188,7 @@ public class Usuario {
 	}
 
 	private void validaAttNomeDeItem(String nomeItem) {
+		
 		if (this.itens.containsKey(nomeItem)) {
 			throw new IllegalArgumentException();
 		}
@@ -147,24 +196,27 @@ public class Usuario {
 	}
 
 	public String getInfoItem(String nomeItem, String atributo) {
-		validaItemParaUso(nomeItem);
+		this.validaItemParaUso(nomeItem);
+		this.validador.validaAtributo(atributo);
+		
 		Item item = getItem(nomeItem);
 		return item.getInfo(atributo);
 	}
 
 	public String getDetalhesItem(String nomeItem) {
-		validaItemParaUso(nomeItem);
+		this.validaItemParaUso(nomeItem);
+		
 		Item item = getItem(nomeItem);
 		return item.toString();
 	}
 
 	public void emprestaItem(String nomeItem, Usuario userRequerente, Emprestimo emprestimo) {
-		validaItemParaUso(nomeItem);
+		this.validaItemParaUso(nomeItem);
 
 		if (emprestimosComoEmprestador.contains(emprestimo)) {
 			throw new IllegalArgumentException("Item emprestado no momento");
 		}
-		getItem(nomeItem).setEmprestado(true);
+		this.getItem(nomeItem).setEmprestado(true);
 		userRequerente.emprestimosComoRequerente.add(emprestimo);
 		this.emprestimosComoEmprestador.add(emprestimo);
 	}
@@ -225,9 +277,48 @@ public class Usuario {
 	}
 
 	private void validaItemParaUso(String nomeItem) {
+		this.validador.validaNome(nomeItem);
+		
 		if (!(itens.containsKey(nomeItem))) {
 			throw new IllegalArgumentException("Item nao encontrado");
 		}
 	}
 
+	public void atualizaAtributo(String atributo, String valor) {
+		this.validador.validaAtributo(atributo);
+		this.validador.validaValor(valor);
+		
+		switch (atributo) {
+		case ("Nome"):
+			setNome(valor);
+			break;
+		case ("Telefone"):
+			setTelefone(valor);
+			break;
+		case ("Email"):
+			setEmail(valor);
+			break;
+			
+		default:
+			throw new IllegalArgumentException("Atributo invalido");
+		}
+		
+	}
+	
+	public String getInfor(String atributo) {
+		this.validador.validaAtributo(atributo);
+		
+		switch (atributo) {
+		case ("Nome"):
+			return getNome();
+		case ("Telefone"):
+			return getTelefone();
+		case ("Email"):
+			return getEmail();
+		default:
+			throw new IllegalArgumentException("Atributo invalido.");
+		}
+	}
+	
+	
 }

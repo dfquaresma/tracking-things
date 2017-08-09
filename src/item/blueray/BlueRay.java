@@ -15,6 +15,9 @@ public abstract class BlueRay extends Item {
 
 	public BlueRay(String nome, double valor, int duracao, String classificacao) {
 		super(nome, valor);
+		this.validador.validaDuracao(duracao);
+		this.validador.validaClassificacao(classificacao);
+		
 		this.duracao = duracao;
 		this.classificacao = Classificacao.valueOf(classificacao);
 
@@ -25,6 +28,7 @@ public abstract class BlueRay extends Item {
 	}
 
 	public void setDuracao(int duracao) {
+		this.validador.validaDuracao(duracao);
 		this.duracao = duracao;
 	}
 
@@ -33,11 +37,13 @@ public abstract class BlueRay extends Item {
 	}
 
 	public void setClassificacao(String classificacao) {
+		this.validador.validaClassificacao(classificacao);
 		this.classificacao = Classificacao.valueOf(classificacao);
 	}
 
 	@Override
 	public String getInfo(String atributo) {
+		this.validador.validaAtributo(atributo);
 
 		switch (atributo) {
 		case ("Duracao"):
@@ -52,6 +58,9 @@ public abstract class BlueRay extends Item {
 	
 	@Override
 	public void atualizaAtributo(String atributo, String valor) {
+		
+		this.validador.validaAtributo(atributo);
+		this.validador.validaValor(valor);
 		
 		if (atributo.equals("Duracao")) {
 			this.duracao = Integer.parseInt(valor);

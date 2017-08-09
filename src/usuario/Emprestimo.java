@@ -1,6 +1,7 @@
 package usuario;
 
 import item.Item;
+import util.Validador;
 
 public class Emprestimo {
 
@@ -10,8 +11,16 @@ public class Emprestimo {
 	private String dataEmprestimo;
 	private int periodo;
 	private String dataRealDaDevolucaoDoItem;
+	private Validador validador;
 
 	public Emprestimo(Usuario dono, Usuario requerente, Item item, String dataEmprestimo, int periodo) {
+		this.validador = new Validador();
+		this.validador.validaDono(dono);
+		this.validador.validaRequerente(requerente);
+		this.validador.validaItem(item);
+		this.validador.validaData(dataEmprestimo);
+		this.validador.validaPeriodo(periodo);
+		
 		this.dono = dono;
 		this.requerente = requerente;
 		this.item = item;
@@ -21,46 +30,49 @@ public class Emprestimo {
 	}
 
 	public String getNomeDono() {
-		return dono.getNome();
+		return this.dono.getNome();
 	}
 	
 	public String getTelefoneDono() {
-		return dono.getTelefone();
+		return this.dono.getTelefone();
 	}
 
 	public String getNomeRequerente() {
-		return requerente.getNome();
+		return this.requerente.getNome();
 	}
 	
 	public String getTelefoneRequerente() {
-		return requerente.getTelefone();
+		return this.requerente.getTelefone();
 	}
 
 	public String getNomeItem() {
-		return item.getNome();
+		return this.item.getNome();
 	}
 
 	public String getDataEmprestimo() {
-		return dataEmprestimo;
+		return this.dataEmprestimo;
 	}
 
 	public void setDataEmprestimo(String dataEmprestimo) {
+		this.validador.validaData(dataEmprestimo);
 		this.dataEmprestimo = dataEmprestimo;
 	}
 
 	public int getPeriodo() {
-		return periodo;
+		return this.periodo;
 	}
 
 	public void setPeriodo(int periodo) {
+		this.validador.validaPeriodo(periodo);
 		this.periodo = periodo;
 	}
 
 	public String getDataRealDaDevolucaoDoItem() {
-		return dataRealDaDevolucaoDoItem;
+		return this.dataRealDaDevolucaoDoItem;
 	}
 
 	public void setDataRealDaDevolucaoDoItem(String dataRealDaDevolucaoDoItem) {
+		this.validador.validaData(dataRealDaDevolucaoDoItem);
 		this.dataRealDaDevolucaoDoItem = dataRealDaDevolucaoDoItem;
 	}
 	
@@ -96,6 +108,7 @@ public class Emprestimo {
 	}
 
 	public void finaliza(String dataDevolucao) {
+		this.validador.validaData(dataDevolucao);
 		this.dataRealDaDevolucaoDoItem = dataDevolucao;
 		// Continua no us5.
 	}

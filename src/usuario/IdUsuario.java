@@ -1,11 +1,18 @@
 package usuario;
 
+import util.Validador;
+
 public class IdUsuario {
 
 	private String nome;
 	private String telefone;
+	private Validador validador;
 
 	public IdUsuario(String nome, String telefone) {
+		this.validador = new Validador();
+		this.validador.validaNome(nome);
+		this.validador.validaTelefone(telefone);
+		
 		this.nome = nome;
 		this.telefone = telefone;
 	}
@@ -14,16 +21,8 @@ public class IdUsuario {
 		return nome;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
 	public String getTelefone() {
 		return telefone;
-	}
-
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package item;
 
+import util.Validador;
+
 /**
  * Description: Todo item precisa manter o seu nome, o seu valor (que pode ser o
  * valor de compra) e se esta ou não emprestado no momento.
@@ -11,8 +13,13 @@ public abstract class Item implements Comparable<Item> {
 	private String nome;
 	private double preco;
 	private boolean emprestado;
+	protected Validador validador;
 
 	public Item(String nome, double preco) {
+		this.validador = new Validador();
+		this.validador.validaNome(nome);
+		this.validador.validaPreco(preco);
+		
 		this.nome = nome;
 		this.preco = preco;
 		this.emprestado = false;
@@ -27,6 +34,7 @@ public abstract class Item implements Comparable<Item> {
 	}
 
 	public void setNome(String nome) {
+		this.validador.validaNome(nome);
 		this.nome = nome;
 	}
 
@@ -35,6 +43,7 @@ public abstract class Item implements Comparable<Item> {
 	}
 
 	public void setPreco(double preco) {
+		this.validador.validaPreco(preco);
 		this.preco = preco;
 	}
 
@@ -82,10 +91,12 @@ public abstract class Item implements Comparable<Item> {
 
 	@Override
 	public int compareTo(Item outroItem) {
+		this.validador.validaItem(outroItem);
 		return this.nome.compareTo(outroItem.nome);
 	}
 
 	public String getInfo(String atributo) {
+		this.validador.validaAtributo(atributo);
 
 		switch (atributo) {
 		case ("Nome"):
@@ -100,6 +111,8 @@ public abstract class Item implements Comparable<Item> {
 	}
 
 	public void atualizaAtributo(String atributo, String valor) {
+		this.validador.validaAtributo(atributo);
+		this.validador.validaValor(valor);
 		
 		if (atributo.equals("Nome")) {
 			setNome(valor);

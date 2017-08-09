@@ -13,6 +13,9 @@ public class Show extends BlueRay {
 
 	public Show(String nome, double valor, int duracao, int numDeFaixas, String artista, String classificacao) {
 		super(nome, valor, duracao, classificacao);
+		this.validador.validaNumeroDeFaixas(numDeFaixas);
+		this.validador.validaArtista(artista);
+		
 		this.numDeFaixas = numDeFaixas;
 		this.artista = artista;
 	}
@@ -22,6 +25,7 @@ public class Show extends BlueRay {
 	}
 
 	public void setNumDeFaixas(int numDeFaixas) {
+		this.validador.validaNumeroDeFaixas(numDeFaixas);
 		this.numDeFaixas = numDeFaixas;
 	}
 
@@ -30,11 +34,13 @@ public class Show extends BlueRay {
 	}
 
 	public void setArtista(String artista) {
+		this.validador.validaArtista(artista);
 		this.artista = artista;
 	}
 
 	@Override
 	public String getInfo(String atributo) {
+		this.validador.validaAtributo(atributo);
 
 		switch (atributo) {
 		case ("Artista"):
@@ -56,6 +62,8 @@ public class Show extends BlueRay {
 	
 	@Override
 	public void atualizaAtributo(String atributo, String valor) {
+		this.validador.validaAtributo(atributo);
+		this.validador.validaValor(valor);
 		
 		if (atributo.equals("Artista")) {
 			this.artista = valor;			

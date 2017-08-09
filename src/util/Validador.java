@@ -6,6 +6,7 @@ import item.Item;
 import item.blueray.Classificacao;
 import item.blueray.Genero;
 import item.jogo.Plataforma;
+import usuario.Usuario;
 
 public class Validador {
 
@@ -131,17 +132,32 @@ public class Validador {
 		if (numeroFaixas <= 0) {
 			throw new IllegalArgumentException("Numero de faixar nao pode ser menor ou igual a zero.");
 		}
-
 	}
 
 	public void validaAtributo(String atributo) {
 		this.validaString(atributo, "Atributo");
-		
 	}
 
 	public void validaPeca(String nomePeca) {
 		this.validaString(nomePeca, "Nome da peca");
-		
+	}
+
+	public void validaObjetos(Object o, String msg) {
+		if (o == null) {
+			throw new IllegalArgumentException(msg + " nao pode ser nulo");
+		}
+	}
+	
+	public void validaDono(Usuario dono) {
+		this.validaObjetos(dono, "Usuario dono");
+	}
+
+	public void validaRequerente(Usuario requerente) {
+		this.validaObjetos(requerente, "Usuario requerente");
+	}
+
+	public void validaItem(Item item) {
+		this.validaObjetos(item, "Item");
 	}
 
 }
