@@ -8,9 +8,9 @@ import java.util.Set;
 
 import excecoes.ItemNaoEhDoTipoEsperadoExcecao;
 import item.Item;
-import item.blueray.Filme;
-import item.blueray.Show;
-import item.blueray.Temporada;
+import item.bluray.Filme;
+import item.bluray.Show;
+import item.bluray.Temporada;
 import item.jogo.JogoEletronico;
 import item.jogo.JogoTabuleiro;
 import util.Validador;

@@ -3,8 +3,8 @@ package util;
 import java.util.List;
 
 import item.Item;
-import item.blueray.Classificacao;
-import item.blueray.Genero;
+import item.bluray.Classificacao;
+import item.bluray.Genero;
 import item.jogo.Plataforma;
 import usuario.Usuario;
 

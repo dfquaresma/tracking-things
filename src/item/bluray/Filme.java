@@ -1,4 +1,4 @@
-package item.blueray;
+package item.bluray;
 
 /**
  * Description: Os blu rays de filmes devem ainda ter genero e ano de

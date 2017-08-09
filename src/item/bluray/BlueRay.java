@@ -1,4 +1,4 @@
-package item.blueray;
+package item.bluray;
 
 import item.Item;
 

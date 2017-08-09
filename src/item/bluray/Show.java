@@ -1,4 +1,4 @@
-package item.blueray;
+package item.bluray;
 
 /**
  * Description: Os blu rays de shows devem indicar o nome do artista e o número

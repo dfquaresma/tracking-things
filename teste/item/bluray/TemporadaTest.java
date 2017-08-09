@@ -1,9 +1,11 @@
-package item.blueray;
+package item.bluray;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import item.bluray.Temporada;
 
 public class TemporadaTest {
 
