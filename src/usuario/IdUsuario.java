@@ -2,29 +2,56 @@ package usuario;
 
 import util.Validador;
 
+/**
+ * Representação de um identificador de usuário.
+ * 
+ * @author David Ferreira
+ *
+ */
 public class IdUsuario {
 
 	private String nome;
 	private String telefone;
 	private Validador validador;
 
+	/**
+	 * Constrói um identificador com nome e telefone.
+	 * 
+	 * @param nome
+	 *            o nome do usuário a ser identificado.
+	 * @param telefone
+	 *            o telefone do usuário a ser identificado.
+	 */
 	public IdUsuario(String nome, String telefone) {
 		this.validador = new Validador();
 		this.validador.validaNome(nome);
 		this.validador.validaTelefone(telefone);
-		
+
 		this.nome = nome;
 		this.telefone = telefone;
 	}
 
+	/**
+	 * Recupera o nome do usuário que este objeta identificada.
+	 * 
+	 * @return o nome do usuário identificado.
+	 */
 	public String getNome() {
-		return nome;
+		return this.nome;
 	}
 
+	/**
+	 * Recupera o telefone do usuário que este objeta identificada.
+	 * 
+	 * @return o telefone do usuário identificado.
+	 */
 	public String getTelefone() {
-		return telefone;
+		return this.telefone;
 	}
 
+	/**
+	 * Retorna um valor hash code desse identificador.
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -34,6 +61,9 @@ public class IdUsuario {
 		return result;
 	}
 
+	/**
+	 * Indica quando um outro objeto é igual a este.
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -55,6 +85,5 @@ public class IdUsuario {
 			return false;
 		return true;
 	}
-	
-	
+
 }

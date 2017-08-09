@@ -4,6 +4,12 @@ import excecoes.OperacaoNaoPermitidaNoMomentoExcecao;
 import item.Item;
 import util.Validador;
 
+/**
+ * Representação de um emprestimo.
+ * 
+ * @author David Ferreira
+ *
+ */
 public class Emprestimo {
 
 	private Usuario dono;
@@ -15,6 +21,16 @@ public class Emprestimo {
 	private Validador validador;
 	private boolean finalizado;
 
+	/**
+	 * Constrói um emprestimo com o dono do item, o requerente do item, o item,
+	 * a data de emprestimo e o período de emprestimo.
+	 * 
+	 * @param dono
+	 * @param requerente
+	 * @param item
+	 * @param dataEmprestimo
+	 * @param periodo
+	 */
 	public Emprestimo(Usuario dono, Usuario requerente, Item item, String dataEmprestimo, int periodo) {
 		this.validador = new Validador();
 		this.validador.validaDono(dono);
@@ -22,67 +38,142 @@ public class Emprestimo {
 		this.validador.validaItem(item);
 		this.validador.validaData(dataEmprestimo);
 		this.validador.validaPeriodo(periodo);
-		
+
 		this.dono = dono;
 		this.requerente = requerente;
 		this.item = item;
 		this.dataEmprestimo = dataEmprestimo;
-		this.periodo = periodo;
+		this.periodo = periodo; 
 		this.finalizado = false;
 
 	}
 
+	/**
+	 * Recupera o nome do dono do item emprestado.
+	 * 
+	 * @return o nome do dono do item.
+	 */
 	public String getNomeDono() {
 		return this.dono.getNome();
 	}
-	
+
+	/**
+	 * Recupera o telefone do dono do item emprestado.
+	 * 
+	 * @return o telefone do dono do item.
+	 */
 	public String getTelefoneDono() {
 		return this.dono.getTelefone();
 	}
 
+	/**
+	 * Recupera o nome do requerente do item emprestado.
+	 * 
+	 * @return o nome do requerente do item.
+	 */
 	public String getNomeRequerente() {
 		return this.requerente.getNome();
 	}
-	
+
+	/**
+	 * Recupera o telefone do requerente do item emprestado.
+	 * 
+	 * @return o telefone do requerente do item.
+	 */
 	public String getTelefoneRequerente() {
 		return this.requerente.getTelefone();
 	}
 
+	/**
+	 * Recupera o nome do item emprestado.
+	 * 
+	 * @return o nome do item.
+	 */
 	public String getNomeItem() {
 		return this.item.getNome();
 	}
 
+	/**
+	 * Recupera a data em que o item foi emprestado.
+	 * 
+	 * @return a data em que o item foi emprestado.
+	 */
 	public String getDataEmprestimo() {
 		return this.dataEmprestimo;
 	}
 
+	/**
+	 * Recupera o período de dias que o item passará (ou passou, caso o
+	 * emprestimo tenha sido finalizado) emprestado.
+	 * 
+	 * @return o período de dias.
+	 */
 	public int getPeriodo() {
 		return this.periodo;
 	}
-		
+
+	/**
+	 * Recupera o estado do emprestimo. Se o emprestimo foi ou não finalizado.
+	 * 
+	 * @return true caso tenha sido finalizado, false caso contrário.
+	 */
 	public boolean isFinalizado() {
 		return finalizado;
 	}
 
+	/**
+	 * Muda a data em que o item foi emprestado.
+	 * 
+	 * @param dataEmprestimo
+	 *            a nova data do emprestimo.
+	 */
 	public void setDataEmprestimo(String dataEmprestimo) {
 		this.validador.validaData(dataEmprestimo);
 		this.dataEmprestimo = dataEmprestimo;
 	}
 
+	/**
+	 * Muda o período de dias que o item passará (ou passou, caso já tenha sido
+	 * finalizado) emprestado.
+	 * 
+	 * @param periodo
+	 *            o período de dias.
+	 */
 	public void setPeriodo(int periodo) {
 		this.validador.validaPeriodo(periodo);
 		this.periodo = periodo;
 	}
 
+	/**
+	 * Recupera a data de devolução do item, ou seja, a data em que o item foi
+	 * devolvido.
+	 * 
+	 * @return a data de devolução.
+	 */
 	public String getDataRealDaDevolucaoDoItem() {
+		if (!this.finalizado) {
+			throw new OperacaoNaoPermitidaNoMomentoExcecao("Este emprestimo ainda não foi finalizado.");
+		}
 		return this.dataRealDaDevolucaoDoItem;
 	}
 
+	/**
+	 * Muda a data de devolução do item.
+	 * 
+	 * @param dataRealDaDevolucaoDoItem
+	 *            a nova data em que o item foi devolvido.
+	 */
 	public void setDataRealDaDevolucaoDoItem(String dataRealDaDevolucaoDoItem) {
 		this.validador.validaData(dataRealDaDevolucaoDoItem);
+		if (!this.finalizado) {
+			throw new OperacaoNaoPermitidaNoMomentoExcecao("Este emprestimo ainda não foi finalizado.");
+		}
 		this.dataRealDaDevolucaoDoItem = dataRealDaDevolucaoDoItem;
 	}
-	
+
+	/**
+	 * Retorna um valor hash code desse emprestimo.
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -94,6 +185,9 @@ public class Emprestimo {
 		return result;
 	}
 
+	/**
+	 * Indica quando um outro objeto é igual a este.
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -126,6 +220,12 @@ public class Emprestimo {
 		return true;
 	}
 
+	/**
+	 * Finaliza esse emprestimo.
+	 * 
+	 * @param dataDevolucao
+	 *            a data em que o item foi devolvido.
+	 */
 	public void finaliza(String dataDevolucao) {
 		this.validador.validaData(dataDevolucao);
 		if (this.finalizado) {
