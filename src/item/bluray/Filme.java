@@ -1,4 +1,4 @@
-package item.blueray;
+package item.bluray;
 
 /**
  * Description: Os blu rays de filmes devem ainda ter genero e ano de
@@ -13,6 +13,9 @@ public class Filme extends BlueRay {
 
 	public Filme(String nome, double valor, int duracao, String genero, String classificacao, int anoDeLancamento) {
 		super(nome, valor, duracao, classificacao);
+		this.validador.validaGenero(genero);
+		this.validador.validaAnoLancamento(anoDeLancamento);
+		
 		this.genero = Genero.valueOf(genero);
 		this.anoDeLancamento = anoDeLancamento;
 	}
@@ -22,6 +25,7 @@ public class Filme extends BlueRay {
 	}
 
 	public void setGenero(String genero) {
+		this.validador.validaGenero(genero);
 		this.genero = Genero.valueOf(genero);
 	}
 
@@ -30,11 +34,13 @@ public class Filme extends BlueRay {
 	}
 
 	public void setAnoDeLancamento(int anoDeLancamento) {
+		this.validador.validaAnoLancamento(anoDeLancamento);
 		this.anoDeLancamento = anoDeLancamento;
 	}
 
 	@Override
 	public String getInfo(String atributo) {
+		this.validador.validaAtributo(atributo);
 
 		switch (atributo) {
 		case ("Genero"):
@@ -49,8 +55,26 @@ public class Filme extends BlueRay {
 
 	@Override
 	public String toString() {
-		return "FILME: " + this.getNome() + ", R$ " + String.valueOf(this.getValor())
-				+ ", " + this.getEstadoEmprestimo() + ", " + this.getDuracao() + " min, " + this.getClassificacao() + ", " + this.getGenero() + ", " + this.getAnoDeLancamento();
+		return "FILME: " + this.getNome() + ", R$ " + String.valueOf(this.getPreco()) + ", "
+				+ this.getEstadoEmprestimo() + ", " + this.getDuracao() + " min, " + this.getClassificacao() + ", "
+				+ this.getGenero() + ", " + this.getAnoDeLancamento();
+	}
+	
+	@Override
+	public void atualizaAtributo(String atributo, String valor) {
+		this.validador.validaAtributo(atributo);
+		this.validador.validaValor(valor);
+		
+		if (atributo.equals("Genero")) {
+			this.genero = Genero.valueOf(valor);			
+			
+		} else if (atributo.equals("Ano de Lancamento")) {
+			this.anoDeLancamento = Integer.parseInt(valor);
+		
+		} else {
+			super.atualizaAtributo(atributo, valor);
+		}
+		
 	}
 
 }

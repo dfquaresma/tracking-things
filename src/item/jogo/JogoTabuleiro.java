@@ -10,7 +10,6 @@ public class JogoTabuleiro extends Item {
 
 	public JogoTabuleiro(String nome, double valor) {
 		super(nome, valor);
-
 		this.pecasPerdidas = new ArrayList<>();
 	}
 
@@ -44,6 +43,7 @@ public class JogoTabuleiro extends Item {
 	}
 
 	public void adicionarPecaPerdida(String nomePeca) {
+		this.validador.validaPeca(nomePeca);
 		this.getPecasPerdidas().add(nomePeca);
 	}
 
@@ -57,7 +57,7 @@ public class JogoTabuleiro extends Item {
 
 	@Override
 	public String toString() {
-		return "JOGO DE TABULEIRO: " + this.getNome() + ", R$ " + String.valueOf(this.getValor())
+		return "JOGO DE TABULEIRO: " + this.getNome() + ", R$ " + String.valueOf(this.getPreco())
 				+ ", " + this.getEstadoEmprestimo() + ", "
 				+ (this.isCompleto() ? "COMPLETO" : "COM PECAS PERDIDAS");
 	}

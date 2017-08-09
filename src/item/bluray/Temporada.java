@@ -1,4 +1,4 @@
-package item.blueray;
+package item.bluray;
 
 import java.util.ArrayList;
 
@@ -23,6 +23,10 @@ public class Temporada extends BlueRay {
 	public Temporada(String nome, double valor, String descricao, int duracao, String classificacao, String genero,
 			int temporada) {
 		super(nome, valor, duracao, classificacao);
+		this.validador.validaDescricao(descricao);
+		this.validador.validaGenero(genero);
+		this.validador.validaTemporada(temporada);
+		
 		this.descricao = descricao;
 		this.genero = Genero.valueOf(genero);
 		this.temporada = temporada;
@@ -34,6 +38,7 @@ public class Temporada extends BlueRay {
 	}
 
 	public void setDescricao(String descricao) {
+		this.validador.validaDescricao(descricao);
 		this.descricao = descricao;
 	}
 
@@ -42,6 +47,7 @@ public class Temporada extends BlueRay {
 	}
 
 	public void setGenero(String genero) {
+		this.validador.validaGenero(genero);
 		this.genero = Genero.valueOf(genero);
 	}
 
@@ -50,16 +56,19 @@ public class Temporada extends BlueRay {
 	}
 
 	public void setTemporada(int temporada) {
+		this.validador.validaTemporada(temporada);
 		this.temporada = temporada;
 	}
 
 	public void addBlueray(int duracao) {
+		this.validador.validaDuracao(duracao);
 		// NAO COMPLETO
 		this.episodios.add(new Episodio(duracao));
 	}
 
 	@Override
 	public String getInfo(String atributo) {
+		this.validador.validaAtributo(atributo);
 
 		switch (atributo) {
 		case ("Descricao"):
@@ -86,9 +95,29 @@ public class Temporada extends BlueRay {
 
 	@Override
 	public String toString() {
-		return "SERIE: " + this.getNome() + ", R$ " + String.valueOf(this.getValor()) + ", "
+		return "SERIE: " + this.getNome() + ", R$ " + String.valueOf(this.getPreco()) + ", "
 				+ this.getEstadoEmprestimo() + ", " + this.getDuracao() + " min, " + this.getClassificacao() + ", "
 				+ this.getGenero() + ", Temporada " + this.getTemporada();
+	}
+	
+	@Override
+	public void atualizaAtributo(String atributo, String valor) {
+		this.validador.validaAtributo(atributo);
+		this.validador.validaValor(valor);
+		
+		if (atributo.equals("Descricao")) {
+			this.descricao = valor;
+			
+		} else if (atributo.equals("Genero")) {
+			this.genero = Genero.valueOf(valor);
+			
+		} else if (atributo.equals("Temporada")) {
+			this.temporada = Integer.parseInt(valor);
+			
+		} else {
+			super.atualizaAtributo(atributo, valor);
+		}
+		
 	}
 
 }

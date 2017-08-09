@@ -1,9 +1,11 @@
-package item.blueray;
+package item.bluray;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import item.bluray.Temporada;
 
 public class TemporadaTest {
 
@@ -32,7 +34,7 @@ public class TemporadaTest {
 	public void testTemporada()
 	{
 		assertEquals("South park", this.temporada.getNome());
-		assertEquals(1000.10, this.temporada.getValor(), 0.0005);
+		assertEquals(1000.10, this.temporada.getPreco(), 0.0005);
 		assertEquals("Primeira temporada de South park", this.temporada.getDescricao());
 		assertEquals(1000, this.temporada.getDuracao());
 		assertEquals("DEZOITO_ANOS", this.temporada.getClassificacao());

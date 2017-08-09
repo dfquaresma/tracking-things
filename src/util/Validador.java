@@ -1,13 +1,12 @@
 package util;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import item.Item;
-import item.blueray.Classificacao;
-import item.blueray.Genero;
+import item.bluray.Classificacao;
+import item.bluray.Genero;
 import item.jogo.Plataforma;
+import usuario.Usuario;
 
 public class Validador {
 
@@ -52,18 +51,15 @@ public class Validador {
 
 	public void validaClassificacao(String classificacao) {
 		this.validaString(classificacao, "Classificacao");
-		this.validaClassificacao(Classificacao.values(), classificacao);
-	}
-
-	private void validaClassificacao(Classificacao[] values, String classificacao) {
-		Set<String> classificacoes = new HashSet<>();
-		for (Classificacao c : values) {
-			classificacoes.add(c.toString());
-		}
-		if (!classificacoes.contains(classificacao)) {
+		
+		try {
+			Classificacao.valueOf(classificacao);
+		} catch (Exception e) {
 			throw new IllegalArgumentException("Classificacao inválida");
 		}
+				
 	}
+
 
 	public void validaNomeBluray(String nomeBluray) {
 		this.validaString(nomeBluray, "Nome do bluray");
@@ -71,17 +67,13 @@ public class Validador {
 
 	public void validaGenero(String genero) {
 		this.validaString(genero, "Genero");
-		this.validaGenero(Genero.values(), genero);
-	}
-
-	private void validaGenero(Genero[] values, String genero) {
-		Set<String> generos = new HashSet<>();
-		for (Genero g : values) {
-			generos.add(g.toString());
+		
+		try {
+			Genero.valueOf(genero);
+		} catch (Exception e) {
+			throw new IllegalArgumentException("Genero inválido");			
 		}
-		if (!generos.contains(genero)) {
-			throw new IllegalArgumentException("Genero inválido");
-		}
+		
 	}
 
 	public void validaTemporada(int temporada) {
@@ -93,18 +85,13 @@ public class Validador {
 
 	public void validaPlataforma(String plataforma) {
 		this.validaString(plataforma, "Plataforma");
-		this.validaPlataforma(Plataforma.values(), plataforma);
-	}
-
-	private void validaPlataforma(Plataforma[] values, String plataforma) {
-		Set<String> plataformas = new HashSet<>();
-		for (Plataforma p : values) {
-			plataformas.add(p.toString());
-		}
-		if (!plataformas.contains(plataforma)) {
+		
+		try {
+			Plataforma.valueOf(plataforma);			
+		} catch (Exception e) {
 			throw new IllegalArgumentException("Plataforma inválida");
 		}
-
+		
 	}
 
 	public void validaAnoLancamento(int ano) {
@@ -145,17 +132,32 @@ public class Validador {
 		if (numeroFaixas <= 0) {
 			throw new IllegalArgumentException("Numero de faixar nao pode ser menor ou igual a zero.");
 		}
-
 	}
 
 	public void validaAtributo(String atributo) {
 		this.validaString(atributo, "Atributo");
-		
 	}
 
 	public void validaPeca(String nomePeca) {
 		this.validaString(nomePeca, "Nome da peca");
-		
+	}
+
+	public void validaObjetos(Object o, String msg) {
+		if (o == null) {
+			throw new IllegalArgumentException(msg + " nao pode ser nulo");
+		}
+	}
+	
+	public void validaDono(Usuario dono) {
+		this.validaObjetos(dono, "Usuario dono");
+	}
+
+	public void validaRequerente(Usuario requerente) {
+		this.validaObjetos(requerente, "Usuario requerente");
+	}
+
+	public void validaItem(Item item) {
+		this.validaObjetos(item, "Item");
 	}
 
 }

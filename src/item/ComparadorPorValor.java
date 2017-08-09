@@ -6,10 +6,10 @@ public class ComparadorPorValor implements Comparator<Item> {
 
 	@Override
 	public int compare(Item itemA, Item itemB) { 
-		if (itemA.getValor() == itemB.getValor()) {
+		if (itemA.getPreco() == itemB.getPreco()) {
 			return 0;
 		}
-		return itemA.getValor() > itemB.getValor()? 1: -1;
+		return itemA.getPreco() > itemB.getPreco()? 1: -1;
 	}
 
 }
