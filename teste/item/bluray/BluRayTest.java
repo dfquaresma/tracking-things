@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class BlueRayTest {
+public class BluRayTest {
 
 	@Test
 	public void testGetInfo() {

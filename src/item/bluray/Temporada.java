@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * de uma temporada, ou empresta a temporada inteira ou não empresta nada)
  *
  */
-public class Temporada extends BlueRay {
+public class Temporada extends BluRay {
 
 	private String descricao;
 	private Genero genero;
@@ -90,7 +90,7 @@ public class Temporada extends BlueRay {
 		for (Episodio ep : this.episodios)
 			duracaoTotalEpisodios += ep.getDuracao();
 
-		return (duracaoTotalEpisodios == super.getDuracao());
+		return (duracaoTotalEpisodios == super.getDuracao()) && super.podeSerEmprestado();
 	}
 
 	@Override

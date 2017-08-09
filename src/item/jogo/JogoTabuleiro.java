@@ -4,15 +4,32 @@ import java.util.ArrayList;
 
 import item.Item;
 
+/**
+ * Representação de um jogo de tabuleiro.
+ * 
+ * @author David Ferreira
+ *
+ */
 public class JogoTabuleiro extends Item {
 
 	private ArrayList<String> pecasPerdidas;
 
-	public JogoTabuleiro(String nome, double valor) {
-		super(nome, valor);
+	/**
+	 * Constrói um jogo de tabuleiro com nome e preco.
+	 * 
+	 * @param nome
+	 *            o nome do jogo.
+	 * @param preco
+	 *            o preco do jogo.
+	 */
+	public JogoTabuleiro(String nome, double preco) {
+		super(nome, preco);
 		this.pecasPerdidas = new ArrayList<>();
 	}
 
+	/**
+	 * Indica quando um outro objeto é igual a este.
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -42,24 +59,33 @@ public class JogoTabuleiro extends Item {
 		return true;
 	}
 
+	/**
+	 * Adiciona uma peça a lista de peças perdidas.
+	 * 
+	 * @param nomePeca
+	 *            o nome da peça perdida.
+	 */
 	public void adicionarPecaPerdida(String nomePeca) {
 		this.validador.validaPeca(nomePeca);
-		this.getPecasPerdidas().add(nomePeca);
+		this.pecasPerdidas.add(nomePeca);
 	}
 
-	private ArrayList<String> getPecasPerdidas() {
-		return this.pecasPerdidas;
-	}
-
+	/**
+	 * Recupera um booleano indicando se o jogo de tabuleiro está completo.
+	 * 
+	 * @return true caso esteja completo, false caso contrário.
+	 */
 	public boolean isCompleto() {
-		return this.getPecasPerdidas().size() == 0;
+		return this.pecasPerdidas.size() == 0;
 	}
 
+	/**
+	 * Retorna uma representação em string deste usuário.
+	 */
 	@Override
 	public String toString() {
-		return "JOGO DE TABULEIRO: " + this.getNome() + ", R$ " + String.valueOf(this.getPreco())
-				+ ", " + this.getEstadoEmprestimo() + ", "
-				+ (this.isCompleto() ? "COMPLETO" : "COM PECAS PERDIDAS");
+		return "JOGO DE TABULEIRO: " + this.getNome() + ", R$ " + String.valueOf(this.getPreco()) + ", "
+				+ this.getEstadoEmprestimo() + ", " + (this.isCompleto() ? "COMPLETO" : "COM PECAS PERDIDAS");
 	}
 
 }

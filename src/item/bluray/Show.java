@@ -6,7 +6,7 @@ package item.bluray;
  * 
  *
  */
-public class Show extends BlueRay {
+public class Show extends BluRay {
 
 	private int numDeFaixas;
 	private String artista;

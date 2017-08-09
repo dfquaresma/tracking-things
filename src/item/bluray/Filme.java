@@ -6,7 +6,7 @@ package item.bluray;
  * 
  *
  */
-public class Filme extends BlueRay {
+public class Filme extends BluRay {
 
 	private Genero genero;
 	private int anoDeLancamento;

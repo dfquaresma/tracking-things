@@ -2,51 +2,93 @@ package item.jogo;
 
 import item.Item;
 
+/**
+ * Representação de um jogo eletrônico.
+ * 
+ * @author David Ferreira
+ *
+ */
 public class JogoEletronico extends Item {
 
 	private Plataforma plataforma;
 
-	public JogoEletronico(String nome, double valor, String plataforma) {
-		super(nome, valor);
+	/**
+	 * Constrói um jogo eletrônico com nome, preço e plataforma.
+	 * 
+	 * @param nome
+	 *            o nome do jogo.
+	 * @param preco
+	 *            o preço do jogo.
+	 * @param plataforma
+	 *            a plataforma do jogo.
+	 */
+	public JogoEletronico(String nome, double preco, String plataforma) {
+		super(nome, preco);
 		this.validador.validaPlataforma(plataforma);
 		this.plataforma = Plataforma.valueOf(plataforma);
 	}
 
+	/**
+	 * Recupera a plataforma do jogo.
+	 * 
+	 * @return uma string representando a plataforma deste jogo.
+	 */
 	public String getPlataforma() {
 		return plataforma.toString();
 	}
 
+	/**
+	 * Atualiza a plataforma deste Jogo com a plataforma recebida como
+	 * parâmetro.
+	 * 
+	 * @param plataforma
+	 *            a nova plataforma deste jogo.
+	 */
 	public void setPlataforma(String plataforma) {
 		this.validador.validaPlataforma(plataforma);
 		this.plataforma = Plataforma.valueOf(plataforma);
 	}
-	
+
+	/**
+	 * Sobrescreve o método da classe mãe para verificar se o atributo a ser
+	 * recuperado pertence a esta classe. Caso não seja, o método da classe mãe
+	 * é chamado.
+	 */
 	@Override
-	public String getInfo(String atributo){
+	public String getInfo(String atributo) {
 		this.validador.validaAtributo(atributo);
-	
+
 		if (atributo.equals("Plataforma")) {
 			return this.plataforma.toString();
 		}
 		return super.getInfo(atributo);
 	}
-	
+
+	/**
+	 * Retorna uma representação em string deste jogo.
+	 */
 	@Override
 	public String toString() {
-		return "JOGO ELETRONICO: " + this.getNome() + ", R$ " + String.valueOf(this.getPreco()) + ", " + this.getEstadoEmprestimo() + ", " + this.getPlataforma();
+		return "JOGO ELETRONICO: " + this.getNome() + ", R$ " + String.valueOf(this.getPreco()) + ", "
+				+ this.getEstadoEmprestimo() + ", " + this.getPlataforma();
 	}
-	
+
+	/**
+	 * Sobrescreve o método da classe mãe para verificar se o atributo a ser
+	 * atualizado pertence a esta classe. Caso não seja, o método da classe mãe
+	 * é chamado.
+	 */
 	@Override
 	public void atualizaAtributo(String atributo, String valor) {
 		this.validador.validaAtributo(atributo);
 		this.validador.validaValor(valor);
-		
+
 		if (atributo.equals("Plataforma")) {
 			this.plataforma = Plataforma.valueOf(valor);
-			
+
 		} else {
-			super.atualizaAtributo(atributo, valor);			
+			super.atualizaAtributo(atributo, valor);
 		}
-		
+
 	}
 }

@@ -8,12 +8,12 @@ import item.Item;
  * 
  *
  */
-public abstract class BlueRay extends Item {
+public abstract class BluRay extends Item {
 
 	private int duracao;
 	private Classificacao classificacao;
 
-	public BlueRay(String nome, double valor, int duracao, String classificacao) {
+	public BluRay(String nome, double valor, int duracao, String classificacao) {
 		super(nome, valor);
 		this.validador.validaDuracao(duracao);
 		this.validador.validaClassificacao(classificacao);
