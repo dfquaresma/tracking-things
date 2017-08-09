@@ -911,7 +911,7 @@ public class ControleTeste {
 			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			controle.cadastrarBlurayShow("Rick", "4002-8922", "Safadao DVD", 30.00, 100, -12, "Safadao", "LIVRE");			
 		} catch (IllegalArgumentException iae) {
-			assertEquals("Numero de faixas nao pode ser maior ou igual a zero", iae.getMessage());
+			assertEquals("Numero de faixas nao pode ser menor ou igual a zero.", iae.getMessage());
 		}
 	}
 	
@@ -922,7 +922,7 @@ public class ControleTeste {
 			controle.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			controle.cadastrarBlurayShow("Rick", "4002-8922", "Safadao DVD", 30.00, 100, 0, "Safadao", "LIVRE");			
 		} catch (IllegalArgumentException iae) {
-			assertEquals("Numero de faixas nao pode ser maior ou igual a zero", iae.getMessage());
+			assertEquals("Numero de faixas nao pode ser menor ou igual a zero.", iae.getMessage());
 		}
 	}
 	

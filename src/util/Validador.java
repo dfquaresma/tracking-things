@@ -60,7 +60,6 @@ public class Validador {
 				
 	}
 
-
 	public void validaNomeBluray(String nomeBluray) {
 		this.validaString(nomeBluray, "Nome do bluray");
 	}
@@ -130,7 +129,7 @@ public class Validador {
 
 	public void validaNumeroDeFaixas(int numeroFaixas) {
 		if (numeroFaixas <= 0) {
-			throw new IllegalArgumentException("Numero de faixar nao pode ser menor ou igual a zero.");
+			throw new IllegalArgumentException("Numero de faixas nao pode ser menor ou igual a zero.");
 		}
 	}
 

@@ -244,7 +244,7 @@ public class Controller {
 
 	public String listarOrdenadosValor() {
 		List<Item> itens = recuperaItensNoSistema();
-		
+
 		this.validaListagem(itens.size());
 		
 		return this.listador.listaItensOrdenadosPorValor(itens);

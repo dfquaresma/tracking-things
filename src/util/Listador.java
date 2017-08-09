@@ -9,7 +9,9 @@ import item.Item;
 public class Listador {
 	private Validador validador;
 
-	
+	public Listador() {
+		this.validador = new Validador();
+	}
 	
 	public String listaItensOrdenadosPorNome(List<Item> itens) {
 		this.validador.validaItensParaListagem(itens);
