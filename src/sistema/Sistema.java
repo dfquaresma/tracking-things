@@ -269,7 +269,7 @@ public class Sistema {
 		this.validaDadosDeIdentificacao(nome, telefone);
 		this.validador.validaNomeItem(nomeItem);
 		this.validador.validaAtributo(atributo);
-
+		
 		Usuario user = getUser(nome, telefone);
 		return user.getInfoItem(nomeItem, atributo);
 	}

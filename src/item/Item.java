@@ -147,7 +147,7 @@ public abstract class Item implements Comparable<Item> {
 	}
 
 	/**
-	 * Compara este item com o outro recebido no parâmetro. 
+	 * Compara este item com o outro recebido no parâmetro.
 	 */
 	@Override
 	public int compareTo(Item outroItem) {
@@ -171,7 +171,7 @@ public abstract class Item implements Comparable<Item> {
 		case ("Preco"):
 			return String.valueOf(this.preco);
 		default:
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Atributo invalido.");
 
 		}
 
