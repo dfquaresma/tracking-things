@@ -1,8 +1,6 @@
 package util;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import item.Item;
 import item.blueray.Classificacao;
@@ -50,22 +48,17 @@ public class Validador {
 		this.validaString(artista, "Artista");
 	}
 
-	public void validaClassificacao(String classificacao) {
+	public void validaClassificacao(String classificacao)
+	{
 		this.validaString(classificacao, "Classificacao");
-		this.validaClassificacao(Classificacao.values(), classificacao);
+		
+		try {
+			Classificacao.valueOf(classificacao);
+		} catch (Exception e) {
+			throw new IllegalArgumentException("Classificacao inválida");
+		}
 	}
 
-	private void validaClassificacao(Classificacao[] values, String classificacao) {
-		boolean hasClassificacao = false;
-		for (Classificacao c : values)
-		{
-			if(classificacao.equals(c.toString()))
-				hasClassificacao = true;
-		}
-		
-		if (!hasClassificacao)
-			throw new IllegalArgumentException("Classificacao inválida");
-	}
 
 	public void validaNomeBluray(String nomeBluray) {
 		this.validaString(nomeBluray, "Nome do bluray");
@@ -73,17 +66,13 @@ public class Validador {
 
 	public void validaGenero(String genero) {
 		this.validaString(genero, "Genero");
-		this.validaGenero(Genero.values(), genero);
-	}
-
-	private void validaGenero(Genero[] values, String genero) {
-		Set<String> generos = new HashSet<>();
-		for (Genero g : values) {
-			generos.add(g.toString());
+		
+		try {
+			Genero.valueOf(genero);
+		} catch (Exception e) {
+			throw new IllegalArgumentException("Genero inválido");			
 		}
-		if (!generos.contains(genero)) {
-			throw new IllegalArgumentException("Genero inválido");
-		}
+		
 	}
 
 	public void validaTemporada(int temporada) {
@@ -95,18 +84,13 @@ public class Validador {
 
 	public void validaPlataforma(String plataforma) {
 		this.validaString(plataforma, "Plataforma");
-		this.validaPlataforma(Plataforma.values(), plataforma);
-	}
-
-	private void validaPlataforma(Plataforma[] values, String plataforma) {
-		Set<String> plataformas = new HashSet<>();
-		for (Plataforma p : values) {
-			plataformas.add(p.toString());
-		}
-		if (!plataformas.contains(plataforma)) {
+		
+		try {
+			Plataforma.valueOf(plataforma);			
+		} catch (Exception e) {
 			throw new IllegalArgumentException("Plataforma inválida");
 		}
-
+		
 	}
 
 	public void validaAnoLancamento(int ano) {

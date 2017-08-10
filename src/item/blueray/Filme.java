@@ -49,8 +49,24 @@ public class Filme extends BlueRay {
 
 	@Override
 	public String toString() {
-		return "FILME: " + this.getNome() + ", R$ " + String.valueOf(this.getValor())
-				+ ", " + this.getEstadoEmprestimo() + ", " + this.getDuracao() + " min, " + this.getClassificacao() + ", " + this.getGenero() + ", " + this.getAnoDeLancamento();
+		return "FILME: " + this.getNome() + ", R$ " + String.valueOf(this.getPreco()) + ", "
+				+ this.getEstadoEmprestimo() + ", " + this.getDuracao() + " min, " + this.getClassificacao() + ", "
+				+ this.getGenero() + ", " + this.getAnoDeLancamento();
+	}
+	
+	@Override
+	public void atualizaAtributo(String atributo, String valor) {
+		
+		if (atributo.equals("Genero")) {
+			this.genero = Genero.valueOf(valor);			
+			
+		} else if (atributo.equals("Ano de Lancamento")) {
+			this.anoDeLancamento = Integer.parseInt(valor);
+		
+		} else {
+			super.atualizaAtributo(atributo, valor);
+		}
+		
 	}
 
 }

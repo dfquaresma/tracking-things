@@ -50,4 +50,19 @@ public abstract class BlueRay extends Item {
 
 	}
 	
+	@Override
+	public void atualizaAtributo(String atributo, String valor) {
+		
+		if (atributo.equals("Duracao")) {
+			this.duracao = Integer.parseInt(valor);
+			
+		} else if (atributo.equals("Classificacao")) {
+			this.classificacao = Classificacao.valueOf(valor);
+			
+		} else {
+			super.atualizaAtributo(atributo, valor);
+		}
+		
+	}
+	
 }

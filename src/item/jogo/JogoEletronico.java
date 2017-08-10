@@ -30,7 +30,18 @@ public class JogoEletronico extends Item {
 	
 	@Override
 	public String toString() {
-		return "JOGO ELETRONICO: " + this.getNome() + ", R$ " + String.valueOf(this.getValor()) + ", " + this.getEstadoEmprestimo() + ", " + this.getPlataforma();
+		return "JOGO ELETRONICO: " + this.getNome() + ", R$ " + String.valueOf(this.getPreco()) + ", " + this.getEstadoEmprestimo() + ", " + this.getPlataforma();
 	}
 	
+	@Override
+	public void atualizaAtributo(String atributo, String valor) {
+		
+		if (atributo.equals("Plataforma")) {
+			this.plataforma = Plataforma.valueOf(valor);
+			
+		} else {
+			super.atualizaAtributo(atributo, valor);			
+		}
+		
+	}
 }

@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import excecoes.ExcecaoItemNaoEhDoTipoEsperado;
+import excecoes.ItemNaoEhDoTipoEsperadoExcecao;
 import item.Item;
 import item.blueray.Filme;
 import item.blueray.Show;
@@ -56,9 +56,6 @@ public class Usuario {
 
 	public ArrayList<Item> getItens() {
 		ArrayList<Item> itensToCopy = new ArrayList<>(this.itens.values());
-		// ArrayList<Item> itens = new ArrayList<>();
-		// Collections.copy(itens, itensToCopy); Pretendo retornar uma cópia,
-		// assim que conseguir fazer sem dar "source does not fit in dest"
 		return itensToCopy;
 	}
 
@@ -107,7 +104,7 @@ public class Usuario {
 
 		Item item = getItem(nomeItem);
 		if (!(item instanceof JogoTabuleiro)) {
-			throw new ExcecaoItemNaoEhDoTipoEsperado("O nome do item informad nao pertence a um tabuleiro");
+			throw new ItemNaoEhDoTipoEsperadoExcecao("O nome do item informad nao pertence a um tabuleiro");
 		}
 
 		JogoTabuleiro jogo = (JogoTabuleiro) item;
@@ -128,20 +125,17 @@ public class Usuario {
 	}
 
 	public void attItem(String nomeItem, String atributo, String valor) {
-		validaItemParaUso(nomeItem);
+		Item itemAtt = getItem(nomeItem);
 
 		if (atributo.equals("Nome")) {
 			validaAttNomeDeItem(valor);
-			Item itemAtt = getItem(nomeItem);
-			itemAtt.setNome(valor);
+			itemAtt.atualizaAtributo(atributo, valor);
 			this.itens.remove(nomeItem);
 			this.itens.put(valor, itemAtt);
-
-		} else if (atributo.equals("Preco")) {
-			getItem(nomeItem).setValor(Double.parseDouble(valor));
-
+			
 		} else {
-			throw new IllegalArgumentException("Atributo invalido");
+			itemAtt.atualizaAtributo(atributo, valor);
+			
 		}
 	}
 
@@ -166,33 +160,27 @@ public class Usuario {
 
 	public void emprestaItem(String nomeItem, Usuario userRequerente, Emprestimo emprestimo) {
 		validaItemParaUso(nomeItem);
-		
+
 		if (emprestimosComoEmprestador.contains(emprestimo)) {
 			throw new IllegalArgumentException("Item emprestado no momento");
 		}
 		getItem(nomeItem).setEmprestado(true);
-		userRequerente.pegaEmprestado(emprestimo);
+		userRequerente.emprestimosComoRequerente.add(emprestimo);
 		this.emprestimosComoEmprestador.add(emprestimo);
 	}
 
-	private void pegaEmprestado(Emprestimo emprestimo) {
-		this.emprestimosComoRequerente.add(emprestimo);
-	}
-
 	public void devolveItem(String nomeItem, String dataEmprestimo, String dataDevolucao, Usuario userEmprestador) {
-		Emprestimo emprestimo = encontraEmprestimo(userEmprestador.nome, nomeItem, dataEmprestimo);
+		Emprestimo emprestimo = encontraEmprestimo(userEmprestador, nomeItem, dataEmprestimo);
 		emprestimo.finaliza(dataDevolucao);
-		userEmprestador.recebeItem(nomeItem);
+		userEmprestador.getItem(nomeItem).setEmprestado(false);
 	}
 
-	private void recebeItem(String nomeItem) {
-		getItem(nomeItem).setEmprestado(false);
-	}
-
-	private Emprestimo encontraEmprestimo(String nomeDono, String nomeItem, String dataEmprestimo) {
+	private Emprestimo encontraEmprestimo(Usuario userEmprestador, String nomeItem, String dataEmprestimo) {
 
 		for (Emprestimo emprestimo : emprestimosComoRequerente) {
-			if (emprestimo.getNomeItem().equals(nomeItem) && emprestimo.getNomeDono().equals(nomeDono)
+			if (emprestimo.getNomeDono().equals(userEmprestador.nome)
+					&& emprestimo.getTelefoneDono().equals(userEmprestador.telefone)
+					&& emprestimo.getNomeItem().equals(nomeItem)
 					&& emprestimo.getDataEmprestimo().equals(dataEmprestimo)) {
 				return emprestimo;
 			}

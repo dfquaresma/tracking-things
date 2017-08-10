@@ -49,9 +49,24 @@ public class Show extends BlueRay {
 
 	@Override
 	public String toString() {
-		return "SHOW: " + this.getNome() + ", R$ " + String.valueOf(this.getValor())
+		return "SHOW: " + this.getNome() + ", R$ " + String.valueOf(this.getPreco())
 				+ ", " + this.getEstadoEmprestimo() + ", " + this.getDuracao() + " min, " + this.getClassificacao() + ", "
 				+ this.getArtista() + ", " + this.getNumDeFaixas() + " faixas";
+	}
+	
+	@Override
+	public void atualizaAtributo(String atributo, String valor) {
+		
+		if (atributo.equals("Artista")) {
+			this.artista = valor;			
+			
+		} else if (atributo.equals("Numero de faixas")) {
+			this.numDeFaixas = Integer.parseInt(valor);
+		
+		} else {
+			super.atualizaAtributo(atributo, valor);
+		}
+		
 	}
 
 }

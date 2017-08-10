@@ -86,7 +86,7 @@ public class UsuarioTest {
 		
 		Item item = this.usuario.getItem("The Lord of the Rings I");
 		
-		assertEquals("O valor difere.", 30, item.getValor(), 0.00001);
+		assertEquals("O valor difere.", 30, item.getPreco(), 0.00001);
 	}
 
 	@Test
