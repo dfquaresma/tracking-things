@@ -289,8 +289,6 @@ public class Controller {
 		Usuario userRequerente = getUser(nomeRequerente, telefoneRequerente);
 		Item item = userEmprestador.getItem(nomeItem);
 		
-		this.validador.validaData(dataEmprestimo);
-		this.validador.validaPeriodo(periodo);
 		Emprestimo emprestimo = new Emprestimo(userEmprestador, userRequerente, item, dataEmprestimo, periodo);
 		
 		userEmprestador.emprestaItem(nomeItem, userRequerente, emprestimo);
@@ -302,9 +300,6 @@ public class Controller {
 		Usuario userEmprestador = getUser(nomeDono, telefoneDono);
 		Usuario userRequerente = getUser(nomeRequerente, telefoneRequerente);
 		
-		this.validador.validaData(dataEmprestimo);
-		this.validador.validaData(dataDevolucao);
-		this.validador.validaNomeItem(nomeItem);
 		userRequerente.devolveItem(nomeItem, dataEmprestimo, dataDevolucao, userEmprestador);
 	}
 
