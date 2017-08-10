@@ -12,22 +12,34 @@ public class UsuarioTest {
 	Usuario usuario;
 	Usuario usuario2;
 	
+	/**
+	 * Inicianlizando usuario e usuario2.
+	 */
 	@Before
 	public void Inicializa() {
 		this.usuario = new Usuario("Ícaro", "+55 (83) 9.9384-7651", "icaro.lima@ccc.ufcg.edu.br"); 
 		this.usuario2 = new Usuario("David", "+55 (83) 9.1234-5678", "david.quaresma@ccc.ufcg.edu.br");
 	}
 
+	/**
+	 * Testa se está cadastrando um eletrônico.
+	 */
 	@Test
 	public void testCadastrarEletronico() {
 		this.usuario.cadastrarEletronico("GTA San Andreas", 34.99, "PC");
 	}
 
+	/**
+	 * Testa se está cadastrando um jogo de tabuleiro.
+	 */
 	@Test
 	public void testCadastrarJogoTabuleiro() {
 		this.usuario.cadastrarJogoTabuleiro("Jogo da Vida", 100.0);
 	}
 
+	/**
+	 * Testa se está adicionando peça perdida em um jogo de tabuleiro.
+	 */
 	@Test
 	public void testAddPecaPerdida() {
 		this.testCadastrarJogoTabuleiro();
@@ -36,21 +48,33 @@ public class UsuarioTest {
 		this.usuario.addPecaPerdida("Jogo da Vida", "Nota ($100)");
 	}
 
+	/**
+	 * Testa se está cadastrando blueray de filme.
+	 */
 	@Test
 	public void testCadastrarBlurayFilme() {
 		this.usuario.cadastrarBlurayFilme("O Senhor dos Anéis I", 230, 95, "FICCAO", "QUATORZE_ANOS", 2001);
 	}
 
+	/**
+	 * Testa se está cadastrando blueray de série.
+	 */
 	@Test
 	public void testCadastrarBluRaySerie() {
 		this.usuario.cadastrarBluRaySerie("Game of Thrones", 12, "Eu não sei descrever", 1200, "DEZESSEIS_ANOS", "AVENTURA", 8);
 	}
 
+	/**
+	 * Testa se está cadastrando blueray de show.
+	 */
 	@Test
 	public void testCadastrarBlurayShow() {
 		this.usuario.cadastrarBlurayShow("Show do Safadão", 49.99, 120, 20, "Wesley Safadão", "DEZ_ANOS");
 	}
 
+	/**
+	 * Testa se está adicionando blueray em uma série.
+	 */
 	@Test
 	public void testAddBlueray() {
 		this.testCadastrarBluRaySerie();
@@ -60,6 +84,9 @@ public class UsuarioTest {
 		this.usuario.addBlueray("Game of Thrones", 60);
 	}
 
+	/**
+	 * Testa se está dando erro ao tentar pegar informação de um item que não existe mais.
+	 */
 	@Test (expected = IllegalArgumentException.class)
 	public void testRemoverItem() {
 		this.testCadastrarBlurayShow();
@@ -68,6 +95,9 @@ public class UsuarioTest {
 		this.usuario.getInfoItem("Show do Safadão", "Nome");
 	}
 
+	/**
+	 * Testa se está pegando item normalmente.
+	 */
 	@Test
 	public void testPegaItem() {
 		this.testCadastrarBlurayFilme();
@@ -76,6 +106,9 @@ public class UsuarioTest {
 		assertEquals("O nome do Item não confere.", "O Senhor dos Anéis I", item.getNome());
 	}
 
+	/**
+	 * Testa se está conseguindo pegar os atributos padrões de um item.
+	 */
 	@Test
 	public void testAttItem() {
 		this.testCadastrarBlurayFilme();
@@ -88,6 +121,9 @@ public class UsuarioTest {
 		assertEquals("O valor difere.", 30, item.getPreco(), 0.00001);
 	}
 
+	/**
+	 * Testa se está conseguindo pegar os detalhes de um item em String.
+	 */
 	@Test
 	public void testGetDetalhesItem() {
 		this.testCadastrarBlurayFilme();
@@ -103,6 +139,9 @@ public class UsuarioTest {
 		assertEquals("JOGO ELETRONICO: GTA San Andreas, R$ 34.99, Nao emprestado, PC", this.usuario.getDetalhesItem("GTA San Andreas"));
 	}
 
+	/**
+	 * Testa se está emprestando item normalmente, testando se ao emprestar, o item se torna "emprestado".
+	 */
 	@Test
 	public void testEmprestaItem() {
 		this.testCadastrarEletronico();
@@ -113,12 +152,18 @@ public class UsuarioTest {
 		assertTrue(this.usuario.getItem("GTA San Andreas").isEmprestado());
 	}
 
+	/**
+	 * Apenas testa se não está dando erro no devolveItem.
+	 */
 	@Test
 	public void testDevolveItem() {
 		this.testEmprestaItem();	
 		this.usuario2.devolveItem("GTA San Andreas", "06/08/2017", "07/08/2017", this.usuario);
 	}
 
+	/**
+	 * Testa o equals de um Usuario.
+	 */
 	@Test
 	public void testEqualsObject() {
 		Usuario userTest = new Usuario("Ícaro", "+55 (83) 9.9384-7651", "icaro.lima@ccc.ufcg.edu.br");
@@ -126,6 +171,9 @@ public class UsuarioTest {
 		assertFalse(this.usuario.equals(this.usuario2));
 	}
 
+	/**
+	 * Testa o toString de um Usuario.
+	 */
 	@Test
 	public void testToString() {
 		assertEquals("Ícaro, +55 (83) 9.9384-7651, icaro.lima@ccc.ufcg.edu.br", this.usuario.toString());
