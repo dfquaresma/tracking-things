@@ -9,6 +9,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import excecoes.OperacaoNaoPermitidaNoMomentoExcecao;
+
 
 public class ValidadorTest {
 
@@ -297,7 +299,7 @@ public class ValidadorTest {
 		this.validador.validaData("       ");
 	}
 
-	@Test
+	@Test(expected=IllegalArgumentException.class)
 	public void testValidaPreco()
 	{
 		this.validador.validaPreco(0);
@@ -318,7 +320,7 @@ public class ValidadorTest {
 		this.validador.validaListaParaListagem(itens);
 	}
 	
-	@Test
+	@Test(expected=OperacaoNaoPermitidaNoMomentoExcecao.class)
 	public void testValidaItensParaListagemVazia()
 	{
 		List<Item>itens = new ArrayList<Item>();

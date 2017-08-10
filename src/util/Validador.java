@@ -84,7 +84,7 @@ public class Validador {
 	 */
 	public void validaDuracao(int duracao) {
 		if (duracao <= 0) {
-			throw new IllegalArgumentException("Duracao nao pode ser negativa");
+			throw new IllegalArgumentException("Duracao nao pode ser menor ou igual a zero");
 		}
 	}
 
@@ -200,7 +200,7 @@ public class Validador {
 	 *            o preço a ser validado.
 	 */
 	public void validaPreco(double preco) {
-		if (preco < 0) {
+		if (preco <= 0) {
 			throw new IllegalArgumentException("Preco invalido");
 		}
 	}
@@ -309,6 +309,12 @@ public class Validador {
 		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException(atributo + " deve ter o formato de um tipo int");
 		}
+
+		if (Integer.parseInt(valor) <= 0) {
+			throw new IllegalArgumentException("Valor nao pode ser menor ou igual a zero para essa operacao");
+
+		}
+
 	}
 
 	/**
@@ -322,6 +328,11 @@ public class Validador {
 			Double.parseDouble(valor);
 		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException(atributo + " deve ter o formato de um tipo double");
+		}
+
+		if (Double.parseDouble(valor) <= 0) {
+			throw new IllegalArgumentException("Valor nao pode ser menor ou igual a zero para essa operacao");
+
 		}
 	}
 
