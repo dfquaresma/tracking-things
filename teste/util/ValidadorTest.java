@@ -1,9 +1,14 @@
 package util;
 
-import static org.junit.Assert.*;
+import item.Item;
+import item.blueray.Temporada;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+
 
 public class ValidadorTest {
 
@@ -185,6 +190,10 @@ public class ValidadorTest {
 	@Test
 	public void testValidaGenero()
 	{
+		this.validador.validaGenero("ACAO");
+		this.validador.validaGenero("ANIMACAO");
+		this.validador.validaGenero("AVENTURA");
+		this.validador.validaGenero("COMEDIA");
 		this.validador.validaGenero("DOCUMENTARIO");
 		this.validador.validaGenero("DRAMA");
 		this.validador.validaGenero("EROTICO");
@@ -213,62 +222,198 @@ public class ValidadorTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void testValidaGeneroNotInside()
 	{
-		this.validador.validaGenero("livre");
+		this.validador.validaGenero("any");
 	}
 
 	@Test
-	public void testValidaTemporada() {
-		fail("Not yet implemented");
+	public void testValidaTemporada()
+	{
+		this.validador.validaTemporada(1);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testValidaTemporadaInvalida() {
+		this.validador.validaTemporada(0);
 	}
 
 	@Test
-	public void testValidaPlataforma() {
-		fail("Not yet implemented");
+	public void testValidaPlataforma()
+	{
+		this.validador.validaPlataforma("PC");
+		this.validador.validaPlataforma("MAC");
+		this.validador.validaPlataforma("PS3");
+		this.validador.validaPlataforma("PS4");
+		this.validador.validaPlataforma("XBOX360");
+		this.validador.validaPlataforma("XBOX_ONE");
+		this.validador.validaPlataforma("NINTENDO_3DS");
+		this.validador.validaPlataforma("OUTRO");
+	}
+	
+	@Test(expected=NullPointerException.class)
+	public void testValidaPlataformaNull()
+	{
+		this.validador.validaPlataforma(null);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testValidaPlataformaInvalido()
+	{
+		this.validador.validaPlataforma("       ");
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testValidaPlataformaNotInside()
+	{
+		this.validador.validaPlataforma("any");
 	}
 
 	@Test
-	public void testValidaAnoLancamento() {
-		fail("Not yet implemented");
+	public void testValidaAnoLancamento()
+	{
+		this.validador.validaAnoLancamento(1);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testValidaAnoLancamentoInvalido()
+	{
+		this.validador.validaAnoLancamento(0);
 	}
 
 	@Test
-	public void testValidaData() {
-		fail("Not yet implemented");
+	public void testValidaData()
+	{
+		this.validador.validaData("15/12/2016");
+	}
+	
+	@Test(expected=NullPointerException.class)
+	public void testValidaDataNull()
+	{
+		this.validador.validaData(null);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testValidaDataInvalido()
+	{
+		this.validador.validaData("       ");
 	}
 
 	@Test
-	public void testValidaPreco() {
-		fail("Not yet implemented");
+	public void testValidaPreco()
+	{
+		this.validador.validaPreco(0);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testValidaPrecoInvalido()
+	{
+		this.validador.validaPreco(-0.0001);
 	}
 
 	@Test
-	public void testValidaItensParaListagem() {
-		fail("Not yet implemented");
+	public void testValidaItensParaListagem()
+	{
+		List<Item>itens = new ArrayList<Item>();
+		itens.add(new Temporada("South Park", 1000.00, "Primeira temporada de South Park", 120, 
+				"DEZOITO_ANOS", "COMEDIA", 1));
+		this.validador.validaItensParaListagem(itens);
+	}
+	
+	@Test
+	public void testValidaItensParaListagemVazia()
+	{
+		List<Item>itens = new ArrayList<Item>();
+		this.validador.validaItensParaListagem(itens);
+	}
+	
+	@Test(expected=NullPointerException.class)
+	public void testValidaItensParaListagemNull()
+	{
+		this.validador.validaItensParaListagem(null);
+	}
+	
+	@Test(expected=NullPointerException.class)
+	public void testValidaItensParaListagemItemNull()
+	{
+		List<Item>itens = new ArrayList<Item>();
+		itens.add(null);
+		this.validador.validaItensParaListagem(itens);
 	}
 
 	@Test
-	public void testValidaPeriodo() {
-		fail("Not yet implemented");
+	public void testValidaPeriodo()
+	{
+		this.validador.validaPeriodo(1);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testValidaPeriodoInvalido()
+	{
+		this.validador.validaPeriodo(0);
 	}
 
 	@Test
-	public void testValidaDescricao() {
-		fail("Not yet implemented");
+	public void testValidaDescricao()
+	{
+		this.validador.validaDescricao("Eu devo descrever alguma coisa aqui");
+	}
+	
+	@Test(expected=NullPointerException.class)
+	public void testValidaDescricaoNull()
+	{
+		this.validador.validaDescricao(null);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testValidaDescricaoInvalido()
+	{
+		this.validador.validaDescricao("       ");
 	}
 
 	@Test
-	public void testValidaNumeroDeFaixas() {
-		fail("Not yet implemented");
+	public void testValidaNumeroDeFaixas()
+	{
+		this.validador.validaNumeroDeFaixas(1);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testValidaNumeroDeFaixasInvalido()
+	{
+		this.validador.validaNumeroDeFaixas(0);
 	}
 
 	@Test
-	public void testValidaAtributo() {
-		fail("Not yet implemented");
+	public void testValidaAtributo()
+	{
+		this.validador.validaAtributo("Nome");
+	}
+	
+	@Test(expected=NullPointerException.class)
+	public void testValidaAtributoNull()
+	{
+		this.validador.validaAtributo(null);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testValidaAtributoInvalido()
+	{
+		this.validador.validaAtributo("       ");
 	}
 
 	@Test
-	public void testValidaPeca() {
-		fail("Not yet implemented");
+	public void testValidaPeca()
+	{
+		this.validador.validaPeca("Cavalo");
 	}
 
+	@Test(expected=NullPointerException.class)
+	public void testValidaPecaNull()
+	{
+		this.validador.validaPeca(null);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testValidaPecaInvalido()
+	{
+		this.validador.validaPeca("       ");
+	}
 }

@@ -125,10 +125,13 @@ public class Validador {
 		}
 	}
 
-	public void validaItensParaListagem(List<Item> itens) {
-		if (itens == null) {
+	public void validaItensParaListagem(List<Item> itens)
+	{
+		if (itens == null)
 			throw new NullPointerException("A lista de itens para listagem nao pode ser nula");
-		}
+		for(Item item : itens)
+			if(item == null)
+				throw new NullPointerException("A lista de itens para listagem nao pode possuir itens nulos");
 	}
 
 	public void validaPeriodo(int periodo) {

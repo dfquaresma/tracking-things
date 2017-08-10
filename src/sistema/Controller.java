@@ -283,11 +283,16 @@ public class Controller {
 	}
 	
 	public void registrarEmprestimo(String nomeDono, String telefoneDono, String nomeRequerente,
-			String telefoneRequerente, String nomeItem, String dataEmprestimo, int periodo) {
+			String telefoneRequerente, String nomeItem, String dataEmprestimo, int periodo)
+	{
 		Usuario userEmprestador = getUser(nomeDono, telefoneDono);
 		Usuario userRequerente = getUser(nomeRequerente, telefoneRequerente);
 		Item item = userEmprestador.getItem(nomeItem);
+		
+		this.validador.validaData(dataEmprestimo);
+		this.validador.validaPeriodo(periodo);
 		Emprestimo emprestimo = new Emprestimo(userEmprestador, userRequerente, item, dataEmprestimo, periodo);
+		
 		userEmprestador.emprestaItem(nomeItem, userRequerente, emprestimo);
 
 	}
@@ -296,6 +301,10 @@ public class Controller {
 			String nomeItem, String dataEmprestimo, String dataDevolucao) {
 		Usuario userEmprestador = getUser(nomeDono, telefoneDono);
 		Usuario userRequerente = getUser(nomeRequerente, telefoneRequerente);
+		
+		this.validador.validaData(dataEmprestimo);
+		this.validador.validaData(dataDevolucao);
+		this.validador.validaNomeItem(nomeItem);
 		userRequerente.devolveItem(nomeItem, dataEmprestimo, dataDevolucao, userEmprestador);
 	}
 
