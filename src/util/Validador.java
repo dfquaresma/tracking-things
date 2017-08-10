@@ -317,7 +317,7 @@ public class Validador {
 	 * 
 	 * @param valor - String a ser convertida em Int.
 	 */
-	public void validaConversaoStringToInt(String valor)
+	public void validaConversaoStringToInt(String atributo, String valor)
 	{
 		try
 		{
@@ -325,7 +325,7 @@ public class Validador {
 		}
 		catch(NumberFormatException e)
 		{
-			throw new IllegalArgumentException("Duracao deve ter o formato de um tipo int");
+			throw new IllegalArgumentException(atributo + "deve ter o formato de um tipo int");
 		}
 	}
 
