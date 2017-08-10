@@ -92,4 +92,19 @@ public class JogoEletronico extends Item {
 		}
 
 	}
+	
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		JogoEletronico other = (JogoEletronico) obj;
+		if (plataforma != other.plataforma)
+			return false;
+		return true;
+	}
 }

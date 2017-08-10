@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import util.Validador;
+
 public class JogoEletronicoTest
 {
 	private JogoEletronico jogo;
@@ -13,6 +15,14 @@ public class JogoEletronicoTest
 	public void criaJogoEletronico()
 	{
 		this.jogo = new JogoEletronico("Super Mario", 1500.00, "PC");
+	}
+	
+	@Test
+	public void testJogoEletronico()
+	{
+		assertEquals("Super Mario", this.jogo.getNome());
+		assertEquals(1500.00, this.jogo.getPreco(), 0.0005);
+		assertEquals("Nao emprestado", this.jogo.getEstadoEmprestimo());
 	}
 	
 	@Test(expected=NullPointerException.class)
@@ -175,5 +185,20 @@ public class JogoEletronicoTest
 	public void testAtualizaAtributoValorInvalido()
 	{
 		this.jogo.atualizaAtributo("Plataforma", "outro");
+	}
+	
+	@Test
+	public void testEquals()
+	{
+		JogoEletronico equalJogo = new JogoEletronico("Super Mario", 100.0, "PC");
+		JogoEletronico diffJogoN = new JogoEletronico("Mario", 200.00, "PC");
+		JogoEletronico diffJogoP = new JogoEletronico("Super Mario", 300.00, "OUTRO");
+		
+		assertEquals(true, this.jogo.equals(equalJogo));
+		assertEquals(false, this.jogo.equals(diffJogoP));
+		assertEquals(false, this.jogo.equals(diffJogoN));
+		assertEquals(true, this.jogo.equals(this.jogo));
+		assertEquals(false, this.jogo.equals(null));
+		assertEquals(false, this.jogo.equals(new Validador()));
 	}
 }
