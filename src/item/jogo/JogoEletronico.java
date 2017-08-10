@@ -84,7 +84,7 @@ public class JogoEletronico extends Item {
 		this.validador.validaValor(valor);
 
 		if (atributo.equals("Plataforma")) {
-			this.plataforma = Plataforma.valueOf(valor);
+			setPlataforma(valor);
 
 		} else {
 			super.atualizaAtributo(atributo, valor);
