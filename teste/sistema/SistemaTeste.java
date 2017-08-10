@@ -4,7 +4,11 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
-
+/**
+ * Descricao: Testa os metodos da classe sistema
+ * @author Amanda V. A. de Luna e Costa
+ *
+ */
 public class SistemaTeste {
 	private Sistema sistema;
 	
@@ -12,26 +16,33 @@ public class SistemaTeste {
 	public void setUp() {
 		this.sistema = new Sistema();
 	}
-	
+	/**
+	 * Testa cadastrar e exibir o nome de um usuario
+	 */
 	@Test
 	public void CadastrarEExibirNomeDoUsuario() {
 		sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 		assertEquals("Rick", sistema.getInfoUser("Rick", "4002-8922", "Nome"));
 	}
-
-
+	/**
+	 * Testa cadastrar e exibir o telefone de um usuario
+	 */
 	@Test
 	public void CadastrarEExibirTelefoneDoUsuario() {
 		sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 		assertEquals("4002-8922", sistema.getInfoUser("Rick", "4002-8922", "Telefone"));
 	}
-
+	/**
+	 * Testa cadastrar e exibir o email de um usuario
+	 */
 	@Test
 	public void CadastrarEExibirEmailDoUsuario() {
 		sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 		assertEquals("rick@mail.com", sistema.getInfoUser("Rick", "4002-8922", "Email"));
 	}
-
+	/**
+	 * Testa cadastrar um usuario com nome vazio
+	 */
 	@Test
 	public void cadastrarUsuarioNomeVazio() {
 		
@@ -42,7 +53,9 @@ public class SistemaTeste {
 			assertEquals("Nome nao pode ser vazio", iae.getMessage());
 		}
 	}
-
+	/**
+	 * Testa cadastrar um usuario com telefone vazio
+	 */
 	@Test
 	public void cadastrarUsuarioTelefoneVazio() {
 		
@@ -53,7 +66,9 @@ public class SistemaTeste {
 			assertEquals("Telefone nao pode ser vazio", iae.getMessage());
 		}
 	}
-
+	/**
+	 * Testa cadastrar um usuario com email vazio
+	 */
 	@Test
 	public void cadastrarUsuarioEmailVazio() {
 		
@@ -64,7 +79,9 @@ public class SistemaTeste {
 			assertEquals("Email nao pode ser vazio", iae.getMessage());
 		}
 	}
-
+	/**
+	 * Testa cadastrar um usuario com nome nulo
+	 */
 	@Test
 	public void cadastrarUsuarioNomeNulo() {
 		
@@ -75,7 +92,9 @@ public class SistemaTeste {
 			assertEquals("Nome nao pode ser nulo", npe.getMessage());
 		}
 	}
-
+	/**
+	 * Testa cadastrar um usuario com telefone nulo
+	 */
 	@Test
 	public void cadastrarUsuarioTelefoneNulo() {
 		
@@ -86,7 +105,9 @@ public class SistemaTeste {
 			assertEquals("Telefone nao pode ser nulo", npe.getMessage());
 		}
 	}
-
+	/**
+	 * Testa cadastrar um usuario com email nulo
+	 */
 	@Test
 	public void cadastrarUsuarioEmailNulo() {
 		
@@ -97,7 +118,9 @@ public class SistemaTeste {
 			assertEquals("Email nao pode ser nulo", npe.getMessage());
 		}
 	}
-
+	/**
+	 * Testa pegar a informação de um usuario com um atributo invalido
+	 */
 	@Test
 	public void getInfoUserAtributoInvalido() {
 		
@@ -109,7 +132,9 @@ public class SistemaTeste {
 			assertEquals("Atributo invalido.", iae.getMessage());
 		}
 	}
-
+	/**
+	 * Testa atualizar o nome de um usuario
+	 */
 	@Test
 	public void attNomeUsuario() {
 		
@@ -117,7 +142,9 @@ public class SistemaTeste {
 		sistema.attUsuario("Rick", "4002-8922", "Nome", "Morty");
 		assertEquals("Morty", sistema.getInfoUser("Morty", "4002-8922", "Nome"));
 	}
-
+	/**
+	 * Testa atualizar o telefone de um usuario
+	 */
 	@Test
 	public void attTelefoneUsuario() {
 		
@@ -125,7 +152,9 @@ public class SistemaTeste {
 		sistema.attUsuario("Rick", "4002-8922", "Telefone", "0800-721-1530");
 		assertEquals("0800-721-1530", sistema.getInfoUser("Rick", "0800-721-1530", "Telefone"));
 	}
-
+	/**
+	 * Testa atualizar o email de um usuario
+	 */
 	@Test
 	public void attEmailUsuario() {
 		
@@ -133,7 +162,9 @@ public class SistemaTeste {
 		sistema.attUsuario("Rick", "4002-8922", "Email", "rick2@mail.com");
 		assertEquals("rick2@mail.com", sistema.getInfoUser("Rick", "4002-8922", "Email"));
 	}
-
+	/**
+	 * Testa atualizar um usuario com um atributo invalido
+	 */
 	@Test
 	public void attUsuarioAtributoInvalido() {
 		
@@ -145,7 +176,9 @@ public class SistemaTeste {
 			assertEquals("Atributo invalido", iae.getMessage());
 		}
 	}
-
+	/**
+	 * Testa atualizar um usuario com nome vazio
+	 */
 	@Test
 	public void attUsuarioNomeVazio() {
 		
@@ -157,7 +190,9 @@ public class SistemaTeste {
 			assertEquals("Nome nao pode ser vazio", iae.getMessage());
 		}
 	}
-
+	/**
+	 * Testa atualizar um usuario com telefone vazio
+	 */
 	@Test
 	public void attUsuarioTelefoneVazio() {
 		
@@ -169,7 +204,9 @@ public class SistemaTeste {
 			assertEquals("Telefone nao pode ser vazio", iae.getMessage());
 		}
 	}
-
+	/**
+	 * Testa atualizar um usuario com um valor vazio
+	 */
 	@Test
 	public void attUsuarioValorVazio() {
 		
@@ -181,7 +218,9 @@ public class SistemaTeste {
 			assertEquals("Valor nao pode ser vazio", iae.getMessage());
 		}
 	}
-
+	/**
+	 * Testa atualizar um usuario com nome nulo
+	 */
 	@Test
 	public void attUsuarioNomeNulo() {
 		
@@ -193,7 +232,9 @@ public class SistemaTeste {
 			assertEquals("Nome nao pode ser nulo", npe.getMessage());
 		}
 	}
-
+	/**
+	 * Testa atalizar o usuario com telefone nulo
+	 */
 	@Test
 	public void attUsuarioTelefoneNulo() {
 		
@@ -205,7 +246,9 @@ public class SistemaTeste {
 			assertEquals("Telefone nao pode ser nulo", npe.getMessage());
 		}
 	}
-
+	/**
+	 * Testa atualizar o usuario com valor nulo
+	 */
 	@Test
 	public void attUsuarioValorNulo() {
 		
@@ -217,7 +260,9 @@ public class SistemaTeste {
 			assertEquals("Valor nao pode ser nulo", npe.getMessage());
 		}
 	}
-
+	/**
+	 * Testa atualizar um usuario que nao existe
+	 */
 	@Test
 	public void attUsuarioInvalido() {
 		
@@ -229,7 +274,9 @@ public class SistemaTeste {
 			assertEquals("Usuario invalido", iae.getMessage());
 		}
 	}
-
+	/**
+	 * Testa remover um usuario
+	 */
 	@Test
 	public void removerUsuario() {
 		
@@ -241,7 +288,9 @@ public class SistemaTeste {
 			assertEquals("Usuario invalido", iae.getMessage());
 		}
 	}
-
+	/**
+	 * Testa remover um usuario com nome vazio
+	 */
 	@Test
 	public void removerUsuarioNomeVazio() {
 		
@@ -253,7 +302,9 @@ public class SistemaTeste {
 			assertEquals("Nome nao pode ser vazio", iae.getMessage());
 		}
 	}
-
+	/**
+	 * Testa remover um usuario com telefone vazio
+	 */
 	@Test
 	public void removerUsuarioTelefoneVazio() {
 		
@@ -265,7 +316,9 @@ public class SistemaTeste {
 			assertEquals("Telefone nao pode ser vazio", iae.getMessage());
 		}
 	}
-
+	/**
+	 * Testa cadastrar um jogo eletronico e pegar detalhes dele
+	 */
 	@Test
 	public void cadastrarEletronicoEGetDetalhesItem() {
 		
@@ -274,7 +327,9 @@ public class SistemaTeste {
 		assertEquals("JOGO ELETRONICO: Bioshock, R$ 35.0, Nao emprestado, PC",
 				sistema.getDetalhesItem("Rick", "4002-8922", "Bioshock"));
 	}
-
+	/**
+	 * Testa cadastrar um jogo eletronica com um nome de usuario vazio
+	 */
 	@Test
 	public void cadastrarEletronicoNomeUserVazio() {
 		
@@ -285,7 +340,9 @@ public class SistemaTeste {
 			assertEquals("Nome nao pode ser vazio", iae.getMessage());
 		}
 	}
-
+	/**
+	 * Testa cadastrar um jogo eletronico com o telefone do usuario vazio
+	 */
 	@Test
 	public void cadastrarEletronicoTelefoneUserVazio() {
 		
@@ -296,7 +353,9 @@ public class SistemaTeste {
 			assertEquals("Telefone nao pode ser vazio", iae.getMessage());
 		}
 	}
-
+	/**
+	 * Testa cadastrar um jogo eletronico com um nome de item vazio
+	 */
 	@Test
 	public void cadastrarEletronicoNomeItemVazio() {
 		
@@ -307,7 +366,9 @@ public class SistemaTeste {
 			assertEquals("Nome do item nao pode ser vazio", iae.getMessage());
 		}
 	}
-
+	/**
+	 * Testa cadastrar um jogo eletronico com um nome de usuario nulo
+	 */
 	@Test
 	public void cadastrarEletronicoNomeUserNulo() {
 		
@@ -318,7 +379,9 @@ public class SistemaTeste {
 			assertEquals("Nome nao pode ser nulo", npe.getMessage());
 		}
 	}
-
+	/**
+	 * Testa cadastrar um jogo eletronico com um telefone de usuario nulo
+	 */
 	@Test
 	public void cadastrarEletronicoTelefoneUserNulo() {
 		
@@ -329,7 +392,9 @@ public class SistemaTeste {
 			assertEquals("Telefone nao pode ser nulo", npe.getMessage());
 		}
 	}
-
+	/**
+	 * Testa cadastrar um jogo eletronico com um nome de item nulo
+	 */
 	@Test
 	public void cadastrarEletronicoNomeItemNulo() {
 		
@@ -340,7 +405,9 @@ public class SistemaTeste {
 			assertEquals("Nome do item nao pode ser nulo", npe.getMessage());
 		}
 	}
-
+	/**
+	 * Testa cadastrar um jogo eletronico em uma plataforma invalida
+	 */
 	@Test
 	public void cadastrarEletronicoPlataformaInvalida() {
 		try { 
@@ -352,7 +419,9 @@ public class SistemaTeste {
 			
 		} 
 	}
-	
+	/**
+	 * Testa cadastrar um jogo eletronico com um preco invalido
+	 */
 	@Test
 	public void cadastrarEletronicoPrecoInvalido() {
 		
@@ -363,7 +432,9 @@ public class SistemaTeste {
 			assertEquals("Preco invalido", iae.getMessage());
 		}
 	}
-
+	/**
+	 * Testa cadastrar um jogo de tabuleiro e pegar os detalhes dele
+	 */
 	@Test
 	public void cadastrarJogoTabuleiroEGetDetalhesItem() {
 		
@@ -372,7 +443,9 @@ public class SistemaTeste {
 		assertEquals("JOGO DE TABULEIRO: D&D, R$ 80.0, Nao emprestado, COMPLETO",
 				sistema.getDetalhesItem("Rick", "4002-8922", "D&D"));
 	}
-
+	/**
+	 * Testa cadastrar um jogo de tabuleiro com um nome de usuario vazio
+	 */
 	@Test
 	public void cadastrarJogoTabuleiroNomeUserVazio() {
 		
@@ -383,7 +456,9 @@ public class SistemaTeste {
 			assertEquals("Nome nao pode ser vazio", iae.getMessage());
 		}
 	}
-
+	/**
+	 * Testa cadastrar um jogo de tabuleiro com um telefone de usuario vazio
+	 */
 	@Test
 	public void cadastrarJogoTabuleiroTelefoneUserVazio() {
 		
@@ -394,7 +469,9 @@ public class SistemaTeste {
 			assertEquals("Telefone nao pode ser vazio", iae.getMessage());
 		}
 	}
-
+	/**
+	 * Testa cadastrar um jogo de tabuleiro com nome de item vazio
+	 */
 	@Test
 	public void cadastrarJogoTabuleiroNomeItemVazio() {
 		
@@ -405,7 +482,9 @@ public class SistemaTeste {
 			assertEquals("Nome do item nao pode ser vazio", iae.getMessage());
 		}
 	}
-
+	/**
+	 * Testa cadastrar um jogo de tabuleiro com preco invalido
+	 */
 	@Test
 	public void cadastrarJogoTabuleiroPrecoInvalido() {
 		
@@ -416,7 +495,9 @@ public class SistemaTeste {
 			assertEquals("Preco invalido", iae.getMessage());
 		}
 	}
-
+	/**
+	 * Testa cadastrar um jogo de tabuleiro com um nome de usuario nulo
+	 */
 	@Test
 	public void cadastrarJogoTabuleiroNomeUserNulo() {
 		
@@ -427,7 +508,9 @@ public class SistemaTeste {
 			assertEquals("Nome nao pode ser nulo", npe.getMessage());
 		}
 	}
-
+	/**
+	 * Testa cadastrar um jogo de tabuleiro com um telefone de usuario nulo
+	 */
 	@Test
 	public void cadastrarJogoTabuleiroTelefoneUserNulo() {
 		
@@ -438,7 +521,9 @@ public class SistemaTeste {
 			assertEquals("Telefone nao pode ser nulo", npe.getMessage());
 		}
 	}
-
+	/**
+	 * Testa cadastrar um jogo de tabuleiro com um nome de item nulo
+	 */
 	@Test
 	public void cadastrarJogoTabuleiroNomeItemNulo() {
 		
@@ -449,7 +534,9 @@ public class SistemaTeste {
 			assertEquals("Nome do item nao pode ser nulo", npe.getMessage());
 		}
 	}
-
+	/**
+	 * Testa adicionar uma peca perdida
+	 */
 	@Test
 	public void addPecaPerdida() {
 		
@@ -459,7 +546,9 @@ public class SistemaTeste {
 		assertEquals("JOGO DE TABULEIRO: D&D, R$ 80.0, Nao emprestado, COM PECAS PERDIDAS",
 				sistema.getDetalhesItem("Rick", "4002-8922", "D&D"));
 	}
-
+	/**
+	 * Testa adicionar peca perdida em um item que nao existe
+	 */
 	@Test
 	public void addPecaPerdidaItemInvalido() {
 		
@@ -472,7 +561,9 @@ public class SistemaTeste {
 			assertEquals("Item nao encontrado", iae.getMessage());
 		}
 	}
-
+	/**
+	 * Testa adicionar peca perdida com nome de usuario vazio
+	 */
 	@Test
 	public void addPecaPerdidaNomeUserVazio() {
 		
@@ -485,7 +576,9 @@ public class SistemaTeste {
 			assertEquals("Nome nao pode ser vazio", iae.getMessage());
 		}
 	}
-
+	/**
+	 * Testa adicionar peca perdida com um telefone de usuario vazio
+	 */
 	@Test
 	public void addPecaPerdidaTelefoneUserVazio() {
 		
@@ -498,7 +591,9 @@ public class SistemaTeste {
 			assertEquals("Telefone nao pode ser vazio", iae.getMessage());
 		}
 	}
-
+	/**
+	 * Testa adicionar peca perdida com um nome de item vazio
+	 */
 	@Test
 	public void addPecaPerdidaNomeItemVazio() {
 		
@@ -511,7 +606,9 @@ public class SistemaTeste {
 			assertEquals("Nome do item nao pode ser vazio", iae.getMessage());
 		}
 	}
-
+	/**
+	 * Testa adicionar peca perdida com um nome da peca vazio
+	 */
 	@Test
 	public void addPecaPerdidaNomePecaVazio() {
 		
@@ -524,7 +621,9 @@ public class SistemaTeste {
 			assertEquals("Nome da peca nao pode ser vazio", iae.getMessage());
 		}
 	}
-
+	/**
+	 * Testa adicionar peca perdida com nome de usuario nulo
+	 */
 	@Test
 	public void addPecaPerdidaNomeUserNulo() {
 		
@@ -537,7 +636,9 @@ public class SistemaTeste {
 			assertEquals("Nome nao pode ser nulo", npe.getMessage());
 		}
 	}
-
+	/**
+	 * Testa adicionar peca perdida com um telefone de usuario nulo
+	 */
 	@Test
 	public void addPecaPerdidaTelefoneUserNulo() {
 		
@@ -550,7 +651,9 @@ public class SistemaTeste {
 			assertEquals("Telefone nao pode ser nulo", npe.getMessage());
 		}
 	}
-
+	/**
+	 * Testa adicionar peca perdida com nome de item nulo
+	 */
 	@Test
 	public void addPecaPerdidaNomeItemNulo() {
 		
@@ -563,7 +666,9 @@ public class SistemaTeste {
 			assertEquals("Nome do item nao pode ser nulo", npe.getMessage());
 		}
 	}
-
+	/**
+	 * Testa adicionar peca perdida com nome da peca nulo
+	 */
 	@Test
 	public void addPecaPerdidaNomePecaNulo() {
 		
@@ -576,7 +681,9 @@ public class SistemaTeste {
 			assertEquals("Nome da peca nao pode ser nulo", npe.getMessage());
 		}
 	}
-
+	/**
+	 * Testa cadastrar um bluray de filme e pegar os detalhes dele
+	 */
 	@Test
 	public void cadastrarBlurayFilmeEGetDetalhesItem() {
 		
@@ -585,7 +692,9 @@ public class SistemaTeste {
 		assertEquals("FILME: Sharknado, R$ 10.0, Nao emprestado, 120 min, DEZ_ANOS, COMEDIA, 2000",
 				sistema.getDetalhesItem("Rick", "4002-8922", "Sharknado"));
 	}
-
+	/**
+	 * Testa cadastrar um bluray de filme com um nome de usuario vazio
+	 */
 	@Test
 	public void cadastrarBlurayFilmeNomeUserVazio() {
 		
@@ -596,7 +705,9 @@ public class SistemaTeste {
 			assertEquals("Nome nao pode ser vazio",iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa cadastrar um bluray de filme com telefone de usuario vazio
+	 */
 	@Test
 	public void cadastrarBlurayFilmeTelefoneUserVazio() {
 		
@@ -607,7 +718,9 @@ public class SistemaTeste {
 			assertEquals("Telefone nao pode ser vazio",iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa cadastrar um bluray de filme com o nome do filme vazio
+	 */
 	@Test
 	public void cadastrarBlurayFilmeNomeFilmeVazio() {
 		
@@ -618,7 +731,9 @@ public class SistemaTeste {
 			assertEquals("Nome do item nao pode ser vazio",iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa cadastrar um bluray de filme com preco invalido
+	 */
 	@Test
 	public void cadastrarBlurayFilmePrecoInvalido() {
 		
@@ -629,7 +744,9 @@ public class SistemaTeste {
 			assertEquals("Preco invalido",iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa cadastrar um bluray de filme em um usuario inexistente
+	 */
 	@Test
 	public void cadastrarBlurayFilmeUserInvalido() {
 		
@@ -640,7 +757,9 @@ public class SistemaTeste {
 			assertEquals("Usuario invalido",iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa cadastrar um bluray de filme com duracao invalida
+	 */
 	@Test
 	public void cadastrarBlurayFilmeDuracaoInvalida() {
 		
@@ -651,7 +770,9 @@ public class SistemaTeste {
 			assertEquals("Duracao nao pode ser negativa",iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa cadastrar um bluray de filme com genero invalido
+	 */
 	@Test
 	public void cadastrarBlurayFilmeGeneroInvalido() {
 		
@@ -662,7 +783,9 @@ public class SistemaTeste {
 			assertEquals("Genero inválido",iae.getMessage());
 		}
 	}
-
+	/**
+	 * Testa cadastrar um bluray de filme com generio vazio
+	 */
 	@Test
 	public void cadastrarBlurayFilmeGeneroVazio() {
 		
@@ -673,7 +796,9 @@ public class SistemaTeste {
 			assertEquals("Genero nao pode ser vazio",iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa cadastrar um bluray de filme com genero nulo
+	 */
 	@Test
 	public void cadastrarBlurayFilmeGeneroNulo() {
 		
@@ -684,7 +809,9 @@ public class SistemaTeste {
 			assertEquals("Genero nao pode ser nulo",npe.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa cadastrar um bluray de filme com classificacao invalida
+	 */
 	@Test
 	public void cadastrarBlurayFilmeClassificacaoInvalida() {
 		
@@ -695,7 +822,9 @@ public class SistemaTeste {
 			assertEquals("Classificacao inválida",iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa cadastrar um bluray de filme com classificacao vazia
+	 */
 	@Test
 	public void cadastrarBlurayFilmeClassificacaoVazia() {
 		
@@ -706,7 +835,9 @@ public class SistemaTeste {
 			assertEquals("Classificacao nao pode ser vazio",iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa cadastrar um bluray de filme com classificacao nula
+	 */
 	@Test
 	public void cadastrarBlurayFilmeClassificacaoNula() {
 		
@@ -717,7 +848,9 @@ public class SistemaTeste {
 			assertEquals("Classificacao nao pode ser nulo",npe.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa cadastrar um bluray de filme com ano invalido
+	 */
 	@Test
 	public void cadastrarBlurayFilmeAnoInvalido() {
 		
@@ -728,7 +861,9 @@ public class SistemaTeste {
 			assertEquals("Ano nao pode ser negativo",iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa cadastrar um bluray de serie e pegar detalhes dele
+	 */
 	@Test
 	public void cadastrarBluraySerieEGetDetalhesItem() {
 		
@@ -737,7 +872,9 @@ public class SistemaTeste {
 		assertEquals("SERIE: Rick e Morty, R$ 666.0, Nao emprestado, 120 min, DEZESSEIS_ANOS, FICCAO, Temporada 1",
 				sistema.getDetalhesItem("Rick", "4002-8922", "Rick e Morty"));
 	}
-	
+	/**
+	 * Testa cadastrar um bluray de serie com nome do usuario vazio
+	 */
 	@Test
 	public void cadastrarBluraySerieNomeUserVazio() {
 		
@@ -749,7 +886,9 @@ public class SistemaTeste {
 			assertEquals("Nome nao pode ser vazio", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa cadastrar um bluray de serie com telefone do usuario vazio
+	 */
 	@Test
 	public void cadastrarBluraySerieTelefoneUserVazio() {
 		
@@ -761,7 +900,9 @@ public class SistemaTeste {
 			assertEquals("Telefone nao pode ser vazio", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa cadastrar um bluray de serie com o nome do item vazio
+	 */
 	@Test
 	public void cadastrarBluraySerieNomeItemVazio() {
 		
@@ -773,7 +914,9 @@ public class SistemaTeste {
 			assertEquals("Nome do item nao pode ser vazio", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa cadastrar um bluray de serie com um preco invalido
+	 */
 	@Test
 	public void cadastrarBluraySeriePrecoInvalido() {
 		
@@ -785,7 +928,9 @@ public class SistemaTeste {
 			assertEquals("Preco invalido", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa cadastrar um bluray de serie com descricao vazia
+	 */
 	@Test
 	public void cadastrarBluraySerieDescricaoVazia() {
 		
@@ -797,7 +942,9 @@ public class SistemaTeste {
 			assertEquals("Descricao nao pode ser vazio", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa cadastrar um bluray de serie com duracao invalida
+	 */
 	@Test
 	public void cadastrarBluraySerieDuracaoInvalida() {
 		
@@ -809,7 +956,9 @@ public class SistemaTeste {
 			assertEquals("Duracao nao pode ser negativa", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa cadastrar um bluray de serie com classificacao invalida
+	 */
 	@Test
 	public void cadastrarBluraySerieClassificacaoInvalida() {
 		
@@ -821,7 +970,9 @@ public class SistemaTeste {
 			assertEquals("Classificacao inválida", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa cadastrar um bluray de serie com classificacao vazia
+	 */
 	@Test
 	public void cadastrarBluraySerieClassificacaoVazia() {
 		
@@ -833,7 +984,9 @@ public class SistemaTeste {
 			assertEquals("Classificacao nao pode ser vazio", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa cadastrar um bluray de serie com classificacao nula
+	 */
 	@Test
 	public void cadastrarBluraySerieClassificacaoNula() {
 		
@@ -845,7 +998,9 @@ public class SistemaTeste {
 			assertEquals("Classificacao nao pode ser nulo", npe.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa cadastrar um bluray de show e pegar os detalhes dele
+	 */
 	@Test
 	public void cadastrarBlurayShowEGetDetalhesItem(){
 		
@@ -854,7 +1009,9 @@ public class SistemaTeste {
 		assertEquals("SHOW: Safadao DVD, R$ 30.0, Nao emprestado, 100 min, LIVRE, Safadao, 12 faixas", sistema.getDetalhesItem("Rick", "4002-8922", "Safadao DVD"));
 		
 	}
-	
+	/**
+	 * Testa cadastrar um bluray de show com nome de usuario vazio
+	 */
 	@Test
 	public void cadastrarBlurayShowNomeUserVazio(){
 		
@@ -865,7 +1022,9 @@ public class SistemaTeste {
 			assertEquals("Nome nao pode ser vazio", iae.getMessage());
 		}
 	}
-		
+	/**
+	 * Testa cadastrar um bluray de show com telefone de usuario vazio	
+	 */
 	@Test
 	public void cadastrarBlurayShowTelefoneUserVazio(){
 		
@@ -876,7 +1035,9 @@ public class SistemaTeste {
 			assertEquals("Telefone nao pode ser vazio", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa cadastrar um bluray de show com nome do item vazio
+	 */
 	@Test
 	public void cadastrarBlurayShowNomeItemVazio(){
 		
@@ -887,7 +1048,9 @@ public class SistemaTeste {
 			assertEquals("Nome do item nao pode ser vazio", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa cadastrar um bluray de show com preco invalido
+	 */
 	@Test
 	public void cadastrarBlurayShowPrecoInvalido(){
 		
@@ -898,7 +1061,9 @@ public class SistemaTeste {
 			assertEquals("Preco invalido", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa cadastrar um bluray de show com duracao invalida
+	 */
 	@Test
 	public void cadastrarBlurayShowDuracaoInvalida(){
 		
@@ -909,7 +1074,9 @@ public class SistemaTeste {
 			assertEquals("Duracao nao pode ser negativa", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa cadastrar um bluray de show com numerode faixas negativo
+	 */
 	@Test
 	public void cadastrarBlurayShowFaixasNegativo(){
 		
@@ -920,7 +1087,9 @@ public class SistemaTeste {
 			assertEquals("Numero de faixas nao pode ser menor ou igual a zero.", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa cadastrar um bluray de show com numero de faizas igual a zero
+	 */
 	@Test
 	public void cadastrarBlurayShowFaixasZero(){
 		
@@ -931,7 +1100,9 @@ public class SistemaTeste {
 			assertEquals("Numero de faixas nao pode ser menor ou igual a zero.", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa cadastrar um bluray show com artista vazio
+	 */
 	@Test
 	public void cadastrarBlurayShowArtistaVazio(){
 		
@@ -942,7 +1113,9 @@ public class SistemaTeste {
 			assertEquals("Artista nao pode ser vazio", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa cadastrar um bluray de show com classificacao invalida
+	 */
 	@Test
 	public void cadastrarBlurayShowClassificacaoInvalida(){
 		
@@ -953,7 +1126,9 @@ public class SistemaTeste {
 			assertEquals("Classificacao inválida", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa cadastrar um bluray de show com classificacao vazia
+	 */
 	@Test
 	public void cadastrarBlurayShowClassificacaoVazia(){
 		
@@ -964,7 +1139,9 @@ public class SistemaTeste {
 			assertEquals("Classificacao nao pode ser vazio", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa cadastrar um bluray de show com classificacao nula
+	 */
 	@Test
 	public void cadastrarBlurayShowClassificacaoNula(){
 		
@@ -975,7 +1152,9 @@ public class SistemaTeste {
 			assertEquals("Classificacao nao pode ser nulo", npe.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa cadastrar um bluray de show com nome de usuario nulo
+	 */
 	@Test
 	public void cadastrarBlurayShowNomeUserNulo(){
 		
@@ -986,9 +1165,11 @@ public class SistemaTeste {
 			assertEquals("Nome nao pode ser nulo", npe.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa cadastrar um bluray de show com telefone de usuario nulo
+	 */
 	@Test
-	public void cadastrarBlurayShowTelefoneUserNula(){
+	public void cadastrarBlurayShowTelefoneUserNulo(){
 		
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
@@ -997,7 +1178,9 @@ public class SistemaTeste {
 			assertEquals("Telefone nao pode ser nulo", npe.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa cadastrar um bluray de show com nome de item nulo
+	 */
 	@Test
 	public void cadastrarBlurayShowNomeItemNulo(){
 		
@@ -1008,7 +1191,9 @@ public class SistemaTeste {
 			assertEquals("Nome do item nao pode ser nulo", npe.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa cadastrar um bluray de show com artista nulo
+	 */
 	@Test
 	public void cadastrarBlurayArtistaNulo(){
 		
@@ -1019,7 +1204,9 @@ public class SistemaTeste {
 			assertEquals("Artista nao pode ser nulo", npe.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa pegar informacoes de um usuario inexistente
+	 */
 	@Test
 	public void getInfoUserInvalido(){
 		
@@ -1030,7 +1217,9 @@ public class SistemaTeste {
 			assertEquals("Usuario invalido", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa pegar o nome de um item
+	 */
 	@Test
 	public void getInfoItemNome(){
 		
@@ -1038,7 +1227,9 @@ public class SistemaTeste {
 		sistema.cadastrarEletronico("Rick", "4002-8922", "GTA V", 200.00, "PS4");
 		assertEquals("GTA V",sistema.getInfoItem("Rick", "4002-8922", "GTA V", "Nome") );
 	}
-	
+	/**
+	 * Testa pegar o preco de um item
+	 */
 	@Test
 	public void getInfoItemPreco(){
 		
@@ -1046,7 +1237,9 @@ public class SistemaTeste {
 		sistema.cadastrarEletronico("Rick", "4002-8922", "GTA V", 200.00, "PS4");
 		assertEquals("200.0",sistema.getInfoItem("Rick", "4002-8922", "GTA V", "Preco") );
 	}
-	
+	/**
+	 * Testa pegar a plataforma de um item
+	 */
 	@Test
 	public void getInfoItemPlataforma(){
 		
@@ -1054,7 +1247,9 @@ public class SistemaTeste {
 		sistema.cadastrarEletronico("Rick", "4002-8922", "GTA V", 200.00, "PS4");
 		assertEquals("PS4",sistema.getInfoItem("Rick", "4002-8922", "GTA V", "Plataforma"));
 	}
-	
+	/**
+	 * Testa pegar informacao de um item com atributo invalido
+	 */
 	@Test
 	public void getInfoItemAtributoInvalido(){
 		try {
@@ -1067,7 +1262,9 @@ public class SistemaTeste {
 			assertEquals("Atributo invalido.", iae.getMessage());// TÁ SEM MENSAGEM
 		}
 	} 
-	
+	/**
+	 * Testa adicionar um bluray
+	 */
 	@Test
 	public void addBluray(){
 		
@@ -1075,7 +1272,9 @@ public class SistemaTeste {
 		sistema.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 50.00, "Loucura total", 100, "DEZESSEIS_ANOS", "FICCAO", 1);
 		sistema.addBluray("Rick", "4002-8922", "Rick e Morty", 22);
 	}
-	
+	/**
+	 * Testa adicionar um bluray em uma serie inexistente
+	 */
 	@Test
 	public void addBluraySerieInvalida(){
 		
@@ -1087,7 +1286,9 @@ public class SistemaTeste {
 			assertEquals("Item nao encontrado", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa adicionar um bluray com nome de usuario vazio
+	 */
 	@Test
 	public void addBlurayNomeUserVazio(){
 		
@@ -1099,7 +1300,9 @@ public class SistemaTeste {
 			assertEquals("Nome nao pode ser vazio", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa adicionar um bluray com telefone de usuario vazio
+	 */
 	@Test
 	public void addBlurayTelefoneUserVazio(){
 		
@@ -1111,7 +1314,9 @@ public class SistemaTeste {
 			assertEquals("Telefone nao pode ser vazio", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa adicionar um bluray com nome do episodio vazio
+	 */
 	@Test
 	public void addBlurayEpisodioVazio(){
 		
@@ -1123,7 +1328,9 @@ public class SistemaTeste {
 			assertEquals("Nome do bluray nao pode ser vazio", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa adicionar um bluray com duracao invalida
+	 */
 	@Test
 	public void addBlurayDuracaoInvalida(){
 		
@@ -1135,7 +1342,9 @@ public class SistemaTeste {
 			assertEquals("Duracao nao pode ser negativa", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa adicionar um bluray com nome de usuario nulo
+	 */
 	@Test
 	public void addBlurayNomeUserNulo(){
 		
@@ -1147,7 +1356,9 @@ public class SistemaTeste {
 			assertEquals("Nome nao pode ser nulo", npe.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa adicionar um bluray com telefone de usuario nulo
+	 */
 	@Test
 	public void addBlurayTelefoneUserNulo(){
 		
@@ -1159,7 +1370,9 @@ public class SistemaTeste {
 			assertEquals("Telefone nao pode ser nulo", npe.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa adicionar um bluray com o nome do bluray nulo
+	 */
 	@Test
 	public void addBlurayNomeBlurayNulo(){
 		
@@ -1171,7 +1384,9 @@ public class SistemaTeste {
 			assertEquals("Nome do bluray nao pode ser nulo", npe.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa adicionar um bluray com um usuario inexistente
+	 */
 	@Test
 	public void addBlurayUsuarioInvalido(){
 		
@@ -1183,7 +1398,9 @@ public class SistemaTeste {
 			assertEquals("Usuario invalido", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa remover um item
+	 */
 	@Test
 	public void removerItem(){
 		
@@ -1196,7 +1413,9 @@ public class SistemaTeste {
 			assertEquals("Item nao encontrado", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa remover um item com nome de usuario nulo
+	 */
 	@Test
 	public void removerItemNomeNulo(){
 		
@@ -1208,7 +1427,9 @@ public class SistemaTeste {
 			assertEquals("Nome nao pode ser nulo", npe.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa remover um item com telefone de usuario nulo
+	 */
 	@Test
 	public void removerItemTelefoneNulo(){
 		
@@ -1220,7 +1441,9 @@ public class SistemaTeste {
 			assertEquals("Telefone nao pode ser nulo", npe.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa remover um item com nome do item nulo
+	 */
 	@Test
 	public void removerItemNomeItemNulo(){
 		
@@ -1232,7 +1455,9 @@ public class SistemaTeste {
 			assertEquals("Nome do item nao pode ser nulo", npe.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa remover um item com nome do usuario vazio
+	 */
 	@Test
 	public void removerItemNomeVazio(){
 		
@@ -1244,7 +1469,9 @@ public class SistemaTeste {
 			assertEquals("Nome nao pode ser vazio", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa remover um item com telefone do usuario vazio
+	 */
 	@Test
 	public void removerItemTelefoneVazio(){
 		
@@ -1256,7 +1483,9 @@ public class SistemaTeste {
 			assertEquals("Telefone nao pode ser vazio", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa remover um item com o nome do item vazio
+	 */
 	@Test
 	public void removerItemNomeItemVazio(){
 		
@@ -1268,7 +1497,9 @@ public class SistemaTeste {
 			assertEquals("Nome do item nao pode ser vazio", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa remover um item de um usuario inexistente
+	 */
 	@Test
 	public void removerItemUsuarioInvalido(){
 		
@@ -1280,10 +1511,11 @@ public class SistemaTeste {
 			assertEquals("Usuario invalido", iae.getMessage());
 		}
 	}
-	
-
+	/**
+	 * Testa atualizar o nome de um item
+	 */
 	@Test
-	public void attNomeItem() { //DEU ERRO AQUI
+	public void attNomeItem() { 
 		sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 		sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 		assertEquals("Overwatch", sistema.getInfoItem("Rick", "4002-8922", "Overwatch", "Nome"));
@@ -1292,7 +1524,9 @@ public class SistemaTeste {
 		assertEquals("Jogo caro da Blizzard", sistema.getInfoItem("Rick", "4002-8922", "Jogo caro da Blizzard", "Nome"));
 
 	}
-
+	/**
+	 * Testa atualizar o preco de um item
+	 */
 	@Test
 	public void attPrecoItem() { 
 		
@@ -1301,7 +1535,9 @@ public class SistemaTeste {
 		sistema.attItem("Rick", "4002-8922", "Overwatch", "Preco", "250.0");
 		assertEquals("250.0", sistema.getInfoItem("Rick", "4002-8922", "Overwatch", "Preco"));
 	}
-	
+	/**
+	 * Testa atualizar um item passando um atributo invalido
+	 */
 	@Test
 	public void attItemAtributoInvalido() { 
 		
@@ -1314,7 +1550,9 @@ public class SistemaTeste {
 			assertEquals("Atributo invalido", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa atualizar um item com nome de usuario vazio
+	 */
 	@Test
 	public void attItemNomeVazio() { 
 		
@@ -1327,7 +1565,9 @@ public class SistemaTeste {
 			assertEquals("Nome nao pode ser vazio", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa atualiza um item com telefone de usuario vazio
+	 */
 	@Test
 	public void attItemTelefoneVazio() { 
 		
@@ -1340,7 +1580,9 @@ public class SistemaTeste {
 			assertEquals("Telefone nao pode ser vazio", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa atualizar um item com nome do item vazio
+	 */
 	@Test
 	public void attItemNomeItemVazio() { 
 		
@@ -1353,7 +1595,9 @@ public class SistemaTeste {
 			assertEquals("Nome do item nao pode ser vazio", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa atualizar um item com um atributo vazio
+	 */
 	@Test
 	public void attItemAtributoVazio() { 
 		
@@ -1366,7 +1610,9 @@ public class SistemaTeste {
 			assertEquals("Atributo nao pode ser vazio", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa atualizar um item com valor vazio
+	 */
 	@Test
 	public void attItemValorVazio() { 
 		
@@ -1379,7 +1625,9 @@ public class SistemaTeste {
 			assertEquals("Valor nao pode ser vazio", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa atualizar um item com nome de usuario nulo
+	 */
 	@Test
 	public void attItemNomeNulo() { 
 		
@@ -1392,7 +1640,9 @@ public class SistemaTeste {
 			assertEquals("Nome nao pode ser nulo", npe.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa atualizar um item com telefone de usuario nulo
+	 */
 	@Test
 	public void attItemTelefoneNulo() { 
 		
@@ -1405,7 +1655,9 @@ public class SistemaTeste {
 			assertEquals("Telefone nao pode ser nulo", npe.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa atualizar um item com nome do item nulo
+	 */
 	@Test
 	public void attItemNomeItemNulo() { 
 		
@@ -1418,7 +1670,9 @@ public class SistemaTeste {
 			assertEquals("Nome do item nao pode ser nulo", npe.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa atualizar um item com nome do item nulo
+	 */
 	@Test
 	public void attItemAtributoNulo() { 
 		
@@ -1431,7 +1685,9 @@ public class SistemaTeste {
 			assertEquals("Atributo nao pode ser nulo", npe.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa atualizar um item com valor nulo
+	 */
 	@Test
 	public void attItemValorNulo() { 
 		
@@ -1444,7 +1700,9 @@ public class SistemaTeste {
 			assertEquals("Valor nao pode ser nulo", npe.getMessage());
 		}
 	} 
-	
+	/**
+	 * Testa emprestar um item
+	 */
 	@Test
 	public void emprestarItem(){
 		sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
@@ -1454,7 +1712,9 @@ public class SistemaTeste {
 		assertEquals("JOGO ELETRONICO: Overwatch, R$ 200.0, Emprestado, PC", sistema.getDetalhesItem("Rick", "4002-8922", "Overwatch"));
 		//sistema.devolverItem("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", "11/08/2017");
 	}
-	
+	/**
+	 * Testa emprestar um item com nome do dono vazio
+	 */
 	@Test
 	public void emprestarItemNomeDonoVazio(){
 		try {
@@ -1467,7 +1727,9 @@ public class SistemaTeste {
 			assertEquals("Nome nao pode ser vazio", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa emprestar um item com nome do requerente vazio
+	 */
 	@Test
 	public void emprestarItemNomeRequerenteVazio(){
 		try {
@@ -1480,7 +1742,9 @@ public class SistemaTeste {
 			assertEquals("Nome nao pode ser vazio", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa emprestar um item com telefone do dono vazio
+	 */
 	@Test
 	public void emprestarItemTelefoneDonoVazio(){
 		try {
@@ -1493,7 +1757,9 @@ public class SistemaTeste {
 			assertEquals("Telefone nao pode ser vazio", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa emprestar um item com telefone do requerente vazio
+	 */
 	@Test
 	public void emprestarItemTelefoneRequerenteVazio(){
 		try {
@@ -1506,7 +1772,9 @@ public class SistemaTeste {
 			assertEquals("Telefone nao pode ser vazio", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa emprestar um item com um nome do item vazio
+	 */
 	@Test
 	public void emprestarItemNomeItemVazio(){
 		try {
@@ -1519,7 +1787,9 @@ public class SistemaTeste {
 			assertEquals("Nome do item nao pode ser vazio", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa emprestar um item com data vazia
+	 */
 	@Test
 	public void emprestarItemDataVazia(){
 		try {
@@ -1532,7 +1802,9 @@ public class SistemaTeste {
 			assertEquals("Data nao pode ser vazio", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa emprestar um item com periodo invalido
+	 */
 	@Test
 	public void emprestarItemPeriodoInvalido(){
 		try {
@@ -1545,7 +1817,9 @@ public class SistemaTeste {
 			assertEquals("Periodo nao pode ser menor ou iguals a zero.", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa emprestar um item com nome do emprestador nulo
+	 */
 	@Test
 	public void emprestarItemNomeEmprestadorNulo(){
 		try {
@@ -1558,7 +1832,9 @@ public class SistemaTeste {
 			assertEquals("Nome nao pode ser nulo", npe.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa emprestar um item com nome do requerente nulo
+	 */
 	@Test
 	public void emprestarItemNomeRequerenteNulo(){
 		try {
@@ -1571,7 +1847,9 @@ public class SistemaTeste {
 			assertEquals("Nome nao pode ser nulo", npe.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa emprestrar um item com telefone do emprestador nulo
+	 */
 	@Test
 	public void emprestarItemTelefoneEmprestadorNulo(){
 		try {
@@ -1584,7 +1862,9 @@ public class SistemaTeste {
 			assertEquals("Telefone nao pode ser nulo", npe.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa emprestar um item com telefone do requerente nulo
+	 */
 	@Test
 	public void emprestarItemTelefoneRequerenteNulo(){
 		try {
@@ -1597,7 +1877,9 @@ public class SistemaTeste {
 			assertEquals("Telefone nao pode ser nulo", npe.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa emprestar um item com nome de item nulo
+	 */
 	@Test
 	public void emprestarItemNomeItemNulo(){
 		try {
@@ -1610,7 +1892,9 @@ public class SistemaTeste {
 			assertEquals("Nome do item nao pode ser nulo", npe.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa emprestar um item com data nula
+	 */
 	@Test
 	public void emprestarItemDataNula(){
 		try {
@@ -1623,7 +1907,9 @@ public class SistemaTeste {
 			assertEquals("Data nao pode ser nulo", npe.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa emprestar item com um usuario requerente inexistente
+	 */
 	@Test
 	public void emprestarItemUsuarioRequerenteInvalido(){
 		try {
@@ -1636,7 +1922,9 @@ public class SistemaTeste {
 			assertEquals("Usuario invalido", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa emprestar um item com um emprestador inexistente
+	 */
 	@Test
 	public void emprestarItemUsuarioEmprestadorInvalido(){
 		try {
@@ -1649,7 +1937,9 @@ public class SistemaTeste {
 			assertEquals("Usuario invalido", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa emprestar um item inexistente
+	 */
 	@Test
 	public void emprestarItemItemInvalido(){
 		try {
@@ -1662,7 +1952,9 @@ public class SistemaTeste {
 			assertEquals("Item nao encontrado", iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa devolver um item
+	 */
 	@Test
 	public void devolverItem(){
 		
@@ -1674,7 +1966,9 @@ public class SistemaTeste {
 			sistema.devolverItem("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", "11/08/2017");
 			assertEquals("JOGO ELETRONICO: Overwatch, R$ 200.0, Nao emprestado, PC",sistema.getDetalhesItem("Rick", "4002-8922", "Overwatch"));
 	}
-	
+	/**
+	 * Testa devolver um item com nome de emprestador vazio
+	 */
 	@Test
 	public void devolverItemNomeEmprestadorVazio(){
 		try {
@@ -1687,7 +1981,9 @@ public class SistemaTeste {
 			assertEquals("Nome nao pode ser vazio",iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa devolver um item com nome de requerente vazio
+	 */
 	@Test
 	public void devolverItemNomeRequerenteVazio(){
 		try {
@@ -1700,7 +1996,9 @@ public class SistemaTeste {
 			assertEquals("Nome nao pode ser vazio",iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa devolver um item com telefone do emprestador vazio
+	 */
 	@Test
 	public void devolverItemTelefoneEmprestadorVazio(){
 		try {
@@ -1713,7 +2011,9 @@ public class SistemaTeste {
 			assertEquals("Telefone nao pode ser vazio",iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa devolver um item com telefone do requerente vazio
+	 */
 	@Test
 	public void devolverItemTelefoneRequerenteVazio(){
 		try {
@@ -1726,7 +2026,9 @@ public class SistemaTeste {
 			assertEquals("Telefone nao pode ser vazio",iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa devolver item com nome do item vazio
+	 */
 	@Test
 	public void devolverItemNomeItemVazio(){
 		try {
@@ -1739,7 +2041,9 @@ public class SistemaTeste {
 			assertEquals("Nome do item nao pode ser vazio",iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa devolver um item com data de emprestimo vazia
+	 */
 	@Test
 	public void devolverItemDataEmprestimoVazia(){
 		try {
@@ -1752,7 +2056,9 @@ public class SistemaTeste {
 			assertEquals("Data nao pode ser vazio",iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa devolver um item com data de devolucao vazia
+	 */
 	@Test
 	public void devolverItemDataDevolucaoVazia(){
 		try {
@@ -1765,7 +2071,9 @@ public class SistemaTeste {
 			assertEquals("Data nao pode ser vazio",iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa devolver um item com nome de emprestador nulo
+	 */
 	@Test
 	public void devolverItemNomeEmprestadorNulo(){
 		try {
@@ -1778,7 +2086,9 @@ public class SistemaTeste {
 			assertEquals("Nome nao pode ser nulo",npe.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa devolver item com nome de requerente nulo
+	 */
 	@Test
 	public void devolverItemNomeRequerenteNulo(){
 		try {
@@ -1791,7 +2101,9 @@ public class SistemaTeste {
 			assertEquals("Nome nao pode ser nulo",npe.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa devolver item com telefone do emprestador nulo
+	 */
 	@Test
 	public void devolverItemTelefoneEmprestadorNulo(){
 		try {
@@ -1804,7 +2116,9 @@ public class SistemaTeste {
 			assertEquals("Telefone nao pode ser nulo",npe.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa devolver item com telefone do requerente nulo
+	 */
 	@Test
 	public void devolverItemTelefoneRequerenteNulo(){
 		try {
@@ -1817,7 +2131,9 @@ public class SistemaTeste {
 			assertEquals("Telefone nao pode ser nulo",npe.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa devolver um item com nome do item nulo
+	 */
 	@Test
 	public void devolverItemNomeItemNulo(){
 		try {
@@ -1830,7 +2146,9 @@ public class SistemaTeste {
 			assertEquals("Nome do item nao pode ser nulo",npe.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa devolver um item com data de emprestimo nula
+	 */
 	@Test
 	public void devolverItemDataEmprestimoNula(){
 		try {
@@ -1843,7 +2161,9 @@ public class SistemaTeste {
 			assertEquals("Data nao pode ser nulo",npe.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa devolver um item com data de devolucao nula
+	 */
 	@Test
 	public void devolverItemDataDevolucaoNula(){
 		try {
@@ -1856,7 +2176,9 @@ public class SistemaTeste {
 			assertEquals("Data nao pode ser nulo",npe.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa devolver um item com um emprestador inexistente
+	 */
 	@Test
 	public void devolverItemUsuarioEmprestadorInvalido(){
 		try {
@@ -1869,7 +2191,9 @@ public class SistemaTeste {
 			assertEquals("Usuario invalido",iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa devolver um item com um requerente inexistente
+	 */
 	@Test
 	public void devolverItemUsuarioRequerenteInvalido(){
 		try {
@@ -1882,7 +2206,9 @@ public class SistemaTeste {
 			assertEquals("Usuario invalido",iae.getMessage());
 		}
 	}
-	
+	/**
+	 * Testa devolver um item inexistente
+	 */
 	@Test
 	public void devolverItemItemInvalido(){
 		try {
