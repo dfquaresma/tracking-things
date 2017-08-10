@@ -30,7 +30,7 @@ public class Listador {
 	 * @return a listagem dos itens.
 	 */
 	public String listaItensOrdenadosPorNome(List<Item> itens) {
-		this.validador.validaItensParaListagem(itens);
+		this.validador.validaListaParaListagem(itens);
 		Collections.sort(itens);
 		return listagemDeItens(itens);
 	}
@@ -43,7 +43,7 @@ public class Listador {
 	 * @return a listagem dos itens.
 	 */
 	public String listaItensOrdenadosPorValor(List<Item> itens) {
-		this.validador.validaItensParaListagem(itens);
+		this.validador.validaListaParaListagem(itens);
 		Collections.sort(itens, new ComparadorPorValor());
 		return listagemDeItens(itens);
 	}

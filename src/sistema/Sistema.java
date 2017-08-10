@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import excecoes.OperacaoNaoPermitidaNoMomentoExcecao;
 import excecoes.UsuarioJaExistenteExcecao;
 import item.Item;
 import usuario.Emprestimo;
@@ -54,7 +53,7 @@ public class Sistema {
 	 *            email do usuário a ser cadastrado.
 	 */
 	public void cadastrarUsuario(String nome, String telefone, String email) {
-		this.validaDadosDeIdentificacao(nome, telefone);
+		this.validador.validaDadosDeIdentificacao(nome, telefone);
 		this.validador.validaEmail(email);
 
 		IdUsuario id = new IdUsuario(nome, telefone);
@@ -65,11 +64,6 @@ public class Sistema {
 		}
 
 		this.usuarios.put(id, user);
-	}
-
-	private void validaDadosDeIdentificacao(String nome, String telefone) {
-		this.validador.validaNome(nome);
-		this.validador.validaTelefone(telefone);
 	}
 
 	/**
@@ -87,16 +81,11 @@ public class Sistema {
 	 *            a plataforma do jogo.
 	 */
 	public void cadastrarEletronico(String nome, String telefone, String nomeItem, double preco, String plataforma) {
-		this.validaDadosDeIdentificacao(nome, telefone);
-		this.validaAtributosDeCadastroDeItem(nomeItem, preco);
+		this.validador.validaDadosDeIdentificacao(nome, telefone);
+		this.validador.validaAtributosDeCadastroDeItem(nomeItem, preco);
 
 		Usuario user = getUser(nome, telefone);
 		user.cadastrarEletronico(nomeItem, preco, plataforma);
-	}
-
-	private void validaAtributosDeCadastroDeItem(String nomeItem, double preco) {
-		this.validador.validaNomeItem(nomeItem);
-		this.validador.validaPreco(preco);
 	}
 
 	/**
@@ -112,16 +101,11 @@ public class Sistema {
 	 *            o preço do jogo.
 	 */
 	public void cadastrarJogoTabuleiro(String nome, String telefone, String nomeItem, double preco) {
-		this.validaDadosDeIdentificacao(nome, telefone);
-		this.validaAtributosDeCadastroDeItem(nomeItem, preco);
+		this.validador.validaDadosDeIdentificacao(nome, telefone);
+		this.validador.validaAtributosDeCadastroDeItem(nomeItem, preco);
 
 		Usuario user = getUser(nome, telefone);
 		user.cadastrarJogoTabuleiro(nomeItem, preco);
-	}
-
-	private void validaAtributosDeCadastroDeBluRays(int duracao, String classificacao) {
-		this.validador.validaDuracao(duracao);
-		this.validador.validaClassificacao(classificacao);
 	}
 
 	/**
@@ -146,9 +130,9 @@ public class Sistema {
 	 */
 	public void cadastrarBlurayFilme(String nome, String telefone, String nomeItem, double preco, int duracao,
 			String genero, String classificacao, int anoLancamento) {
-		this.validaDadosDeIdentificacao(nome, telefone);
-		this.validaAtributosDeCadastroDeItem(nomeItem, preco);
-		this.validaAtributosDeCadastroDeBluRays(duracao, classificacao);
+		this.validador.validaDadosDeIdentificacao(nome, telefone);
+		this.validador.validaAtributosDeCadastroDeItem(nomeItem, preco);
+		this.validador.validaAtributosDeCadastroDeBluRays(duracao, classificacao);
 		this.validador.validaGenero(genero);
 		this.validador.validaAnoLancamento(anoLancamento);
 
@@ -180,9 +164,9 @@ public class Sistema {
 	 */
 	public void cadastrarBluRaySerie(String nome, String telefone, String nomeItem, double preco, String descricao,
 			int duracao, String classificacao, String genero, int temporada) {
-		this.validaDadosDeIdentificacao(nome, telefone);
-		this.validaAtributosDeCadastroDeItem(nomeItem, preco);
-		this.validaAtributosDeCadastroDeBluRays(duracao, classificacao);
+		this.validador.validaDadosDeIdentificacao(nome, telefone);
+		this.validador.validaAtributosDeCadastroDeItem(nomeItem, preco);
+		this.validador.validaAtributosDeCadastroDeBluRays(duracao, classificacao);
 		this.validador.validaDescricao(descricao);
 		this.validador.validaGenero(genero);
 		this.validador.validaTemporada(temporada);
@@ -213,9 +197,9 @@ public class Sistema {
 	 */
 	public void cadastrarBlurayShow(String nome, String telefone, String nomeItem, double preco, int duracao,
 			int numeroFaixas, String artista, String classificacao) {
-		this.validaDadosDeIdentificacao(nome, telefone);
-		this.validaAtributosDeCadastroDeItem(nomeItem, preco);
-		this.validaAtributosDeCadastroDeBluRays(duracao, classificacao);
+		this.validador.validaDadosDeIdentificacao(nome, telefone);
+		this.validador.validaAtributosDeCadastroDeItem(nomeItem, preco);
+		this.validador.validaAtributosDeCadastroDeBluRays(duracao, classificacao);
 		this.validador.validaNumeroDeFaixas(numeroFaixas);
 		this.validador.validaArtista(artista);
 
@@ -224,7 +208,7 @@ public class Sistema {
 	}
 
 	private Usuario getUser(String nome, String telefone) {
-		this.validaDadosDeIdentificacao(nome, telefone);
+		this.validador.validaDadosDeIdentificacao(nome, telefone);
 		IdUsuario id = new IdUsuario(nome, telefone);
 
 		this.validaIdeParaUso(id);
@@ -244,7 +228,7 @@ public class Sistema {
 	 * @return o atributo recuperado.
 	 */
 	public String getInfoUser(String nome, String telefone, String atributo) {
-		this.validaDadosDeIdentificacao(nome, telefone);
+		this.validador.validaDadosDeIdentificacao(nome, telefone);
 		this.validador.validaAtributo(atributo);
 
 		Usuario user = getUser(nome, telefone);
@@ -266,7 +250,7 @@ public class Sistema {
 	 * @return o atributo a ser recuperado.
 	 */
 	public String getInfoItem(String nome, String telefone, String nomeItem, String atributo) {
-		this.validaDadosDeIdentificacao(nome, telefone);
+		this.validador.validaDadosDeIdentificacao(nome, telefone);
 		this.validador.validaNomeItem(nomeItem);
 		this.validador.validaAtributo(atributo);
 		
@@ -286,7 +270,7 @@ public class Sistema {
 	 * @return os detalhes do item.
 	 */
 	public String getDetalhesItem(String nome, String telefone, String nomeItem) {
-		this.validaDadosDeIdentificacao(nome, telefone);
+		this.validador.validaDadosDeIdentificacao(nome, telefone);
 		this.validador.validaNomeItem(nomeItem);
 
 		Usuario user = getUser(nome, telefone);
@@ -306,7 +290,7 @@ public class Sistema {
 	 *            o novo valor do atributo a ser atualizado.
 	 */
 	public void attUsuario(String nome, String telefone, String atributo, String valor) {
-		this.validaDadosDeIdentificacao(nome, telefone);
+		this.validador.validaDadosDeIdentificacao(nome, telefone);
 		this.validador.validaAtributo(atributo);
 		this.validador.validaValor(valor);
 
@@ -356,7 +340,7 @@ public class Sistema {
 	 *            o telefone do usuário.
 	 */
 	public void removeUsuario(String nome, String telefone) {
-		this.validaDadosDeIdentificacao(nome, telefone);
+		this.validador.validaDadosDeIdentificacao(nome, telefone);
 
 		IdUsuario id = new IdUsuario(nome, telefone);
 		this.validaIdeParaUso(id);
@@ -378,7 +362,7 @@ public class Sistema {
 	 *            a peça a ser adicionada.
 	 */
 	public void addPecaPerdida(String nome, String telefone, String nomeItem, String nomePeca) {
-		this.validaDadosDeIdentificacao(nome, telefone);
+		this.validador.validaDadosDeIdentificacao(nome, telefone);
 		this.validador.validaNomeItem(nomeItem);
 		this.validador.validaPeca(nomePeca);
 
@@ -399,7 +383,7 @@ public class Sistema {
 	 *            a duração do episódio.
 	 */
 	public void addBluray(String nome, String telefone, String nomeBluray, int duracao) {
-		this.validaDadosDeIdentificacao(nome, telefone);
+		this.validador.validaDadosDeIdentificacao(nome, telefone);
 		this.validador.validaNomeBluray(nomeBluray);
 		this.validador.validaDuracao(duracao);
 
@@ -418,7 +402,7 @@ public class Sistema {
 	 *            o nome do item.
 	 */
 	public void removerItem(String nome, String telefone, String nomeItem) {
-		this.validaDadosDeIdentificacao(nome, telefone);
+		this.validador.validaDadosDeIdentificacao(nome, telefone);
 		this.validador.validaNomeItem(nomeItem);
 
 		Usuario user = getUser(nome, telefone);
@@ -440,7 +424,7 @@ public class Sistema {
 	 *            o atributo a ser atualizado.
 	 */
 	public void attItem(String nome, String telefone, String nomeItem, String atributo, String valor) {
-		this.validaDadosDeIdentificacao(nome, telefone);
+		this.validador.validaDadosDeIdentificacao(nome, telefone);
 		this.validador.validaNomeItem(nomeItem);
 		this.validador.validaAtributo(atributo);
 		this.validador.validaValor(valor);
@@ -456,9 +440,6 @@ public class Sistema {
 	 */
 	public String listarOrdenadosNome() {
 		List<Item> itens = recuperaItensNoSistema();
-
-		this.validaListagem(itens.size());
-
 		return this.listador.listaItensOrdenadosPorNome(itens);
 	}
 
@@ -469,9 +450,6 @@ public class Sistema {
 	 */
 	public String listarOrdenadosValor() {
 		List<Item> itens = recuperaItensNoSistema();
-
-		this.validaListagem(itens.size());
-
 		return this.listador.listaItensOrdenadosPorValor(itens);
 	}
 
@@ -482,12 +460,6 @@ public class Sistema {
 			itens.addAll(user.getItens());
 		}
 		return itens;
-	}
-
-	private void validaListagem(int size) {
-		if (size == 0) {
-			throw new OperacaoNaoPermitidaNoMomentoExcecao("Nao ha itens para serem listados no momento");
-		}
 	}
 
 	/**
@@ -510,7 +482,7 @@ public class Sistema {
 	 */
 	public void registrarEmprestimo(String nomeDono, String telefoneDono, String nomeRequerente,
 			String telefoneRequerente, String nomeItem, String dataEmprestimo, int periodo) {
-		this.validaDadosDeEmprestimos(nomeDono, telefoneDono, nomeRequerente, telefoneRequerente, nomeItem,
+		this.validador.validaDadosDeEmprestimos(nomeDono, telefoneDono, nomeRequerente, telefoneRequerente, nomeItem,
 				dataEmprestimo);
 		this.validador.validaPeriodo(periodo);
 
@@ -542,23 +514,13 @@ public class Sistema {
 	 */
 	public void devolverItem(String nomeDono, String telefoneDono, String nomeRequerente, String telefoneRequerente,
 			String nomeItem, String dataEmprestimo, String dataDevolucao) {
-		this.validaDadosDeEmprestimos(nomeDono, telefoneDono, nomeRequerente, telefoneRequerente, nomeItem,
+		this.validador.validaDadosDeEmprestimos(nomeDono, telefoneDono, nomeRequerente, telefoneRequerente, nomeItem,
 				dataEmprestimo);
 		this.validador.validaData(dataDevolucao);
 
 		Usuario userEmprestador = getUser(nomeDono, telefoneDono);
 		Usuario userRequerente = getUser(nomeRequerente, telefoneRequerente);
 		userRequerente.devolveItem(nomeItem, dataEmprestimo, dataDevolucao, userEmprestador);
-	}
-
-	private void validaDadosDeEmprestimos(String nomeDono, String telefoneDono, String nomeRequerente,
-			String telefoneRequerente, String nomeItem, String dataEmprestimo) {
-		this.validador.validaNome(nomeDono);
-		this.validador.validaNome(nomeRequerente);
-		this.validador.validaNomeItem(nomeItem);
-		this.validador.validaTelefone(telefoneDono);
-		this.validador.validaTelefone(telefoneRequerente);
-		this.validador.validaData(dataEmprestimo);
 	}
 
 	/**

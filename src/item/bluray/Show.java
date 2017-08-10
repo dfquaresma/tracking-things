@@ -121,6 +121,7 @@ public class Show extends BluRay {
 			this.artista = valor;			
 			
 		} else if (atributo.equals("Numero de faixas")) {
+			this.validador.validaConversaoStringToInt(atributo, valor);
 			this.numDeFaixas = Integer.parseInt(valor);
 		
 		} else {

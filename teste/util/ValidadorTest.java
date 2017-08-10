@@ -315,20 +315,20 @@ public class ValidadorTest {
 		List<Item>itens = new ArrayList<Item>();
 		itens.add(new Temporada("South Park", 1000.00, "Primeira temporada de South Park", 120, 
 				"DEZOITO_ANOS", "COMEDIA", 1));
-		this.validador.validaItensParaListagem(itens);
+		this.validador.validaListaParaListagem(itens);
 	}
 	
 	@Test
 	public void testValidaItensParaListagemVazia()
 	{
 		List<Item>itens = new ArrayList<Item>();
-		this.validador.validaItensParaListagem(itens);
+		this.validador.validaListaParaListagem(itens);
 	}
 	
 	@Test(expected=NullPointerException.class)
 	public void testValidaItensParaListagemNull()
 	{
-		this.validador.validaItensParaListagem(null);
+		this.validador.validaListaParaListagem(null);
 	}
 	
 	@Test(expected=NullPointerException.class)
@@ -336,7 +336,7 @@ public class ValidadorTest {
 	{
 		List<Item>itens = new ArrayList<Item>();
 		itens.add(null);
-		this.validador.validaItensParaListagem(itens);
+		this.validador.validaListaParaListagem(itens);
 	}
 
 	@Test

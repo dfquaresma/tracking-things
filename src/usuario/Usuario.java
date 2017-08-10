@@ -149,15 +149,10 @@ public class Usuario {
 	 *            a plataforma do jogo.
 	 */
 	public void cadastrarEletronico(String nomeItem, double preco, String plataforma) {
-		this.validaAtributosDeCadastroDeItem(nomeItem, preco);
+		this.validador.validaAtributosDeCadastroDeItem(nomeItem, preco);
 		this.validador.validaPlataforma(plataforma);
 		Item novoItem = new JogoEletronico(nomeItem, preco, plataforma);
 		this.itens.put(nomeItem, novoItem);
-	}
-
-	private void validaAtributosDeCadastroDeItem(String nomeItem, double preco) {
-		this.validador.validaNome(nomeItem);
-		this.validador.validaPreco(preco);
 	}
 
 	/**
@@ -169,14 +164,9 @@ public class Usuario {
 	 *            o preço do jogo.
 	 */
 	public void cadastrarJogoTabuleiro(String nomeItem, double preco) {
-		this.validaAtributosDeCadastroDeItem(nomeItem, preco);
+		this.validador.validaAtributosDeCadastroDeItem(nomeItem, preco);
 		Item novoItem = new JogoTabuleiro(nomeItem, preco);
 		this.itens.put(nomeItem, novoItem);
-	}
-
-	private void validaAtributosDeCadastroDeBluRays(int duracao, String classificacao) {
-		this.validador.validaDuracao(duracao);
-		this.validador.validaClassificacao(classificacao);
 	}
 
 	/**
@@ -197,8 +187,8 @@ public class Usuario {
 	 */
 	public void cadastrarBlurayFilme(String nomeItem, double preco, int duracao, String genero, String classificacao,
 			int anoLancamento) {
-		this.validaAtributosDeCadastroDeItem(nomeItem, preco);
-		this.validaAtributosDeCadastroDeBluRays(duracao, classificacao);
+		this.validador.validaAtributosDeCadastroDeItem(nomeItem, preco);
+		this.validador.validaAtributosDeCadastroDeBluRays(duracao, classificacao);
 		this.validador.validaGenero(genero);
 		this.validador.validaAnoLancamento(anoLancamento);
 
@@ -226,8 +216,8 @@ public class Usuario {
 	 */
 	public void cadastrarBluRaySerie(String nomeItem, double preco, String descricao, int duracao, String classificacao,
 			String genero, int temporada) {
-		this.validaAtributosDeCadastroDeItem(nomeItem, preco);
-		this.validaAtributosDeCadastroDeBluRays(duracao, classificacao);
+		this.validador.validaAtributosDeCadastroDeItem(nomeItem, preco);
+		this.validador.validaAtributosDeCadastroDeBluRays(duracao, classificacao);
 		this.validador.validaDescricao(descricao);
 		this.validador.validaGenero(genero);
 		this.validador.validaTemporada(temporada);
@@ -253,8 +243,8 @@ public class Usuario {
 	 */
 	public void cadastrarBlurayShow(String nomeItem, double preco, int duracao, int numeroFaixas, String artista,
 			String classificacao) {
-		this.validaAtributosDeCadastroDeItem(nomeItem, preco);
-		this.validaAtributosDeCadastroDeBluRays(duracao, classificacao);
+		this.validador.validaAtributosDeCadastroDeItem(nomeItem, preco);
+		this.validador.validaAtributosDeCadastroDeBluRays(duracao, classificacao);
 		this.validador.validaNumeroDeFaixas(numeroFaixas);
 		this.validador.validaArtista(artista);
 

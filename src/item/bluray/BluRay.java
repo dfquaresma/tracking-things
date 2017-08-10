@@ -108,7 +108,6 @@ public abstract class BluRay extends Item {
 		
 		if (atributo.equals("Duracao"))
 		{
-			// FIX - valor pode nao ser explicitamente um Int
 			this.validador.validaConversaoStringToInt(atributo, valor);
 			
 			this.setDuracao(Integer.parseInt(valor));

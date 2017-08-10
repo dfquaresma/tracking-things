@@ -2,6 +2,7 @@ package util;
 
 import java.util.List;
 
+import excecoes.OperacaoNaoPermitidaNoMomentoExcecao;
 import item.Item;
 import item.bluray.Classificacao;
 import item.bluray.Genero;
@@ -103,8 +104,7 @@ public class Validador {
 	 * @param classificacao
 	 *            a classificação a ser validada.
 	 */
-	public void validaClassificacao(String classificacao)
-	{
+	public void validaClassificacao(String classificacao) {
 		this.validaString(classificacao, "Classificacao");
 
 		try {
@@ -206,21 +206,6 @@ public class Validador {
 	}
 
 	/**
-	 * Valida uma lista de itens recebida no parâmetro.
-	 * 
-	 * @param itens
-	 *            uma lista de itens a ser validada.
-	 */
-	public void validaItensParaListagem(List<Item> itens)
-	{
-		if (itens == null)
-			throw new NullPointerException("A lista de itens para listagem nao pode ser nula");
-		for(Item item : itens)
-			if(item == null)
-				throw new NullPointerException("A lista de itens para listagem nao pode possuir itens nulos");
-	}
-
-	/**
 	 * Valida um inteiro representando período de dias.
 	 * 
 	 * @param periodo
@@ -311,22 +296,119 @@ public class Validador {
 	public void validaItem(Item item) {
 		this.validaObjetos(item, "Item");
 	}
-	
+
 	/**
 	 * Valida se valor tem o formato de um Inteiro.
 	 * 
-	 * @param valor - String a ser convertida em Int.
+	 * @param valor
+	 *            - String a ser convertida em Int.
 	 */
-	public void validaConversaoStringToInt(String atributo, String valor)
-	{
-		try
-		{
+	public void validaConversaoStringToInt(String atributo, String valor) {
+		try {
 			Integer.parseInt(valor);
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException(atributo + " deve ter o formato de um tipo int");
 		}
-		catch(NumberFormatException e)
-		{
-			throw new IllegalArgumentException(atributo + "deve ter o formato de um tipo int");
+	}
+
+	/**
+	 * Valida se valor tem o formato de um Double.
+	 * 
+	 * @param valor
+	 *            - String a ser convertida em Int.
+	 */
+	public void validaConversaoStringToDouble(String atributo, String valor) {
+		try {
+			Double.parseDouble(valor);
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException(atributo + " deve ter o formato de um tipo double");
 		}
+	}
+
+	/**
+	 * Valida dados referentes a uma entidade do tipo Emprestimo.
+	 * 
+	 * @param nomeDono
+	 *            o nome do usuário dono do item a ser emprestado.
+	 * @param telefoneDono
+	 *            o telefone do usuário dono do item a se emprestado.
+	 * @param nomeRequerente
+	 *            o nome do usuário que deseja pegar o item emprestado.
+	 * @param telefoneRequerente
+	 *            o telefone do usuário que deseja pegar o item emprestado.
+	 * @param nomeItem
+	 *            o nome do item a ser emprestado.
+	 * @param dataEmprestimo
+	 *            a data em que o emprestimo foi iniciado.
+	 */
+	public void validaDadosDeEmprestimos(String nomeDono, String telefoneDono, String nomeRequerente,
+			String telefoneRequerente, String nomeItem, String dataEmprestimo) {
+		this.validaNome(nomeDono);
+		this.validaNome(nomeRequerente);
+		this.validaNomeItem(nomeItem);
+		this.validaTelefone(telefoneDono);
+		this.validaTelefone(telefoneRequerente);
+		this.validaData(dataEmprestimo);
+	}
+
+	/**
+	 * Valida uma lista de itens recebida no parâmetro.
+	 * 
+	 * @param itens
+	 *            uma lista de itens a ser validada.
+	 */
+	public void validaListaParaListagem(List<Item> itens) {
+		if (itens == null)
+			throw new NullPointerException("A lista de itens para listagem nao pode ser nula");
+
+		if (itens.size() == 0) {
+			throw new OperacaoNaoPermitidaNoMomentoExcecao("Nao ha itens para serem listados no momento");
+		}
+
+		for (Item item : itens) {
+			if (item == null)
+				throw new NullPointerException("A lista de itens para listagem nao pode possuir itens nulos");
+		}
+
+	}
+
+	/**
+	 * Valida atributos de cadastro de blu-rays
+	 * 
+	 * @param duracao
+	 *            a duração do blu-ray a ser validada.
+	 * @param classificacao
+	 *            a classificação do blu-ray a ser validada.
+	 */
+	public void validaAtributosDeCadastroDeBluRays(int duracao, String classificacao) {
+		this.validaDuracao(duracao);
+		this.validaClassificacao(classificacao);
+	}
+
+	/**
+	 * Valida atributos para cadastro de item.
+	 * 
+	 * @param nomeItem
+	 *            o nome do item para cadastro.
+	 * @param preco
+	 *            o preço do item para cadastro.
+	 */
+	public void validaAtributosDeCadastroDeItem(String nomeItem, double preco) {
+		this.validaNomeItem(nomeItem);
+		this.validaPreco(preco);
+	}
+
+	/**
+	 * Valida dados de identificação.
+	 * 
+	 * @param nome
+	 *            o nome do usuário a ser identificado.
+	 * @param telefone
+	 *            o telefone do usuário a ser identificado.
+	 */
+	public void validaDadosDeIdentificacao(String nome, String telefone) {
+		this.validaNome(nome);
+		this.validaTelefone(telefone);
 	}
 
 }

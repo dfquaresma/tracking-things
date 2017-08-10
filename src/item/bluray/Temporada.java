@@ -183,6 +183,7 @@ public class Temporada extends BluRay {
 			this.genero = Genero.valueOf(valor);
 			
 		} else if (atributo.equals("Temporada")) {
+			this.validador.validaConversaoStringToInt(atributo, valor);
 			this.temporada = Integer.parseInt(valor);
 			
 		} else {

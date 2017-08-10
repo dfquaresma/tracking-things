@@ -193,6 +193,7 @@ public abstract class Item implements Comparable<Item> {
 			setNome(valor);
 
 		} else if (atributo.equals("Preco")) {
+			this.validador.validaConversaoStringToDouble(atributo, valor);
 			setPreco(Double.parseDouble(valor));
 
 		} else {
