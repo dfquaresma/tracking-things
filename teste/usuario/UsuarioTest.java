@@ -100,6 +100,30 @@ public class UsuarioTest {
 	public void testCadastrarEletronico() {
 		this.usuario.cadastrarEletronico("GTA San Andreas", 34.99, "PC");
 	}
+	
+	/**
+	 * Testa cadastrarEletronico quando o nome do item é vazio.
+	 */
+	@Test (expected = IllegalArgumentException.class)
+	public void testCadastrarEletronicoNomeItemVazio() {
+		this.usuario.cadastrarEletronico("", 34.99, "PC");
+	}
+	
+	/**
+	 * Testa cadastrarEletronico quando o nome do item é vazio com espaços.
+	 */
+	@Test (expected = IllegalArgumentException.class)
+	public void testCadastrarEletronicoNomeItemVazioComEspacos() {
+		this.usuario.cadastrarEletronico("      ", 34.99, "PC");
+	}
+	
+	/**
+	 * Testa cadastrarEletronico quando o nome do item é nulo.
+	 */
+	@Test (expected = NullPointerException.class)
+	public void testCadastrarEletronicoNomeItemNulo() {
+		this.usuario.cadastrarEletronico(null, 34.99, "PC");
+	}
 
 	/**
 	 * Testa se está cadastrando um jogo de tabuleiro.
@@ -107,6 +131,30 @@ public class UsuarioTest {
 	@Test
 	public void testCadastrarJogoTabuleiro() {
 		this.usuario.cadastrarJogoTabuleiro("Jogo da Vida", 100.0);
+	}
+	
+	/**
+	 * Testa cadastrarJogoTabuleiro com nome do item vazio.
+	 */
+	@Test (expected = IllegalArgumentException.class)
+	public void testCadastrarJogoTabuleiroNomeItemVazio() {
+		this.usuario.cadastrarJogoTabuleiro("", 100.0);
+	}
+	
+	/**
+	 * Testa cadastrarJogoTabuleiro com nome do item vazio e com espaços.
+	 */
+	@Test (expected = IllegalArgumentException.class)
+	public void testCadastrarJogoTabuleiroNomeItemVazioComEspacos() {
+		this.usuario.cadastrarJogoTabuleiro("    ", 100.0);
+	}
+	
+	/**
+	 * Testa cadastrarJogoTabuleiro com nome do item nulo.
+	 */
+	@Test (expected = NullPointerException.class)
+	public void testCadastrarJogoTabuleiroNomeItemNulo() {
+		this.usuario.cadastrarJogoTabuleiro(null, 100.0);
 	}
 
 	/**
@@ -119,6 +167,66 @@ public class UsuarioTest {
 		this.usuario.addPecaPerdida("Jogo da Vida", "Carro (azul)");
 		this.usuario.addPecaPerdida("Jogo da Vida", "Nota ($100)");
 	}
+	
+	/**
+	 * Testa addPecaPerdida quando o nome do item é vazio.
+	 */
+	@Test (expected = IllegalArgumentException.class)
+	public void testAddPecaPerdidaNomeItemVazio() {
+		this.testCadastrarJogoTabuleiro();
+		
+		this.usuario.addPecaPerdida("", "Carro (azul)");
+	}
+	
+	/**
+	 * Testa addPecaPerdida quando o nome do item é vazio e com espaços.
+	 */
+	@Test (expected = IllegalArgumentException.class)
+	public void testAddPecaPerdidaNomeItemVazioComEspacos() {
+		this.testCadastrarJogoTabuleiro();
+		
+		this.usuario.addPecaPerdida("       ", "Carro (azul)");
+	}
+	
+	/**
+	 * Testa addPecaPerdida quando o nome do item é nulo.
+	 */
+	@Test (expected = NullPointerException.class)
+	public void testAddPecaPerdidaNomeItemNulo() {
+		this.testCadastrarJogoTabuleiro();
+		
+		this.usuario.addPecaPerdida(null, "Carro (azul)");
+	}
+	
+	/**
+	 * Testa addPecaPerdida quando o nome da peça é vazia.
+	 */
+	@Test (expected = IllegalArgumentException.class)
+	public void testAddPecaPerdidaNomePecaVazio() {
+		this.testCadastrarJogoTabuleiro();
+		
+		this.usuario.addPecaPerdida("Jogo da Vida", "");
+	}
+	
+	/**
+	 * Testa addPecaPerdida quando o nome da peça é vazia e com espaços.
+	 */
+	@Test (expected = IllegalArgumentException.class)
+	public void testAddPecaPerdidaNomePecaVazioComEspacos() {
+		this.testCadastrarJogoTabuleiro();
+		
+		this.usuario.addPecaPerdida("Jogo da Vida", "    ");
+	}
+	
+	/**
+	 * Testa addPecaPerdida quando o nome da peça é nulo.
+	 */
+	@Test (expected = NullPointerException.class)
+	public void testAddPecaPerdidaNomePecaNulo() {
+		this.testCadastrarJogoTabuleiro();
+		
+		this.usuario.addPecaPerdida("Jogo da Vida", null);
+	}
 
 	/**
 	 * Testa se está cadastrando blueray de filme.
@@ -127,7 +235,33 @@ public class UsuarioTest {
 	public void testCadastrarBlurayFilme() {
 		this.usuario.cadastrarBlurayFilme("O Senhor dos Anéis I", 230, 95, "FICCAO", "QUATORZE_ANOS", 2001);
 	}
+	
+	/**
+	 * Testa cadastrarBluerayFilme quando o nome do filme é vazio.
+	 */
+	@Test (expected = IllegalArgumentException.class)
+	public void testCadastrarBlurayFilmeNomeItemVazio() {
+		this.usuario.cadastrarBlurayFilme("", 230, 95, "FICCAO", "QUATORZE_ANOS", 2001);
+	}
+	
+	/**
+	 * Testa cadastrarBluerayFilme quando o nome do filme é vazio e com espaços.
+	 */
+	@Test (expected = IllegalArgumentException.class)
+	public void testCadastrarBlurayFilmeNomeItemVazioComEspacos() {
+		this.usuario.cadastrarBlurayFilme("   ", 230, 95, "FICCAO", "QUATORZE_ANOS", 2001);
+	}
+	
+	/**
+	 * Testa cadastrarBluerayFilme quando o nome do filme é nulo.
+	 */
+	@Test (expected = NullPointerException.class)
+	public void testCadastrarBlurayFilmeNomeItemNulo() {
+		this.usuario.cadastrarBlurayFilme(null, 230, 95, "FICCAO", "QUATORZE_ANOS", 2001);
+	}
 
+	/////// VOU CONTINUAR A PARTIR DAQUI QUANDO VOLTAR DA UFCG! ///////
+	
 	/**
 	 * Testa se está cadastrando blueray de série.
 	 */
