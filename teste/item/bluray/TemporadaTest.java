@@ -46,7 +46,7 @@ public class TemporadaTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void testTemporadaValorInvalido()
 	{
-		new Temporada("South park", 0.0, "Primeira temporada de South park", 1000, "DEZOITO_ANOS", "COMEDIA", 1);
+		new Temporada("South park", -0.0001, "Primeira temporada de South park", 1000, "DEZOITO_ANOS", "COMEDIA", 1);
 	}
 	
 	@Test(expected=IllegalArgumentException.class)

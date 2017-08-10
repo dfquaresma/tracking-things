@@ -103,7 +103,8 @@ public class Validador {
 	 * @param classificacao
 	 *            a classificação a ser validada.
 	 */
-	public void validaClassificacao(String classificacao) {
+	public void validaClassificacao(String classificacao)
+	{
 		this.validaString(classificacao, "Classificacao");
 
 		try {
@@ -111,7 +112,6 @@ public class Validador {
 		} catch (Exception e) {
 			throw new IllegalArgumentException("Classificacao inválida");
 		}
-
 	}
 
 	/**
@@ -211,10 +211,13 @@ public class Validador {
 	 * @param itens
 	 *            uma lista de itens a ser validada.
 	 */
-	public void validaItensParaListagem(List<Item> itens) {
-		if (itens == null) {
+	public void validaItensParaListagem(List<Item> itens)
+	{
+		if (itens == null)
 			throw new NullPointerException("A lista de itens para listagem nao pode ser nula");
-		}
+		for(Item item : itens)
+			if(item == null)
+				throw new NullPointerException("A lista de itens para listagem nao pode possuir itens nulos");
 	}
 
 	/**
