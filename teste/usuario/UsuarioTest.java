@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import item.Item;
+import item.bluray.Classificacao;
 import item.bluray.Genero;
 
 public class UsuarioTest {
@@ -337,6 +338,59 @@ public class UsuarioTest {
 		this.usuario.cadastrarBlurayFilme("12", 230, 95, "ROMANCE", "QUATORZE_ANOS", 2001);
 		this.usuario.cadastrarBlurayFilme("13", 230, 95, "SUSPENSE", "QUATORZE_ANOS", 2001);
 		this.usuario.cadastrarBlurayFilme("14", 230, 95, "TERROR", "QUATORZE_ANOS", 2001);
+	}
+	
+	/**
+	 * Testa cadastrarBluerayFilme quando a classificação é vazia.
+	 */
+	@Test (expected = IllegalArgumentException.class)
+	public void testCadastrarBlurayFilmeClassificacaoVazio() {
+		this.usuario.cadastrarBlurayFilme("Filmezao", 230, 95, "TERROR", "", 2001);
+	}
+	
+	/**
+	 * Testa cadastrarBluerayFilme quando a classificação é vazia e com espaços.
+	 */
+	@Test (expected = IllegalArgumentException.class)
+	public void testCadastrarBlurayFilmeClassificacaoVazioComEspacos() {
+		this.usuario.cadastrarBlurayFilme("Filmezao", 230, 95, "TERROR", " ", 2001);
+	}
+	
+	/**
+	 * Testa cadastrarBluerayFilme quando a classificação é nula.
+	 */
+	@Test (expected = NullPointerException.class)
+	public void testCadastrarBlurayFilmeClassificacaoNulo() {
+		this.usuario.cadastrarBlurayFilme("Filmezao", 230, 95, "TERROR", null, 2001);
+	}
+	
+	/**
+	 * Testa todas as classificações.
+	 */
+	@Test
+	public void testCadastrarBlurayFilmeClassificacaoTodas() {
+		this.usuario.cadastrarBlurayFilme("00", 230, 95, "ACAO", "DEZ_ANOS", 2001);
+		this.usuario.cadastrarBlurayFilme("01", 230, 95, "ANIMACAO", "DEZESSEIS_ANOS", 2001);
+		this.usuario.cadastrarBlurayFilme("02", 230, 95, "AVENTURA", "DEZOITO_ANOS", 2001);
+		this.usuario.cadastrarBlurayFilme("03", 230, 95, "COMEDIA", "DOZE_ANOS", 2001);
+		this.usuario.cadastrarBlurayFilme("04", 230, 95, "DOCUMENTARIO", "LIVRE", 2001);
+		this.usuario.cadastrarBlurayFilme("05", 230, 95, "DRAMA", "QUATORZE_ANOS", 2001);
+	}
+	
+	/**
+	 * Testa quando o ano é nulo.
+	 */
+	@Test (expected = IllegalArgumentException.class)
+	public void testCadastrarBlurayFilmeAnoNulo() {
+		this.usuario.cadastrarBlurayFilme("05", 230, 95, "DRAMA", "QUATORZE_ANOS", 0);
+	}
+	
+	/**
+	 * Testa quando o ano é negativo.
+	 */
+	@Test (expected = IllegalArgumentException.class)
+	public void testCadastrarBlurayFilmeAnoNegativo() {
+		this.usuario.cadastrarBlurayFilme("05", 230, 95, "DRAMA", "QUATORZE_ANOS", -1);
 	}
 	
 	/**
