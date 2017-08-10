@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import item.Item;
+import item.bluray.Genero;
 
 public class UsuarioTest {
 
@@ -259,8 +260,84 @@ public class UsuarioTest {
 	public void testCadastrarBlurayFilmeNomeItemNulo() {
 		this.usuario.cadastrarBlurayFilme(null, 230, 95, "FICCAO", "QUATORZE_ANOS", 2001);
 	}
-
-	/////// VOU CONTINUAR A PARTIR DAQUI QUANDO VOLTAR DA UFCG! ///////
+	
+	/**
+	 * Testa cadastrarBluerayFilme quando o valor é nulo.
+	 */
+	@Test (expected = IllegalArgumentException.class)
+	public void testCadastrarBlurayFilmePrecoNulo() {
+		this.usuario.cadastrarBlurayFilme("Filmezao", 0, 95, "FICCAO", "QUATORZE_ANOS", 2001);
+	}
+	
+	/**
+	 * Testa cadastrarBluerayFilme quando o valor é negativo.
+	 */
+	@Test (expected = IllegalArgumentException.class)
+	public void testCadastrarBlurayFilmePrecoNegativo() {
+		this.usuario.cadastrarBlurayFilme("Filmezao", -1, 95, "FICCAO", "QUATORZE_ANOS", 2001);
+	}
+	
+	/**
+	 * Testa cadastrarBluerayFilme quando a duração é nula.
+	 */
+	@Test (expected = IllegalArgumentException.class)
+	public void testCadastrarBlurayFilmeDuracaoNula() {
+		this.usuario.cadastrarBlurayFilme("Filmezao", 230, 0, "FICCAO", "QUATORZE_ANOS", 2001);
+	}
+	
+	/**
+	 * Testa cadastrarBluerayFilme quando a duração é negativa.
+	 */
+	@Test (expected = IllegalArgumentException.class)
+	public void testCadastrarBlurayFilmeNomeItemDuracaoNegativa() {
+		this.usuario.cadastrarBlurayFilme("Filmezao", 230, -1, "FICCAO", "QUATORZE_ANOS", 2001);
+	}
+	
+	/**
+	 * Testa cadastrarBluerayFilme quando o genero é vazio.
+	 */
+	@Test (expected = IllegalArgumentException.class)
+	public void testCadastrarBlurayFilmeGenroVazio() {
+		this.usuario.cadastrarBlurayFilme("Filmezao", 230, 95, "", "QUATORZE_ANOS", 2001);
+	}
+	
+	/**
+	 * Testa cadastrarBluerayFilme quando o genero é vazio e com espaços.
+	 */
+	@Test (expected = IllegalArgumentException.class)
+	public void testCadastrarBlurayFilmeGeneroVazioComEspacos() {
+		this.usuario.cadastrarBlurayFilme("Filmezao", 230, 95, " ", "QUATORZE_ANOS", 2001);
+	}
+	
+	/**
+	 * Testa cadastrarBluerayFilme quando o genero é nulo.
+	 */
+	@Test (expected = NullPointerException.class)
+	public void testCadastrarBlurayFilmeGeneroNulo() {
+		this.usuario.cadastrarBlurayFilme("Filmezao", 230, 95, null, "QUATORZE_ANOS", 2001);
+	}
+	
+	/**
+	 * Testando todos os gêneros.
+	 */
+	@Test
+	public void testCadastrarBlurayFilmeGeneroTodos() {
+		this.usuario.cadastrarBlurayFilme("00", 230, 95, "ACAO", "QUATORZE_ANOS", 2001);
+		this.usuario.cadastrarBlurayFilme("01", 230, 95, "ANIMACAO", "QUATORZE_ANOS", 2001);
+		this.usuario.cadastrarBlurayFilme("02", 230, 95, "AVENTURA", "QUATORZE_ANOS", 2001);
+		this.usuario.cadastrarBlurayFilme("03", 230, 95, "COMEDIA", "QUATORZE_ANOS", 2001);
+		this.usuario.cadastrarBlurayFilme("04", 230, 95, "DOCUMENTARIO", "QUATORZE_ANOS", 2001);
+		this.usuario.cadastrarBlurayFilme("05", 230, 95, "DRAMA", "QUATORZE_ANOS", 2001);
+		this.usuario.cadastrarBlurayFilme("06", 230, 95, "EROTICO", "QUATORZE_ANOS", 2001);
+		this.usuario.cadastrarBlurayFilme("07", 230, 95, "FAROESTE", "QUATORZE_ANOS", 2001);
+		this.usuario.cadastrarBlurayFilme("08", 230, 95, "FICCAO", "QUATORZE_ANOS", 2001);
+		this.usuario.cadastrarBlurayFilme("09", 230, 95, "MUSICAL", "QUATORZE_ANOS", 2001);
+		this.usuario.cadastrarBlurayFilme("10", 230, 95, "OUTRO", "QUATORZE_ANOS", 2001);
+		this.usuario.cadastrarBlurayFilme("11", 230, 95, "POLICIAL", "QUATORZE_ANOS", 2001);
+		this.usuario.cadastrarBlurayFilme("12", 230, 95, "ROMANCE", "QUATORZE_ANOS", 2001);
+		this.usuario.cadastrarBlurayFilme("13", 230, 95, "SUSPENSE", "QUATORZE_ANOS", 2001);
+		this.usuario.cadastrarBlurayFilme("14", 230, 95, "TERROR", "QUATORZE_ANOS", 2001);
+	}
 	
 	/**
 	 * Testa se está cadastrando blueray de série.
