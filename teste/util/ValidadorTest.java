@@ -22,18 +22,27 @@ public class ValidadorTest {
 		this.validador = new Validador();
 	}
 	
+	/**
+	 * Metodo para testar se, quando o nome eh passado corretamente eh validado
+	 */
 	@Test
 	public void testValidaNome()
 	{
 		this.validador.validaNome("paulofelipe");
 	}
 	
+	/**
+	 * Metodo para testar se, quando o nome eh passado como Null, uma excecao eh lancada
+	 */
 	@Test(expected=NullPointerException.class)
 	public void testValidaNomeNull()
 	{
 		this.validador.validaNome(null);
 	}
 	
+	/**
+	 * 
+	 */
 	@Test(expected=IllegalArgumentException.class)
 	public void testValidaNomeInvalido()
 	{
