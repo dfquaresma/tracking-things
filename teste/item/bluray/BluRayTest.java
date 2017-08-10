@@ -94,6 +94,12 @@ public class BluRayTest
 	{
 		this.blurayFilme.atualizaAtributo("Classificacao", "naosouclassificacao");
 	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testAtualizaAtributoValorAtributoDuracaoInvalido()
+	{
+		this.blurayFilme.atualizaAtributo("duracao", "100");
+	}
 
 	@Test
 	public void testSetDuracao()
