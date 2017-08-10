@@ -48,6 +48,7 @@ public class SistemaTeste {
 		
 		try {
 			sistema.cadastrarUsuario(" ", "4002-8922", "rick@mail.com");
+			fail();
 
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Nome nao pode ser vazio", iae.getMessage());
@@ -61,6 +62,7 @@ public class SistemaTeste {
 		
 		try {
 			sistema.cadastrarUsuario("Rick", "  ", "rick@mail.com");
+			fail();
 
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Telefone nao pode ser vazio", iae.getMessage());
@@ -74,7 +76,7 @@ public class SistemaTeste {
 		
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "  ");
-
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Email nao pode ser vazio", iae.getMessage());
 		}
@@ -87,6 +89,7 @@ public class SistemaTeste {
 		
 		try {
 			sistema.cadastrarUsuario(null, "4002-8922", "rick@mail.com");
+			fail();
 
 		} catch (NullPointerException npe) {
 			assertEquals("Nome nao pode ser nulo", npe.getMessage());
@@ -100,6 +103,7 @@ public class SistemaTeste {
 		
 		try {
 			sistema.cadastrarUsuario("Rick", null, "rick@mail.com");
+			fail();
 
 		} catch (NullPointerException npe) {
 			assertEquals("Telefone nao pode ser nulo", npe.getMessage());
@@ -113,6 +117,7 @@ public class SistemaTeste {
 		
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", null);
+			fail();
 
 		} catch (NullPointerException npe) {
 			assertEquals("Email nao pode ser nulo", npe.getMessage());
@@ -127,6 +132,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.getInfoUser("Rick", "4002-8922", "Plataforma");
+			fail();
 
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Atributo invalido.", iae.getMessage());
@@ -171,6 +177,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.attUsuario("Rick", "4002-8922", "Classificacao", "Morty");
+			fail();
 
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Atributo invalido", iae.getMessage());
@@ -185,6 +192,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.attUsuario(" ", "4002-8922", "Nome", "Morty");
+			fail();
 
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Nome nao pode ser vazio", iae.getMessage());
@@ -199,6 +207,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.attUsuario("Rick", " ", "Nome", "Morty");
+			fail();
 
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Telefone nao pode ser vazio", iae.getMessage());
@@ -213,6 +222,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.attUsuario("Rick", "4002-8922", "Nome", " ");
+			fail();
 
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Valor nao pode ser vazio", iae.getMessage());
@@ -227,6 +237,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.attUsuario(null, "4002-8922", "Nome", "Morty");
+			fail();
 
 		} catch (NullPointerException npe) {
 			assertEquals("Nome nao pode ser nulo", npe.getMessage());
@@ -241,6 +252,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.attUsuario("Rick", null, "Nome", "Morty");
+			fail();
 
 		} catch (NullPointerException npe) {
 			assertEquals("Telefone nao pode ser nulo", npe.getMessage());
@@ -255,6 +267,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.attUsuario("Rick", "4002-8922", "Nome", null);
+			fail();
 
 		} catch (NullPointerException npe) {
 			assertEquals("Valor nao pode ser nulo", npe.getMessage());
@@ -269,6 +282,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.attUsuario("Morty", "4002-8922", "Nome", "Summer");
+			fail();
 
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Usuario invalido", iae.getMessage());
@@ -284,6 +298,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.removeUsuario("Rick", "4002-8922");
 			sistema.getInfoUser("Rick", "4002-8922", "Nome");
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Usuario invalido", iae.getMessage());
 		}
@@ -297,6 +312,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.removeUsuario(" ", "4002-8922");
+			fail();
 
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Nome nao pode ser vazio", iae.getMessage());
@@ -311,7 +327,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.removeUsuario("Rick", "   ");
-
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Telefone nao pode ser vazio", iae.getMessage());
 		}
@@ -336,6 +352,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarEletronico(" ", "4002-8922", "Bioshock", 35.00, "PC");
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Nome nao pode ser vazio", iae.getMessage());
 		}
@@ -349,6 +366,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarEletronico("Rick", " ", "Bioshock", 35.00, "PC");
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Telefone nao pode ser vazio", iae.getMessage());
 		}
@@ -362,6 +380,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarEletronico("Rick", "4002-8922", " ", 35.00, "PC");
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Nome do item nao pode ser vazio", iae.getMessage());
 		}
@@ -375,6 +394,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarEletronico(null, "4002-8922", "Bioshock", 35.00, "PC");
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Nome nao pode ser nulo", npe.getMessage());
 		}
@@ -388,6 +408,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarEletronico("Rick", null, "Bioshock", 35.00, "PC");
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Telefone nao pode ser nulo", npe.getMessage());
 		}
@@ -401,6 +422,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarEletronico("Rick", "4002-8922", null, 35.00, "PC");
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Nome do item nao pode ser nulo", npe.getMessage());
 		}
@@ -413,6 +435,7 @@ public class SistemaTeste {
 		try { 
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com"); 
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Bioshock", 35.00, "Gameboy");
+			fail();
 		
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Plataforma inválida", iae.getMessage());
@@ -428,6 +451,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Bioshock", -35.00, "PC");
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Preco invalido", iae.getMessage());
 		}
@@ -452,6 +476,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarJogoTabuleiro(" ", "4002-8922", "D&D", 80.00);
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Nome nao pode ser vazio", iae.getMessage());
 		}
@@ -465,6 +490,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarJogoTabuleiro("Rick", " ", "D&D", 80.00);
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Telefone nao pode ser vazio", iae.getMessage());
 		}
@@ -478,6 +504,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarJogoTabuleiro("Rick", "4002-8922", " ", 80.00);
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Nome do item nao pode ser vazio", iae.getMessage());
 		}
@@ -491,6 +518,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarJogoTabuleiro("Rick", "4002-8922", "D&D", -80.00);
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Preco invalido", iae.getMessage());
 		}
@@ -504,6 +532,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarJogoTabuleiro(null, "4002-8922", "D&D", 80.00);
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Nome nao pode ser nulo", npe.getMessage());
 		}
@@ -517,6 +546,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarJogoTabuleiro("Rick", null, "D&D", 80.00);
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Telefone nao pode ser nulo", npe.getMessage());
 		}
@@ -530,6 +560,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarJogoTabuleiro("Rick", "4002-8922", null, 80.00);
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Nome do item nao pode ser nulo", npe.getMessage());
 		}
@@ -556,6 +587,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarJogoTabuleiro("Rick", "4002-8922", "D&D", 80.00);
 			sistema.addPecaPerdida("Rick", "4002-8922", "Munchkin", "Dado");
+			fail();
 
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Item nao encontrado", iae.getMessage());
@@ -571,6 +603,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarJogoTabuleiro("Rick", "4002-8922", "D&D", 80.00);
 			sistema.addPecaPerdida(" ", "4002-8922", "D&D", "Dado");
+			fail();
 
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Nome nao pode ser vazio", iae.getMessage());
@@ -586,6 +619,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarJogoTabuleiro("Rick", "4002-8922", "D&D", 80.00);
 			sistema.addPecaPerdida("Rick", " ", "D&D", "Dado");
+			fail();
 
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Telefone nao pode ser vazio", iae.getMessage());
@@ -601,6 +635,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarJogoTabuleiro("Rick", "4002-8922", "D&D", 80.00);
 			sistema.addPecaPerdida("Rick", "4002-8922", "  ", "Dado");
+			fail();
 
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Nome do item nao pode ser vazio", iae.getMessage());
@@ -616,7 +651,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarJogoTabuleiro("Rick", "4002-8922", "D&D", 80.00);
 			sistema.addPecaPerdida("Rick", "4002-8922", "D&D", " ");
-
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Nome da peca nao pode ser vazio", iae.getMessage());
 		}
@@ -631,6 +666,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarJogoTabuleiro("Rick", "4002-8922", "D&D", 80.00);
 			sistema.addPecaPerdida(null, "4002-8922", "D&D", "Dado");
+			fail();
 
 		} catch (NullPointerException npe) {
 			assertEquals("Nome nao pode ser nulo", npe.getMessage());
@@ -646,6 +682,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarJogoTabuleiro("Rick", "4002-8922", "D&D", 80.00);
 			sistema.addPecaPerdida("Rick", null, "D&D", "Dado");
+			fail();
 
 		} catch (NullPointerException npe) {
 			assertEquals("Telefone nao pode ser nulo", npe.getMessage());
@@ -661,6 +698,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarJogoTabuleiro("Rick", "4002-8922", "D&D", 80.00);
 			sistema.addPecaPerdida("Rick", "4002-8922", null, "Dado");
+			fail();
 
 		} catch (NullPointerException npe) {
 			assertEquals("Nome do item nao pode ser nulo", npe.getMessage());
@@ -676,6 +714,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarJogoTabuleiro("Rick", "4002-8922", "D&D", 80.00);
 			sistema.addPecaPerdida("Rick", "4002-8922", "D&D", null);
+			fail();
 
 		} catch (NullPointerException npe) {
 			assertEquals("Nome da peca nao pode ser nulo", npe.getMessage());
@@ -701,6 +740,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBlurayFilme("  ", "4002-8922", "Sharknado", 10.00, 120, "COMEDIA", "DEZ_ANOS", 2000);
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Nome nao pode ser vazio",iae.getMessage());
 		}
@@ -714,6 +754,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBlurayFilme("Rick", "  ", "Sharknado", 10.00, 120, "COMEDIA", "DEZ_ANOS", 2000);
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Telefone nao pode ser vazio",iae.getMessage());
 		}
@@ -727,6 +768,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBlurayFilme("Rick", "4002-8922", " ", 10.00, 120, "COMEDIA", "DEZ_ANOS", 2000);
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Nome do item nao pode ser vazio",iae.getMessage());
 		}
@@ -740,6 +782,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBlurayFilme("Rick", "4002-8922", "Sharknado", -10.00, 120, "COMEDIA", "DEZ_ANOS", 2000);
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Preco invalido",iae.getMessage());
 		}
@@ -753,6 +796,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBlurayFilme("Morty", "4002-8922", "Sharknado", 10.00, 120, "COMEDIA", "DEZ_ANOS", 2000);
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Usuario invalido",iae.getMessage());
 		}
@@ -766,8 +810,9 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBlurayFilme("Rick", "4002-8922", "Sharknado", 10.00, -120, "COMEDIA", "DEZ_ANOS", 2000);
+			fail();
 		} catch (IllegalArgumentException iae) {
-			assertEquals("Duracao nao pode ser negativa",iae.getMessage());
+			assertEquals("Duracao nao pode ser menor ou igual a zero",iae.getMessage());
 		}
 	}
 	/**
@@ -779,6 +824,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBlurayFilme("Rick", "4002-8922", "Sharknado", 10.00, 120, "BATATA", "DEZ_ANOS", 2000);
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Genero inválido",iae.getMessage());
 		}
@@ -792,6 +838,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBlurayFilme("Rick", "4002-8922", "Sharknado", 10.00, 120, "  ", "DEZ_ANOS", 2000);
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Genero nao pode ser vazio",iae.getMessage());
 		}
@@ -805,6 +852,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBlurayFilme("Rick", "4002-8922", "Sharknado", 10.00, 120, null, "DEZ_ANOS", 2000);
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Genero nao pode ser nulo",npe.getMessage());
 		}
@@ -818,6 +866,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBlurayFilme("Rick", "4002-8922", "Sharknado", 10.00, 120, "COMEDIA", "VINTE_ANOS", 2000);
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Classificacao inválida",iae.getMessage());
 		}
@@ -831,6 +880,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBlurayFilme("Rick", "4002-8922", "Sharknado", 10.00, 120, "COMEDIA", " ", 2000);
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Classificacao nao pode ser vazio",iae.getMessage());
 		}
@@ -844,6 +894,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBlurayFilme("Rick", "4002-8922", "Sharknado", 10.00, 120, "COMEDIA", null, 2000);
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Classificacao nao pode ser nulo",npe.getMessage());
 		}
@@ -857,8 +908,9 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBlurayFilme("Rick", "4002-8922", "Sharknado", 10.00, 120, "COMEDIA", "DEZ_ANOS", -2000);
+			fail();
 		} catch (IllegalArgumentException iae) {
-			assertEquals("Ano nao pode ser negativo",iae.getMessage());
+			assertEquals("Ano nao pode ser menor ou igual a zero.",iae.getMessage());
 		}
 	}
 	/**
@@ -881,7 +933,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBluRaySerie("  ", "4002-8922", "Rick e Morty", 666.00, "Loucura total", 120, "DEZESSEIS_ANOS", "FICCAO", 1);
-			
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Nome nao pode ser vazio", iae.getMessage());
 		}
@@ -895,7 +947,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBluRaySerie("Rick", "  ", "Rick e Morty", 666.00, "Loucura total", 120, "DEZESSEIS_ANOS", "FICCAO", 1);
-			
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Telefone nao pode ser vazio", iae.getMessage());
 		}
@@ -909,7 +961,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBluRaySerie("Rick", "4002-8922", " ", 666.00, "Loucura total", 120, "DEZESSEIS_ANOS", "FICCAO", 1);
-			
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Nome do item nao pode ser vazio", iae.getMessage());
 		}
@@ -923,7 +975,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", -666.00, "Loucura total", 120, "DEZESSEIS_ANOS", "FICCAO", 1);
-			
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Preco invalido", iae.getMessage());
 		}
@@ -937,7 +989,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 666.00, " ", 120, "DEZESSEIS_ANOS", "FICCAO", 1);
-			
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Descricao nao pode ser vazio", iae.getMessage());
 		}
@@ -951,9 +1003,9 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 666.00, "Loucura total", -120, "DEZESSEIS_ANOS", "FICCAO", 1);
-			
+			fail();
 		} catch (IllegalArgumentException iae) {
-			assertEquals("Duracao nao pode ser negativa", iae.getMessage());
+			assertEquals("Duracao nao pode ser menor ou igual a zero", iae.getMessage());
 		}
 	}
 	/**
@@ -965,7 +1017,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 666.00, "Loucura total", 120, "VINTE_ANOS", "FICCAO", 1);
-			
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Classificacao inválida", iae.getMessage());
 		}
@@ -979,7 +1031,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 666.00, "Loucura total", 120, "  ", "FICCAO", 1);
-			
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Classificacao nao pode ser vazio", iae.getMessage());
 		}
@@ -993,7 +1045,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 666.00, "Loucura total", 120, null, "FICCAO", 1);
-			
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Classificacao nao pode ser nulo", npe.getMessage());
 		}
@@ -1018,6 +1070,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBlurayShow(" ", "4002-8922", "Safadao DVD", 30.00, 100, 12, "Safadao", "LIVRE");			
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Nome nao pode ser vazio", iae.getMessage());
 		}
@@ -1030,7 +1083,8 @@ public class SistemaTeste {
 		
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
-			sistema.cadastrarBlurayShow("Rick", " ", "Safadao DVD", 30.00, 100, 12, "Safadao", "LIVRE");			
+			sistema.cadastrarBlurayShow("Rick", " ", "Safadao DVD", 30.00, 100, 12, "Safadao", "LIVRE");
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Telefone nao pode ser vazio", iae.getMessage());
 		}
@@ -1043,7 +1097,8 @@ public class SistemaTeste {
 		
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
-			sistema.cadastrarBlurayShow("Rick", "4002-8922", " ", 30.00, 100, 12, "Safadao", "LIVRE");			
+			sistema.cadastrarBlurayShow("Rick", "4002-8922", " ", 30.00, 100, 12, "Safadao", "LIVRE");
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Nome do item nao pode ser vazio", iae.getMessage());
 		}
@@ -1057,6 +1112,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBlurayShow("Rick", "4002-8922", "Safadao DVD", -30.00, 100, 12, "Safadao", "LIVRE");			
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Preco invalido", iae.getMessage());
 		}
@@ -1070,8 +1126,9 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBlurayShow("Rick", "4002-8922", "Safadao DVD", 30.00, -100, 12, "Safadao", "LIVRE");			
+			fail();
 		} catch (IllegalArgumentException iae) {
-			assertEquals("Duracao nao pode ser negativa", iae.getMessage());
+			assertEquals("Duracao nao pode ser menor ou igual a zero", iae.getMessage());
 		}
 	}
 	/**
@@ -1083,6 +1140,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBlurayShow("Rick", "4002-8922", "Safadao DVD", 30.00, 100, -12, "Safadao", "LIVRE");			
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Numero de faixas nao pode ser menor ou igual a zero.", iae.getMessage());
 		}
@@ -1096,6 +1154,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBlurayShow("Rick", "4002-8922", "Safadao DVD", 30.00, 100, 0, "Safadao", "LIVRE");			
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Numero de faixas nao pode ser menor ou igual a zero.", iae.getMessage());
 		}
@@ -1109,6 +1168,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBlurayShow("Rick", "4002-8922", "Safadao DVD", 30.00, 100, 12, " ", "LIVRE");			
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Artista nao pode ser vazio", iae.getMessage());
 		}
@@ -1122,6 +1182,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBlurayShow("Rick", "4002-8922", "Safadao DVD", 30.00, 100, 12, "Safadao", "BATATA");			
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Classificacao inválida", iae.getMessage());
 		}
@@ -1135,6 +1196,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBlurayShow("Rick", "4002-8922", "Safadao DVD", 30.00, 100, 12, "Safadao", " ");			
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Classificacao nao pode ser vazio", iae.getMessage());
 		}
@@ -1148,6 +1210,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBlurayShow("Rick", "4002-8922", "Safadao DVD", 30.00, 100, 12, "Safadao", null);			
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Classificacao nao pode ser nulo", npe.getMessage());
 		}
@@ -1161,6 +1224,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBlurayShow(null, "4002-8922", "Safadao DVD", 30.00, 100, 12, "Safadao", "LIVRE");			
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Nome nao pode ser nulo", npe.getMessage());
 		}
@@ -1174,6 +1238,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBlurayShow("Rick", null, "Safadao DVD", 30.00, 100, 12, "Safadao", "LIVRE");			
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Telefone nao pode ser nulo", npe.getMessage());
 		}
@@ -1186,7 +1251,8 @@ public class SistemaTeste {
 		
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
-			sistema.cadastrarBlurayShow("Rick", "4002-8922", null, 30.00, 100, 12, "Safadao", "LIVRE");			
+			sistema.cadastrarBlurayShow("Rick", "4002-8922", null, 30.00, 100, 12, "Safadao", "LIVRE");
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Nome do item nao pode ser nulo", npe.getMessage());
 		}
@@ -1200,6 +1266,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBlurayShow("Rick", "4002-8922", "Safadao DVD", 30.00, 100, 12, null, "LIVRE");			
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Artista nao pode ser nulo", npe.getMessage());
 		}
@@ -1213,6 +1280,7 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.getInfoUser("Morty", "4002-8922", "Nome");
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Usuario invalido", iae.getMessage());
 		}
@@ -1282,6 +1350,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 50.00, "Loucura total", 100, "DEZESSEIS_ANOS", "FICCAO", 1);
 			sistema.addBluray("Rick", "4002-8922", "CDZ", 22);
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Item nao encontrado", iae.getMessage());
 		}
@@ -1296,6 +1365,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 50.00, "Loucura total", 100, "DEZESSEIS_ANOS", "FICCAO", 1);
 			sistema.addBluray(" ", "4002-8922", "CDZ", 22);
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Nome nao pode ser vazio", iae.getMessage());
 		}
@@ -1310,6 +1380,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 50.00, "Loucura total", 100, "DEZESSEIS_ANOS", "FICCAO", 1);
 			sistema.addBluray("Rick", "  ", "CDZ", 22);
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Telefone nao pode ser vazio", iae.getMessage());
 		}
@@ -1324,6 +1395,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 50.00, "Loucura total", 100, "DEZESSEIS_ANOS", "FICCAO", 1);
 			sistema.addBluray("Rick", "4002-8922", " ", 22);
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Nome do bluray nao pode ser vazio", iae.getMessage());
 		}
@@ -1338,8 +1410,9 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 50.00, "Loucura total", 100, "DEZESSEIS_ANOS", "FICCAO", 1);
 			sistema.addBluray("Rick", "4002-8922", "Rick e Morty", -22);
+			fail();
 		} catch (IllegalArgumentException iae) {
-			assertEquals("Duracao nao pode ser negativa", iae.getMessage());
+			assertEquals("Duracao nao pode ser menor ou igual a zero", iae.getMessage());
 		}
 	}
 	/**
@@ -1352,6 +1425,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 50.00, "Loucura total", 100, "DEZESSEIS_ANOS", "FICCAO", 1);
 			sistema.addBluray(null, "4002-8922", "Rick e Morty", 22);
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Nome nao pode ser nulo", npe.getMessage());
 		}
@@ -1366,6 +1440,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 50.00, "Loucura total", 100, "DEZESSEIS_ANOS", "FICCAO", 1);
 			sistema.addBluray("Rick", null, "Rick e Morty", 22);
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Telefone nao pode ser nulo", npe.getMessage());
 		}
@@ -1380,6 +1455,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 50.00, "Loucura total", 100, "DEZESSEIS_ANOS", "FICCAO", 1);
 			sistema.addBluray("Rick", "4002-8922", null, 22);
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Nome do bluray nao pode ser nulo", npe.getMessage());
 		}
@@ -1394,6 +1470,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 50.00, "Loucura total", 100, "DEZESSEIS_ANOS", "FICCAO", 1);
 			sistema.addBluray("Morty", "4002-8922", "Rick e Morty", 22);
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Usuario invalido", iae.getMessage());
 		}
@@ -1409,6 +1486,7 @@ public class SistemaTeste {
 			sistema.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 50.00, "Loucura total", 100, "DEZESSEIS_ANOS", "FICCAO", 1);
 			sistema.removerItem("Rick", "4002-8922", "Rick e Morty");
 			sistema.getInfoItem("Rick", "4002-8922", "Rick e Morty", "Nome");
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Item nao encontrado", iae.getMessage());
 		}
@@ -1423,6 +1501,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 50.00, "Loucura total", 100, "DEZESSEIS_ANOS", "FICCAO", 1);
 			sistema.removerItem(null, "4002-8922", "Rick e Morty");
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Nome nao pode ser nulo", npe.getMessage());
 		}
@@ -1437,6 +1516,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 50.00, "Loucura total", 100, "DEZESSEIS_ANOS", "FICCAO", 1);
 			sistema.removerItem("Rick", null, "Rick e Morty");
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Telefone nao pode ser nulo", npe.getMessage());
 		}
@@ -1451,6 +1531,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 50.00, "Loucura total", 100, "DEZESSEIS_ANOS", "FICCAO", 1);
 			sistema.removerItem("Rick", "4002-8922", null);
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Nome do item nao pode ser nulo", npe.getMessage());
 		}
@@ -1465,6 +1546,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 50.00, "Loucura total", 100, "DEZESSEIS_ANOS", "FICCAO", 1);
 			sistema.removerItem(" ", "4002-8922", "Rick e Morty");
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Nome nao pode ser vazio", iae.getMessage());
 		}
@@ -1479,6 +1561,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 50.00, "Loucura total", 100, "DEZESSEIS_ANOS", "FICCAO", 1);
 			sistema.removerItem("Rick", "  ", "Rick e Morty");
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Telefone nao pode ser vazio", iae.getMessage());
 		}
@@ -1493,6 +1576,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 50.00, "Loucura total", 100, "DEZESSEIS_ANOS", "FICCAO", 1);
 			sistema.removerItem("Rick", "4002-8922", "  ");
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Nome do item nao pode ser vazio", iae.getMessage());
 		}
@@ -1507,6 +1591,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarBluRaySerie("Rick", "4002-8922", "Rick e Morty", 50.00, "Loucura total", 100, "DEZESSEIS_ANOS", "FICCAO", 1);
 			sistema.removerItem("Morty", "4002-8922", "Rick e Morty");
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Usuario invalido", iae.getMessage());
 		}
@@ -1544,8 +1629,8 @@ public class SistemaTeste {
 		try {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
-			sistema.attItem("Rick", "4002-8922", "Overwatch", "Plataforma", "PS4");
-			
+			sistema.attItem("Rick", "4002-8922", "Overwatch", "Batata", "PS4");
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Atributo invalido", iae.getMessage());
 		}
@@ -1560,7 +1645,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.attItem(" ", "4002-8922", "Overwatch", "Plataforma", "PS4");
-			
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Nome nao pode ser vazio", iae.getMessage());
 		}
@@ -1575,7 +1660,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.attItem("Rick", "  ", "Overwatch", "Plataforma", "PS4");
-			
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Telefone nao pode ser vazio", iae.getMessage());
 		}
@@ -1590,7 +1675,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.attItem("Rick", "4002-8922", " ", "Plataforma", "PS4");
-			
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Nome do item nao pode ser vazio", iae.getMessage());
 		}
@@ -1605,7 +1690,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.attItem("Rick", "4002-8922", "Overwatch", " ", "PS4");
-			
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Atributo nao pode ser vazio", iae.getMessage());
 		}
@@ -1620,7 +1705,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.attItem("Rick", "4002-8922", "Overwatch", "Plataforma", "  ");
-			
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Valor nao pode ser vazio", iae.getMessage());
 		}
@@ -1635,7 +1720,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.attItem(null, "4002-8922", "Overwatch", "Plataforma", "PS4");
-			
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Nome nao pode ser nulo", npe.getMessage());
 		}
@@ -1650,7 +1735,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.attItem("Rick", null, "Overwatch", "Plataforma", "PS4");
-			
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Telefone nao pode ser nulo", npe.getMessage());
 		}
@@ -1665,7 +1750,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.attItem("Rick", "4002-8922", null, "Plataforma", "PS4");
-			
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Nome do item nao pode ser nulo", npe.getMessage());
 		}
@@ -1680,7 +1765,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.attItem("Rick", "4002-8922", "Overwatch", null, "PS4");
-			
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Atributo nao pode ser nulo", npe.getMessage());
 		}
@@ -1695,7 +1780,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.attItem("Rick", "4002-8922", "Overwatch", "Plataforma", null);
-			
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Valor nao pode ser nulo", npe.getMessage());
 		}
@@ -1722,7 +1807,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.registrarEmprestimo(" ", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
-			
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Nome nao pode ser vazio", iae.getMessage());
 		}
@@ -1737,7 +1822,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.registrarEmprestimo("Rick", "4002-8922", " ", "4220", "Overwatch", "09/08/2017", 3);
-			
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Nome nao pode ser vazio", iae.getMessage());
 		}
@@ -1752,7 +1837,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.registrarEmprestimo("Rick", " ", "Morty", "4220", "Overwatch", "09/08/2017", 3);
-			
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Telefone nao pode ser vazio", iae.getMessage());
 		}
@@ -1767,7 +1852,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "  ", "Overwatch", "09/08/2017", 3);
-			
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Telefone nao pode ser vazio", iae.getMessage());
 		}
@@ -1782,7 +1867,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "  ", "09/08/2017", 3);
-			
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Nome do item nao pode ser vazio", iae.getMessage());
 		}
@@ -1797,7 +1882,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", " ", 3);
-			
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Data nao pode ser vazio", iae.getMessage());
 		}
@@ -1812,7 +1897,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", -3);
-			
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Periodo nao pode ser menor ou iguals a zero.", iae.getMessage());
 		}
@@ -1827,7 +1912,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.registrarEmprestimo(null, "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
-			
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Nome nao pode ser nulo", npe.getMessage());
 		}
@@ -1842,7 +1927,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.registrarEmprestimo("Rick", "4002-8922", null, "4220", "Overwatch", "09/08/2017", 3);
-			
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Nome nao pode ser nulo", npe.getMessage());
 		}
@@ -1857,7 +1942,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.registrarEmprestimo("Rick", null, "Morty", "4220", "Overwatch", "09/08/2017", 3);
-			
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Telefone nao pode ser nulo", npe.getMessage());
 		}
@@ -1872,7 +1957,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", null, "Overwatch", "09/08/2017", 3);
-			
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Telefone nao pode ser nulo", npe.getMessage());
 		}
@@ -1887,7 +1972,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", null, "09/08/2017", 3);
-			
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Nome do item nao pode ser nulo", npe.getMessage());
 		}
@@ -1902,7 +1987,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", null, 3);
-			
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Data nao pode ser nulo", npe.getMessage());
 		}
@@ -1917,7 +2002,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.registrarEmprestimo("Rick", "4002-8922", "Summer", "4220", "Overwatch", "09/08/2017", 3);
-			
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Usuario invalido", iae.getMessage());
 		}
@@ -1932,7 +2017,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.registrarEmprestimo("Summer", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
-			
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Usuario invalido", iae.getMessage());
 		}
@@ -1947,7 +2032,7 @@ public class SistemaTeste {
 			sistema.cadastrarUsuario("Morty", "4220", "morty@mail.com");
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Bioshock", "09/08/2017", 3);
-			
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Item nao encontrado", iae.getMessage());
 		}
@@ -1977,6 +2062,7 @@ public class SistemaTeste {
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
 			sistema.devolverItem(" ", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", "11/08/2017");
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Nome nao pode ser vazio",iae.getMessage());
 		}
@@ -1992,6 +2078,7 @@ public class SistemaTeste {
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
 			sistema.devolverItem("Rick", "4002-8922", " ", "4220", "Overwatch", "09/08/2017", "11/08/2017");
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Nome nao pode ser vazio",iae.getMessage());
 		}
@@ -2007,6 +2094,7 @@ public class SistemaTeste {
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
 			sistema.devolverItem("Rick", "  ", "Morty", "4220", "Overwatch", "09/08/2017", "11/08/2017");
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Telefone nao pode ser vazio",iae.getMessage());
 		}
@@ -2022,6 +2110,7 @@ public class SistemaTeste {
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
 			sistema.devolverItem("Rick", "4002-8922", "Morty", "  ", "Overwatch", "09/08/2017", "11/08/2017");
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Telefone nao pode ser vazio",iae.getMessage());
 		}
@@ -2037,6 +2126,7 @@ public class SistemaTeste {
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
 			sistema.devolverItem("Rick", "4002-8922", "Morty", "4220", "  ", "09/08/2017", "11/08/2017");
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Nome do item nao pode ser vazio",iae.getMessage());
 		}
@@ -2052,6 +2142,7 @@ public class SistemaTeste {
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
 			sistema.devolverItem("Rick", "4002-8922", "Morty", "4220", "Overwatch", " ", "11/08/2017");
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Data nao pode ser vazio",iae.getMessage());
 		}
@@ -2067,6 +2158,7 @@ public class SistemaTeste {
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
 			sistema.devolverItem("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", " ");
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Data nao pode ser vazio",iae.getMessage());
 		}
@@ -2082,6 +2174,7 @@ public class SistemaTeste {
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
 			sistema.devolverItem(null, "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", "11/08/2017");
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Nome nao pode ser nulo",npe.getMessage());
 		}
@@ -2097,6 +2190,7 @@ public class SistemaTeste {
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
 			sistema.devolverItem("Rick", "4002-8922", null, "4220", "Overwatch", "09/08/2017", "11/08/2017");
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Nome nao pode ser nulo",npe.getMessage());
 		}
@@ -2112,6 +2206,7 @@ public class SistemaTeste {
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
 			sistema.devolverItem("Rick", null, "Morty", "4220", "Overwatch", "09/08/2017", "11/08/2017");
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Telefone nao pode ser nulo",npe.getMessage());
 		}
@@ -2127,6 +2222,7 @@ public class SistemaTeste {
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
 			sistema.devolverItem("Rick", "4002-8922", "Morty", null, "Overwatch", "09/08/2017", "11/08/2017");
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Telefone nao pode ser nulo",npe.getMessage());
 		}
@@ -2142,6 +2238,7 @@ public class SistemaTeste {
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
 			sistema.devolverItem("Rick", "4002-8922", "Morty", "4220", null, "09/08/2017", "11/08/2017");
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Nome do item nao pode ser nulo",npe.getMessage());
 		}
@@ -2157,6 +2254,7 @@ public class SistemaTeste {
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
 			sistema.devolverItem("Rick", "4002-8922", "Morty", "4220", "Overwatch", null, "11/08/2017");
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Data nao pode ser nulo",npe.getMessage());
 		}
@@ -2172,6 +2270,7 @@ public class SistemaTeste {
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
 			sistema.devolverItem("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", null);
+			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Data nao pode ser nulo",npe.getMessage());
 		}
@@ -2187,6 +2286,7 @@ public class SistemaTeste {
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
 			sistema.devolverItem("Summer", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", "11/08/2017");
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Usuario invalido",iae.getMessage());
 		}
@@ -2202,6 +2302,7 @@ public class SistemaTeste {
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
 			sistema.devolverItem("Rick", "4002-8922", "Summer", "4220", "Overwatch", "09/08/2017", "11/08/2017");
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Usuario invalido",iae.getMessage());
 		}
@@ -2217,6 +2318,7 @@ public class SistemaTeste {
 			sistema.cadastrarEletronico("Rick", "4002-8922", "Overwatch", 200.0, "PC");
 			sistema.registrarEmprestimo("Rick", "4002-8922", "Morty", "4220", "Overwatch", "09/08/2017", 3);
 			sistema.devolverItem("Rick", "4002-8922", "Morty", "4220", "Bioshock", "09/08/2017", "11/08/2017");
+			fail();
 		} catch (IllegalArgumentException iae) {
 			assertEquals("Emprestimo nao encontrado",iae.getMessage());
 		}
