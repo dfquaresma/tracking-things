@@ -1,6 +1,7 @@
 package item.jogo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import item.Item;
 
@@ -27,35 +28,30 @@ public class JogoTabuleiro extends Item {
 		this.pecasPerdidas = new ArrayList<>();
 	}
 
-	/**
-	 * Indica quando um outro objeto é igual a este.
-	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if (this == obj)
 			return true;
-		}
-		if (obj == null) {
+		if (!super.equals(obj))
 			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if (getClass() != obj.getClass())
 			return false;
-		}
 		JogoTabuleiro other = (JogoTabuleiro) obj;
-		if (pecasPerdidas == null) {
-			if (other.pecasPerdidas != null) {
+		if (pecasPerdidas == null)
+		{
+			if (other.pecasPerdidas != null)
 				return false;
-			}
-		} else if (!pecasPerdidas.equals(other.pecasPerdidas)) {
-			return false;
 		}
-		if (this.getNome() == null) {
-			if (other.getNome() != null) {
-				return false;
-			}
-		} else if (!this.getNome().equals(other.getNome())) {
+		else if(other.pecasPerdidas == null)
 			return false;
+		else
+		{
+			Collections.sort(this.pecasPerdidas);
+			Collections.sort(other.pecasPerdidas);
 		}
+		
+		if(!pecasPerdidas.equals(other.pecasPerdidas))
+			return false;
 		return true;
 	}
 
