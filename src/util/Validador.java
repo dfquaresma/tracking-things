@@ -179,7 +179,7 @@ public class Validador {
 	 */
 	public void validaAnoLancamento(int ano) {
 		if (ano <= 0) {
-			throw new IllegalArgumentException("Ano nao pode ser negativo");
+			throw new IllegalArgumentException("Ano nao pode ser menor ou igual a zero.");
 		}
 	}
 

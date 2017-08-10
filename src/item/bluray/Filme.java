@@ -115,6 +115,7 @@ public class Filme extends BluRay {
 		this.validador.validaValor(valor);
 		
 		if (atributo.equals("Genero")) {
+			this.validador.validaGenero(valor);
 			this.genero = Genero.valueOf(valor);			
 			
 		} else if (atributo.equals("Ano de Lancamento")) {

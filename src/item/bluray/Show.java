@@ -89,7 +89,7 @@ public class Show extends BluRay {
 		switch (atributo) {
 		case ("Artista"):
 			return this.artista;
-		case ("Numero de Faixas"):
+		case ("Numero de faixas"):
 			return String.valueOf(this.numDeFaixas);
 		default:
 			return super.getInfo(atributo);

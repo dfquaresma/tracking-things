@@ -23,8 +23,8 @@ public class ShowTest {
 		assertEquals("AC DC", showTest.getArtista());
 		assertEquals("DEZ_ANOS", showTest.getClassificacao());
 
-		assertEquals("AC_DC - Live in River Plate", showTest.getInfo("Nome"));
-		assertEquals("DEZ_ANOS", showTest.getInfo("Classificacao"));
+		assertEquals("AC DC", showTest.getInfo("Artista"));
+		assertEquals("20", showTest.getInfo("Numero de faixas"));
 
 		try {
 			showTest.getInfo(null);
@@ -43,7 +43,7 @@ public class ShowTest {
 	}
 
 	@Test
-	public void testAttNome() {
+	public void testSetNome() {
 		try {
 			showTest.setNome(null);
 			fail();
@@ -62,7 +62,7 @@ public class ShowTest {
 	}
 
 	@Test
-	public void testAttPreco() {
+	public void testSetPreco() {
 		try {
 			showTest.setPreco(0);
 			fail();
@@ -74,7 +74,7 @@ public class ShowTest {
 	}
 
 	@Test
-	public void testAttDuracao() {
+	public void testSetDuracao() {
 		try {
 			showTest.setDuracao(0);
 			fail();
@@ -86,7 +86,7 @@ public class ShowTest {
 	}
 
 	@Test
-	public void testAttNumeroDeFaixas() {
+	public void testSetNumeroDeFaixas() {
 		try {
 			showTest.setNumDeFaixas(0);
 			fail();
@@ -98,7 +98,7 @@ public class ShowTest {
 	}
 
 	@Test
-	public void testAttArtista() {
+	public void testSetArtista() {
 		try {
 			showTest.setArtista(null);
 			fail();
@@ -116,7 +116,7 @@ public class ShowTest {
 	}
 
 	@Test
-	public void testAttClassificacao() {
+	public void testSetClassificacao() {
 		try {
 			showTest.setClassificacao(null);
 			fail();
@@ -138,10 +138,9 @@ public class ShowTest {
 		showTest.setClassificacao("DOZE_ANOS");
 		assertEquals("DOZE_ANOS", showTest.getClassificacao());
 	}
-
+	
 	@Test
-	public void testAtualizaAtributo() {
-
+	public void testAtualizaAtributoNome() {
 		try {
 			showTest.atualizaAtributo("Nome", null);
 			fail();
@@ -155,7 +154,11 @@ public class ShowTest {
 			assertEquals("Valor nao pode ser vazio", iae.getMessage());
 		}
 		showTest.atualizaAtributo("Nome", "Outro");
+		
+	}
 
+	@Test
+	public void testAtualizaAtributoPreco() {
 		try {
 			showTest.atualizaAtributo("Preco", "-1");
 			fail();
@@ -163,7 +166,11 @@ public class ShowTest {
 			assertEquals("Valor nao pode ser menor ou igual a zero para essa operacao", iae.getMessage());
 		}
 		showTest.atualizaAtributo("Preco", "20");
+		
+	}
 
+	@Test
+	public void testAtualizaAtributoDuracao() {
 		try {
 			showTest.atualizaAtributo("Duracao", "0");
 			fail();
@@ -172,31 +179,13 @@ public class ShowTest {
 		}
 		showTest.atualizaAtributo("Duracao", "20");
 
-		try {
-			showTest.atualizaAtributo("Numero de faixas", "-1");
-			fail();
-		} catch (IllegalArgumentException iae) {
-			assertEquals("Valor nao pode ser menor ou igual a zero para essa operacao", iae.getMessage());
-		}
-		showTest.atualizaAtributo("Numero de faixas", "12");
+	}
 
-		try {
-			showTest.atualizaAtributo("Artista", null);
-			fail();
-		} catch (NullPointerException iae) {
-			assertEquals("Valor nao pode ser nulo", iae.getMessage());
-		}
-		try {
-			showTest.atualizaAtributo("Artista", "");
-			fail();
-		} catch (IllegalArgumentException iae) {
-			assertEquals("Valor nao pode ser vazio", iae.getMessage());
-		}
-		showTest.atualizaAtributo("Artista", "Outro");
-
+	@Test
+	public void testAtualizaAtributoClassificacao() {
+		
 		try {
 			showTest.atualizaAtributo("Classificacao", null);
-			;
 			fail();
 		} catch (NullPointerException npe) {
 			assertEquals("Valor nao pode ser nulo", npe.getMessage());
@@ -214,9 +203,9 @@ public class ShowTest {
 			assertEquals("Classificacao inválida", iae.getMessage());
 		}
 		showTest.atualizaAtributo("Classificacao", "DOZE_ANOS");
-
+		
 	}
-
+	
 	@Test
 	public void testToString() {
 		assertEquals("SHOW: AC_DC - Live in River Plate, R$ 200.0, Nao emprestado, 120 min, DEZ_ANOS, AC DC, 20 faixas",
