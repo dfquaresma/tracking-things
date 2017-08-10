@@ -59,18 +59,16 @@ public class JogoTabuleiroTest
 	}
 
 	@Test
-	public void testAdicionarPecaPerdida() {
-		fail("Not yet implemented");
+	public void testAdicionarPecaPerdida()
+	{
+		this.jogo.adicionarPecaPerdida("cavalo");
+		assertEquals(false, this.jogo.isCompleto());
 	}
 
 	@Test
-	public void testIsCompleto() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testToString() {
-		fail("Not yet implemented");
+	public void testToString()
+	{
+		assertEquals("JOGO DE TABULEIRO: xadrex, R$ 333.66, Nao emprestado, COMPLETO", this.jogo.toString());
 	}
 
 }

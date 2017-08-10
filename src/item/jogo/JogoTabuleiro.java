@@ -1,6 +1,7 @@
 package item.jogo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import item.Item;
 
@@ -36,10 +37,20 @@ public class JogoTabuleiro extends Item {
 		if (getClass() != obj.getClass())
 			return false;
 		JogoTabuleiro other = (JogoTabuleiro) obj;
-		if (pecasPerdidas == null) {
+		if (pecasPerdidas == null)
+		{
 			if (other.pecasPerdidas != null)
 				return false;
-		} else if (!pecasPerdidas.equals(other.pecasPerdidas))
+		}
+		else if(other.pecasPerdidas == null)
+			return false;
+		else
+		{
+			Collections.sort(this.pecasPerdidas);
+			Collections.sort(other.pecasPerdidas);
+		}
+		
+		if(!pecasPerdidas.equals(other.pecasPerdidas))
 			return false;
 		return true;
 	}
