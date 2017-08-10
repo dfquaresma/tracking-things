@@ -106,13 +106,19 @@ public abstract class BluRay extends Item {
 		this.validador.validaAtributo(atributo);
 		this.validador.validaValor(valor);
 		
-		if (atributo.equals("Duracao")) {
-			this.duracao = Integer.parseInt(valor);
+		if (atributo.equals("Duracao"))
+		{
+			// FIX - valor pode nao ser explicitamente um Int
+			this.validador.validaConversaoStringToInt(valor);
 			
-		} else if (atributo.equals("Classificacao")) {
-			this.classificacao = Classificacao.valueOf(valor);
-			
-		} else {
+			this.setDuracao(Integer.parseInt(valor));
+		}
+		else if (atributo.equals("Classificacao"))
+		{
+			this.setClassificacao(valor);
+		}
+		else
+		{
 			super.atualizaAtributo(atributo, valor);
 		}
 		
