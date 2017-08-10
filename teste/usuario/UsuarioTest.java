@@ -6,8 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import item.Item;
-import item.bluray.Classificacao;
-import item.bluray.Genero;
 
 public class UsuarioTest {
 
