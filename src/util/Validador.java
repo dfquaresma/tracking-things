@@ -311,5 +311,22 @@ public class Validador {
 	public void validaItem(Item item) {
 		this.validaObjetos(item, "Item");
 	}
+	
+	/**
+	 * Valida se valor tem o formato de um Inteiro.
+	 * 
+	 * @param valor - String a ser convertida em Int.
+	 */
+	public void validaConversaoStringToInt(String atributo, String valor)
+	{
+		try
+		{
+			Integer.parseInt(valor);
+		}
+		catch(NumberFormatException e)
+		{
+			throw new IllegalArgumentException(atributo + "deve ter o formato de um tipo int");
+		}
+	}
 
 }
