@@ -11,137 +11,185 @@ import org.junit.Test;
 
 import excecoes.OperacaoNaoPermitidaNoMomentoExcecao;
 
-
+/**
+ * Testa a classe de validação.
+ * 
+ * @author David Ferreira
+ *
+ */
 public class ValidadorTest {
 
-	Validador validador;
-	
+	private Validador validador;
+
+	/**
+	 * Prepara o ambiente para os testes.
+	 */
 	@Before
-	public void criaValidador()
-	{
+	public void criaValidador() {
 		this.validador = new Validador();
 	}
-	
+
 	/**
-	 * Metodo para testar se, quando o nome eh passado corretamente eh validado
+	 * Metodo para testar se, quando o nome é passado corretamente é validado.
 	 */
 	@Test
-	public void testValidaNome()
-	{
+	public void testValidaNome() {
 		this.validador.validaNome("paulofelipe");
 	}
-	
+
 	/**
-	 * Metodo para testar se, quando o nome eh passado como Null, uma excecao eh lancada
+	 * Metodo para testar se, quando o nome é passado como Null, uma excecao é
+	 * lancada.
 	 */
-	@Test(expected=NullPointerException.class)
-	public void testValidaNomeNull()
-	{
+	@Test(expected = NullPointerException.class)
+	public void testValidaNomeNull() {
 		this.validador.validaNome(null);
 	}
-	
+
 	/**
-	 * 
+	 * Metodo para testar se, quando o nome é passado como vazio, uma excecao é
+	 * lancada.
 	 */
-	@Test(expected=IllegalArgumentException.class)
-	public void testValidaNomeInvalido()
-	{
+	@Test(expected = IllegalArgumentException.class)
+	public void testValidaNomeInvalido() {
 		this.validador.validaNome("       ");
 	}
-	
+
+	/**
+	 * Testa se qualquer padrão de telefone é aceito no sistema.
+	 */
 	@Test
-	public void testValidaTelefone()
-	{
+	public void testValidaTelefone() {
 		this.validador.validaTelefone("chama no zap bb: 8398777777");
 	}
-	
-	@Test(expected=NullPointerException.class)
-	public void testValidaTelefoneNull()
-	{
+
+	/**
+	 * Metodo para testar se, quando o telefone é passado como Null, uma excecao
+	 * é lancada.
+	 */
+	@Test(expected = NullPointerException.class)
+	public void testValidaTelefoneNull() {
 		this.validador.validaTelefone(null);
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testValidaTelefoneInvalido()
-	{
+
+	/**
+	 * Metodo para testar se, quando o telefone é passado como vazio, uma
+	 * excecao é lancada.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testValidaTelefoneInvalido() {
 		this.validador.validaTelefone("       ");
 	}
-	
+
+	/**
+	 * Testa se qualquer padrão de email é aceito no sistema.
+	 */
 	@Test
-	public void testValidaEmail()
-	{
+	public void testValidaEmail() {
 		this.validador.validaEmail("paulopaulopaulo@gmail.com");
 	}
-	
-	@Test(expected=NullPointerException.class)
-	public void testValidaEmailNull()
-	{
+
+	/**
+	 * Metodo para testar se, quando o email é passado como Null, uma excecao é
+	 * lancada.
+	 */
+	@Test(expected = NullPointerException.class)
+	public void testValidaEmailNull() {
 		this.validador.validaEmail(null);
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testValidaEmailInvalido()
-	{
+
+	/**
+	 * Metodo para testar se, quando o email é passado como vazio, uma excecao é
+	 * lancada.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testValidaEmailInvalido() {
 		this.validador.validaEmail("       ");
 	}
-	
+
+	/**
+	 * Testa se a validação de valor não lança exceção quando o valor é válido.
+	 */
 	@Test
-	public void testValidaValor()
-	{
+	public void testValidaValor() {
 		this.validador.validaValor("Nome");
 	}
-	
-	@Test(expected=NullPointerException.class)
-	public void testValidaValorNull()
-	{
+
+	/**
+	 * Metodo para testar se, quando o valor é passado como Null, uma excecao é
+	 * lancada.
+	 */
+	@Test(expected = NullPointerException.class)
+	public void testValidaValorNull() {
 		this.validador.validaValor(null);
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testValidaValorInvalido()
-	{
+
+	/**
+	 * Metodo para testar se, quando o valor é passado como vazio, uma excecao é
+	 * lancada.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testValidaValorInvalido() {
 		this.validador.validaValor("       ");
 	}
-	
+
+	/**
+	 * Testa se quando o nome de item é válido, nenhuma exceção é lançada.
+	 */
 	@Test
-	public void testValidaNomeItem()
-	{
+	public void testValidaNomeItem() {
 		this.validador.validaNomeItem("parafuso");
 	}
-	
-	@Test(expected=NullPointerException.class)
-	public void testValidaNomeItemNull()
-	{
+
+	/**
+	 * Metodo para testar se, quando o nome de item é passado como Null, uma
+	 * excecao é lancada.
+	 */
+	@Test(expected = NullPointerException.class)
+	public void testValidaNomeItemNull() {
 		this.validador.validaNomeItem(null);
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testValidaNomeItemInvalido()
-	{
+
+	/**
+	 * Metodo para testar se, quando o nome de item é passado como vazio, uma
+	 * excecao é lancada.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testValidaNomeItemInvalido() {
 		this.validador.validaNomeItem("       ");
 	}
-	
+
+	/**
+	 * Testa se quando o nome de artista é válido, nenhuma exceção é lançada.
+	 */
 	@Test
-	public void testValidaArtista()
-	{
+	public void testValidaArtista() {
 		this.validador.validaArtista("REBELDES");
 	}
-	
-	@Test(expected=NullPointerException.class)
-	public void testValidaArtistaNull()
-	{
+
+	/**
+	 * Metodo para testar se, quando o nome de artista é passado como Null, uma
+	 * excecao é lancada.
+	 */
+	@Test(expected = NullPointerException.class)
+	public void testValidaArtistaNull() {
 		this.validador.validaArtista(null);
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testValidaArtistaInvalido()
-	{
+
+	/**
+	 * Metodo para testar se, quando o nome de artista é passado como vazio, uma
+	 * excecao é lancada.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testValidaArtistaInvalido() {
 		this.validador.validaArtista("       ");
 	}
-	
+
+	/**
+	 * Testa se quando a classificação é válida, nenhuma exceção é lançada.
+	 */
 	@Test
-	public void testValidaClassificacao()
-	{
+	public void testValidaClassificacao() {
 		this.validador.validaClassificacao("LIVRE");
 		this.validador.validaClassificacao("DEZ_ANOS");
 		this.validador.validaClassificacao("DOZE_ANOS");
@@ -149,58 +197,82 @@ public class ValidadorTest {
 		this.validador.validaClassificacao("DEZESSEIS_ANOS");
 		this.validador.validaClassificacao("DEZOITO_ANOS");
 	}
-	
-	@Test(expected=NullPointerException.class)
-	public void testValidaClassificacaoNull()
-	{
+
+	/**
+	 * Metodo para testar se, quando uma classificação é passada como Null, uma
+	 * excecao é lancada.
+	 */
+	@Test(expected = NullPointerException.class)
+	public void testValidaClassificacaoNull() {
 		this.validador.validaClassificacao(null);
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testValidaClassificacaoInvalido()
-	{
+
+	/**
+	 * Metodo para testar se, quando uma classificação é passada como vazia, uma
+	 * excecao é lancada.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testValidaClassificacaoInvalido() {
 		this.validador.validaClassificacao("       ");
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testValidaClassificacaoNotInside()
-	{
+
+	/**
+	 * Metodo para testar se, quando é passada uma classificação não válida, uma
+	 * excecao é lancada.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testValidaClassificacaoNotInside() {
 		this.validador.validaClassificacao("livre");
 	}
 
+	/**
+	 * Testa se quando a duração é válida, nenhuma exceção é lançada.
+	 */
 	@Test
-	public void testValidaDuracao()
-	{
+	public void testValidaDuracao() {
 		this.validador.validaDuracao(1);
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testValidaDuracaoInvalida()
-	{
-		this.validador.validaDuracao(0);	//upper bound of (-inf, 0]
+
+	/**
+	 * Metodo para testar se, quando é passada uma duração não válida, uma
+	 * excecao é lancada.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testValidaDuracaoInvalida() {
+		this.validador.validaDuracao(0); // upper bound of (-inf, 0]
 	}
 
+	/**
+	 * Testa se quando o nome do blu-ray é válido, nenhuma exceção é lançada.
+	 */
 	@Test
-	public void testValidaNomeBluray()
-	{
+	public void testValidaNomeBluray() {
 		this.validador.validaNomeBluray("GoT");
 	}
-	
-	@Test(expected=NullPointerException.class)
-	public void testValidaNomeBlurayNull()
-	{
+
+	/**
+	 * Metodo para testar se, quando é passada um nome de blu-ray Null, uma
+	 * excecao é lancada.
+	 */
+	@Test(expected = NullPointerException.class)
+	public void testValidaNomeBlurayNull() {
 		this.validador.validaNomeBluray(null);
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testValidaNomeBlurayInvalido()
-	{
+
+	/**
+	 * Metodo para testar se, quando é passada um nome de blu-ray vazio, uma
+	 * excecao é lancada.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testValidaNomeBlurayInvalido() {
 		this.validador.validaNomeBluray("       ");
 	}
 
+	/**
+	 * Testa se quando o gênero é válido, nenhuma exceção é lançada.
+	 */
 	@Test
-	public void testValidaGenero()
-	{
+	public void testValidaGenero() {
 		this.validador.validaGenero("ACAO");
 		this.validador.validaGenero("ANIMACAO");
 		this.validador.validaGenero("AVENTURA");
@@ -217,39 +289,57 @@ public class ValidadorTest {
 		this.validador.validaGenero("TERROR");
 		this.validador.validaGenero("OUTRO");
 	}
-	
-	@Test(expected=NullPointerException.class)
-	public void testValidaGeneroNull()
-	{
+
+	/**
+	 * Metodo para testar se, quando é passada um gênero Null, uma excecao é
+	 * lancada.
+	 */
+	@Test(expected = NullPointerException.class)
+	public void testValidaGeneroNull() {
 		this.validador.validaGenero(null);
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testValidaGeneroInvalido()
-	{
+
+	/**
+	 * Metodo para testar se, quando é passada um gênero vazio, uma excecao é
+	 * lancada.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testValidaGeneroInvalido() {
 		this.validador.validaGenero("       ");
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testValidaGeneroNotInside()
-	{
+
+	/**
+	 * Metodo para testar se, quando é passada um gênero inválido, uma excecao é
+	 * lancada.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testValidaGeneroNotInside() {
 		this.validador.validaGenero("any");
 	}
 
+	/**
+	 * Testa se quando a temporada é válida, nenhuma exceção é lançada.
+	 */
 	@Test
-	public void testValidaTemporada()
-	{
+	public void testValidaTemporada() {
 		this.validador.validaTemporada(1);
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
+
+	/**
+	 * Metodo para testar se, quando é passada uma temporada inválida, uma
+	 * excecao é lancada.
+	 */
+	@Test(expected = IllegalArgumentException.class)
 	public void testValidaTemporadaInvalida() {
 		this.validador.validaTemporada(0);
 	}
 
+	/**
+	 * Testa se quando é passado uma plataforma válida, nenhuma exceção é
+	 * lançada.
+	 */
 	@Test
-	public void testValidaPlataforma()
-	{
+	public void testValidaPlataforma() {
 		this.validador.validaPlataforma("PC");
 		this.validador.validaPlataforma("MAC");
 		this.validador.validaPlataforma("PS3");
@@ -259,172 +349,249 @@ public class ValidadorTest {
 		this.validador.validaPlataforma("NINTENDO_3DS");
 		this.validador.validaPlataforma("OUTRO");
 	}
-	
-	@Test(expected=NullPointerException.class)
-	public void testValidaPlataformaNull()
-	{
+
+	/**
+	 * Metodo para testar se, quando é passada uma plataforma Null, uma excecao
+	 * é lancada.
+	 */
+	@Test(expected = NullPointerException.class)
+	public void testValidaPlataformaNull() {
 		this.validador.validaPlataforma(null);
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testValidaPlataformaInvalido()
-	{
+
+	/**
+	 * Metodo para testar se, quando é passada uma plataforma vazio, uma excecao
+	 * é lancada.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testValidaPlataformaInvalido() {
 		this.validador.validaPlataforma("       ");
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testValidaPlataformaNotInside()
-	{
+
+	/**
+	 * Metodo para testar se, quando é passada uma plataforma inválida, uma
+	 * excecao é lancada.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testValidaPlataformaNotInside() {
 		this.validador.validaPlataforma("any");
 	}
 
+	/**
+	 * Testa se quando é passado uma ano de lançamento válido, nenhuma exceção é
+	 * lançada.
+	 */
 	@Test
-	public void testValidaAnoLancamento()
-	{
+	public void testValidaAnoLancamento() {
 		this.validador.validaAnoLancamento(1);
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testValidaAnoLancamentoInvalido()
-	{
+
+	/**
+	 * Metodo para testar se, quando é passado ano de lançamento inválido, uma
+	 * excecao é lancada.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testValidaAnoLancamentoInvalido() {
 		this.validador.validaAnoLancamento(0);
 	}
 
+	/**
+	 * Testa se quando é passado uma data válida, nenhuma exceção é lançada.
+	 */
 	@Test
-	public void testValidaData()
-	{
+	public void testValidaData() {
 		this.validador.validaData("15/12/2016");
 	}
-	
-	@Test(expected=NullPointerException.class)
-	public void testValidaDataNull()
-	{
+
+	/**
+	 * Metodo para testar se, quando é passado uma data Null, uma excecao é
+	 * lancada.
+	 */
+	@Test(expected = NullPointerException.class)
+	public void testValidaDataNull() {
 		this.validador.validaData(null);
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testValidaDataInvalido()
-	{
+
+	/**
+	 * Metodo para testar se, quando é passado uma data vazio, uma excecao é
+	 * lancada.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testValidaDataInvalido() {
 		this.validador.validaData("       ");
 	}
 
-	@Test(expected=IllegalArgumentException.class)
-	public void testValidaPreco()
-	{
-		this.validador.validaPreco(0);
+	/**
+	 * Testa se, quando é passado um preço válido, nenhuma exceção é lançada.
+	 */
+	@Test
+	public void testValidaPreco() {
+		this.validador.validaPreco(1);
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testValidaPrecoInvalido()
-	{
+
+	/**
+	 * Metodo para testar se, quando é passado um preço inválido, uma excecao é
+	 * lancada.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testValidaPrecoInvalido() {
 		this.validador.validaPreco(-0.0001);
 	}
 
+	/**
+	 * Testa se, quando é passado uma lista válida para listagem, nenhuma
+	 * exceção é lançada.
+	 */
 	@Test
-	public void testValidaItensParaListagem()
-	{
-		List<Item>itens = new ArrayList<Item>();
-		itens.add(new Temporada("South Park", 1000.00, "Primeira temporada de South Park", 120, 
-				"DEZOITO_ANOS", "COMEDIA", 1));
+	public void testValidaItensParaListagem() {
+		List<Item> itens = new ArrayList<Item>();
+		itens.add(new Temporada("South Park", 1000.00, "Primeira temporada de South Park", 120, "DEZOITO_ANOS",
+				"COMEDIA", 1));
 		this.validador.validaListaParaListagem(itens);
 	}
-	
-	@Test(expected=OperacaoNaoPermitidaNoMomentoExcecao.class)
-	public void testValidaItensParaListagemVazia()
-	{
-		List<Item>itens = new ArrayList<Item>();
+
+	/**
+	 * Metodo para testar se, quando é passado uma lista vazia, uma excecao é
+	 * lancada.
+	 */
+	@Test(expected = OperacaoNaoPermitidaNoMomentoExcecao.class)
+	public void testValidaItensParaListagemVazia() {
+		List<Item> itens = new ArrayList<Item>();
 		this.validador.validaListaParaListagem(itens);
 	}
-	
-	@Test(expected=NullPointerException.class)
-	public void testValidaItensParaListagemNull()
-	{
+
+	/**
+	 * Metodo para testar se, quando é passado uma lista Null, uma excecao é
+	 * lancada.
+	 */
+	@Test(expected = NullPointerException.class)
+	public void testValidaItensParaListagemNull() {
 		this.validador.validaListaParaListagem(null);
 	}
-	
-	@Test(expected=NullPointerException.class)
-	public void testValidaItensParaListagemItemNull()
-	{
-		List<Item>itens = new ArrayList<Item>();
+
+	/**
+	 * Metodo para testar se, quando é passado uma lista com elementos Null, uma
+	 * excecao é lancada.
+	 */
+	@Test(expected = NullPointerException.class)
+	public void testValidaItensParaListagemItemNull() {
+		List<Item> itens = new ArrayList<Item>();
 		itens.add(null);
 		this.validador.validaListaParaListagem(itens);
 	}
 
+	/**
+	 * Testa se, quando é passado um período válido, nenhuma exceção é lançada.
+	 */
 	@Test
-	public void testValidaPeriodo()
-	{
+	public void testValidaPeriodo() {
 		this.validador.validaPeriodo(1);
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testValidaPeriodoInvalido()
-	{
+
+	/**
+	 * Metodo para testar se, quando é passado um período inválido, uma excecao
+	 * é lancada.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testValidaPeriodoInvalido() {
 		this.validador.validaPeriodo(0);
 	}
 
+	/**
+	 * Testa se, quando é passado uma descrição válida, nenhuma exceção é
+	 * lançada.
+	 */
 	@Test
-	public void testValidaDescricao()
-	{
+	public void testValidaDescricao() {
 		this.validador.validaDescricao("Eu devo descrever alguma coisa aqui");
 	}
-	
-	@Test(expected=NullPointerException.class)
-	public void testValidaDescricaoNull()
-	{
+
+	/**
+	 * Metodo para testar se, quando é passado uma descrição Null, uma excecao é
+	 * lancada.
+	 */
+	@Test(expected = NullPointerException.class)
+	public void testValidaDescricaoNull() {
 		this.validador.validaDescricao(null);
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testValidaDescricaoInvalido()
-	{
+
+	/**
+	 * Metodo para testar se, quando é passado uma descrição vazia, uma excecao
+	 * é lancada.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testValidaDescricaoInvalido() {
 		this.validador.validaDescricao("       ");
 	}
 
+	/**
+	 * Teste se, quando é passado um número válido de faixas, nenhuma exceção é
+	 * lançada.
+	 */
 	@Test
-	public void testValidaNumeroDeFaixas()
-	{
+	public void testValidaNumeroDeFaixas() {
 		this.validador.validaNumeroDeFaixas(1);
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testValidaNumeroDeFaixasInvalido()
-	{
+
+	/**
+	 * Metodo para testar se, quando é passado um número inválido de faixas, uma
+	 * excecao é lancada.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testValidaNumeroDeFaixasInvalido() {
 		this.validador.validaNumeroDeFaixas(0);
 	}
 
+	/**
+	 * Teste se, quando é passado um atributo válido, nenhuma exceção é lançada.
+	 */
 	@Test
-	public void testValidaAtributo()
-	{
+	public void testValidaAtributo() {
 		this.validador.validaAtributo("Nome");
 	}
-	
-	@Test(expected=NullPointerException.class)
-	public void testValidaAtributoNull()
-	{
+
+	/**
+	 * Metodo para testar se, quando é passado um atributo Null, uma excecao é
+	 * lancada.
+	 */
+	@Test(expected = NullPointerException.class)
+	public void testValidaAtributoNull() {
 		this.validador.validaAtributo(null);
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testValidaAtributoInvalido()
-	{
+
+	/**
+	 * Metodo para testar se, quando é passado um atributo vazio, uma excecao é
+	 * lancada.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testValidaAtributoInvalido() {
 		this.validador.validaAtributo("       ");
 	}
 
+	/**
+	 * Teste se, quando é passado uma pela de tabuleiro válida, nenhuma exceção
+	 * é lançada.
+	 */
 	@Test
-	public void testValidaPeca()
-	{
+	public void testValidaPeca() {
 		this.validador.validaPeca("Cavalo");
 	}
 
-	@Test(expected=NullPointerException.class)
-	public void testValidaPecaNull()
-	{
+	/**
+	 * Metodo para testar se, quando é passado uma peça de tabuleiro Null, uma
+	 * excecao é lancada.
+	 */
+	@Test(expected = NullPointerException.class)
+	public void testValidaPecaNull() {
 		this.validador.validaPeca(null);
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testValidaPecaInvalido()
-	{
+
+	/**
+	 * Metodo para testar se, quando é passado uma peça de tabuleiro vazia, uma
+	 * excecao é lancada.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testValidaPecaInvalido() {
 		this.validador.validaPeca("       ");
 	}
 }

@@ -9,8 +9,8 @@ import item.Item;
 
 public class UsuarioTest {
 
-	Usuario usuario;
-	Usuario usuario2;
+	private Usuario usuario;
+	private Usuario usuario2;
 	
 	/**
 	 * Inicianlizando usuario e usuario2.
