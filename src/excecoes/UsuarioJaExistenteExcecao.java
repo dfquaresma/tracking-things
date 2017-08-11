@@ -5,7 +5,10 @@ package excecoes;
  * atualização de nome ou telefone) pertence a outro usuário já cadastrado no
  * sistema.
  * 
- * @author David Ferreira
+ * @author Amanda V. A. de Luna e Costa
+ * @author David Ferreira Quaresma
+ * @author Ícaro Dantas de Araújo Lima
+ * @author Paulo Felipe Feitosa da Silva
  *
  */
 public class UsuarioJaExistenteExcecao extends RuntimeException {

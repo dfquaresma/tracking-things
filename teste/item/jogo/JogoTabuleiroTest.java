@@ -5,6 +5,15 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Testa as funcionalidade da clase JogoTabuleiro
+ * 
+ * @author Amanda V. A. de Luna e Costa
+ * @author David Ferreira Quaresma
+ * @author Ícaro Dantas de Araújo Lima
+ * @author Paulo Felipe Feitosa da Silva
+ *
+ */
 public class JogoTabuleiroTest {
 	private JogoTabuleiro jogo;
 

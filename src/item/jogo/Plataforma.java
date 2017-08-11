@@ -3,7 +3,10 @@ package item.jogo;
 /**
  * Representação das plataformas disponíveis.
  * 
- * @author David Ferreira
+ * @author Amanda V. A. de Luna e Costa
+ * @author David Ferreira Quaresma
+ * @author Ícaro Dantas de Araújo Lima
+ * @author Paulo Felipe Feitosa da Silva
  *
  */
 public enum Plataforma {

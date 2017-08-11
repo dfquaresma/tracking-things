@@ -3,7 +3,10 @@ package item.bluray;
 /**
  * Representação das classificações disponíveis.
  * 
- * @author David Ferreira
+ * @author Amanda V. A. de Luna e Costa
+ * @author David Ferreira Quaresma
+ * @author Ícaro Dantas de Araújo Lima
+ * @author Paulo Felipe Feitosa da Silva
  *
  */
 public enum Classificacao {

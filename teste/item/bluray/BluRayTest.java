@@ -6,7 +6,11 @@ import org.junit.Before;
 import org.junit.Test;
 /**
  * Testa os métodos da classe BluRay
- * @author Paulo Felipe Feitosa
+ * 
+ * @author Amanda V. A. de Luna e Costa
+ * @author David Ferreira Quaresma
+ * @author Ícaro Dantas de Araújo Lima
+ * @author Paulo Felipe Feitosa da Silva
  *
  */
 public class BluRayTest
@@ -15,6 +19,9 @@ public class BluRayTest
 	private BluRay blurayFilme;
 	private BluRay blurayShow;
 	
+	/**
+	 * Prepara o ambiente para testes.
+	 */
 	@Before
 	public void criaBluray()
 	{
