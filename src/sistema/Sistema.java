@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import emprestimo.EmprestimoController;
 import excecoes.UsuarioJaExistenteExcecao;
 import item.Item;
-import usuario.Emprestimo;
 import usuario.IdUsuario;
 import usuario.Usuario;
 import util.Listador;
@@ -16,10 +16,7 @@ import util.Validador;
 /**
  * Representação de um sistema de emprestimos de itens entre usuários.
  * 
- * @author Amanda V. A. de Luna e Costa
- * @author David Ferreira Quaresma
- * @author Ícaro Dantas de Araújo Lima
- * @author Paulo Felipe Feitosa da Silva
+ * @author David Ferreira
  *
  */
 public class Sistema {
@@ -27,6 +24,7 @@ public class Sistema {
 	private Map<IdUsuario, Usuario> usuarios;
 	private Listador listador;
 	private Validador validador;
+	private EmprestimoController controladorDeEmprestimos;
 
 	/**
 	 * Constrói um sistema de emprestimos.
@@ -35,6 +33,7 @@ public class Sistema {
 		this.usuarios = new HashMap<>();
 		this.listador = new Listador();
 		this.validador = new Validador();
+		this.controladorDeEmprestimos = new EmprestimoController();
 	}
 
 	/**
@@ -491,10 +490,8 @@ public class Sistema {
 
 		Usuario userEmprestador = getUser(nomeDono, telefoneDono);
 		Usuario userRequerente = getUser(nomeRequerente, telefoneRequerente);
-		Item item = userEmprestador.getItem(nomeItem);
-		Emprestimo emprestimo = new Emprestimo(userEmprestador, userRequerente, item, dataEmprestimo, periodo);
-		userEmprestador.emprestaItem(nomeItem, userRequerente, emprestimo);
-
+		this.controladorDeEmprestimos.registraEmprestimo(userEmprestador, userRequerente, nomeItem, dataEmprestimo, periodo);		
+		
 	}
 
 	/**
@@ -523,7 +520,8 @@ public class Sistema {
 
 		Usuario userEmprestador = getUser(nomeDono, telefoneDono);
 		Usuario userRequerente = getUser(nomeRequerente, telefoneRequerente);
-		userRequerente.devolveItem(nomeItem, dataEmprestimo, dataDevolucao, userEmprestador);
+		this.controladorDeEmprestimos.fecharEmprestimo(userEmprestador, userRequerente, nomeItem, dataEmprestimo, dataDevolucao);
+		
 	}
 
 	/**

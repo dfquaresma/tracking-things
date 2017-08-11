@@ -1,13 +1,18 @@
-package usuario;
+package emprestimo;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import emprestimo.Emprestimo;
 import item.Item;
 import item.jogo.JogoEletronico;
 import item.jogo.JogoTabuleiro;
+import usuario.Usuario;
 
 /**
  * Testa as funcionalidades da classe emprestimo.
@@ -32,7 +37,8 @@ public class EmprestimoTest {
 		this.user1 = new Usuario("Alguem", "3371-0001", "alguem@gmail.com");
 		this.user2 = new Usuario("Outro", "3371-0002", "outro@gmail.com");
 		this.item = new JogoEletronico("Bola Quadrada", 100000, "PC");
-		this.emprestimo = new Emprestimo(user1, user2, item, "08/08/2017", 7);
+		this.user1.cadastrarEletronico("Bola Quadrada", 100000, "PC");
+		this.emprestimo = new Emprestimo(user1, user2, item.getNome(), "08/08/2017", 7);
 	}
 
 	/**
@@ -42,14 +48,14 @@ public class EmprestimoTest {
 	@Test
 	public void testConstrutorFalha() {
 		try {
-			new Emprestimo(null, user2, item, "22/12/12", 9);
+			new Emprestimo(null, user2, item.getNome(), "22/12/12", 9);
 			fail();
 		} catch (Exception e) {
 			assertEquals("Usuario dono nao pode ser nulo", e.getMessage());
 		}
 
 		try {
-			new Emprestimo(user1, null, item, "22/12/12", 9);
+			new Emprestimo(user1, null, item.getNome(), "22/12/12", 9);
 			fail();
 		} catch (Exception e) {
 			assertEquals("Usuario requerente nao pode ser nulo", e.getMessage());
@@ -59,25 +65,25 @@ public class EmprestimoTest {
 			new Emprestimo(user1, user2, null, "22/12/12", 9);
 			fail();
 		} catch (Exception e) {
-			assertEquals("Item nao pode ser nulo", e.getMessage());
+			assertEquals("Nome do item nao pode ser nulo", e.getMessage());
 		}
 
 		try {
-			new Emprestimo(user1, user2, item, null, 9);
+			new Emprestimo(user1, user2, item.getNome(), null, 9);
 			fail();
 		} catch (Exception e) {
 			assertEquals("Data nao pode ser nulo", e.getMessage());
 		}
 
 		try {
-			new Emprestimo(user1, user2, item, "", 9);
+			new Emprestimo(user1, user2, item.getNome(), "", 9);
 			fail();
 		} catch (Exception e) {
 			assertEquals("Data nao pode ser vazio", e.getMessage());
 		}
 
 		try {
-			new Emprestimo(user1, user2, item, "22/12/12", 0);
+			new Emprestimo(user1, user2, item.getNome(), "22/12/12", 0);
 			fail();
 		} catch (Exception e) {
 			assertEquals("Periodo nao pode ser menor ou iguals a zero.", e.getMessage());
@@ -120,23 +126,47 @@ public class EmprestimoTest {
 	 */
 	@Test
 	public void testEqualsObject() {
-		Emprestimo emprestimo = new Emprestimo(this.user1, this.user2, this.item, "08/08/2017", 7);
+
+		try {
+			emprestimo = new Emprestimo(this.user1, this.user2, this.item.getNome(), "08/08/2017", 134);
+			fail();
+		} catch (Exception e) {
+			assertEquals("Item emprestado no momento", e.getMessage());
+		}
+
+		Usuario user1 = new Usuario("Alguem", "3371-0001", "alguem@gmail.com");
+		Usuario user2 = new Usuario("Outro", "3371-0002", "outro@gmail.com");
+		Item item = new JogoEletronico("Bola Quadrada", 100000, "PC");
+		user1.cadastrarEletronico("Bola Quadrada", 100000, "PC");
+		Emprestimo emprestimo = new Emprestimo(user1, user2, item.getNome(), "08/08/2017", 7);
 		assertTrue(this.emprestimo.equals(emprestimo));
 
-		emprestimo = new Emprestimo(this.user1, this.user2, this.item, "08/08/2017", 134);
-		assertTrue(this.emprestimo.equals(emprestimo));
-
-		emprestimo = new Emprestimo(this.user1, this.user2, this.item, "08/08/2018", 134);
+		user1 = new Usuario("Alguem", "3371-0001", "alguem@gmail.com");
+		user2 = new Usuario("Outro", "3371-0002", "outro@gmail.com");
+		item = new JogoEletronico("Bola Quadrada", 100000, "PC");
+		user1.cadastrarEletronico("Bola Quadrada", 100000, "PC");
+		emprestimo = new Emprestimo(user1, user2, item.getNome(), "08/08/2018", 7);
 		assertFalse(this.emprestimo.equals(emprestimo));
 
-		emprestimo = new Emprestimo(this.user2, this.user1, this.item, "08/08/2017", 134);
+		user1 = new Usuario("Alguem", "3371-0001", "alguem@gmail.com");
+		user2 = new Usuario("Outro", "3371-0002", "outro@gmail.com");
+		item = new JogoEletronico("Bola Quadrada", 100000, "PC");
+		user2.cadastrarEletronico("Bola Quadrada", 100000, "PC");
+		emprestimo = new Emprestimo(user2, user1, item.getNome(), "08/08/2017", 7);
 		assertFalse(this.emprestimo.equals(emprestimo));
 
-		emprestimo = new Emprestimo(this.user1, new Usuario("Abra", "3371-0003", "abriu@gmail.com"), this.item,
+		user1 = new Usuario("Alguem", "3371-0001", "alguem@gmail.com");
+		item = new JogoEletronico("Bola Quadrada", 100000, "PC");
+		user1.cadastrarEletronico("Bola Quadrada", 100000, "PC");
+		emprestimo = new Emprestimo(user1, new Usuario("Abra", "3371-0003", "abriu@gmail.com"), this.item.getNome(),
 				"08/08/2017", 134);
 		assertFalse(this.emprestimo.equals(emprestimo));
 
-		emprestimo = new Emprestimo(this.user1, this.user2, new JogoTabuleiro("Damas", 1.99), "08/08/2017", 134);
+		user1 = new Usuario("Alguem", "3371-0001", "alguem@gmail.com");
+		user2 = new Usuario("Outro", "3371-0002", "outro@gmail.com");
+		user1.cadastrarJogoTabuleiro("Damas", 1.99);
+		emprestimo = new Emprestimo(user1, user2, new JogoTabuleiro("Damas", 1.99).getNome(), "08/08/2017",
+				134);
 		assertFalse(this.emprestimo.equals(emprestimo));
 
 	}
