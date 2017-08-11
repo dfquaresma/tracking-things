@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 /**
- * Descricao: Testa os metodos da classe sistema
+ * Testa os metodos da classe sistema
  * @author Amanda V. A. de Luna e Costa
  *
  */
