@@ -1,7 +1,6 @@
 package item;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,6 +15,9 @@ public class ItemTest {
 		this.filmeTest = new Filme("Kickass", 220, 150, "ACAO", "DEZ_ANOS", 2002);
 	}
 	
+	/**
+	 * Metodo que testa a corretude do Construtor de Item.
+	 */
 	@Test
 	public void testItem()
 	{
@@ -24,6 +26,9 @@ public class ItemTest {
 		assertEquals("Nao emprestado", this.filmeTest.getEstadoEmprestimo());
 	}
 	
+	/**
+	 * Metodo que testa a corretude do metodo podeSerEmprestado de Item.
+	 */
 	@Test
 	public void testPodeSerEmprestado()
 	{
@@ -32,6 +37,9 @@ public class ItemTest {
 		assertEquals(false, this.filmeTest.podeSerEmprestado());
 	}
 	
+	/**
+	 * Metodo que testa a corretude do metodo setNome de Item.
+	 */
 	@Test
 	public void testSetNome()
 	{
@@ -39,30 +47,46 @@ public class ItemTest {
 		assertEquals("Lagoa Azul", this.filmeTest.getNome());
 	}
 	
+	/**
+	 * Metodo que testa o comportamento do metodo setNome de Item quando o nome passado eh nulo.
+	 */
 	@Test(expected=NullPointerException.class)
 	public void testSetNomeNull()
 	{
 		this.filmeTest.setNome(null);
 	}
 	
+	/**
+	 * Metodo que testa o comportamento do metodo setNome de Item quando o nome passado eh vazio.
+	 */
 	@Test(expected=IllegalArgumentException.class)
 	public void testSetNomeVazio()
 	{
 		this.filmeTest.setNome("");
 	}
 	
+	/**
+	 * Metodo que testa a corretude do metodo setPreco de Item.
+	 */
 	@Test
 	public void testSetPreco()
 	{
 		this.filmeTest.setPreco(345.50);
+		assertEquals(345.50, this.filmeTest.getPreco(), 0.0001);
 	}
 	
+	/**
+	 * Metodo que testa o comportamento do metodo setPreco quando o preco do Item eh invalido.
+	 */
 	@Test(expected=IllegalArgumentException.class)
 	public void testSetPrecoInvalido()
 	{
 		this.filmeTest.setPreco(0.000);
 	}
 	
+	/**
+	 * Metodo que testa a corretude do metodo isEmprestado de Item.
+	 */
 	@Test
 	public void testIsEmprestado()
 	{
@@ -72,6 +96,9 @@ public class ItemTest {
 		assertEquals(true, this.filmeTest.isEmprestado());
 	}
 	
+	/**
+	 * Metodo que testa a corretude do metodo getEstadoEmprestimo de Item.
+	 */
 	@Test
 	public void testGetEstadoEmprestimo()
 	{
@@ -80,6 +107,9 @@ public class ItemTest {
 		assertEquals("Emprestado", this.filmeTest.getEstadoEmprestimo());
 	}
 	
+	/**
+	 * Metodo que testa a corretude do metodo compareTo de Item.
+	 */
 	@Test
 	public void testCompareTo()
 	{
@@ -89,6 +119,9 @@ public class ItemTest {
 		assertEquals(true, this.filmeTest.compareTo(filmeTest) == 0);
 	}
 
+	/**
+	 * Metodo que testa a corretude dos getters e setters de Item.
+	 */
 	@Test
 	public void testGetsDeItem()
 	{
@@ -97,37 +130,6 @@ public class ItemTest {
 
 		assertEquals("Kickass", filmeTest.getInfo("Nome"));
 		assertEquals("220.0", filmeTest.getInfo("Preco"));
-	}
-	
-	@Test
-	public void testAttNome() {
-		try {
-			filmeTest.setNome(null);
-			fail();
-		} catch (NullPointerException iae) {
-			assertEquals("Nome nao pode ser nulo", iae.getMessage());
-		}
-		try {
-			filmeTest.setNome("");
-			fail();
-		} catch (IllegalArgumentException iae) {
-			assertEquals("Nome nao pode ser vazio", iae.getMessage());
-		}
-		filmeTest.setNome("NomeTest1");
-		assertEquals("NomeTest1", filmeTest.getNome());
-
-	}
-
-	@Test
-	public void testAttPreco() {
-		try {
-			filmeTest.setPreco(0);
-			fail();
-		} catch (IllegalArgumentException iae) {
-			assertEquals("Preco invalido", iae.getMessage());
-		}
-		filmeTest.setPreco(100);
-		assertEquals(100, filmeTest.getPreco(), 0.01);
 	}
 	
 }
