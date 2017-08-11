@@ -28,8 +28,8 @@ public abstract class BluRay extends Item {
 	 * @param classificacao
 	 *            a classificação do blu-ray.
 	 */
-	public BluRay(String nome, double valor, int duracao, String classificacao) {
-		super(nome, valor);
+	public BluRay(String nome, double preco, int duracao, String classificacao) {
+		super(nome, preco);
 		this.validador.validaDuracao(duracao);
 		this.validador.validaClassificacao(classificacao);
 		

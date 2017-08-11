@@ -31,8 +31,8 @@ public class Filme extends BluRay {
 	 * @param anoDeLancamento
 	 *            o ano de lançamento do filme.
 	 */
-	public Filme(String nome, double valor, int duracao, String genero, String classificacao, int anoDeLancamento) {
-		super(nome, valor, duracao, classificacao);
+	public Filme(String nome, double preco, int duracao, String genero, String classificacao, int anoDeLancamento) {
+		super(nome, preco, duracao, classificacao);
 		this.validador.validaGenero(genero);
 		this.validador.validaAnoLancamento(anoDeLancamento);
 

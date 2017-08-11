@@ -22,7 +22,9 @@ public abstract class Item implements Comparable<Item> {
 	 * Constrói um item com nome e preço.
 	 * 
 	 * @param nome
+	 *            o nome do item.
 	 * @param preco
+	 *            o preço do item.
 	 */
 	public Item(String nome, double preco) {
 		this.validador = new Validador();
@@ -107,7 +109,7 @@ public abstract class Item implements Comparable<Item> {
 	/**
 	 * Recupera uma string representando o estado do item.
 	 * 
-	 * @return
+	 * @return uma representação em string do estado do item.
 	 */
 	public String getEstadoEmprestimo() {
 		return this.isEmprestado() ? "Emprestado" : "Nao emprestado";

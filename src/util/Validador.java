@@ -283,7 +283,7 @@ public class Validador {
 	/**
 	 * Valida um usuario, recebido no parâmetro, requerente de um item.
 	 * 
-	 * @param dono
+	 * @param requerente
 	 *            o requerente a ser validado.
 	 */
 	public void validaRequerente(Usuario requerente) {
@@ -303,6 +303,8 @@ public class Validador {
 	/**
 	 * Valida se valor tem o formato de um Inteiro.
 	 * 
+	 * @param atributo
+	 *            o atributo que valor representa
 	 * @param valor
 	 *            - String a ser convertida em Int.
 	 */
@@ -323,6 +325,8 @@ public class Validador {
 	/**
 	 * Valida se valor tem o formato de um Double.
 	 * 
+	 * @param atributo
+	 *            o atributo que o valor representa.
 	 * @param valor
 	 *            - String a ser convertida em Int.
 	 */

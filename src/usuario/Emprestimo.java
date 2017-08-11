@@ -31,14 +31,19 @@ public class Emprestimo {
 	private boolean finalizado;
 
 	/**
-	 * Constrói um emprestimo com o dono do item, o requerente do item, o item, a
-	 * data de emprestimo e o período de emprestimo.
+	 * Constrói um emprestimo com o dono do item, o requerente do item, o item,
+	 * a data de emprestimo e o período de emprestimo.
 	 * 
 	 * @param dono
+	 *            o usuário dono do item a ser emprestado.
 	 * @param requerente
+	 *            o usuário requerente do item a ser emprestado.
 	 * @param item
+	 *            o item a ser emprestado.
 	 * @param dataEmprestimo
+	 *            a data do início do emprestimo.
 	 * @param periodo
+	 *            o período em dias em que o item passará emprestado.
 	 */
 	public Emprestimo(Usuario dono, Usuario requerente, Item item, String dataEmprestimo, int periodo) {
 		this.validador = new Validador();
@@ -119,8 +124,8 @@ public class Emprestimo {
 	}
 
 	/**
-	 * Recupera o período de dias que o item passará (ou passou, caso o emprestimo
-	 * tenha sido finalizado) emprestado.
+	 * Recupera o período de dias que o item passará (ou passou, caso o
+	 * emprestimo tenha sido finalizado) emprestado.
 	 * 
 	 * @return o período de dias.
 	 */
@@ -258,7 +263,7 @@ public class Emprestimo {
 		if (this.finalizado) {
 			throw new OperacaoNaoPermitidaNoMomentoExcecao("Este emprestimo ja foi finalizado.");
 		}
-		
+
 		try {
 			this.dataRealDaDevolucaoDoItem = this.dateFormat.parse(dataDevolucao);
 		} catch (ParseException e) {

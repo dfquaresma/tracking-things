@@ -285,11 +285,11 @@ public class Usuario {
 	 * @param duracao
 	 *            a duração do episódio.
 	 */
-	public void addBlueray(String nomeBlueray, int duracao) {
-		this.validador.validaNome(nomeBlueray);
+	public void addBlueray(String nomeBluray, int duracao) {
+		this.validador.validaNome(nomeBluray);
 		this.validador.validaDuracao(duracao);
 
-		Item item = getItem(nomeBlueray);
+		Item item = getItem(nomeBluray);
 		if (!(item instanceof Temporada)) {
 			throw new ItemNaoEhDoTipoEsperadoExcecao("O item de nome informado nao é do tipo temporada");
 		}

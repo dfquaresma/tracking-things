@@ -31,8 +31,8 @@ public class Show extends BluRay {
 	 * @param classificacao
 	 *            a classificação do show.
 	 */
-	public Show(String nome, double valor, int duracao, int numDeFaixas, String artista, String classificacao) {
-		super(nome, valor, duracao, classificacao);
+	public Show(String nome, double preco, int duracao, int numDeFaixas, String artista, String classificacao) {
+		super(nome, preco, duracao, classificacao);
 		this.validador.validaNumeroDeFaixas(numDeFaixas);
 		this.validador.validaArtista(artista);
 		

@@ -38,9 +38,9 @@ public class Temporada extends BluRay {
 	 * @param temporada
 	 *            a edição da temporada.
 	 */
-	public Temporada(String nome, double valor, String descricao, int duracao, String classificacao, String genero,
+	public Temporada(String nome, double preco, String descricao, int duracao, String classificacao, String genero,
 			int temporada) {
-		super(nome, valor, duracao, classificacao);
+		super(nome, preco, duracao, classificacao);
 		this.validador.validaDescricao(descricao);
 		this.validador.validaGenero(genero);
 		this.validador.validaTemporada(temporada);

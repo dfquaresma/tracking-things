@@ -7,9 +7,21 @@ import org.junit.Test;
 
 import item.bluray.Filme;
 
+/**
+ * Testa as funcionalidades da clase Item.
+ * 
+ * @author Amanda V. A. de Luna e Costa
+ * @author David Ferreira Quaresma
+ * @author Ícaro Dantas de Araújo Lima
+ * @author Paulo Felipe Feitosa da Silva
+ *
+ */
 public class ItemTest {
 	private Item filmeTest;
 	
+	/**
+	 * Prepara o ambiente de testes. 
+	 */
 	@Before
 	public void setUp() {
 		this.filmeTest = new Filme("Kickass", 220, 150, "ACAO", "DEZ_ANOS", 2002);
