@@ -118,6 +118,43 @@ public class ItemTest {
 		assertEquals(true, newItem.compareTo(filmeTest) > 0);
 		assertEquals(true, this.filmeTest.compareTo(filmeTest) == 0);
 	}
+	
+	/**
+	 * Metodo que testa a corretude do metodo getInfo de Item.
+	 */
+	@Test
+	public void testGetInfo()
+	{
+		assertEquals("Kickass", this.filmeTest.getInfo("Nome"));
+		assertEquals("220.0", this.filmeTest.getInfo("Preco"));
+	}
+	
+	/**
+	 * Metodo que testa o comportamento de getInfo quando o atributo passado eh nulo.
+	 */
+	@Test(expected=NullPointerException.class)
+	public void testGetInfoAtributoNull()
+	{
+		this.filmeTest.getInfo(null);
+	}
+	
+	/**
+	 * Metodo que testa o comportamento de getInfo quando o atributo passado eh vazio.
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	public void testGetInfoAtributoVazio()
+	{
+		this.filmeTest.getInfo(" ");
+	}
+	
+	/**
+	 * Metodo que testa o comportamento de getInfo quando o atributo passado eh Invalido.
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	public void testGetInfoAtributoInvalido()
+	{
+		this.filmeTest.getInfo("naosouatributo");
+	}
 
 	/**
 	 * Metodo que testa a corretude dos getters e setters de Item.
