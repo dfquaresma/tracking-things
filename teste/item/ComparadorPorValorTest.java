@@ -11,7 +11,10 @@ import item.jogo.JogoTabuleiro;
 /**
  * Testa se o comparadro de itens por valor funciona corretamente.
  * 
- * @author David Ferreira
+ * @author Amanda V. A. de Luna e Costa
+ * @author David Ferreira Quaresma
+ * @author Ícaro Dantas de Araújo Lima
+ * @author Paulo Felipe Feitosa da Silva
  *
  */
 public class ComparadorPorValorTest {

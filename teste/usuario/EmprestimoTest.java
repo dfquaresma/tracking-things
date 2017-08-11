@@ -12,7 +12,10 @@ import item.jogo.JogoTabuleiro;
 /**
  * Testa as funcionalidades da classe emprestimo.
  * 
- * @author David Ferreira
+ * @author Amanda V. A. de Luna e Costa
+ * @author David Ferreira Quaresma
+ * @author Ícaro Dantas de Araújo Lima
+ * @author Paulo Felipe Feitosa da Silvaw
  *
  */
 public class EmprestimoTest {

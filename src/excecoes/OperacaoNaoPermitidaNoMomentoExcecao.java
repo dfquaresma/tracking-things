@@ -3,7 +3,10 @@ package excecoes;
 /**
  * Lançado para indicar que a operação não é permitida no momento.
  * 
- * @author David Ferreira
+ * @author Amanda V. A. de Luna e Costa
+ * @author David Ferreira Quaresma
+ * @author Ícaro Dantas de Araújo Lima
+ * @author Paulo Felipe Feitosa da Silva
  *
  */
 public class OperacaoNaoPermitidaNoMomentoExcecao extends RuntimeException {

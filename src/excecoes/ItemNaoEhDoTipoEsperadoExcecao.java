@@ -4,7 +4,10 @@ package excecoes;
  * Lançado para indicar que a operação sobre o item de interesse é inválida pois
  * o item não é do tipo esperado para a operação.
  * 
- * @author David Ferreira
+ * @author Amanda V. A. de Luna e Costa
+ * @author David Ferreira Quaresma
+ * @author Ícaro Dantas de Araújo Lima
+ * @author Paulo Felipe Feitosa da Silva
  *
  */
 public class ItemNaoEhDoTipoEsperadoExcecao extends RuntimeException {

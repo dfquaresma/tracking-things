@@ -2,6 +2,12 @@ package item.bluray;
 
 /**
  * Representação de um filme blu-ray.
+ * 
+ * @author Amanda V. A. de Luna e Costa
+ * @author David Ferreira Quaresma
+ * @author Ícaro Dantas de Araújo Lima
+ * @author Paulo Felipe Feitosa da Silva
+ * 
  */
 public class Filme extends BluRay {
 
@@ -29,7 +35,7 @@ public class Filme extends BluRay {
 		super(nome, valor, duracao, classificacao);
 		this.validador.validaGenero(genero);
 		this.validador.validaAnoLancamento(anoDeLancamento);
-		
+
 		this.genero = Genero.valueOf(genero);
 		this.anoDeLancamento = anoDeLancamento;
 	}
@@ -103,7 +109,7 @@ public class Filme extends BluRay {
 				+ this.getEstadoEmprestimo() + ", " + this.getDuracao() + " min, " + this.getClassificacao() + ", "
 				+ this.getGenero() + ", " + this.getAnoDeLancamento();
 	}
-	
+
 	/**
 	 * Sobrescreve o método da classe mãe para verificar se o atributo a ser
 	 * atualizado pertence a esta classe. Caso não seja, o método da classe mãe
@@ -113,19 +119,19 @@ public class Filme extends BluRay {
 	public void atualizaAtributo(String atributo, String valor) {
 		this.validador.validaAtributo(atributo);
 		this.validador.validaValor(valor);
-		
+
 		if (atributo.equals("Genero")) {
 			this.validador.validaGenero(valor);
-			this.genero = Genero.valueOf(valor);			
-			
+			this.genero = Genero.valueOf(valor);
+
 		} else if (atributo.equals("Ano de Lancamento")) {
 			this.validador.validaConversaoStringToInt(atributo, valor);
 			this.anoDeLancamento = Integer.parseInt(valor);
-		
+
 		} else {
 			super.atualizaAtributo(atributo, valor);
 		}
-		
+
 	}
 
 }

@@ -14,7 +14,10 @@ import excecoes.OperacaoNaoPermitidaNoMomentoExcecao;
 /**
  * Testa a classe de validação.
  * 
- * @author David Ferreira
+ * @author Amanda V. A. de Luna e Costa
+ * @author David Ferreira Quaresma
+ * @author Ícaro Dantas de Araújo Lima
+ * @author Paulo Felipe Feitosa da Silva
  *
  */
 public class ValidadorTest {

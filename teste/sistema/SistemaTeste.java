@@ -9,11 +9,16 @@ import org.junit.Test;
  * Testa os metodos da classe sistema
  * 
  * @author Amanda V. A. de Luna e Costa
- *
+ * @author David Ferreira Quaresma
+ * @author Ícaro Dantas de Araújo Lima
+ * @author Paulo Felipe Feitosa da Silva
  */
 public class SistemaTeste {
 	private Sistema sistema;
 
+	/**
+	 * Prepara o ambiente para testes.
+	 */
 	@Before
 	public void setUp() {
 		this.sistema = new Sistema();
