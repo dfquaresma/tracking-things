@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import item.bluray.Episodio;
 /**
- * Testa a criacao de um episodios
+ * Testa a criacao de um episodio
  * @author ghost666
  *
  */
