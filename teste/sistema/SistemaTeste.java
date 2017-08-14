@@ -2524,7 +2524,7 @@ public class SistemaTeste {
 			sistema.devolverItem("Rick", "4002-8922", "Morty", "4220", "Bioshock", "09/08/2017", "11/08/2017");
 			fail();
 		} catch (IllegalArgumentException iae) {
-			assertEquals("Emprestimo nao encontrado", iae.getMessage());
+			assertEquals("Emprestimo nao encontrado.", iae.getMessage());
 		}
 	}
 }

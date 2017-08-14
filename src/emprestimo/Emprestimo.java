@@ -1,4 +1,4 @@
-package usuario;
+package emprestimo;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -7,15 +7,13 @@ import java.util.Date;
 
 import excecoes.OperacaoNaoPermitidaNoMomentoExcecao;
 import item.Item;
+import usuario.Usuario;
 import util.Validador;
 
 /**
  * Representação de um emprestimo.
  * 
- * @author Amanda V. A. de Luna e Costa
- * @author David Ferreira Quaresma
- * @author Ícaro Dantas de Araújo Lima
- * @author Paulo Felipe Feitosa da Silva
+ * @author David Ferreira
  *
  */
 public class Emprestimo {
@@ -35,27 +33,21 @@ public class Emprestimo {
 	 * a data de emprestimo e o período de emprestimo.
 	 * 
 	 * @param dono
-	 *            o usuário dono do item a ser emprestado.
 	 * @param requerente
-	 *            o usuário requerente do item a ser emprestado.
 	 * @param item
-	 *            o item a ser emprestado.
 	 * @param dataEmprestimo
-	 *            a data do início do emprestimo.
 	 * @param periodo
-	 *            o período em dias em que o item passará emprestado.
 	 */
-	public Emprestimo(Usuario dono, Usuario requerente, Item item, String dataEmprestimo, int periodo) {
+	public Emprestimo(Usuario dono, Usuario requerente, String nomeItem, String dataEmprestimo, int periodo) {
 		this.validador = new Validador();
 		this.validador.validaDono(dono);
 		this.validador.validaRequerente(requerente);
-		this.validador.validaItem(item);
 		this.validador.validaData(dataEmprestimo);
 		this.validador.validaPeriodo(periodo);
 
 		this.dono = dono;
 		this.requerente = requerente;
-		this.item = item;
+		this.item = dono.getItem(nomeItem);
 
 		this.dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		try {
@@ -66,6 +58,37 @@ public class Emprestimo {
 
 		this.periodo = periodo;
 		this.finalizado = false;
+				
+		this.dono.emprestaItem(getNomeItem());
+
+	}
+
+	/**
+	 * Recupera o usuário dono do item deste emprestimo.
+	 * 
+	 * @return o usuário dono do item deste emprestimo.
+	 */
+	public Usuario getDono() {
+		return this.dono;
+
+	}
+
+	/**
+	 * Recupera o usuário requerente do item deste emprestimo.
+	 * 
+	 * @return o usuário requerente do item deste emprestimo.
+	 */
+	public Usuario getRequerente() {
+		return this.requerente;
+	}
+
+	/**
+	 * Recupera o item emprestado.
+	 * 
+	 * @return o item emprestado.
+	 */
+	public Item getItem() {
+		return this.item;
 
 	}
 
@@ -263,13 +286,13 @@ public class Emprestimo {
 		if (this.finalizado) {
 			throw new OperacaoNaoPermitidaNoMomentoExcecao("Este emprestimo ja foi finalizado.");
 		}
-
 		try {
 			this.dataRealDaDevolucaoDoItem = this.dateFormat.parse(dataDevolucao);
 		} catch (ParseException e) {
 			throw new IllegalArgumentException("O formato da data inserido está incorreto, utilize dd/MM/yyyy");
 		}
 		this.finalizado = true;
+		this.dono.recebeItem(getNomeItem());
 	}
 
 }

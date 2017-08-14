@@ -2,9 +2,7 @@ package usuario;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import excecoes.ItemNaoEhDoTipoEsperadoExcecao;
 import excecoes.OperacaoNaoPermitidaNoMomentoExcecao;
@@ -19,10 +17,7 @@ import util.Validador;
 /**
  * Representação de um usuário no sistema.
  * 
- * @author Amanda V. A. de Luna e Costa
- * @author David Ferreira Quaresma
- * @author Ícaro Dantas de Araújo Lima
- * @author Paulo Felipe Feitosa da Silva
+ * @author David Ferreira
  *
  */
 public class Usuario {
@@ -31,8 +26,6 @@ public class Usuario {
 	private String telefone;
 	private String email;
 	private Map<String, Item> itens;
-	private Set<Emprestimo> emprestimosComoEmprestador;
-	private Set<Emprestimo> emprestimosComoRequerente;
 	private Validador validador;
 
 	/**
@@ -54,8 +47,6 @@ public class Usuario {
 		this.telefone = telefone;
 		this.email = email;
 		this.itens = new HashMap<>();
-		this.emprestimosComoEmprestador = new HashSet<>();
-		this.emprestimosComoRequerente = new HashSet<>();
 
 	}
 
@@ -285,11 +276,11 @@ public class Usuario {
 	 * @param duracao
 	 *            a duração do episódio.
 	 */
-	public void addBlueray(String nomeBluray, int duracao) {
-		this.validador.validaNome(nomeBluray);
+	public void addBlueray(String nomeBlueray, int duracao) {
+		this.validador.validaNome(nomeBlueray);
 		this.validador.validaDuracao(duracao);
 
-		Item item = getItem(nomeBluray);
+		Item item = getItem(nomeBlueray);
 		if (!(item instanceof Temporada)) {
 			throw new ItemNaoEhDoTipoEsperadoExcecao("O item de nome informado nao é do tipo temporada");
 		}
@@ -327,7 +318,7 @@ public class Usuario {
 		Item itemAtt = getItem(nomeItem);
 
 		if (atributo.equals("Nome")) {
-			
+
 			this.validaAttNomeDeItem(valor);
 			itemAtt.atualizaAtributo(atributo, valor);
 			this.itens.put(valor, itemAtt);
@@ -378,59 +369,35 @@ public class Usuario {
 	}
 
 	/**
-	 * Empresta um item a um outro usuário.
+	 * Atualiza os status de um item ao ser emprestado.
 	 * 
 	 * @param nomeItem
-	 *            o nome do item a ser emprestado.
-	 * @param userRequerente
-	 *            o usuário que pegará emprestado o item.
-	 * @param emprestimo
-	 *            o emprestimo a ser adicionado a lista de emprestimos caso o
-	 *            item esteja disponível para emprestimo.
+	 *            o nome do item que está sendo emprestado.
 	 */
-	public void emprestaItem(String nomeItem, Usuario userRequerente, Emprestimo emprestimo) {
+	public void emprestaItem(String nomeItem) {
 		this.validaItemParaUso(nomeItem);
 
 		Item item = this.getItem(nomeItem);
-
 		if (item.isEmprestado()) {
 			throw new OperacaoNaoPermitidaNoMomentoExcecao("Item emprestado no momento");
 		}
-
 		item.setEmprestado(true);
-		userRequerente.emprestimosComoRequerente.add(emprestimo);
-		this.emprestimosComoEmprestador.add(emprestimo);
 	}
 
 	/**
-	 * Devolve um item finalizando o emprestimo.
+	 * Atualiza os status de um item que está sendo devoldido.
 	 * 
 	 * @param nomeItem
-	 *            o nome do item emprestado.
-	 * @param dataEmprestimo
-	 *            a data em que o emprestimo se iniciou.
-	 * @param dataDevolucao
-	 *            a data em que o emprestimo foi finalizado.
-	 * @param userEmprestador
-	 *            o usuário dono do item.
+	 *            o nome do item que está sendo devolvido.
 	 */
-	public void devolveItem(String nomeItem, String dataEmprestimo, String dataDevolucao, Usuario userEmprestador) {
-		Emprestimo emprestimo = encontraEmprestimo(userEmprestador, nomeItem, dataEmprestimo);
-		emprestimo.finaliza(dataDevolucao);
-		userEmprestador.getItem(nomeItem).setEmprestado(false);
-	}
+	public void recebeItem(String nomeItem) {
+		this.validaItemParaUso(nomeItem);
 
-	private Emprestimo encontraEmprestimo(Usuario userEmprestador, String nomeItem, String dataEmprestimo) {
-
-		for (Emprestimo emprestimo : emprestimosComoRequerente) {
-			if (emprestimo.getNomeDono().equals(userEmprestador.nome)
-					&& emprestimo.getTelefoneDono().equals(userEmprestador.telefone)
-					&& emprestimo.getNomeItem().equals(nomeItem)
-					&& emprestimo.getDataEmprestimo().equals(dataEmprestimo)) {
-				return emprestimo;
-			}
+		Item item = this.getItem(nomeItem);
+		if (!item.isEmprestado()) {
+			throw new OperacaoNaoPermitidaNoMomentoExcecao("Item nao esta emprestado no momento");
 		}
-		throw new IllegalArgumentException("Emprestimo nao encontrado");
+		item.setEmprestado(false);
 	}
 
 	/**
@@ -479,7 +446,7 @@ public class Usuario {
 	}
 
 	private void validaItemParaUso(String nomeItem) {
-		this.validador.validaNome(nomeItem);
+		this.validador.validaNomeItem(nomeItem);
 
 		if (!(itens.containsKey(nomeItem))) {
 			throw new IllegalArgumentException("Item nao encontrado");

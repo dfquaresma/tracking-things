@@ -502,8 +502,7 @@ public class UsuarioTest {
 		this.testCadastrarEletronico();
 
 		Item item = this.usuario.getItem("GTA San Andreas");
-		Emprestimo emprestimo = new Emprestimo(this.usuario, this.usuario2, item, "06/08/2017", 7);
-		this.usuario.emprestaItem(item.getNome(), this.usuario2, emprestimo);
+		this.usuario.emprestaItem(item.getNome());
 		assertTrue(this.usuario.getItem("GTA San Andreas").isEmprestado());
 	}
 
@@ -511,9 +510,9 @@ public class UsuarioTest {
 	 * Apenas testa se não está dando erro no devolveItem.
 	 */
 	@Test
-	public void testDevolveItem() {
+	public void testRecebeItem() {
 		this.testEmprestaItem();
-		this.usuario2.devolveItem("GTA San Andreas", "06/08/2017", "07/08/2017", this.usuario);
+		this.usuario.recebeItem("GTA San Andreas");
 	}
 
 	/**
