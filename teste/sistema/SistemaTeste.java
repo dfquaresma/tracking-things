@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import usuario.UsuarioController;
+
 /**
  * Testa os metodos da classe sistema
  * 
@@ -14,14 +16,14 @@ import org.junit.Test;
  * @author Paulo Felipe Feitosa da Silva
  */
 public class SistemaTeste {
-	private Sistema sistema;
+	private UsuarioController sistema;
 
 	/**
 	 * Prepara o ambiente para testes.
 	 */
 	@Before
 	public void setUp() {
-		this.sistema = new Sistema();
+		this.sistema = new UsuarioController();
 	}
 
 	/**

@@ -16,6 +16,7 @@ public abstract class Item implements Comparable<Item> {
 	private String nome;
 	private double preco;
 	private boolean emprestado;
+	private int qtdVezesEmprestado;
 	protected Validador validador;
 
 	/**
@@ -34,6 +35,7 @@ public abstract class Item implements Comparable<Item> {
 		this.nome = nome;
 		this.preco = preco;
 		this.emprestado = false;
+		this.qtdVezesEmprestado = 0;
 	}
 
 	/**
@@ -72,6 +74,15 @@ public abstract class Item implements Comparable<Item> {
 	 */
 	public double getPreco() {
 		return this.preco;
+	}
+
+	/**
+	 * Recupera o número de vezes que este item foi emprestado.
+	 * 
+	 * @return quantas vezes foi emprestado.
+	 */
+	public int getQtdVezesEmprestado() {
+		return this.qtdVezesEmprestado;
 	}
 
 	/**
