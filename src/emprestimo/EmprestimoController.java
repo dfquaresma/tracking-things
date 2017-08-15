@@ -1,18 +1,77 @@
 package emprestimo;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import item.Item;
 import usuario.Usuario;
+import usuario.UsuarioController;
 
 public class EmprestimoController {
 	private Set<Emprestimo> emprestimos;
+	private UsuarioController usuarioController;
 
-	public EmprestimoController() {
+	public EmprestimoController(UsuarioController usuarioController) {
 		this.emprestimos = new HashSet<>();
+		this.usuarioController = usuarioController;
 	}
 
+	/**
+	 * Registra um emprestimo de um item.
+	 * 
+	 * @param nomeDono
+	 *            o nome do usuário dono do item.
+	 * @param telefoneDono
+	 *            o telefone do usuário dono do item.
+	 * @param nomeRequerente
+	 *            o nome do usuário requerente do item.
+	 * @param telefoneRequerente
+	 *            o telefone do usuário requerente do item.
+	 * @param nomeItem
+	 *            o nome do item.
+	 * @param dataEmprestimo
+	 *            a data em que o emprestimo foi iniciado.
+	 * @param periodo
+	 *            o período em que o item ficará emprestado.
+	 */
+	public void registrarEmprestimo(String nomeDono, String telefoneDono, String nomeRequerente,
+			String telefoneRequerente, String nomeItem, String dataEmprestimo, int periodo) {
+
+		Usuario userEmprestador = usuarioController.getUser(nomeDono, telefoneDono);
+		Usuario userRequerente = usuarioController.getUser(nomeRequerente, telefoneRequerente);
+		registraEmprestimo(userEmprestador, userRequerente, nomeItem, dataEmprestimo, periodo);		
+		
+	}
+
+	/**
+	 * Devolve um item.
+	 * 
+	 * @param nomeDono
+	 *            o nome do usuário dono do item.
+	 * @param telefoneDono
+	 *            o telefone do usuário dono do item.
+	 * @param nomeRequerente
+	 *            o nome do usuário requerente do item.
+	 * @param telefoneRequerente
+	 *            o telefone do usuário requerente do item.
+	 * @param nomeItem
+	 *            o nome do item.
+	 * @param dataEmprestimo
+	 *            a data em que o emprestimo foi iniciado.
+	 * @param dataDevolucao
+	 *            a data em que o item foi devolvido.
+	 */
+	public void devolverItem(String nomeDono, String telefoneDono, String nomeRequerente, String telefoneRequerente,
+			String nomeItem, String dataEmprestimo, String dataDevolucao) {
+
+		Usuario userEmprestador = usuarioController.getUser(nomeDono, telefoneDono);
+		Usuario userRequerente = usuarioController.getUser(nomeRequerente, telefoneRequerente);
+		fecharEmprestimo(userEmprestador, userRequerente, nomeItem, dataEmprestimo, dataDevolucao);
+		
+	}
+	
 	public void registraEmprestimo(Usuario userEmprestador, Usuario userRequerente, String nomeItem,
 			String dataEmprestimo, int periodo) {
 		this.validaAddEmprestimo(userEmprestador, userRequerente, nomeItem, dataEmprestimo);
@@ -78,5 +137,20 @@ public class EmprestimoController {
 		}
 		return true;
 	}
+
+	public List<Emprestimo> getEmprestimosUserEmprestando(String nome, String telefone) {
+		Usuario user = this.usuarioController.getUser(nome, telefone);
+		
+		List<Emprestimo> emprestimos = new ArrayList<>();
+		
+		for (Emprestimo emprestimo : this.emprestimos) {
+			if (emprestimo.getDono().equals(user)) {
+				emprestimos.add(emprestimo);
+			}
+		}
+		
+		return emprestimos;
+	}
+	
 
 }

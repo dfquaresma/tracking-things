@@ -1,4 +1,9 @@
-package sistema;
+package projeto;
+
+import emprestimo.EmprestimoController;
+import item.ItemController;
+import usuario.UsuarioController;
+import util.Listador;
 
 /**
  * Representação de uma fachada do tracking things (Sistema de emprestimos de
@@ -12,20 +17,25 @@ package sistema;
  */
 public class Facade {
 
-	private Sistema sistema;
+	private UsuarioController usuarioController;
+	private ItemController itemController;
+	private EmprestimoController emprestimoController;
+	private Listador listador;
 
 	/**
 	 * Constrói a fachada de um sistema de emprestimos.
 	 */
 	public Facade() {
-		this.sistema = new Sistema();
+		this.usuarioController = new UsuarioController();
+		this.itemController = new ItemController(this.usuarioController);
+		this.emprestimoController = new EmprestimoController(this.usuarioController);
+		this.listador = new Listador(this.usuarioController, this.emprestimoController);
 	}
 
 	/**
 	 * Inicializa os sistema de emprestimos.
 	 */
 	public void iniciarSistema() {
-		this.sistema.iniciaSistema();
 	}
 
 	/**
@@ -39,7 +49,7 @@ public class Facade {
 	 *            email do usuário a ser cadastrado.
 	 */
 	public void cadastrarUsuario(String nome, String telefone, String email) {
-		this.sistema.cadastrarUsuario(nome, telefone, email);
+		this.usuarioController.cadastrarUsuario(nome, telefone, email);
 	}
 
 	/**
@@ -55,7 +65,7 @@ public class Facade {
 	 * @return o atributo recuperado.
 	 */
 	public String getInfoUsuario(String nome, String telefone, String atributo) {
-		return this.sistema.getInfoUser(nome, telefone, atributo);
+		return this.usuarioController.getInfoUser(nome, telefone, atributo);
 	}
 
 	/**
@@ -71,7 +81,7 @@ public class Facade {
 	 *            o novo valor do atributo a ser atualizado.
 	 */
 	public void atualizarUsuario(String nome, String telefone, String atributo, String valor) {
-		this.sistema.attUsuario(nome, telefone, atributo, valor);
+		this.usuarioController.attUsuario(nome, telefone, atributo, valor);
 	}
 
 	/**
@@ -83,7 +93,7 @@ public class Facade {
 	 *            o telefone do usuário.
 	 */
 	public void removerUsuario(String nome, String telefone) {
-		this.sistema.removeUsuario(nome, telefone);
+		this.usuarioController.removeUsuario(nome, telefone);
 	}
 
 	/**
@@ -101,7 +111,7 @@ public class Facade {
 	 *            a plataforma do jogo.
 	 */
 	public void cadastrarEletronico(String nome, String telefone, String nomeItem, double preco, String plataforma) {
-		this.sistema.cadastrarEletronico(nome, telefone, nomeItem, preco, plataforma);
+		this.usuarioController.cadastrarEletronico(nome, telefone, nomeItem, preco, plataforma);
 	}
 
 	/**
@@ -117,7 +127,7 @@ public class Facade {
 	 *            o preço do jogo.
 	 */
 	public void cadastrarJogoTabuleiro(String nome, String telefone, String nomeItem, double preco) {
-		this.sistema.cadastrarJogoTabuleiro(nome, telefone, nomeItem, preco);
+		this.usuarioController.cadastrarJogoTabuleiro(nome, telefone, nomeItem, preco);
 	}
 
 	/**
@@ -134,7 +144,7 @@ public class Facade {
 	 *            a peça a ser adicionada.
 	 */
 	public void adicionarPecaPerdida(String nome, String telefone, String nomeItem, String nomePeca) {
-		this.sistema.addPecaPerdida(nome, telefone, nomeItem, nomePeca);
+		this.usuarioController.addPecaPerdida(nome, telefone, nomeItem, nomePeca);
 	}
 
 	/**
@@ -159,7 +169,7 @@ public class Facade {
 	 */
 	public void cadastrarBluRayFilme(String nome, String telefone, String nomeItem, double preco, int duracao,
 			String genero, String classificacao, int anoLancamento) {
-		this.sistema.cadastrarBlurayFilme(nome, telefone, nomeItem, preco, duracao, genero, classificacao,
+		this.usuarioController.cadastrarBlurayFilme(nome, telefone, nomeItem, preco, duracao, genero, classificacao,
 				anoLancamento);
 	}
 
@@ -187,7 +197,7 @@ public class Facade {
 	 */
 	public void cadastrarBluRaySerie(String nome, String telefone, String nomeItem, double preco, String descricao,
 			int duracao, String classificacao, String genero, int temporada) {
-		this.sistema.cadastrarBluRaySerie(nome, telefone, nomeItem, preco, descricao, duracao, classificacao, genero,
+		this.usuarioController.cadastrarBluRaySerie(nome, telefone, nomeItem, preco, descricao, duracao, classificacao, genero,
 				temporada);
 	}
 
@@ -213,7 +223,7 @@ public class Facade {
 	 */
 	public void cadastrarBluRayShow(String nome, String telefone, String nomeItem, double preco, int duracao,
 			int numeroFaixas, String artista, String classificacao) {
-		this.sistema.cadastrarBlurayShow(nome, telefone, nomeItem, preco, duracao, numeroFaixas, artista,
+		this.usuarioController.cadastrarBlurayShow(nome, telefone, nomeItem, preco, duracao, numeroFaixas, artista,
 				classificacao);
 	}
 
@@ -230,7 +240,7 @@ public class Facade {
 	 *            a duração do episódio.
 	 */
 	public void adicionarBluRay(String nome, String telefone, String nomeBluray, int duracao) {
-		this.sistema.addBluray(nome, telefone, nomeBluray, duracao);
+		this.usuarioController.addBluray(nome, telefone, nomeBluray, duracao);
 	}
 
 	/**
@@ -244,7 +254,7 @@ public class Facade {
 	 *            o nome do item.
 	 */
 	public void removerItem(String nome, String telefone, String nomeItem) {
-		this.sistema.removerItem(nome, telefone, nomeItem);
+		this.usuarioController.removerItem(nome, telefone, nomeItem);
 	}
 
 	/**
@@ -262,7 +272,7 @@ public class Facade {
 	 *            o atributo a ser atualizado.
 	 */
 	public void atualizarItem(String nome, String telefone, String nomeItem, String valor, String atributo) {
-		this.sistema.attItem(nome, telefone, nomeItem, valor, atributo);
+		this.usuarioController.attItem(nome, telefone, nomeItem, valor, atributo);
 	}
 
 	/**
@@ -279,7 +289,7 @@ public class Facade {
 	 * @return o atributo a ser recuperado.
 	 */
 	public String getInfoItem(String nome, String telefone, String nomeItem, String atributo) {
-		return this.sistema.getInfoItem(nome, telefone, nomeItem, atributo);
+		return this.usuarioController.getInfoItem(nome, telefone, nomeItem, atributo);
 	}
 
 	/**
@@ -288,7 +298,7 @@ public class Facade {
 	 * @return a listagem.
 	 */
 	public String listarItensOrdenadosPorNome() {
-		return this.sistema.listarOrdenadosNome();
+		return this.listador.listaItensOrdenadosPorNome();
 	}
 
 	/**
@@ -297,7 +307,7 @@ public class Facade {
 	 * @return a listagem.
 	 */
 	public String listarItensOrdenadosPorValor() {
-		return this.sistema.listarOrdenadosValor();
+		return this.listador.listaItensOrdenadosPorValor();
 	}
 
 	/**
@@ -312,7 +322,7 @@ public class Facade {
 	 * @return os detalhes do item.
 	 */
 	public String pesquisarDetalhesItem(String nome, String telefone, String nomeItem) {
-		return this.sistema.getDetalhesItem(nome, telefone, nomeItem);
+		return this.usuarioController.getDetalhesItem(nome, telefone, nomeItem);
 	}
 
 	/**
@@ -335,7 +345,7 @@ public class Facade {
 	 */
 	public void registrarEmprestimo(String nomeDono, String telefoneDono, String nomeRequerente,
 			String telefoneRequerente, String nomeItem, String dataEmprestimo, int periodo) {
-		this.sistema.registrarEmprestimo(nomeDono, telefoneDono, nomeRequerente, telefoneRequerente, nomeItem,
+		this.emprestimoController.registrarEmprestimo(nomeDono, telefoneDono, nomeRequerente, telefoneRequerente, nomeItem,
 				dataEmprestimo, periodo);
 	}
 
@@ -359,7 +369,7 @@ public class Facade {
 	 */
 	public void devolverItem(String nomeDono, String telefoneDono, String nomeRequerente, String telefoneRequerente,
 			String nomeItem, String dataEmprestimo, String dataDevolucao) {
-		this.sistema.devolverItem(nomeDono, telefoneDono, nomeRequerente, telefoneRequerente, nomeItem, dataEmprestimo,
+		this.emprestimoController.devolverItem(nomeDono, telefoneDono, nomeRequerente, telefoneRequerente, nomeItem, dataEmprestimo,
 				dataDevolucao);
 	}
 
@@ -367,7 +377,6 @@ public class Facade {
 	 * Fecha o sistema de apostas.
 	 */
 	public void fecharSistema() {
-		this.sistema.fechaSistema();
 
 	}
 

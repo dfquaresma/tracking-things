@@ -1,16 +1,12 @@
-package sistema;
+package usuario;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import emprestimo.EmprestimoController;
 import excecoes.UsuarioJaExistenteExcecao;
 import item.Item;
-import usuario.IdUsuario;
-import usuario.Usuario;
-import util.Listador;
 import util.Validador;
 
 /**
@@ -19,30 +15,19 @@ import util.Validador;
  * @author David Ferreira
  *
  */
-public class Sistema {
+public class UsuarioController {
 
 	private Map<IdUsuario, Usuario> usuarios;
-	private Listador listador;
 	private Validador validador;
-	private EmprestimoController controladorDeEmprestimos;
 
 	/**
 	 * Constrói um sistema de emprestimos.
 	 */
-	public Sistema() {
+	public UsuarioController() {
 		this.usuarios = new HashMap<>();
-		this.listador = new Listador();
 		this.validador = new Validador();
-		this.controladorDeEmprestimos = new EmprestimoController();
 	}
 
-	/**
-	 * Inicializa o sistema de emprestimos.
-	 */
-	public void iniciaSistema() {
-		// TODO Auto-generated method stub
-
-	}
 
 	/**
 	 * Cadastra um usuário no sistema.
@@ -209,7 +194,7 @@ public class Sistema {
 		user.cadastrarBlurayShow(nomeItem, preco, duracao, numeroFaixas, artista, classificacao);
 	}
 
-	private Usuario getUser(String nome, String telefone) {
+	public Usuario getUser(String nome, String telefone) {
 		this.validador.validaDadosDeIdentificacao(nome, telefone);
 		IdUsuario id = new IdUsuario(nome, telefone);
 
@@ -435,27 +420,8 @@ public class Sistema {
 		user.attItem(nomeItem, atributo, valor);
 	}
 
-	/**
-	 * Recupera uma listagem de todos os itens no sistema em ordem alfabética.
-	 * 
-	 * @return a listagem.
-	 */
-	public String listarOrdenadosNome() {
-		List<Item> itens = recuperaItensNoSistema();
-		return this.listador.listaItensOrdenadosPorNome(itens);
-	}
 
-	/**
-	 * Recupera uma listagem de todos os itens no sistema ordenados por valor.
-	 * 
-	 * @return a listagem.
-	 */
-	public String listarOrdenadosValor() {
-		List<Item> itens = recuperaItensNoSistema();
-		return this.listador.listaItensOrdenadosPorValor(itens);
-	}
-
-	private List<Item> recuperaItensNoSistema() {
+	public List<Item> recuperaItensNoSistema() {
 		List<Item> itens = new ArrayList<>();
 
 		for (Usuario user : this.usuarios.values()) {
@@ -464,72 +430,5 @@ public class Sistema {
 		return itens;
 	}
 
-	/**
-	 * Registra um emprestimo de um item.
-	 * 
-	 * @param nomeDono
-	 *            o nome do usuário dono do item.
-	 * @param telefoneDono
-	 *            o telefone do usuário dono do item.
-	 * @param nomeRequerente
-	 *            o nome do usuário requerente do item.
-	 * @param telefoneRequerente
-	 *            o telefone do usuário requerente do item.
-	 * @param nomeItem
-	 *            o nome do item.
-	 * @param dataEmprestimo
-	 *            a data em que o emprestimo foi iniciado.
-	 * @param periodo
-	 *            o período em que o item ficará emprestado.
-	 */
-	public void registrarEmprestimo(String nomeDono, String telefoneDono, String nomeRequerente,
-			String telefoneRequerente, String nomeItem, String dataEmprestimo, int periodo) {
-		this.validador.validaDadosDeEmprestimos(nomeDono, telefoneDono, nomeRequerente, telefoneRequerente, nomeItem,
-				dataEmprestimo);
-		this.validador.validaPeriodo(periodo);
-
-		Usuario userEmprestador = getUser(nomeDono, telefoneDono);
-		Usuario userRequerente = getUser(nomeRequerente, telefoneRequerente);
-		this.controladorDeEmprestimos.registraEmprestimo(userEmprestador, userRequerente, nomeItem, dataEmprestimo, periodo);		
-		
-	}
-
-	/**
-	 * Devolve um item.
-	 * 
-	 * @param nomeDono
-	 *            o nome do usuário dono do item.
-	 * @param telefoneDono
-	 *            o telefone do usuário dono do item.
-	 * @param nomeRequerente
-	 *            o nome do usuário requerente do item.
-	 * @param telefoneRequerente
-	 *            o telefone do usuário requerente do item.
-	 * @param nomeItem
-	 *            o nome do item.
-	 * @param dataEmprestimo
-	 *            a data em que o emprestimo foi iniciado.
-	 * @param dataDevolucao
-	 *            a data em que o item foi devolvido.
-	 */
-	public void devolverItem(String nomeDono, String telefoneDono, String nomeRequerente, String telefoneRequerente,
-			String nomeItem, String dataEmprestimo, String dataDevolucao) {
-		this.validador.validaDadosDeEmprestimos(nomeDono, telefoneDono, nomeRequerente, telefoneRequerente, nomeItem,
-				dataEmprestimo);
-		this.validador.validaData(dataDevolucao);
-
-		Usuario userEmprestador = getUser(nomeDono, telefoneDono);
-		Usuario userRequerente = getUser(nomeRequerente, telefoneRequerente);
-		this.controladorDeEmprestimos.fecharEmprestimo(userEmprestador, userRequerente, nomeItem, dataEmprestimo, dataDevolucao);
-		
-	}
-
-	/**
-	 * Fecha o sistema de apostas.
-	 */
-	public void fechaSistema() {
-		// TODO Auto-generated method stub
-
-	}
 
 }

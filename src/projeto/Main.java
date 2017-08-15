@@ -1,4 +1,4 @@
-package sistema;
+package projeto;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -17,7 +17,7 @@ public class Main {
 		testes.add("us" + File.separator + "us6_test.txt");
 		testes.add("us" + File.separator + "us7_test.txt");
 		testes.add("us" + File.separator + "us8_test.txt");
-		EasyAccept.executeEasyAcceptTests("sistema.Facade", testes);
+		EasyAccept.executeEasyAcceptTests("projeto.Facade", testes);
 	}
 
 }
