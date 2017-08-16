@@ -29,8 +29,8 @@ public class Emprestimo implements Comparable<Emprestimo> {
 	private boolean finalizado;
 
 	/**
-	 * Constrói um emprestimo com o dono do item, o requerente do item, o item,
-	 * a data de emprestimo e o período de emprestimo.
+	 * Constrói um emprestimo com o dono do item, o requerente do item, o item, a
+	 * data de emprestimo e o período de emprestimo.
 	 * 
 	 * @param dono
 	 * @param requerente
@@ -49,7 +49,7 @@ public class Emprestimo implements Comparable<Emprestimo> {
 		this.requerente = requerente;
 		this.item = dono.getItem(nomeItem);
 
-		this.dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		this.dateFormat = new SimpleDateFormat("d/M/yyyy");
 		try {
 			this.dataEmprestimo = dateFormat.parse(dataEmprestimo);
 		} catch (ParseException e) {
@@ -58,7 +58,7 @@ public class Emprestimo implements Comparable<Emprestimo> {
 
 		this.periodo = periodo;
 		this.finalizado = false;
-				
+
 		this.dono.emprestaItem(getNomeItem());
 
 	}
@@ -147,8 +147,8 @@ public class Emprestimo implements Comparable<Emprestimo> {
 	}
 
 	/**
-	 * Recupera o período de dias que o item passará (ou passou, caso o
-	 * emprestimo tenha sido finalizado) emprestado.
+	 * Recupera o período de dias que o item passará (ou passou, caso o emprestimo
+	 * tenha sido finalizado) emprestado.
 	 * 
 	 * @return o período de dias.
 	 */
@@ -294,17 +294,19 @@ public class Emprestimo implements Comparable<Emprestimo> {
 		this.finalizado = true;
 		this.dono.recebeItem(getNomeItem());
 	}
-	
+
 	@Override
 	public String toString() {
 		String modificador;
 		if (isFinalizado()) {
 			modificador = this.getDataRealDaDevolucaoDoItem();
 		} else {
-			modificador  = "Emprestimo em andamento";
+			modificador = "Emprestimo em andamento";
 		}
-		
-		return "EMPRESTIMO - De: " + this.getNomeDono() + ", Para: " + this.getNomeRequerente() + ", " + this.getNomeItem() + ", " + this.getDataEmprestimo() + ", " + this.getPeriodo() + " dias, ENTREGA: " + modificador;
+
+		return "EMPRESTIMO - De: " + this.getNomeDono() + ", Para: " + this.getNomeRequerente() + ", "
+				+ this.getNomeItem() + ", " + this.getDataEmprestimo() + ", " + this.getPeriodo()
+				+ " dias, ENTREGA: " + modificador;
 	}
 
 	@Override
