@@ -7,10 +7,7 @@ import java.util.Map;
 import excecoes.ItemNaoEhDoTipoEsperadoExcecao;
 import excecoes.OperacaoNaoPermitidaNoMomentoExcecao;
 import item.Item;
-import item.bluray.Filme;
-import item.bluray.Show;
 import item.bluray.Temporada;
-import item.jogo.JogoEletronico;
 import item.jogo.JogoTabuleiro;
 import util.Validador;
 
@@ -50,202 +47,13 @@ public class Usuario {
 
 	}
 
-	/**
-	 * Recupera o nome do usuário.
-	 * 
-	 * @return o nome do usuário.
-	 */
-	public String getNome() {
-		return this.nome;
+	public void adicionaItem(Item item) {
+		String nomeDoItem = item.getNome();
+		this.validador.validaAtributosDeCadastroDeItem(nomeDoItem, item.getPreco());
+		this.itens.put(nomeDoItem, item);
+				
 	}
-
-	/**
-	 * Recupera o telefone do usuário.
-	 * 
-	 * @return o telefone do usuário.
-	 */
-	public String getTelefone() {
-		return this.telefone;
-	}
-
-	/**
-	 * Recupera o email do usuário.
-	 * 
-	 * @return o email do usuário.
-	 */
-	public String getEmail() {
-		return this.email;
-	}
-
-	/**
-	 * Recupera um item deste usuário.
-	 * 
-	 * @param nomeItem
-	 *            o nome do item a ser recuperado.
-	 * @return o item.
-	 */
-	public Item getItem(String nomeItem) {
-		this.validaItemParaUso(nomeItem);
-		return this.itens.get(nomeItem);
-	}
-
-	/**
-	 * Recupera os itens deste usuário.
-	 * 
-	 * @return o itens.
-	 */
-	public ArrayList<Item> getItens() {
-		ArrayList<Item> itensToCopy = new ArrayList<>(this.itens.values());
-		return itensToCopy;
-	}
-
-	/**
-	 * Muda o nome do usuário para o nome recebido no parâmetro.
-	 * 
-	 * @param nome
-	 *            o novo nome deste usuário.
-	 */
-	public void setNome(String nome) {
-		this.validador.validaNome(nome);
-		this.nome = nome;
-	}
-
-	/**
-	 * Muda o telefone do usuário para o telefone recebido no parâmetro.
-	 * 
-	 * @param telefone
-	 *            o novo telefone deste usuário.
-	 */
-	public void setTelefone(String telefone) {
-		this.validador.validaTelefone(telefone);
-		this.telefone = telefone;
-	}
-
-	/**
-	 * Muda o email do usuário para o email recebido no parâmetro.
-	 * 
-	 * @param email
-	 *            o novo email do deste usuário.
-	 */
-	public void setEmail(String email) {
-		this.validador.validaEmail(email);
-		this.email = email;
-	}
-
-	/**
-	 * Cadastra um jogo eletrônico.
-	 * 
-	 * @param nomeItem
-	 *            o nome do jogo.
-	 * @param preco
-	 *            o preço do jogo.
-	 * @param plataforma
-	 *            a plataforma do jogo.
-	 */
-	public void cadastrarEletronico(String nomeItem, double preco, String plataforma) {
-		this.validador.validaAtributosDeCadastroDeItem(nomeItem, preco);
-		this.validador.validaPlataforma(plataforma);
-		Item novoItem = new JogoEletronico(nomeItem, preco, plataforma);
-		this.itens.put(nomeItem, novoItem);
-	}
-
-	/**
-	 * Cadastra um jogo de tabuleiro.
-	 * 
-	 * @param nomeItem
-	 *            o nome do jogo.
-	 * @param preco
-	 *            o preço do jogo.
-	 */
-	public void cadastrarJogoTabuleiro(String nomeItem, double preco) {
-		this.validador.validaAtributosDeCadastroDeItem(nomeItem, preco);
-		Item novoItem = new JogoTabuleiro(nomeItem, preco);
-		this.itens.put(nomeItem, novoItem);
-	}
-
-	/**
-	 * Cadastra um filme blu-ray.
-	 * 
-	 * @param nomeItem
-	 *            o nome do filme.
-	 * @param preco
-	 *            o preço do filme.
-	 * @param duracao
-	 *            a duração do filme.
-	 * @param genero
-	 *            o gênero do filme.
-	 * @param classificacao
-	 *            a classificação do filme.
-	 * @param anoLancamento
-	 *            o ano de lançamento do filme.
-	 */
-	public void cadastrarBlurayFilme(String nomeItem, double preco, int duracao, String genero, String classificacao,
-			int anoLancamento) {
-		this.validador.validaAtributosDeCadastroDeItem(nomeItem, preco);
-		this.validador.validaAtributosDeCadastroDeBluRays(duracao, classificacao);
-		this.validador.validaGenero(genero);
-		this.validador.validaAnoLancamento(anoLancamento);
-
-		Item novoItem = new Filme(nomeItem, preco, duracao, genero, classificacao, anoLancamento);
-		itens.put(nomeItem, novoItem);
-	}
-
-	/**
-	 * Cadastra uma temporada em blu-ray.
-	 * 
-	 * @param nomeItem
-	 *            o nome da temporada.
-	 * @param preco
-	 *            o preço da temporada.
-	 * @param descricao
-	 *            a descrição da temporada.
-	 * @param duracao
-	 *            a duração da temporada.
-	 * @param classificacao
-	 *            a classificação da temporada.
-	 * @param genero
-	 *            o gênero da temporada.
-	 * @param temporada
-	 *            a temporada da temporada.
-	 */
-	public void cadastrarBluRaySerie(String nomeItem, double preco, String descricao, int duracao, String classificacao,
-			String genero, int temporada) {
-		this.validador.validaAtributosDeCadastroDeItem(nomeItem, preco);
-		this.validador.validaAtributosDeCadastroDeBluRays(duracao, classificacao);
-		this.validador.validaDescricao(descricao);
-		this.validador.validaGenero(genero);
-		this.validador.validaTemporada(temporada);
-		Item novoItem = new Temporada(nomeItem, preco, descricao, duracao, classificacao, genero, temporada);
-		itens.put(nomeItem, novoItem);
-	}
-
-	/**
-	 * Cadastra um show blu-ray.
-	 * 
-	 * @param nomeItem
-	 *            o nome do show.
-	 * @param preco
-	 *            o preço do show.
-	 * @param duracao
-	 *            a duração do show.
-	 * @param numeroFaixas
-	 *            o número de faixar do show.
-	 * @param artista
-	 *            o artista do show.
-	 * @param classificacao
-	 *            a classificação do show.
-	 */
-	public void cadastrarBlurayShow(String nomeItem, double preco, int duracao, int numeroFaixas, String artista,
-			String classificacao) {
-		this.validador.validaAtributosDeCadastroDeItem(nomeItem, preco);
-		this.validador.validaAtributosDeCadastroDeBluRays(duracao, classificacao);
-		this.validador.validaNumeroDeFaixas(numeroFaixas);
-		this.validador.validaArtista(artista);
-
-		Item novoItem = new Show(nomeItem, preco, duracao, numeroFaixas, artista, classificacao);
-		itens.put(nomeItem, novoItem);
-	}
-
+	
 	/**
 	 * Adiciona uma peça perdida a um jogo de tabuleiro.
 	 * 
@@ -330,14 +138,6 @@ public class Usuario {
 		}
 	}
 
-	private void validaAttNomeDeItem(String nomeItem) {
-
-		if (this.itens.containsKey(nomeItem)) {
-			throw new IllegalArgumentException();
-		}
-
-	}
-
 	/**
 	 * Recupera um atributo de um item.
 	 * 
@@ -401,6 +201,139 @@ public class Usuario {
 	}
 
 	/**
+	 * Atualiza um atributo específico.
+	 * 
+	 * @param atributo
+	 *            o atributo a ser atualizado.
+	 * @param valor
+	 *            o novo valor do atributo atualizado.
+	 */
+	public void atualizaAtributo(String atributo, String valor) {
+		this.validador.validaAtributo(atributo);
+		this.validador.validaValor(valor);
+
+		switch (atributo) {
+		case ("Nome"):
+			setNome(valor);
+			break;
+		case ("Telefone"):
+			setTelefone(valor);
+			break;
+		case ("Email"):
+			setEmail(valor);
+			break;
+
+		default:
+			throw new IllegalArgumentException("Atributo invalido");
+		}
+
+	}
+
+	/**
+	 * Recupera um atributo específico.
+	 * 
+	 * @param atributo
+	 *            o atributo a ser recuperado.
+	 * @return o atributo.
+	 */
+	public String getInfor(String atributo) {
+		this.validador.validaAtributo(atributo);
+
+		switch (atributo) {
+		case ("Nome"):
+			return getNome();
+		case ("Telefone"):
+			return getTelefone();
+		case ("Email"):
+			return getEmail();
+		default:
+			throw new IllegalArgumentException("Atributo invalido.");
+		}
+	}
+
+	/**
+	 * Recupera o nome do usuário.
+	 * 
+	 * @return o nome do usuário.
+	 */
+	public String getNome() {
+		return this.nome;
+	}
+
+	/**
+	 * Recupera o telefone do usuário.
+	 * 
+	 * @return o telefone do usuário.
+	 */
+	public String getTelefone() {
+		return this.telefone;
+	}
+
+	/**
+	 * Recupera o email do usuário.
+	 * 
+	 * @return o email do usuário.
+	 */
+	public String getEmail() {
+		return this.email;
+	}
+
+	/**
+	 * Muda o nome do usuário para o nome recebido no parâmetro.
+	 * 
+	 * @param nome
+	 *            o novo nome deste usuário.
+	 */
+	public void setNome(String nome) {
+		this.validador.validaNome(nome);
+		this.nome = nome;
+	}
+
+	/**
+	 * Muda o telefone do usuário para o telefone recebido no parâmetro.
+	 * 
+	 * @param telefone
+	 *            o novo telefone deste usuário.
+	 */
+	public void setTelefone(String telefone) {
+		this.validador.validaTelefone(telefone);
+		this.telefone = telefone;
+	}
+
+	/**
+	 * Muda o email do usuário para o email recebido no parâmetro.
+	 * 
+	 * @param email
+	 *            o novo email do deste usuário.
+	 */
+	public void setEmail(String email) {
+		this.validador.validaEmail(email);
+		this.email = email;
+	}	
+	
+	/**
+	 * Recupera um item deste usuário.
+	 * 
+	 * @param nomeItem
+	 *            o nome do item a ser recuperado.
+	 * @return o item.
+	 */
+	public Item getItem(String nomeItem) {
+		this.validaItemParaUso(nomeItem);
+		return this.itens.get(nomeItem);
+	}
+
+	/**
+	 * Recupera os itens deste usuário.
+	 * 
+	 * @return o itens.
+	 */
+	public ArrayList<Item> getItens() {
+		ArrayList<Item> itensToCopy = new ArrayList<>(this.itens.values());
+		return itensToCopy;
+	}
+
+	/**
 	 * Retorna um valor hash code desse Usuário.
 	 */
 	@Override
@@ -453,55 +386,13 @@ public class Usuario {
 		}
 	}
 
-	/**
-	 * Atualiza um atributo específico.
-	 * 
-	 * @param atributo
-	 *            o atributo a ser atualizado.
-	 * @param valor
-	 *            o novo valor do atributo atualizado.
-	 */
-	public void atualizaAtributo(String atributo, String valor) {
-		this.validador.validaAtributo(atributo);
-		this.validador.validaValor(valor);
+	private void validaAttNomeDeItem(String nomeItem) {
 
-		switch (atributo) {
-		case ("Nome"):
-			setNome(valor);
-			break;
-		case ("Telefone"):
-			setTelefone(valor);
-			break;
-		case ("Email"):
-			setEmail(valor);
-			break;
-
-		default:
-			throw new IllegalArgumentException("Atributo invalido");
+		if (this.itens.containsKey(nomeItem)) {
+			throw new IllegalArgumentException();
 		}
 
 	}
 
-	/**
-	 * Recupera um atributo específico.
-	 * 
-	 * @param atributo
-	 *            o atributo a ser recuperado.
-	 * @return o atributo.
-	 */
-	public String getInfor(String atributo) {
-		this.validador.validaAtributo(atributo);
-
-		switch (atributo) {
-		case ("Nome"):
-			return getNome();
-		case ("Telefone"):
-			return getTelefone();
-		case ("Email"):
-			return getEmail();
-		default:
-			throw new IllegalArgumentException("Atributo invalido.");
-		}
-	}
-
+	
 }

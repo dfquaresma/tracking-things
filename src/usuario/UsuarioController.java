@@ -28,7 +28,6 @@ public class UsuarioController {
 		this.validador = new Validador();
 	}
 
-
 	/**
 	 * Cadastra um usuário no sistema.
 	 * 
@@ -51,147 +50,6 @@ public class UsuarioController {
 		}
 
 		this.usuarios.put(id, user);
-	}
-
-	/**
-	 * Cadastra um jogo eletrônico a um usuário específico.
-	 * 
-	 * @param nome
-	 *            o nome do usuário.
-	 * @param telefone
-	 *            o telefone do usuário.
-	 * @param nomeItem
-	 *            o nome do jogo.
-	 * @param preco
-	 *            o preço do jogo.
-	 * @param plataforma
-	 *            a plataforma do jogo.
-	 */
-	public void cadastrarEletronico(String nome, String telefone, String nomeItem, double preco, String plataforma) {
-		this.validador.validaDadosDeIdentificacao(nome, telefone);
-		this.validador.validaAtributosDeCadastroDeItem(nomeItem, preco);
-
-		Usuario user = getUser(nome, telefone);
-		user.cadastrarEletronico(nomeItem, preco, plataforma);
-	}
-
-	/**
-	 * Cadastra um jogo de tabuleiro a um usuário específico.
-	 * 
-	 * @param nome
-	 *            o nome do usuário.
-	 * @param telefone
-	 *            o telefone do usuário.
-	 * @param nomeItem
-	 *            o nome do jogo.
-	 * @param preco
-	 *            o preço do jogo.
-	 */
-	public void cadastrarJogoTabuleiro(String nome, String telefone, String nomeItem, double preco) {
-		this.validador.validaDadosDeIdentificacao(nome, telefone);
-		this.validador.validaAtributosDeCadastroDeItem(nomeItem, preco);
-
-		Usuario user = getUser(nome, telefone);
-		user.cadastrarJogoTabuleiro(nomeItem, preco);
-	}
-
-	/**
-	 * Cadastra um filme blu-ray a um usuário específico.
-	 * 
-	 * @param nome
-	 *            o nome do usuário.
-	 * @param telefone
-	 *            o telefone do usuário.
-	 * @param nomeItem
-	 *            o nome do filme.
-	 * @param preco
-	 *            o preço do filme.
-	 * @param duracao
-	 *            a duração do filme.
-	 * @param genero
-	 *            o gênero do filme.
-	 * @param classificacao
-	 *            a classificação do filme.
-	 * @param anoLancamento
-	 *            o ano de lançamento do filme.
-	 */
-	public void cadastrarBlurayFilme(String nome, String telefone, String nomeItem, double preco, int duracao,
-			String genero, String classificacao, int anoLancamento) {
-		this.validador.validaDadosDeIdentificacao(nome, telefone);
-		this.validador.validaAtributosDeCadastroDeItem(nomeItem, preco);
-		this.validador.validaAtributosDeCadastroDeBluRays(duracao, classificacao);
-		this.validador.validaGenero(genero);
-		this.validador.validaAnoLancamento(anoLancamento);
-
-		Usuario user = getUser(nome, telefone);
-		user.cadastrarBlurayFilme(nomeItem, preco, duracao, genero, classificacao, anoLancamento);
-	}
-
-	/**
-	 * Cadastra uma temporada em blu-ray de uma série a um usuário específico.
-	 * 
-	 * @param nome
-	 *            o nome do usuário.
-	 * @param telefone
-	 *            o telefone do usuário.
-	 * @param nomeItem
-	 *            o nome da temporada.
-	 * @param preco
-	 *            o preço da temporada.
-	 * @param descricao
-	 *            a descrição da temporada.
-	 * @param duracao
-	 *            a duração da temporada.
-	 * @param classificacao
-	 *            a classificação da temporada.
-	 * @param genero
-	 *            o gênero da temporada.
-	 * @param temporada
-	 *            a temporada da temporada.
-	 */
-	public void cadastrarBluRaySerie(String nome, String telefone, String nomeItem, double preco, String descricao,
-			int duracao, String classificacao, String genero, int temporada) {
-		this.validador.validaDadosDeIdentificacao(nome, telefone);
-		this.validador.validaAtributosDeCadastroDeItem(nomeItem, preco);
-		this.validador.validaAtributosDeCadastroDeBluRays(duracao, classificacao);
-		this.validador.validaDescricao(descricao);
-		this.validador.validaGenero(genero);
-		this.validador.validaTemporada(temporada);
-
-		Usuario user = getUser(nome, telefone);
-		user.cadastrarBluRaySerie(nomeItem, preco, descricao, duracao, classificacao, genero, temporada);
-	}
-
-	/**
-	 * Cadastra um show blu-ray a um usuário específico.
-	 * 
-	 * @param nome
-	 *            o nome do usuário.
-	 * @param telefone
-	 *            o telefone do usuário.
-	 * @param nomeItem
-	 *            o nome do show.
-	 * @param preco
-	 *            o preço do show.
-	 * @param duracao
-	 *            a duração do show.
-	 * @param numeroFaixas
-	 *            o número de faixar do show.
-	 * @param artista
-	 *            o artista do show.
-	 * @param classificacao
-	 *            a classificação do show.
-	 */
-	public void cadastrarBlurayShow(String nome, String telefone, String nomeItem, double preco, int duracao,
-			int numeroFaixas, String artista, String classificacao) {
-		this.validador.validaDadosDeIdentificacao(nome, telefone);
-		this.validador.validaAtributosDeCadastroDeItem(nomeItem, preco);
-		this.validador.validaAtributosDeCadastroDeBluRays(duracao, classificacao);
-		this.validador.validaNumeroDeFaixas(numeroFaixas);
-		this.validador.validaArtista(artista);
-
-		Usuario user = getUser(nome, telefone);
-		user.cadastrarBlurayShow(nomeItem, preco, duracao, numeroFaixas, artista, classificacao);
 	}
 
 	public Usuario getUser(String nome, String telefone) {
@@ -223,6 +81,61 @@ public class UsuarioController {
 
 	}
 
+	/**
+	 * Atualiza um atributo de um usuário específico.
+	 * 
+	 * @param nome
+	 *            o nome do usuário que se deseja atualizar um atributo.
+	 * @param telefone
+	 *            o telefone do usuário que se deseja atualizar um atributo.
+	 * @param atributo
+	 *            o atributo que se deseja atualizar.
+	 * @param valor
+	 *            o novo valor do atributo a ser atualizado.
+	 */
+	public void attUsuario(String nome, String telefone, String atributo, String valor) {
+		this.validador.validaDadosDeIdentificacao(nome, telefone);
+		this.validador.validaAtributo(atributo);
+		this.validador.validaValor(valor);
+
+		Usuario user = getUser(nome, telefone);
+
+		this.validaAtualizacao(user, atributo, valor);
+
+		IdUsuario idAntigo = new IdUsuario(nome, telefone);
+		user.atualizaAtributo(atributo, valor);
+
+		IdUsuario novoId = new IdUsuario(user.getNome(), user.getTelefone());
+		this.usuarios.remove(idAntigo);
+		this.usuarios.put(novoId, user);
+
+	}
+
+	/**
+	 * Remove um usuário do sistema.
+	 * 
+	 * @param nome
+	 *            o nome do usuário.
+	 * @param telefone
+	 *            o telefone do usuário.
+	 */
+	public void removeUsuario(String nome, String telefone) {
+		this.validador.validaDadosDeIdentificacao(nome, telefone);
+
+		IdUsuario id = new IdUsuario(nome, telefone);
+		this.validaIdeParaUso(id);
+		this.usuarios.remove(id);
+
+	}
+
+	public void adicionaItem(String nome, String telefone, Item item) {
+		this.validador.validaDadosDeIdentificacao(nome, telefone);
+
+		Usuario user = getUser(nome, telefone);
+		user.adicionaItem(item);		
+		
+	}
+	
 	/**
 	 * Recupera um atributo de um item de um usuário específico.
 	 * 
@@ -263,78 +176,7 @@ public class UsuarioController {
 		Usuario user = getUser(nome, telefone);
 		return user.getDetalhesItem(nomeItem);
 	}
-
-	/**
-	 * Atualiza um atributo de um usuário específico.
-	 * 
-	 * @param nome
-	 *            o nome do usuário que se deseja atualizar um atributo.
-	 * @param telefone
-	 *            o telefone do usuário que se deseja atualizar um atributo.
-	 * @param atributo
-	 *            o atributo que se deseja atualizar.
-	 * @param valor
-	 *            o novo valor do atributo a ser atualizado.
-	 */
-	public void attUsuario(String nome, String telefone, String atributo, String valor) {
-		this.validador.validaDadosDeIdentificacao(nome, telefone);
-		this.validador.validaAtributo(atributo);
-		this.validador.validaValor(valor);
-
-		Usuario user = getUser(nome, telefone);
-
-		this.validaAtualizacao(user, atributo, valor);
-
-		IdUsuario idAntigo = new IdUsuario(nome, telefone);
-		user.atualizaAtributo(atributo, valor);
-
-		IdUsuario novoId = new IdUsuario(user.getNome(), user.getTelefone());
-		this.usuarios.remove(idAntigo);
-		this.usuarios.put(novoId, user);
-
-	}
-
-	private void validaIdeParaUso(IdUsuario id) {
-		if (!this.usuarios.containsKey(id)) {
-			throw new IllegalArgumentException("Usuario invalido");
-		}
-	}
-
-	private void validaAtualizacao(Usuario user, String atributo, String valor) {
-		if (atributo.equals("Nome")) {
-			IdUsuario id = new IdUsuario(valor, user.getTelefone());
-			this.validaIdeParaAtt(id);
-
-		} else if (atributo.equals("Telefone")) {
-			IdUsuario id = new IdUsuario(user.getNome(), valor);
-			this.validaIdeParaAtt(id);
-		}
-
-	}
-
-	private void validaIdeParaAtt(IdUsuario id) {
-		if (this.usuarios.containsKey(id)) {
-			throw new UsuarioJaExistenteExcecao("Usuario invalido");
-		}
-	}
-
-	/**
-	 * Remove um usuário do sistema.
-	 * 
-	 * @param nome
-	 *            o nome do usuário.
-	 * @param telefone
-	 *            o telefone do usuário.
-	 */
-	public void removeUsuario(String nome, String telefone) {
-		this.validador.validaDadosDeIdentificacao(nome, telefone);
-
-		IdUsuario id = new IdUsuario(nome, telefone);
-		this.validaIdeParaUso(id);
-		this.usuarios.remove(id);
-
-	}
-
+	
 	/**
 	 * Adiciona uma peça perdida a um jogo de tabuleiro de um usuário
 	 * específico.
@@ -420,14 +262,37 @@ public class UsuarioController {
 		user.attItem(nomeItem, atributo, valor);
 	}
 
-
-	public List<Item> recuperaItensNoSistema() {
+	public List<Item> getItensNoSistema() {
 		List<Item> itens = new ArrayList<>();
 
 		for (Usuario user : this.usuarios.values()) {
 			itens.addAll(user.getItens());
 		}
 		return itens;
+	}
+
+	private void validaIdeParaUso(IdUsuario id) {
+		if (!this.usuarios.containsKey(id)) {
+			throw new IllegalArgumentException("Usuario invalido");
+		}
+	}
+
+	private void validaAtualizacao(Usuario user, String atributo, String valor) {
+		if (atributo.equals("Nome")) {
+			IdUsuario id = new IdUsuario(valor, user.getTelefone());
+			this.validaIdeParaAtt(id);
+
+		} else if (atributo.equals("Telefone")) {
+			IdUsuario id = new IdUsuario(user.getNome(), valor);
+			this.validaIdeParaAtt(id);
+		}
+
+	}
+
+	private void validaIdeParaAtt(IdUsuario id) {
+		if (this.usuarios.containsKey(id)) {
+			throw new UsuarioJaExistenteExcecao("Usuario invalido");
+		}
 	}
 
 

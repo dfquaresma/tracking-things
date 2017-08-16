@@ -167,7 +167,16 @@ public class EmprestimoController {
 	}
 
 	public List<Emprestimo> getEmprestimosItem(String nomeItem) {
-		return null;
+		List<Emprestimo> emprestimos = new ArrayList<>();
+		
+		for (Emprestimo emprestimo : this.emprestimos) {
+			if (emprestimo.getNomeItem().equals(nomeItem)) {
+				emprestimos.add(emprestimo);
+			}
+		}
+		
+		return emprestimos;
+
 	}
 	
 

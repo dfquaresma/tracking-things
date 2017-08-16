@@ -114,7 +114,14 @@ public abstract class Item implements Comparable<Item> {
 	 *            sido desolvido.
 	 */
 	public void setEmprestado(boolean emprestado) {
+		if (this.emprestado == emprestado && this.emprestado) {
+			throw new IllegalArgumentException("Item emprestado no momento");
+		}
+		if (this.emprestado == emprestado && !this.emprestado) {
+			throw new IllegalArgumentException("Item nao esta emprestado no momento");
+		}
 		this.emprestado = emprestado;
+		this.qtdVezesEmprestado++;
 	}
 
 	/**

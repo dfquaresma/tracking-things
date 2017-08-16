@@ -29,7 +29,7 @@ public class Facade {
 		this.usuarioController = new UsuarioController();
 		this.itemController = new ItemController(this.usuarioController);
 		this.emprestimoController = new EmprestimoController(this.usuarioController);
-		this.listador = new Listador(this.usuarioController, this.emprestimoController);
+		this.listador = new Listador(this.usuarioController, this.emprestimoController, this.itemController);
 	}
 
 	/**
@@ -111,7 +111,7 @@ public class Facade {
 	 *            a plataforma do jogo.
 	 */
 	public void cadastrarEletronico(String nome, String telefone, String nomeItem, double preco, String plataforma) {
-		this.usuarioController.cadastrarEletronico(nome, telefone, nomeItem, preco, plataforma);
+		this.itemController.cadastrarEletronico(nome, telefone, nomeItem, preco, plataforma);
 	}
 
 	/**
@@ -127,7 +127,7 @@ public class Facade {
 	 *            o preço do jogo.
 	 */
 	public void cadastrarJogoTabuleiro(String nome, String telefone, String nomeItem, double preco) {
-		this.usuarioController.cadastrarJogoTabuleiro(nome, telefone, nomeItem, preco);
+		this.itemController.cadastrarJogoTabuleiro(nome, telefone, nomeItem, preco);
 	}
 
 	/**
@@ -169,7 +169,7 @@ public class Facade {
 	 */
 	public void cadastrarBluRayFilme(String nome, String telefone, String nomeItem, double preco, int duracao,
 			String genero, String classificacao, int anoLancamento) {
-		this.usuarioController.cadastrarBlurayFilme(nome, telefone, nomeItem, preco, duracao, genero, classificacao,
+		this.itemController.cadastrarBlurayFilme(nome, telefone, nomeItem, preco, duracao, genero, classificacao,
 				anoLancamento);
 	}
 
@@ -197,7 +197,7 @@ public class Facade {
 	 */
 	public void cadastrarBluRaySerie(String nome, String telefone, String nomeItem, double preco, String descricao,
 			int duracao, String classificacao, String genero, int temporada) {
-		this.usuarioController.cadastrarBluRaySerie(nome, telefone, nomeItem, preco, descricao, duracao, classificacao, genero,
+		this.itemController.cadastrarBluRaySerie(nome, telefone, nomeItem, preco, descricao, duracao, classificacao, genero,
 				temporada);
 	}
 
@@ -223,7 +223,7 @@ public class Facade {
 	 */
 	public void cadastrarBluRayShow(String nome, String telefone, String nomeItem, double preco, int duracao,
 			int numeroFaixas, String artista, String classificacao) {
-		this.usuarioController.cadastrarBlurayShow(nome, telefone, nomeItem, preco, duracao, numeroFaixas, artista,
+		this.itemController.cadastrarBlurayShow(nome, telefone, nomeItem, preco, duracao, numeroFaixas, artista,
 				classificacao);
 	}
 
@@ -373,6 +373,30 @@ public class Facade {
 				dataDevolucao);
 	}
 
+	public String listarItensNaoEmprestados() {
+		return this.listador.listarItensNaoEmprestados();
+	}
+	
+	public String listarItensEmprestados() {
+		return this.listador.listarItensEmprestados();
+	}
+	
+	public String listarTop10Itens() {
+		return this.listador.listarTop10Itens();
+	}
+	
+	public String listarEmprestimosUsuarioEmprestando(String nome, String telefone) {
+		return this.listador.listarEmprestimosUsuarioEmprestando(nome, telefone);
+	}
+	
+	public String listarEmprestimosUsuarioPegandoEmprestado(String nome, String telefone) {
+		return this.listador.listarEmprestimosUsuarioPegandoEmprestado(nome, telefone);
+	}
+	
+	public String listarEmprestimosItem(String nomeItem) {
+		return this.listador.listarEmprestimosItem(nomeItem);
+	}
+		
 	/**
 	 * Fecha o sistema de apostas.
 	 */
