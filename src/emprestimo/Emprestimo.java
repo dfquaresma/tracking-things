@@ -16,7 +16,7 @@ import util.Validador;
  * @author David Ferreira
  *
  */
-public class Emprestimo {
+public class Emprestimo implements Comparable<Emprestimo> {
 
 	private Usuario dono;
 	private Usuario requerente;
@@ -293,6 +293,11 @@ public class Emprestimo {
 		}
 		this.finalizado = true;
 		this.dono.recebeItem(getNomeItem());
+	}
+
+	@Override
+	public int compareTo(Emprestimo outroEmprestimo) {
+		return this.getNomeItem().compareTo(outroEmprestimo.getNomeItem());
 	}
 
 }

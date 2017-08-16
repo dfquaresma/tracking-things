@@ -151,6 +151,24 @@ public class EmprestimoController {
 		
 		return emprestimos;
 	}
+
+	public List<Emprestimo> getEmprestimosUserPegandoEmprestado(String nome, String telefone) {
+		Usuario user = this.usuarioController.getUser(nome, telefone);
+		
+		List<Emprestimo> emprestimos = new ArrayList<>();
+		
+		for (Emprestimo emprestimo : this.emprestimos) {
+			if (emprestimo.getRequerente().equals(user)) {
+				emprestimos.add(emprestimo);
+			}
+		}
+		
+		return emprestimos;
+	}
+
+	public List<Emprestimo> getEmprestimosItem(String nomeItem) {
+		return null;
+	}
 	
 
 }

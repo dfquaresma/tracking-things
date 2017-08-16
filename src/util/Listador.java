@@ -71,20 +71,31 @@ public class Listador {
 	}
  
 	public String listarEmprestimosUsuarioEmprestando(String nome, String telefone) {
-		List<Emprestimo> emprestimo = this.emprestimoController.getEmprestimosUserEmprestando(nome, telefone);
-		return null;
-		
+		List<Emprestimo> emprestimos = this.emprestimoController.getEmprestimosUserEmprestando(nome, telefone);
+		Collections.sort(emprestimos);
+		return listagemDeEmprestimos(emprestimos);
 	}
 	
 	public String listarEmprestimosUsuarioPegandoEmprestado(String nome, String telefone) {
-		return null;
-		
+		List<Emprestimo> emprestimos = this.emprestimoController.getEmprestimosUserPegandoEmprestado(nome, telefone);
+		Collections.sort(emprestimos);
+		return listagemDeEmprestimos(emprestimos);
 	}
 	
 	public String listarEmprestimosItem(String nomeItem) {
-		return null;
-		
+		List<Emprestimo> emprestimos = this.emprestimoController.getEmprestimosItem(nomeItem);
+		return listagemDeEmprestimos(emprestimos);
 	}
+	
+	private String listagemDeEmprestimos(List<Emprestimo> emprestimos) {
+		String repr = "";
+		for (Emprestimo emprestimo : emprestimos) {
+			repr += emprestimo + "|";
+		}
+		return repr;
+	}
+	
+
 	
 	public String listarItensNaoEmprestados() {
 		return null;
