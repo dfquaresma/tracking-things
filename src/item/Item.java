@@ -121,7 +121,9 @@ public abstract class Item implements Comparable<Item> {
 			throw new IllegalArgumentException("Item nao esta emprestado no momento");
 		}
 		this.emprestado = emprestado;
-		this.qtdVezesEmprestado++;
+		if (emprestado) {
+			this.qtdVezesEmprestado++;			
+		}
 	}
 
 	/**
