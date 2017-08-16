@@ -298,8 +298,10 @@ public class Emprestimo implements Comparable<Emprestimo> {
 	@Override
 	public String toString() {
 		DateFormat dateFormat = new SimpleDateFormat("d/M/yyyy");
+		
+		String dataEmprestimo = null;
 		try {
-			String dataEmprestimo = dateFormat.parse(this.getDataEmprestimo()).toString();
+			dataEmprestimo = dateFormat.format(dateFormat.parse(this.getDataEmprestimo()));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -307,7 +309,7 @@ public class Emprestimo implements Comparable<Emprestimo> {
 		String modificador;
 		if (isFinalizado()) {
 			try {
-				modificador = dateFormat.parse(this.getDataRealDaDevolucaoDoItem()).toString();
+				modificador = dateFormat.format(dateFormat.parse(this.getDataRealDaDevolucaoDoItem()));
 			} catch (ParseException e) {
 				throw new IllegalArgumentException("O formato da data inserido está incorreto, utilize dd/MM/yyyy");
 			}
