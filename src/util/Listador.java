@@ -77,6 +77,7 @@ public class Listador {
 		
 	public String listarItensNaoEmprestados() {
 		List<Item> itens = this.itemController.getItensNaoEmprestados();
+		Collections.sort(itens);
 		return listagemDeItens(itens);
 	}
 	
@@ -92,25 +93,36 @@ public class Listador {
 		int count = 1;
 		String repr = "";
 		Iterator<Item> itr = itens.iterator();
+				
 		while (itr.hasNext() && count <= 10) {
 			Item item = itr.next();
+			if (item.getQtdVezesEmprestado() == 0) {
+				break;				
+			}
 			repr += count + ") " + item.getQtdVezesEmprestado() + " emprestimos - " + item + "|";
 			count++;
 		}
+		
 		return repr;
 		
 	}
 	
 	public String listarEmprestimosUsuarioEmprestando(String nome, String telefone) {
 		List<Emprestimo> emprestimos = this.emprestimoController.getEmprestimosUserEmprestando(nome, telefone);
+		if (emprestimos.size() == 0) {
+			return "Nenhum item emprestado";
+		}
 		Collections.sort(emprestimos);
-		return listagemDeEmprestimos(emprestimos);
+		return "Emprestimos: " + listagemDeEmprestimos(emprestimos);
 	}
 	
 	public String listarEmprestimosUsuarioPegandoEmprestado(String nome, String telefone) {
 		List<Emprestimo> emprestimos = this.emprestimoController.getEmprestimosUserPegandoEmprestado(nome, telefone);
+		if (emprestimos.size() == 0) {
+			return "Nenhum item pego emprestado";
+		}
 		Collections.sort(emprestimos);
-		return listagemDeEmprestimos(emprestimos);
+		return "Emprestimos pegos: " + listagemDeEmprestimos(emprestimos);
 	}
 	
 	public String listarEmprestimosItem(String nomeItem) {
@@ -118,7 +130,7 @@ public class Listador {
 		return listagemDeEmprestimos(emprestimos);
 	}
 	
-	private String listagemDeEmprestimos(List<Emprestimo> emprestimos) {
+	private String listagemDeEmprestimos(List<Emprestimo> emprestimos) {	
 		String repr = "";
 		for (Emprestimo emprestimo : emprestimos) {
 			repr += emprestimo + "|";
