@@ -49,7 +49,7 @@ public class Emprestimo implements Comparable<Emprestimo> {
 		this.requerente = requerente;
 		this.item = dono.getItem(nomeItem);
 
-		this.dateFormat = new SimpleDateFormat("d/M/yyyy");
+		this.dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		try {
 			this.dataEmprestimo = dateFormat.parse(dataEmprestimo);
 		} catch (ParseException e) {
@@ -297,16 +297,27 @@ public class Emprestimo implements Comparable<Emprestimo> {
 
 	@Override
 	public String toString() {
+		DateFormat dateFormat = new SimpleDateFormat("d/M/yyyy");
+		try {
+			String dataEmprestimo = dateFormat.parse(this.getDataEmprestimo()).toString();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
 		String modificador;
 		if (isFinalizado()) {
-			modificador = this.getDataRealDaDevolucaoDoItem();
+			try {
+				modificador = dateFormat.parse(this.getDataRealDaDevolucaoDoItem()).toString();
+			} catch (ParseException e) {
+				throw new IllegalArgumentException("O formato da data inserido está incorreto, utilize dd/MM/yyyy");
+			}
 		} else {
 			modificador = "Emprestimo em andamento";
 		}
 
 		return "EMPRESTIMO - De: " + this.getNomeDono() + ", Para: " + this.getNomeRequerente() + ", "
-				+ this.getNomeItem() + ", " + this.getDataEmprestimo() + ", " + this.getPeriodo()
-				+ " dias, ENTREGA: " + modificador;
+				+ this.getNomeItem() + ", " + dataEmprestimo + ", " + this.getPeriodo() + " dias, ENTREGA: "
+				+ modificador;
 	}
 
 	@Override
