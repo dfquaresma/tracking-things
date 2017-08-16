@@ -294,6 +294,11 @@ public class Emprestimo implements Comparable<Emprestimo> {
 		this.finalizado = true;
 		this.dono.recebeItem(getNomeItem());
 	}
+	
+	@Override
+	public String toString() {
+		return "EMPRESTIMO - De: " + this.getNomeDono() + ", Para: " + this.getNomeRequerente() + ", " + this.getNomeItem() + ", " + this.getDataEmprestimo() + ", " + this.getPeriodo() + " dias, ENTREGA: " + this.getDataRealDaDevolucaoDoItem();
+	}
 
 	@Override
 	public int compareTo(Emprestimo outroEmprestimo) {
