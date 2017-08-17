@@ -1,6 +1,6 @@
 package usuario;
 
-import validador.Validador;
+import util.Validador;
 
 /**
  * Representação de um identificador de usuário.

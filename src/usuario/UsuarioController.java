@@ -7,7 +7,7 @@ import java.util.Map;
 
 import excecoes.UsuarioJaExistenteExcecao;
 import item.Item;
-import validador.Validador;
+import util.Validador;
 
 /**
  * Representação de um sistema de emprestimos de itens entre usuários.

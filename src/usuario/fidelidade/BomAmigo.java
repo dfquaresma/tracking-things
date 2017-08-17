@@ -1,12 +1,12 @@
-package usuarios.fidelidade;
+package usuario.fidelidade;
 
-public class FreeRider implements CartaoFidelidade {
-	
-	private final int PERIODO = 5;
+public class BomAmigo implements CartaoFidelidade {
+
+	private final int PERIODO = 14;
 	
 	@Override
 	public int getPeriodo() {
-		return PERIODO;
+		return this.PERIODO;
 	}
 
 	@Override
@@ -16,8 +16,7 @@ public class FreeRider implements CartaoFidelidade {
 	
 	@Override
 	public String toString(){
-		return "FreeRider";
+		return "BomAmigo";
 	}
-
 
 }

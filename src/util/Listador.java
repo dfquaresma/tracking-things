@@ -6,12 +6,14 @@ import java.util.Iterator;
 import java.util.List;
 
 import emprestimo.Emprestimo;
-import emprestimo.EmprestimoComparatorNomeDono;
+import emprestimo.comparador.EmprestimoComparatorNomeDono;
+import emprestimo.comparador.EmprestimosComparatorDataEmprestimo;
 import item.Item;
-import item.ItemComparatorValor;
-import item.ItemComparatorVezesEmprestadas;
-
-import validador.Validador;
+import item.comparator.ItemComparatorNome;
+import item.comparator.ItemComparatorValor;
+import item.comparator.ItemComparatorVezesEmprestadas;
+import usuario.Usuario;
+import usuario.comparator.UsuarioNomeComparator;
 
 /**
  * Representa um listador de objetos.
@@ -43,7 +45,7 @@ public class Listador {
 	 */
 	public String listaItensOrdenadosPorNome(List<Item> itens) {
 		this.validador.validaListaParaListagem(itens);
-		Collections.sort(itens);
+		itens.sort(new ItemComparatorNome());
 		return listagemDeItens(itens);
 	}
 
@@ -56,7 +58,7 @@ public class Listador {
 	 */
 	public String listaItensOrdenadosPorValor(List<Item> itens ) {
 		this.validador.validaListaParaListagem(itens);
-		Collections.sort(itens, new ItemComparatorValor());
+		itens.sort(new ItemComparatorValor());
 		return listagemDeItens(itens);
 	}
 
@@ -69,12 +71,12 @@ public class Listador {
 	}
 		
 	public String listarItensNaoEmprestados(List<Item> itens) {
-		Collections.sort(itens);
+		itens.sort(new ItemComparatorNome());
 		return listagemDeItens(itens);
 	}
 	
 	public String listarItensEmprestados(List<Emprestimo> emprestimos) {
-		Collections.sort(emprestimos, new EmprestimoComparatorNomeDono());
+		emprestimos.sort(new EmprestimoComparatorNomeDono());
 		String listagem = "";
 		for (Emprestimo emprestimo : emprestimos) {
 			listagem += "Dono do item: " + emprestimo.getNomeDono() + ", Nome do item emprestado: " + emprestimo.getNomeItem() + "|";
@@ -83,7 +85,7 @@ public class Listador {
 	}
 	
 	public String listarTop10Itens(List<Item> itens) {
-		Collections.sort(itens, new ItemComparatorVezesEmprestadas());
+		itens.sort(new ItemComparatorVezesEmprestadas());
 		
 		int count = 1;
 		String repr = "";
@@ -104,7 +106,7 @@ public class Listador {
 		if (emprestimos.size() == 0) {
 			return "Nenhum item emprestado";
 		}
-		Collections.sort(emprestimos);
+		emprestimos.sort(new EmprestimosComparatorDataEmprestimo());
 		return "Emprestimos: " + listagemDeEmprestimos(emprestimos);
 	}
 	
@@ -112,12 +114,12 @@ public class Listador {
 		if (emprestimos.size() == 0) {
 			return "Nenhum item pego emprestado";
 		}
-		Collections.sort(emprestimos);
+		emprestimos.sort(new EmprestimosComparatorDataEmprestimo());
 		return "Emprestimos pegos: " + listagemDeEmprestimos(emprestimos);
 	}
 	
 	public String listarEmprestimosItem(List<Emprestimo> emprestimos) {
-		Collections.sort(emprestimos);
+		emprestimos.sort(new EmprestimosComparatorDataEmprestimo());
 		if (emprestimos.size() == 0) {
 			return "Nenhum emprestimo associado ao item";
 		}
@@ -136,9 +138,9 @@ public class Listador {
 		String repr = "Lista de usuarios com reputacao negativa: ";
 		List<Usuario> usuariosCaloteiros = new ArrayList<Usuario>();
 		for (Usuario usuario: usuarios) {
-			if (usuario.isCaloteiro()) {
-				usuariosCaloteiros.add(usuario);
-			}
+			//if (usuario.isCaloteiro()) { COISA DE ÍCARO
+			//	usuariosCaloteiros.add(usuario);
+			//}
 		}
 		
 		usuariosCaloteiros.sort(new UsuarioNomeComparator());

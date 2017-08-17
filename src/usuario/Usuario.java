@@ -9,7 +9,7 @@ import excecoes.OperacaoNaoPermitidaNoMomentoExcecao;
 import item.Item;
 import item.bluray.Temporada;
 import item.jogo.JogoTabuleiro;
-import validador.Validador;
+import util.Validador;
 
 /**
  * Representação de um usuário no sistema.
@@ -221,7 +221,7 @@ public class Usuario {
 		this.validaItemParaUso(nomeItem);
 		
 		Item item = this.getItem(nomeItem);
-		this.reputacao.devolveItem(dias)
+		//this.reputacao.devolveItem(dias); ACHO QUE É CÓDIGO DE PAULO
 	}
 
 	/**

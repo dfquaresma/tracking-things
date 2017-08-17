@@ -8,7 +8,7 @@ import java.util.Date;
 import excecoes.OperacaoNaoPermitidaNoMomentoExcecao;
 import item.Item;
 import usuario.Usuario;
-import validador.Validador;
+import util.Validador;
 
 /**
  * Representação de um emprestimo.
@@ -16,7 +16,7 @@ import validador.Validador;
  * @author David Ferreira
  *
  */
-public class Emprestimo implements Comparable<Emprestimo> {
+public class Emprestimo {
 
 	private Usuario dono;
 	private Usuario requerente;
@@ -81,7 +81,8 @@ public class Emprestimo implements Comparable<Emprestimo> {
 		}
 		this.finalizado = true;
 		this.dono.recebeItem(getNomeItem());
-		this.requerente.devolveItem(diasAtraso);
+		
+		//this.requerente.devolveItem(diasAtraso); COISA DE PAULO
 	}
 
 	/**
@@ -311,9 +312,8 @@ public class Emprestimo implements Comparable<Emprestimo> {
 				+ modificador;
 	}
 
-	@Override
-	public int compareTo(Emprestimo outroEmprestimo) {
-		return this.dataEmprestimo.compareTo(outroEmprestimo.dataEmprestimo);
+	public Date getDataDoEmprestimo() {
+		return this.dataEmprestimo;
 	}
 
 }
