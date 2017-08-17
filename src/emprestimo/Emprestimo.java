@@ -8,7 +8,7 @@ import java.util.Date;
 import excecoes.OperacaoNaoPermitidaNoMomentoExcecao;
 import item.Item;
 import usuario.Usuario;
-import util.Validador;
+import validador.Validador;
 
 /**
  * Representação de um emprestimo.
@@ -297,28 +297,16 @@ public class Emprestimo implements Comparable<Emprestimo> {
 
 	@Override
 	public String toString() {
-		DateFormat dateFormat = new SimpleDateFormat("d/M/yyyy");
-		
-		String dataEmprestimo = null;
-		try {
-			dataEmprestimo = dateFormat.format(dateFormat.parse(this.getDataEmprestimo()));
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
 
 		String modificador;
 		if (isFinalizado()) {
-			try {
-				modificador = dateFormat.format(dateFormat.parse(this.getDataRealDaDevolucaoDoItem()));
-			} catch (ParseException e) {
-				throw new IllegalArgumentException("O formato da data inserido está incorreto, utilize dd/MM/yyyy");
-			}
+			modificador = this.getDataRealDaDevolucaoDoItem();
 		} else {
 			modificador = "Emprestimo em andamento";
 		}
 
 		return "EMPRESTIMO - De: " + this.getNomeDono() + ", Para: " + this.getNomeRequerente() + ", "
-				+ this.getNomeItem() + ", " + dataEmprestimo + ", " + this.getPeriodo() + " dias, ENTREGA: "
+				+ this.getNomeItem() + ", " + this.getDataEmprestimo() + ", " + this.getPeriodo() + " dias, ENTREGA: "
 				+ modificador;
 	}
 

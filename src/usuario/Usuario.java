@@ -9,7 +9,7 @@ import excecoes.OperacaoNaoPermitidaNoMomentoExcecao;
 import item.Item;
 import item.bluray.Temporada;
 import item.jogo.JogoTabuleiro;
-import util.Validador;
+import validador.Validador;
 
 /**
  * Representação de um usuário no sistema.

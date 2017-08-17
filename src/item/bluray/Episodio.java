@@ -1,6 +1,6 @@
 package item.bluray;
 
-import util.Validador;
+import validador.Validador;
 
 /**
  * Representação de um episódio de temporada.

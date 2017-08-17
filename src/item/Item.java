@@ -1,6 +1,6 @@
 package item;
 
-import util.Validador;
+import validador.Validador;
 
 /**
  * Representação de um item.

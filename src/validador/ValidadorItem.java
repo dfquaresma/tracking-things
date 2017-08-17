@@ -1,24 +1,10 @@
-package util;
+package validador;
 
-import java.util.List;
-
-import excecoes.OperacaoNaoPermitidaNoMomentoExcecao;
-import item.Item;
 import item.bluray.Classificacao;
 import item.bluray.Genero;
 import item.jogo.Plataforma;
-import usuario.Usuario;
 
-/**
- * Represetanção de um validador.
- * 
- * @author Amanda V. A. de Luna e Costa
- * @author David Ferreira Quaresma
- * @author Ícaro Dantas de Araújo Lima
- * @author Paulo Felipe Feitosa da Silva
- *
- */
-public class Validador {
+public class ValidadorItem {
 
 	private void validaString(String atributo, String atributoMsg) {
 		if (atributo == null) {
@@ -28,37 +14,7 @@ public class Validador {
 			throw new IllegalArgumentException(atributoMsg + " nao pode ser vazio");
 		}
 	}
-
-	/**
-	 * Valida um nome recebido como parâmetro.
-	 * 
-	 * @param nome
-	 *            o nome a ser validado.
-	 */
-	public void validaNome(String nome) {
-		this.validaString(nome, "Nome");
-	}
-
-	/**
-	 * Valida um telefone recebido como parâmetro.
-	 * 
-	 * @param telefone
-	 *            o telefone a ser validado.
-	 */
-	public void validaTelefone(String telefone) {
-		this.validaString(telefone, "Telefone");
-	}
-
-	/**
-	 * Valida um email recebido como parâmetro.
-	 * 
-	 * @param email
-	 *            o email a ser validado.
-	 */
-	public void validaEmail(String email) {
-		this.validaString(email, "Email");
-	}
-
+	
 	/**
 	 * Valida um valor recebido como parâmetro.
 	 * 
@@ -90,7 +46,7 @@ public class Validador {
 			throw new IllegalArgumentException("Duracao nao pode ser menor ou igual a zero");
 		}
 	}
-
+	
 	/**
 	 * Valida um nome de artista recebido como parâmetro.
 	 * 
@@ -263,141 +219,7 @@ public class Validador {
 	public void validaPeca(String nomePeca) {
 		this.validaString(nomePeca, "Nome da peca");
 	}
-
-	private void validaObjetos(Object o, String msg) {
-		if (o == null) {
-			throw new IllegalArgumentException(msg + " nao pode ser nulo");
-		}
-	}
-
-	/**
-	 * Valida um usuario, recebido no parâmetro, dono de um item.
-	 * 
-	 * @param dono
-	 *            o dono a ser validado.
-	 */
-	public void validaDono(Usuario dono) {
-		this.validaObjetos(dono, "Usuario dono");
-	}
-
-	/**
-	 * Valida um usuario, recebido no parâmetro, requerente de um item.
-	 * 
-	 * @param requerente
-	 *            o requerente a ser validado.
-	 */
-	public void validaRequerente(Usuario requerente) {
-		this.validaObjetos(requerente, "Usuario requerente");
-	}
-
-	/**
-	 * Valida um item qualquer recebido no parÂmetro.
-	 * 
-	 * @param item
-	 *            o item a ser validado.
-	 */
-	public void validaItem(Item item) {
-		this.validaObjetos(item, "Item");
-	}
-
-	/**
-	 * Valida se valor tem o formato de um Inteiro.
-	 * 
-	 * @param atributo
-	 *            o atributo que valor representa
-	 * @param valor
-	 *            - String a ser convertida em Int.
-	 */
-	public void validaConversaoStringToInt(String atributo, String valor) {
-		try {
-			Integer.parseInt(valor);
-		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException(atributo + " deve ter o formato de um tipo int");
-		}
-
-		if (Integer.parseInt(valor) <= 0) {
-			throw new IllegalArgumentException("Valor nao pode ser menor ou igual a zero para essa operacao");
-
-		}
-
-	}
-
-	/**
-	 * Valida se valor tem o formato de um Double.
-	 * 
-	 * @param atributo
-	 *            o atributo que o valor representa.
-	 * @param valor
-	 *            - String a ser convertida em Int.
-	 */
-	public void validaConversaoStringToDouble(String atributo, String valor) {
-		try {
-			Double.parseDouble(valor);
-		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException(atributo + " deve ter o formato de um tipo double");
-		}
-
-		if (Double.parseDouble(valor) <= 0) {
-			throw new IllegalArgumentException("Valor nao pode ser menor ou igual a zero para essa operacao");
-
-		}
-	}
-
-	/**
-	 * Valida dados referentes a uma entidade do tipo Emprestimo.
-	 * 
-	 * @param nomeDono
-	 *            o nome do usuário dono do item a ser emprestado.
-	 * @param telefoneDono
-	 *            o telefone do usuário dono do item a se emprestado.
-	 * @param nomeRequerente
-	 *            o nome do usuário que deseja pegar o item emprestado.
-	 * @param telefoneRequerente
-	 *            o telefone do usuário que deseja pegar o item emprestado.
-	 * @param nomeItem
-	 *            o nome do item a ser emprestado.
-	 * @param dataEmprestimo
-	 *            a data em que o emprestimo foi iniciado.
-	 */
-	public void validaDadosDeEmprestimos(String nomeDono, String telefoneDono, String nomeRequerente,
-			String telefoneRequerente, String nomeItem, String dataEmprestimo) {
-		this.validaNome(nomeDono);
-		this.validaNome(nomeRequerente);
-		this.validaNomeItem(nomeItem);
-		this.validaTelefone(telefoneDono);
-		this.validaTelefone(telefoneRequerente);
-		this.validaData(dataEmprestimo);
-	}
-
-	/**
-	 * Valida uma lista de itens recebida no parâmetro.
-	 * 
-	 * @param itens
-	 *            uma lista de itens a ser validada.
-	 */
-	public void validaListaParaListagem(List<Item> itens) {
-		if (itens == null)
-			throw new NullPointerException("A lista de itens para listagem nao pode ser nula");
-
-		if (itens.size() == 0) {
-			throw new OperacaoNaoPermitidaNoMomentoExcecao("Nao ha itens para serem listados no momento");
-		}
-
-		for (Item item : itens) {
-			if (item == null)
-				throw new NullPointerException("A lista de itens para listagem nao pode possuir itens nulos");
-		}
-
-	}
-
-	/**
-	 * Valida atributos de cadastro de blu-rays
-	 * 
-	 * @param duracao
-	 *            a duração do blu-ray a ser validada.
-	 * @param classificacao
-	 *            a classificação do blu-ray a ser validada.
-	 */
+	
 	public void validaAtributosDeCadastroDeBluRays(int duracao, String classificacao) {
 		this.validaDuracao(duracao);
 		this.validaClassificacao(classificacao);
@@ -414,19 +236,6 @@ public class Validador {
 	public void validaAtributosDeCadastroDeItem(String nomeItem, double preco) {
 		this.validaNomeItem(nomeItem);
 		this.validaPreco(preco);
-	}
-
-	/**
-	 * Valida dados de identificação.
-	 * 
-	 * @param nome
-	 *            o nome do usuário a ser identificado.
-	 * @param telefone
-	 *            o telefone do usuário a ser identificado.
-	 */
-	public void validaDadosDeIdentificacao(String nome, String telefone) {
-		this.validaNome(nome);
-		this.validaTelefone(telefone);
 	}
 
 }

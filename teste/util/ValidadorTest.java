@@ -2,6 +2,7 @@ package util;
 
 import item.Item;
 import item.bluray.Temporada;
+import validador.Validador;
 
 import java.util.ArrayList;
 import java.util.List;

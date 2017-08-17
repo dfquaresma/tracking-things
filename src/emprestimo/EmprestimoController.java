@@ -8,15 +8,12 @@ import java.util.Set;
 
 import item.Item;
 import usuario.Usuario;
-import usuario.UsuarioController;
 
 public class EmprestimoController {
 	private Set<Emprestimo> emprestimos;
-	private UsuarioController usuarioController;
 
-	public EmprestimoController(UsuarioController usuarioController) {
+	public EmprestimoController() {
 		this.emprestimos = new HashSet<>();
-		this.usuarioController = usuarioController;
 	}
 
 	/**
@@ -37,13 +34,12 @@ public class EmprestimoController {
 	 * @param periodo
 	 *            o período em que o item ficará emprestado.
 	 */
-	public void registrarEmprestimo(String nomeDono, String telefoneDono, String nomeRequerente,
-			String telefoneRequerente, String nomeItem, String dataEmprestimo, int periodo) {
+	public void registrarEmprestimo(Usuario userEmprestador, Usuario userRequerente, String nomeItem,
+			String dataEmprestimo, int periodo) {
+		this.validaAddEmprestimo(userEmprestador, userRequerente, nomeItem, dataEmprestimo);
+		Emprestimo emprestimo = new Emprestimo(userEmprestador, userRequerente, nomeItem, dataEmprestimo, periodo);
+		this.emprestimos.add(emprestimo);
 
-		Usuario userEmprestador = usuarioController.getUser(nomeDono, telefoneDono);
-		Usuario userRequerente = usuarioController.getUser(nomeRequerente, telefoneRequerente);
-		registraEmprestimo(userEmprestador, userRequerente, nomeItem, dataEmprestimo, periodo);		
-		
 	}
 
 	/**
@@ -64,25 +60,8 @@ public class EmprestimoController {
 	 * @param dataDevolucao
 	 *            a data em que o item foi devolvido.
 	 */
-	public void devolverItem(String nomeDono, String telefoneDono, String nomeRequerente, String telefoneRequerente,
-			String nomeItem, String dataEmprestimo, String dataDevolucao) {
-
-		Usuario userEmprestador = usuarioController.getUser(nomeDono, telefoneDono);
-		Usuario userRequerente = usuarioController.getUser(nomeRequerente, telefoneRequerente);
-		fecharEmprestimo(userEmprestador, userRequerente, nomeItem, dataEmprestimo, dataDevolucao);
-		
-	}
-	
-	public void registraEmprestimo(Usuario userEmprestador, Usuario userRequerente, String nomeItem,
-			String dataEmprestimo, int periodo) {
-		this.validaAddEmprestimo(userEmprestador, userRequerente, nomeItem, dataEmprestimo);
-		Emprestimo emprestimo = new Emprestimo(userEmprestador, userRequerente, nomeItem, dataEmprestimo, periodo);
-		this.emprestimos.add(emprestimo);
-
-	}
-
-	public void fecharEmprestimo(Usuario userEmprestador, Usuario userRequerente, String nomeItem,
-			String dataEmprestimo, String dataDevolucao) {
+	public void devolverItem(Usuario userEmprestador, Usuario userRequerente, String nomeItem, String dataEmprestimo,
+			String dataDevolucao) {
 		Emprestimo emprestimo = getEmprestimo(userEmprestador, userRequerente, nomeItem, dataEmprestimo);
 		emprestimo.finaliza(dataDevolucao);
 
@@ -111,7 +90,6 @@ public class EmprestimoController {
 			String dataEmprestimo) {
 
 		Item item = userEmprestador.getItem(nomeItem);
-
 		for (Emprestimo emprestimo : this.emprestimos) {
 			if (emprestimo.getDono().equals(userEmprestador) && emprestimo.getRequerente().equals(userRequerente)
 					&& emprestimo.getItem().equals(item) && emprestimo.getDataEmprestimo().equals(dataEmprestimo)) {
@@ -139,50 +117,48 @@ public class EmprestimoController {
 		return true;
 	}
 
-	public List<Emprestimo> getEmprestimosUserEmprestando(String nome, String telefone) {
-		Usuario user = this.usuarioController.getUser(nome, telefone);
-		
+	public List<Emprestimo> getEmprestimosUserEmprestando(Usuario user) {
+
 		List<Emprestimo> emprestimos = new ArrayList<>();
-		
+
 		for (Emprestimo emprestimo : this.emprestimos) {
 			if (emprestimo.getDono().equals(user)) {
 				emprestimos.add(emprestimo);
 			}
 		}
-		
+
 		return emprestimos;
 	}
 
-	public List<Emprestimo> getEmprestimosUserPegandoEmprestado(String nome, String telefone) {
-		Usuario user = this.usuarioController.getUser(nome, telefone);
-		
+	public List<Emprestimo> getEmprestimosUserPegandoEmprestado(Usuario user) {
+
 		List<Emprestimo> emprestimos = new ArrayList<>();
-		
+
 		for (Emprestimo emprestimo : this.emprestimos) {
 			if (emprestimo.getRequerente().equals(user)) {
 				emprestimos.add(emprestimo);
 			}
 		}
-		
+
 		return emprestimos;
 	}
 
 	public List<Emprestimo> getEmprestimosItem(String nomeItem) {
 		List<Emprestimo> emprestimos = new ArrayList<>();
-		
+
 		for (Emprestimo emprestimo : this.emprestimos) {
 			if (emprestimo.getNomeItem().equals(nomeItem)) {
 				emprestimos.add(emprestimo);
 			}
 		}
-		
+
 		return emprestimos;
 
 	}
-	
+
 	public List<Emprestimo> getEmprestimosNaoFinalizados() {
 		List<Emprestimo> emprestimos = new ArrayList<>();
-		
+
 		Iterator<Emprestimo> itr = this.emprestimos.iterator();
 		while (itr.hasNext()) {
 			Emprestimo emprestimo = itr.next();
@@ -191,8 +167,7 @@ public class EmprestimoController {
 			}
 		}
 		return emprestimos;
-		
-	}
 
+	}
 
 }
