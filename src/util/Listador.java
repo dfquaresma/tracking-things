@@ -5,10 +5,11 @@ import java.util.Iterator;
 import java.util.List;
 
 import emprestimo.Emprestimo;
+import emprestimo.EmprestimoComparatorNomeDono;
 import emprestimo.EmprestimoController;
-import item.ComparadorPorValor;
-import item.ComparadorPorVezesEmprestadas;
 import item.Item;
+import item.ItemComparatorValor;
+import item.ItemComparatorVezesEmprestadas;
 import item.ItemController;
 import usuario.UsuarioController;
 
@@ -63,7 +64,7 @@ public class Listador {
 	public String listaItensOrdenadosPorValor() {
 		List<Item> itens = this.usuarioController.getItensNoSistema();
 		this.validador.validaListaParaListagem(itens);
-		Collections.sort(itens, new ComparadorPorValor());
+		Collections.sort(itens, new ItemComparatorValor());
 		return listagemDeItens(itens);
 	}
 
@@ -82,18 +83,22 @@ public class Listador {
 	}
 	
 	public String listarItensEmprestados() {
-		List<Item> itens = this.itemController.getItensEmprestados();
-		throw new IllegalArgumentException("NAO IMPLEMENTEI");
+		List<Emprestimo> emprestimos = this.emprestimoController.getEmprestimosNaoFinalizados();
+		Collections.sort(emprestimos, new EmprestimoComparatorNomeDono());
+		String listagem = "";
+		for (Emprestimo emprestimo : emprestimos) {
+			listagem += "Dono do item: " + emprestimo.getNomeDono() + ", Nome do item emprestado: " + emprestimo.getNomeItem() + "|";
+		}
+		return listagem;
 	}
 	
 	public String listarTop10Itens() {
 		List<Item> itens = this.usuarioController.getItensNoSistema();
-		Collections.sort(itens, new ComparadorPorVezesEmprestadas());
+		Collections.sort(itens, new ItemComparatorVezesEmprestadas());
 		
 		int count = 1;
 		String repr = "";
-		Iterator<Item> itr = itens.iterator();
-				
+		Iterator<Item> itr = itens.iterator();		
 		while (itr.hasNext() && count <= 10) {
 			Item item = itr.next();
 			if (item.getQtdVezesEmprestado() == 0) {
@@ -102,7 +107,6 @@ public class Listador {
 			repr += count + ") " + item.getQtdVezesEmprestado() + " emprestimos - " + item + "|";
 			count++;
 		}
-		
 		return repr;
 		
 	}
@@ -127,7 +131,11 @@ public class Listador {
 	
 	public String listarEmprestimosItem(String nomeItem) {
 		List<Emprestimo> emprestimos = this.emprestimoController.getEmprestimosItem(nomeItem);
-		return listagemDeEmprestimos(emprestimos);
+		Collections.sort(emprestimos);
+		if (emprestimos.size() == 0) {
+			return "Nenhum emprestimo associado ao item";
+		}
+		return "Emprestimos associados ao item: " + listagemDeEmprestimos(emprestimos);
 	}
 	
 	private String listagemDeEmprestimos(List<Emprestimo> emprestimos) {	

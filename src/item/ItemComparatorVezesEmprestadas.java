@@ -2,7 +2,7 @@ package item;
 
 import java.util.Comparator;
 
-public class ComparadorPorVezesEmprestadas implements Comparator<Item> {
+public class ItemComparatorVezesEmprestadas implements Comparator<Item> {
 
 	@Override
 	public int compare(Item itemA, Item itemB) {
