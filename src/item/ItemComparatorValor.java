@@ -11,7 +11,7 @@ import java.util.Comparator;
  * @author Paulo Felipe Feitosa da Silva
  *
  */
-public class ComparadorPorValor implements Comparator<Item> {
+public class ItemComparatorValor implements Comparator<Item> {
 
 	/**
 	 * Comparada o itemA com o itemB. Retorna 0 caso estes itens forem iguais, 1

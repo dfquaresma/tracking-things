@@ -324,7 +324,7 @@ public class Emprestimo implements Comparable<Emprestimo> {
 
 	@Override
 	public int compareTo(Emprestimo outroEmprestimo) {
-		return this.getNomeItem().compareTo(outroEmprestimo.getNomeItem());
+		return this.dataEmprestimo.compareTo(outroEmprestimo.dataEmprestimo);
 	}
 
 }

@@ -2,6 +2,7 @@ package emprestimo;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -179,5 +180,19 @@ public class EmprestimoController {
 
 	}
 	
+	public List<Emprestimo> getEmprestimosNaoFinalizados() {
+		List<Emprestimo> emprestimos = new ArrayList<>();
+		
+		Iterator<Emprestimo> itr = this.emprestimos.iterator();
+		while (itr.hasNext()) {
+			Emprestimo emprestimo = itr.next();
+			if (!emprestimo.isFinalizado()) {
+				emprestimos.add(emprestimo);
+			}
+		}
+		return emprestimos;
+		
+	}
+
 
 }

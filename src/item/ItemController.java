@@ -158,18 +158,6 @@ public class ItemController {
 		
 	}
 	
-	public List<Item> getItensEmprestados() {
-		List<Item> itens = this.usuarioController.getItensNoSistema();
-		
-		Iterator<Item> itr = itens.iterator();
-		while (itr.hasNext()) {
-			if (!itr.next().isEmprestado()) {
-				itr.remove();
-			}
-		}
-		return itens;
-		
-	}
 
 
 	
