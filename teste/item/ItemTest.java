@@ -120,18 +120,6 @@ public class ItemTest {
 	}
 	
 	/**
-	 * Metodo que testa a corretude do metodo compareTo de Item.
-	 */
-	@Test
-	public void testCompareTo()
-	{
-		Item newItem = new Filme("Rodaviva", 220, 150, "OUTRO", "DEZ_ANOS", 1999);
-		assertEquals(true, this.filmeTest.compareTo(newItem) < 0);
-		assertEquals(true, newItem.compareTo(filmeTest) > 0);
-		assertEquals(true, this.filmeTest.compareTo(filmeTest) == 0);
-	}
-	
-	/**
 	 * Metodo que testa a corretude do metodo getInfo de Item.
 	 */
 	@Test

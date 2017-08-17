@@ -1,4 +1,4 @@
-package usuarios.fidelidade;
+package usuario.fidelidade;
 
 public interface CartaoFidelidade {
 	

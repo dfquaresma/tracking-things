@@ -1,4 +1,4 @@
-package util;
+package usuario.comparator;
 import java.util.Comparator;
 
 import usuario.Usuario;

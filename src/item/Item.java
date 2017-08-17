@@ -1,6 +1,6 @@
 package item;
 
-import validador.Validador;
+import util.Validador;
 
 /**
  * Representação de um item.
@@ -11,7 +11,7 @@ import validador.Validador;
  * @author Paulo Felipe Feitosa da Silva
  *
  */
-public abstract class Item implements Comparable<Item> {
+public abstract class Item {
 
 	private String nome;
 	private double preco;
@@ -169,15 +169,6 @@ public abstract class Item implements Comparable<Item> {
 			return false;
 		}
 		return true;
-	}
-
-	/**
-	 * Compara este item com o outro recebido no parâmetro.
-	 */
-	@Override
-	public int compareTo(Item outroItem) {
-		this.validador.validaItem(outroItem);
-		return this.nome.compareTo(outroItem.nome);
 	}
 
 	/**

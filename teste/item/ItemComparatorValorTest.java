@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import item.bluray.Show;
+import item.comparator.ItemComparatorValor;
 import item.jogo.JogoEletronico;
 import item.jogo.JogoTabuleiro;
 

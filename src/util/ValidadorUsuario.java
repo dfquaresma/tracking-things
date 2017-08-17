@@ -1,4 +1,4 @@
-package validador;
+package util;
 
 public class ValidadorUsuario {
 	

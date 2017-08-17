@@ -1,6 +1,8 @@
-package item;
+package item.comparator;
 
 import java.util.Comparator;
+
+import item.Item;
 
 public class ItemComparatorVezesEmprestadas implements Comparator<Item> {
 

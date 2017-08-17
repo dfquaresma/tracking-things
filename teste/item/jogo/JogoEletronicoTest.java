@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import validador.Validador;
+import util.Validador;
 
 /**
  * Testa os métodos da classe Jogo Eletrônico.
