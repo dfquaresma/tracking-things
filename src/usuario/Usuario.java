@@ -24,6 +24,7 @@ public class Usuario {
 	private String email;
 	private Map<String, Item> itens;
 	private Validador validador;
+	private Reputacao reputacao;
 
 	/**
 	 * Constrói um usuário com nome, telefone e email.
@@ -44,14 +45,36 @@ public class Usuario {
 		this.telefone = telefone;
 		this.email = email;
 		this.itens = new HashMap<>();
+		this.reputacao = new Reputacao();
 
 	}
 
+	/**
+	 * Adiciona um item a um usuário específico.
+	 * 
+	 * @param item
+	 */
 	public void adicionaItem(Item item) {
 		String nomeDoItem = item.getNome();
 		this.validador.validaAtributosDeCadastroDeItem(nomeDoItem, item.getPreco());
 		this.itens.put(nomeDoItem, item);
-				
+		
+		this.reputacao.adicionandoItemParaEmprestimo(item.getPreco());
+	}
+	
+	/**
+	 * Remove um item de um usuário específico.
+	 * 
+	 * @param nomeItem
+	 *            o nome do item.
+	 */
+	public void removerItem(String nomeItem) {
+		this.validaItemParaUso(nomeItem);
+		Item item = this.getItem(nomeItem);
+		
+		this.itens.remove(nomeItem);
+		
+		this.reputacao.removendoItemParaEmprestimo(item.getPreco());
 	}
 	
 	/**
@@ -73,7 +96,6 @@ public class Usuario {
 
 		JogoTabuleiro jogo = (JogoTabuleiro) item;
 		jogo.adicionarPecaPerdida(nomePeca);
-
 	}
 
 	/**
@@ -95,17 +117,6 @@ public class Usuario {
 
 		Temporada temporada = (Temporada) item;
 		temporada.addBlueray(duracao);
-	}
-
-	/**
-	 * Remove um item de um usuário específico.
-	 * 
-	 * @param nomeItem
-	 *            o nome do item.
-	 */
-	public void removerItem(String nomeItem) {
-		this.validaItemParaUso(nomeItem);
-		itens.remove(nomeItem);
 	}
 
 	/**
@@ -182,6 +193,8 @@ public class Usuario {
 			throw new OperacaoNaoPermitidaNoMomentoExcecao("Item emprestado no momento");
 		}
 		item.setEmprestado(true);
+		
+		this.reputacao.emprestandoItem(item.getPreco());
 	}
 
 	/**
@@ -199,9 +212,20 @@ public class Usuario {
 		}
 		item.setEmprestado(false);
 	}
+	
+	/**
+	 * 
+	 */
+	public void devolveItem(String nomeItem, int diasAtraso)
+	{
+		this.validaItemParaUso(nomeItem);
+		
+		Item item = this.getItem(nomeItem);
+		this.reputacao.devolveItem(dias)
+	}
 
 	/**
-	 * Atualiza um atributo específico.
+	 * Atualiza um atributo específico do usuário.
 	 * 
 	 * @param atributo
 	 *            o atributo a ser atualizado.
@@ -230,7 +254,7 @@ public class Usuario {
 	}
 
 	/**
-	 * Recupera um atributo específico.
+	 * Recupera um atributo específico do usuário.
 	 * 
 	 * @param atributo
 	 *            o atributo a ser recuperado.
@@ -246,9 +270,27 @@ public class Usuario {
 			return getTelefone();
 		case ("Email"):
 			return getEmail();
+		case ("Reputacao"):
+			return String.format("%f", this.getReputacao());
 		default:
 			throw new IllegalArgumentException("Atributo invalido.");
 		}
+	}
+	
+	private void validaItemParaUso(String nomeItem) {
+		this.validador.validaNomeItem(nomeItem);
+
+		if (!(itens.containsKey(nomeItem))) {
+			throw new IllegalArgumentException("Item nao encontrado");
+		}
+	}
+
+	private void validaAttNomeDeItem(String nomeItem) {
+
+		if (this.itens.containsKey(nomeItem)) {
+			throw new IllegalArgumentException();
+		}
+
 	}
 
 	/**
@@ -276,6 +318,11 @@ public class Usuario {
 	 */
 	public String getEmail() {
 		return this.email;
+	}
+	
+	public double getReputacao()
+	{
+		return this.reputacao.getReputacao();
 	}
 
 	/**
@@ -377,22 +424,4 @@ public class Usuario {
 	public String toString() {
 		return this.nome + ", " + this.telefone + ", " + this.email;
 	}
-
-	private void validaItemParaUso(String nomeItem) {
-		this.validador.validaNomeItem(nomeItem);
-
-		if (!(itens.containsKey(nomeItem))) {
-			throw new IllegalArgumentException("Item nao encontrado");
-		}
-	}
-
-	private void validaAttNomeDeItem(String nomeItem) {
-
-		if (this.itens.containsKey(nomeItem)) {
-			throw new IllegalArgumentException();
-		}
-
-	}
-
-	
 }
