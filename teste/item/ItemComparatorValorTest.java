@@ -17,7 +17,7 @@ import item.jogo.JogoTabuleiro;
  * @author Paulo Felipe Feitosa da Silva
  *
  */
-public class ComparadorPorValorTest {
+public class ItemComparatorValorTest {
 
 	/**
 	 * Executa a bateria de testes a fim de verificar a corretude da classe
@@ -25,7 +25,7 @@ public class ComparadorPorValorTest {
 	 */
 	@Test
 	public void test() {
-		ComparadorPorValor comparador = new ComparadorPorValor();
+		ItemComparatorValor comparador = new ItemComparatorValor();
 		Item itemA = new JogoTabuleiro("Xadrez", 200);
 		Item itemB = new JogoEletronico("Dota", 200, "PC");
 		Item itemC = new Show("AC DC - Live in River Plate", 300, 2, 11, "AC_DC", "DEZ_ANOS");

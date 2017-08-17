@@ -1,7 +1,12 @@
 package projeto;
 
+import java.util.List;
+
+import emprestimo.Emprestimo;
 import emprestimo.EmprestimoController;
+import item.Item;
 import item.ItemController;
+import usuario.Usuario;
 import usuario.UsuarioController;
 import util.Listador;
 
@@ -28,8 +33,8 @@ public class Facade {
 	public Facade() {
 		this.usuarioController = new UsuarioController();
 		this.itemController = new ItemController(this.usuarioController);
-		this.emprestimoController = new EmprestimoController(this.usuarioController);
-		this.listador = new Listador(this.usuarioController, this.emprestimoController, this.itemController);
+		this.emprestimoController = new EmprestimoController();
+		this.listador = new Listador();
 	}
 
 	/**
@@ -197,8 +202,8 @@ public class Facade {
 	 */
 	public void cadastrarBluRaySerie(String nome, String telefone, String nomeItem, double preco, String descricao,
 			int duracao, String classificacao, String genero, int temporada) {
-		this.itemController.cadastrarBluRaySerie(nome, telefone, nomeItem, preco, descricao, duracao, classificacao, genero,
-				temporada);
+		this.itemController.cadastrarBluRaySerie(nome, telefone, nomeItem, preco, descricao, duracao, classificacao,
+				genero, temporada);
 	}
 
 	/**
@@ -298,7 +303,8 @@ public class Facade {
 	 * @return a listagem.
 	 */
 	public String listarItensOrdenadosPorNome() {
-		return this.listador.listaItensOrdenadosPorNome();
+		List<Item> itens = this.usuarioController.getItensNoSistema();
+		return this.listador.listaItensOrdenadosPorNome(itens);
 	}
 
 	/**
@@ -307,7 +313,8 @@ public class Facade {
 	 * @return a listagem.
 	 */
 	public String listarItensOrdenadosPorValor() {
-		return this.listador.listaItensOrdenadosPorValor();
+		List<Item> itens = this.usuarioController.getItensNoSistema();
+		return this.listador.listaItensOrdenadosPorValor(itens);
 	}
 
 	/**
@@ -345,8 +352,10 @@ public class Facade {
 	 */
 	public void registrarEmprestimo(String nomeDono, String telefoneDono, String nomeRequerente,
 			String telefoneRequerente, String nomeItem, String dataEmprestimo, int periodo) {
-		this.emprestimoController.registrarEmprestimo(nomeDono, telefoneDono, nomeRequerente, telefoneRequerente, nomeItem,
-				dataEmprestimo, periodo);
+		Usuario userEmprestador = usuarioController.getUser(nomeDono, telefoneDono);
+		Usuario userRequerente = usuarioController.getUser(nomeRequerente, telefoneRequerente);
+		this.emprestimoController.registrarEmprestimo(userEmprestador, userRequerente, nomeItem, dataEmprestimo,
+				periodo);
 	}
 
 	/**
@@ -369,34 +378,44 @@ public class Facade {
 	 */
 	public void devolverItem(String nomeDono, String telefoneDono, String nomeRequerente, String telefoneRequerente,
 			String nomeItem, String dataEmprestimo, String dataDevolucao) {
-		this.emprestimoController.devolverItem(nomeDono, telefoneDono, nomeRequerente, telefoneRequerente, nomeItem, dataEmprestimo,
+		Usuario userEmprestador = usuarioController.getUser(nomeDono, telefoneDono);
+		Usuario userRequerente = usuarioController.getUser(nomeRequerente, telefoneRequerente);
+		this.emprestimoController.devolverItem(userEmprestador, userRequerente, nomeItem, dataEmprestimo,
 				dataDevolucao);
 	}
 
 	public String listarItensNaoEmprestados() {
-		return this.listador.listarItensNaoEmprestados();
+		List<Item> itens = this.itemController.getItensNaoEmprestados();
+		return this.listador.listarItensNaoEmprestados(itens);
 	}
-	
+
 	public String listarItensEmprestados() {
-		return this.listador.listarItensEmprestados();
+		List<Emprestimo> emprestimos = this.emprestimoController.getEmprestimosNaoFinalizados();
+		return this.listador.listarItensEmprestados(emprestimos);
 	}
-	
+
 	public String listarTop10Itens() {
-		return this.listador.listarTop10Itens();
+		List<Item> itens = this.usuarioController.getItensNoSistema();
+		return this.listador.listarTop10Itens(itens);
 	}
-	
+
 	public String listarEmprestimosUsuarioEmprestando(String nome, String telefone) {
-		return this.listador.listarEmprestimosUsuarioEmprestando(nome, telefone);
+		Usuario user = this.usuarioController.getUser(nome, telefone);
+		List<Emprestimo> emprestimos = this.emprestimoController.getEmprestimosUserEmprestando(user);
+		return this.listador.listarEmprestimosUsuarioEmprestando(emprestimos);
 	}
-	
+
 	public String listarEmprestimosUsuarioPegandoEmprestado(String nome, String telefone) {
-		return this.listador.listarEmprestimosUsuarioPegandoEmprestado(nome, telefone);
+		Usuario user = this.usuarioController.getUser(nome, telefone);
+		List<Emprestimo> emprestimos = this.emprestimoController.getEmprestimosUserPegandoEmprestado(user);
+		return this.listador.listarEmprestimosUsuarioPegandoEmprestado(emprestimos);
 	}
-	
+
 	public String listarEmprestimosItem(String nomeItem) {
-		return this.listador.listarEmprestimosItem(nomeItem);
+		List<Emprestimo> emprestimos = this.emprestimoController.getEmprestimosItem(nomeItem);
+		return this.listador.listarEmprestimosItem(emprestimos);
 	}
-		
+
 	/**
 	 * Fecha o sistema de apostas.
 	 */

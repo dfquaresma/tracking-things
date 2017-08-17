@@ -9,7 +9,7 @@ import item.bluray.Temporada;
 import item.jogo.JogoEletronico;
 import item.jogo.JogoTabuleiro;
 import usuario.UsuarioController;
-import util.Validador;
+import validador.Validador;
 
 public class ItemController {
 

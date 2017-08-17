@@ -37,7 +37,6 @@ public class EmprestimoTest {
 		this.user1 = new Usuario("Alguem", "3371-0001", "alguem@gmail.com");
 		this.user2 = new Usuario("Outro", "3371-0002", "outro@gmail.com");
 		this.item = new JogoEletronico("Bola Quadrada", 100000, "PC");
-		this.user1.cadastrarEletronico("Bola Quadrada", 100000, "PC");
 		this.emprestimo = new Emprestimo(user1, user2, item.getNome(), "08/08/2017", 7);
 	}
 
@@ -137,34 +136,29 @@ public class EmprestimoTest {
 		Usuario user1 = new Usuario("Alguem", "3371-0001", "alguem@gmail.com");
 		Usuario user2 = new Usuario("Outro", "3371-0002", "outro@gmail.com");
 		Item item = new JogoEletronico("Bola Quadrada", 100000, "PC");
-		user1.cadastrarEletronico("Bola Quadrada", 100000, "PC");
 		Emprestimo emprestimo = new Emprestimo(user1, user2, item.getNome(), "08/08/2017", 7);
 		assertTrue(this.emprestimo.equals(emprestimo));
 
 		user1 = new Usuario("Alguem", "3371-0001", "alguem@gmail.com");
 		user2 = new Usuario("Outro", "3371-0002", "outro@gmail.com");
 		item = new JogoEletronico("Bola Quadrada", 100000, "PC");
-		user1.cadastrarEletronico("Bola Quadrada", 100000, "PC");
 		emprestimo = new Emprestimo(user1, user2, item.getNome(), "08/08/2018", 7);
 		assertFalse(this.emprestimo.equals(emprestimo));
 
 		user1 = new Usuario("Alguem", "3371-0001", "alguem@gmail.com");
 		user2 = new Usuario("Outro", "3371-0002", "outro@gmail.com");
 		item = new JogoEletronico("Bola Quadrada", 100000, "PC");
-		user2.cadastrarEletronico("Bola Quadrada", 100000, "PC");
 		emprestimo = new Emprestimo(user2, user1, item.getNome(), "08/08/2017", 7);
 		assertFalse(this.emprestimo.equals(emprestimo));
 
 		user1 = new Usuario("Alguem", "3371-0001", "alguem@gmail.com");
 		item = new JogoEletronico("Bola Quadrada", 100000, "PC");
-		user1.cadastrarEletronico("Bola Quadrada", 100000, "PC");
 		emprestimo = new Emprestimo(user1, new Usuario("Abra", "3371-0003", "abriu@gmail.com"), this.item.getNome(),
 				"08/08/2017", 134);
 		assertFalse(this.emprestimo.equals(emprestimo));
 
 		user1 = new Usuario("Alguem", "3371-0001", "alguem@gmail.com");
 		user2 = new Usuario("Outro", "3371-0002", "outro@gmail.com");
-		user1.cadastrarJogoTabuleiro("Damas", 1.99);
 		emprestimo = new Emprestimo(user1, user2, new JogoTabuleiro("Damas", 1.99).getNome(), "08/08/2017",
 				134);
 		assertFalse(this.emprestimo.equals(emprestimo));
