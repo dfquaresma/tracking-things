@@ -60,7 +60,28 @@ public class Emprestimo implements Comparable<Emprestimo> {
 		this.finalizado = false;
 
 		this.dono.emprestaItem(getNomeItem());
-
+	}
+	
+	
+	/**
+	 * Finaliza esse emprestimo.
+	 * 
+	 * @param dataDevolucao
+	 *            a data em que o item foi devolvido.
+	 */
+	public void finaliza(String dataDevolucao) {
+		this.validador.validaData(dataDevolucao);
+		if (this.finalizado) {
+			throw new OperacaoNaoPermitidaNoMomentoExcecao("Este emprestimo ja foi finalizado.");
+		}
+		try {
+			this.dataRealDaDevolucaoDoItem = this.dateFormat.parse(dataDevolucao);
+		} catch (ParseException e) {
+			throw new IllegalArgumentException("O formato da data inserido está incorreto, utilize dd/MM/yyyy");
+		}
+		this.finalizado = true;
+		this.dono.recebeItem(getNomeItem());
+		this.requerente.devolveItem(diasAtraso);
 	}
 
 	/**
@@ -273,26 +294,6 @@ public class Emprestimo implements Comparable<Emprestimo> {
 		} else if (!requerente.equals(other.requerente))
 			return false;
 		return true;
-	}
-
-	/**
-	 * Finaliza esse emprestimo.
-	 * 
-	 * @param dataDevolucao
-	 *            a data em que o item foi devolvido.
-	 */
-	public void finaliza(String dataDevolucao) {
-		this.validador.validaData(dataDevolucao);
-		if (this.finalizado) {
-			throw new OperacaoNaoPermitidaNoMomentoExcecao("Este emprestimo ja foi finalizado.");
-		}
-		try {
-			this.dataRealDaDevolucaoDoItem = this.dateFormat.parse(dataDevolucao);
-		} catch (ParseException e) {
-			throw new IllegalArgumentException("O formato da data inserido está incorreto, utilize dd/MM/yyyy");
-		}
-		this.finalizado = true;
-		this.dono.recebeItem(getNomeItem());
 	}
 
 	@Override

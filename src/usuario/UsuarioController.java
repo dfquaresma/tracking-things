@@ -294,6 +294,9 @@ public class UsuarioController {
 			throw new UsuarioJaExistenteExcecao("Usuario invalido");
 		}
 	}
-
+	
+	public List<Usuario> getUsuariosNoSistema() {
+		return new ArrayList<Usuario>(this.usuarios.values());
+	}
 
 }
