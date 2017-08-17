@@ -1,5 +1,6 @@
 package util;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -11,6 +12,7 @@ import item.Item;
 import item.ItemComparatorValor;
 import item.ItemComparatorVezesEmprestadas;
 import item.ItemController;
+import usuario.Usuario;
 import usuario.UsuarioController;
 
 /**
@@ -143,6 +145,23 @@ public class Listador {
 		for (Emprestimo emprestimo : emprestimos) {
 			repr += emprestimo + "|";
 		}
+		return repr;
+	}
+	
+	public String listarCaloteiros(List<Usuario> usuarios) {
+		String repr = "Lista de usuarios com reputacao negativa: ";
+		List<Usuario> usuariosCaloteiros = new ArrayList<Usuario>();
+		for (Usuario usuario: usuarios) {
+			if (usuario.isCaloteiro()) {
+				usuariosCaloteiros.add(usuario);
+			}
+		}
+		
+		usuariosCaloteiros.sort(new UsuarioNomeComparator());
+		for (Usuario usuario: usuariosCaloteiros) {
+			repr += usuario.toString() + "|";
+		}
+		
 		return repr;
 	}
 	

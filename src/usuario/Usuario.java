@@ -329,8 +329,7 @@ public class Usuario {
 	 * @return o itens.
 	 */
 	public ArrayList<Item> getItens() {
-		ArrayList<Item> itensToCopy = new ArrayList<>(this.itens.values());
-		return itensToCopy;
+		return new ArrayList<>(this.itens.values());
 	}
 
 	/**
