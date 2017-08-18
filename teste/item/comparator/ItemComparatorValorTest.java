@@ -26,7 +26,7 @@ public class ItemComparatorValorTest {
 	 * ComparadorPorValor.
 	 */
 	@Test
-	public void test() {
+	public void testCompare() {
 		ItemComparatorValor comparador = new ItemComparatorValor();
 		Item itemA = new JogoTabuleiro("Xadrez", 200);
 		Item itemB = new JogoEletronico("Dota", 200, "PC");
