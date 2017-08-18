@@ -9,16 +9,16 @@ import item.bluray.Temporada;
 import item.jogo.JogoEletronico;
 import item.jogo.JogoTabuleiro;
 import usuario.UsuarioController;
-import util.Validador;
+import util.ValidadorItem;
 
 public class ItemController {
 
 	private UsuarioController usuarioController;
-	private Validador validador; 
+	private ValidadorItem validador; 
 
 	public ItemController(UsuarioController usuarioController) {
 		this.usuarioController = usuarioController;
-		this.validador = new Validador();
+		this.validador = new ValidadorItem();
 	}
 
 	/**

@@ -102,10 +102,10 @@ public class ItemTest {
 	@Test
 	public void testIsEmprestado()
 	{
-		this.filmeTest.setEmprestado(false);
-		assertEquals(false, this.filmeTest.isEmprestado());
 		this.filmeTest.setEmprestado(true);
 		assertEquals(true, this.filmeTest.isEmprestado());
+		this.filmeTest.setEmprestado(false);
+		assertEquals(false, this.filmeTest.isEmprestado());
 	}
 	
 	/**

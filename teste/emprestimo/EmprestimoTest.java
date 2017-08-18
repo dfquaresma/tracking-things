@@ -37,6 +37,7 @@ public class EmprestimoTest {
 		this.user1 = new Usuario("Alguem", "3371-0001", "alguem@gmail.com");
 		this.user2 = new Usuario("Outro", "3371-0002", "outro@gmail.com");
 		this.item = new JogoEletronico("Bola Quadrada", 100000, "PC");
+		this.user1.adicionaItem(item);
 		this.emprestimo = new Emprestimo(user1, user2, item.getNome(), "08/08/2017", 7);
 	}
 

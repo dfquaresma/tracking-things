@@ -8,7 +8,7 @@ import java.util.Date;
 import excecoes.OperacaoNaoPermitidaNoMomentoExcecao;
 import item.Item;
 import usuario.Usuario;
-import util.Validador;
+import util.ValidadorEmprestimo;
 
 /**
  * Representação de um emprestimo.
@@ -25,7 +25,7 @@ public class Emprestimo {
 	private DateFormat dateFormat;
 	private int periodo;
 	private Date dataRealDaDevolucaoDoItem;
-	private Validador validador;
+	private ValidadorEmprestimo validador;
 	private boolean finalizado;
 
 	/**
@@ -39,7 +39,7 @@ public class Emprestimo {
 	 * @param periodo
 	 */
 	public Emprestimo(Usuario dono, Usuario requerente, String nomeItem, String dataEmprestimo, int periodo) {
-		this.validador = new Validador();
+		this.validador = new ValidadorEmprestimo();
 		this.validador.validaDono(dono);
 		this.validador.validaRequerente(requerente);
 		this.validador.validaData(dataEmprestimo);

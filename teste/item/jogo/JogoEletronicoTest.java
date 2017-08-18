@@ -1,11 +1,11 @@
 package item.jogo;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import util.Validador;
+import util.ValidadorItem;
 
 /**
  * Testa os métodos da classe Jogo Eletrônico.
@@ -278,6 +278,6 @@ public class JogoEletronicoTest {
 		assertEquals(false, this.jogo.equals(diffJogoN));
 		assertEquals(true, this.jogo.equals(this.jogo));
 		assertEquals(false, this.jogo.equals(null));
-		assertEquals(false, this.jogo.equals(new Validador()));
+		assertEquals(false, this.jogo.equals(new ValidadorItem()));
 	}
 }

@@ -1,6 +1,6 @@
 package item.bluray;
 
-import util.Validador;
+import util.ValidadorItem;
 
 /**
  * Representação de um episódio de temporada.
@@ -14,7 +14,7 @@ import util.Validador;
 public class Episodio {
 
 	private int duracao;
-	private Validador validador;
+	private ValidadorItem validador;
 
 	/**
 	 * Constrói um episódio com duração.
@@ -23,7 +23,7 @@ public class Episodio {
 	 *            a duração do episódio.
 	 */
 	public Episodio(int duracao) {
-		this.validador = new Validador();
+		this.validador = new ValidadorItem();
 		this.validador.validaDuracao(duracao);
 		this.duracao = duracao;
 	}

@@ -7,7 +7,7 @@ import java.util.Map;
 
 import excecoes.UsuarioJaExistenteExcecao;
 import item.Item;
-import util.Validador;
+import util.ValidadorUsuario;
 
 /**
  * Representação de um sistema de emprestimos de itens entre usuários.
@@ -18,14 +18,14 @@ import util.Validador;
 public class UsuarioController {
 
 	private Map<IdUsuario, Usuario> usuarios;
-	private Validador validador;
+	private ValidadorUsuario validador;
 
 	/**
 	 * Constrói um sistema de emprestimos.
 	 */
 	public UsuarioController() {
 		this.usuarios = new HashMap<>();
-		this.validador = new Validador();
+		this.validador = new ValidadorUsuario();
 	}
 
 	/**
@@ -193,7 +193,6 @@ public class UsuarioController {
 	public void addPecaPerdida(String nome, String telefone, String nomeItem, String nomePeca) {
 		this.validador.validaDadosDeIdentificacao(nome, telefone);
 		this.validador.validaNomeItem(nomeItem);
-		this.validador.validaPeca(nomePeca);
 
 		Usuario user = getUser(nome, telefone);
 		user.addPecaPerdida(nomeItem, nomePeca);
@@ -213,8 +212,6 @@ public class UsuarioController {
 	 */
 	public void addBluray(String nome, String telefone, String nomeBluray, int duracao) {
 		this.validador.validaDadosDeIdentificacao(nome, telefone);
-		this.validador.validaNomeBluray(nomeBluray);
-		this.validador.validaDuracao(duracao);
 
 		Usuario user = getUser(nome, telefone);
 		user.addBlueray(nomeBluray, duracao);
