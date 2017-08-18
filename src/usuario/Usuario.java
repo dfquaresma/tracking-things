@@ -9,7 +9,7 @@ import excecoes.OperacaoNaoPermitidaNoMomentoExcecao;
 import item.Item;
 import item.bluray.Temporada;
 import item.jogo.JogoTabuleiro;
-import util.Validador;
+import util.ValidadorUsuario;
 
 /**
  * Representação de um usuário no sistema.
@@ -23,7 +23,7 @@ public class Usuario {
 	private String telefone;
 	private String email;
 	private Map<String, Item> itens;
-	private Validador validador;
+	private ValidadorUsuario validador;
 	private Reputacao reputacao;
 
 	/**
@@ -37,7 +37,7 @@ public class Usuario {
 	 *            o email do usuário.
 	 */
 	public Usuario(String nome, String telefone, String email) {
-		this.validador = new Validador();
+		this.validador = new ValidadorUsuario();
 		this.validador.validaNome(nome);
 		this.validador.validaTelefone(telefone);
 		this.validador.validaEmail(email);
@@ -55,8 +55,8 @@ public class Usuario {
 	 * @param item
 	 */
 	public void adicionaItem(Item item) {
+		this.validador.validaItem(item);
 		String nomeDoItem = item.getNome();
-		this.validador.validaAtributosDeCadastroDeItem(nomeDoItem, item.getPreco());
 		this.itens.put(nomeDoItem, item);
 		
 		this.reputacao.adicionandoItemParaEmprestimo(item.getPreco());
@@ -69,7 +69,7 @@ public class Usuario {
 	 *            o nome do item.
 	 */
 	public void removerItem(String nomeItem) {
-		this.validaItemParaUso(nomeItem);
+		this.validaNomeItemParaUso(nomeItem);
 		Item item = this.getItem(nomeItem);
 		
 		this.itens.remove(nomeItem);
@@ -86,8 +86,7 @@ public class Usuario {
 	 *            a peça a ser adicionada.
 	 */
 	public void addPecaPerdida(String nomeItem, String nomePeca) {
-		this.validaItemParaUso(nomeItem);
-		this.validador.validaPeca(nomePeca);
+		this.validaNomeItemParaUso(nomeItem);
 
 		Item item = getItem(nomeItem);
 		if (!(item instanceof JogoTabuleiro)) {
@@ -107,8 +106,6 @@ public class Usuario {
 	 *            a duração do episódio.
 	 */
 	public void addBlueray(String nomeBlueray, int duracao) {
-		this.validador.validaNome(nomeBlueray);
-		this.validador.validaDuracao(duracao);
 
 		Item item = getItem(nomeBlueray);
 		if (!(item instanceof Temporada)) {
@@ -173,7 +170,7 @@ public class Usuario {
 	 * @return os detalhes do item.
 	 */
 	public String getDetalhesItem(String nomeItem) {
-		this.validaItemParaUso(nomeItem);
+		this.validaNomeItemParaUso(nomeItem);
 
 		Item item = getItem(nomeItem);
 		return item.toString();
@@ -186,7 +183,7 @@ public class Usuario {
 	 *            o nome do item que está sendo emprestado.
 	 */
 	public void emprestaItem(String nomeItem) {
-		this.validaItemParaUso(nomeItem);
+		this.validaNomeItemParaUso(nomeItem);
 
 		Item item = this.getItem(nomeItem);
 		if (item.isEmprestado()) {
@@ -204,7 +201,7 @@ public class Usuario {
 	 *            o nome do item que está sendo devolvido.
 	 */
 	public void recebeItem(String nomeItem) {
-		this.validaItemParaUso(nomeItem);
+		this.validaNomeItemParaUso(nomeItem);
 
 		Item item = this.getItem(nomeItem);
 		if (!item.isEmprestado()) {
@@ -218,7 +215,7 @@ public class Usuario {
 	 */
 	public void devolveItem(String nomeItem, int diasAtraso)
 	{
-		this.validaItemParaUso(nomeItem);
+		this.validaNomeItemParaUso(nomeItem);
 		
 		Item item = this.getItem(nomeItem);
 		//this.reputacao.devolveItem(dias); ACHO QUE É CÓDIGO DE PAULO
@@ -277,7 +274,7 @@ public class Usuario {
 		}
 	}
 	
-	private void validaItemParaUso(String nomeItem) {
+	private void validaNomeItemParaUso(String nomeItem) {
 		this.validador.validaNomeItem(nomeItem);
 
 		if (!(itens.containsKey(nomeItem))) {
@@ -366,7 +363,7 @@ public class Usuario {
 	 * @return o item.
 	 */
 	public Item getItem(String nomeItem) {
-		this.validaItemParaUso(nomeItem);
+		this.validaNomeItemParaUso(nomeItem);
 		return this.itens.get(nomeItem);
 	}
 

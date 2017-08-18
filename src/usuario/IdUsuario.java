@@ -1,6 +1,6 @@
 package usuario;
 
-import util.Validador;
+import util.ValidadorUsuario;
 
 /**
  * Representação de um identificador de usuário.
@@ -15,7 +15,7 @@ public class IdUsuario {
 
 	private String nome;
 	private String telefone;
-	private Validador validador;
+	private ValidadorUsuario validador;
 
 	/**
 	 * Constrói um identificador com nome e telefone.
@@ -26,7 +26,7 @@ public class IdUsuario {
 	 *            o telefone do usuário a ser identificado.
 	 */
 	public IdUsuario(String nome, String telefone) {
-		this.validador = new Validador();
+		this.validador = new ValidadorUsuario();
 		this.validador.validaNome(nome);
 		this.validador.validaTelefone(telefone);
 

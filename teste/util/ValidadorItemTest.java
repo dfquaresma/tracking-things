@@ -1,15 +1,7 @@
 package util;
 
-import item.Item;
-import item.bluray.Temporada;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
-
-import excecoes.OperacaoNaoPermitidaNoMomentoExcecao;
 
 /**
  * Testa a classe de validação.
@@ -20,94 +12,16 @@ import excecoes.OperacaoNaoPermitidaNoMomentoExcecao;
  * @author Paulo Felipe Feitosa da Silva
  *
  */
-public class ValidadorTest {
+public class ValidadorItemTest {
 
-	private Validador validador;
+	private ValidadorItem validador;
 
 	/**
 	 * Prepara o ambiente para os testes.
 	 */
 	@Before
 	public void criaValidador() {
-		this.validador = new Validador();
-	}
-
-	/**
-	 * Metodo para testar se, quando o nome é passado corretamente é validado.
-	 */
-	@Test
-	public void testValidaNome() {
-		this.validador.validaNome("paulofelipe");
-	}
-
-	/**
-	 * Metodo para testar se, quando o nome é passado como Null, uma excecao é
-	 * lancada.
-	 */
-	@Test(expected = NullPointerException.class)
-	public void testValidaNomeNull() {
-		this.validador.validaNome(null);
-	}
-
-	/**
-	 * Metodo para testar se, quando o nome é passado como vazio, uma excecao é
-	 * lancada.
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testValidaNomeInvalido() {
-		this.validador.validaNome("       ");
-	}
-
-	/**
-	 * Testa se qualquer padrão de telefone é aceito no sistema.
-	 */
-	@Test
-	public void testValidaTelefone() {
-		this.validador.validaTelefone("chama no zap bb: 8398777777");
-	}
-
-	/**
-	 * Metodo para testar se, quando o telefone é passado como Null, uma excecao
-	 * é lancada.
-	 */
-	@Test(expected = NullPointerException.class)
-	public void testValidaTelefoneNull() {
-		this.validador.validaTelefone(null);
-	}
-
-	/**
-	 * Metodo para testar se, quando o telefone é passado como vazio, uma
-	 * excecao é lancada.
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testValidaTelefoneInvalido() {
-		this.validador.validaTelefone("       ");
-	}
-
-	/**
-	 * Testa se qualquer padrão de email é aceito no sistema.
-	 */
-	@Test
-	public void testValidaEmail() {
-		this.validador.validaEmail("paulopaulopaulo@gmail.com");
-	}
-
-	/**
-	 * Metodo para testar se, quando o email é passado como Null, uma excecao é
-	 * lancada.
-	 */
-	@Test(expected = NullPointerException.class)
-	public void testValidaEmailNull() {
-		this.validador.validaEmail(null);
-	}
-
-	/**
-	 * Metodo para testar se, quando o email é passado como vazio, uma excecao é
-	 * lancada.
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testValidaEmailInvalido() {
-		this.validador.validaEmail("       ");
+		this.validador = new ValidadorItem();
 	}
 
 	/**
@@ -439,48 +353,6 @@ public class ValidadorTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testValidaPrecoInvalido() {
 		this.validador.validaPreco(-0.0001);
-	}
-
-	/**
-	 * Testa se, quando é passado uma lista válida para listagem, nenhuma
-	 * exceção é lançada.
-	 */
-	@Test
-	public void testValidaItensParaListagem() {
-		List<Item> itens = new ArrayList<Item>();
-		itens.add(new Temporada("South Park", 1000.00, "Primeira temporada de South Park", 120, "DEZOITO_ANOS",
-				"COMEDIA", 1));
-		this.validador.validaListaParaListagem(itens);
-	}
-
-	/**
-	 * Metodo para testar se, quando é passado uma lista vazia, uma excecao é
-	 * lancada.
-	 */
-	@Test(expected = OperacaoNaoPermitidaNoMomentoExcecao.class)
-	public void testValidaItensParaListagemVazia() {
-		List<Item> itens = new ArrayList<Item>();
-		this.validador.validaListaParaListagem(itens);
-	}
-
-	/**
-	 * Metodo para testar se, quando é passado uma lista Null, uma excecao é
-	 * lancada.
-	 */
-	@Test(expected = NullPointerException.class)
-	public void testValidaItensParaListagemNull() {
-		this.validador.validaListaParaListagem(null);
-	}
-
-	/**
-	 * Metodo para testar se, quando é passado uma lista com elementos Null, uma
-	 * excecao é lancada.
-	 */
-	@Test(expected = NullPointerException.class)
-	public void testValidaItensParaListagemItemNull() {
-		List<Item> itens = new ArrayList<Item>();
-		itens.add(null);
-		this.validador.validaListaParaListagem(itens);
 	}
 
 	/**

@@ -6,25 +6,6 @@ import item.jogo.Plataforma;
 
 public class ValidadorItem {
 
-	private void validaString(String atributo, String atributoMsg) {
-		if (atributo == null) {
-			throw new NullPointerException(atributoMsg + " nao pode ser nulo");
-		}
-		if (atributo.trim().isEmpty()) {
-			throw new IllegalArgumentException(atributoMsg + " nao pode ser vazio");
-		}
-	}
-	
-	/**
-	 * Valida um valor recebido como parâmetro.
-	 * 
-	 * @param valor
-	 *            o valor a ser validado.
-	 */
-	public void validaValor(String valor) {
-		this.validaString(valor, "Valor");
-	}
-
 	/**
 	 * Valida um nome de item recebido como parâmetro.
 	 * 
@@ -35,18 +16,6 @@ public class ValidadorItem {
 		this.validaString(nomeItem, "Nome do item");
 	}
 
-	/**
-	 * Valida uma duração recebida como parâmetro.
-	 * 
-	 * @param duracao
-	 *            a duração a ser validada.
-	 */
-	public void validaDuracao(int duracao) {
-		if (duracao <= 0) {
-			throw new IllegalArgumentException("Duracao nao pode ser menor ou igual a zero");
-		}
-	}
-	
 	/**
 	 * Valida um nome de artista recebido como parâmetro.
 	 * 
@@ -201,16 +170,6 @@ public class ValidadorItem {
 	}
 
 	/**
-	 * Valida um atributo recebido no parâmetro.
-	 * 
-	 * @param atributo
-	 *            o atributo a ser validado.
-	 */
-	public void validaAtributo(String atributo) {
-		this.validaString(atributo, "Atributo");
-	}
-
-	/**
 	 * Valida um nome de peça perdida recebida como parâmetro.
 	 * 
 	 * @param nomePeca
@@ -237,5 +196,80 @@ public class ValidadorItem {
 		this.validaNomeItem(nomeItem);
 		this.validaPreco(preco);
 	}
+
+	
+	/**
+	 * Valida uma duração recebida como parâmetro.
+	 * 
+	 * @param duracao
+	 *            a duração a ser validada.
+	 */
+	public void validaDuracao(int duracao) {
+		if (duracao <= 0) {
+			throw new IllegalArgumentException("Duracao nao pode ser menor ou igual a zero");
+		}
+	}
+	
+	public void validaConversaoStringToDouble(String atributo, String valor) {
+		try {
+			Double.parseDouble(valor);
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException(atributo + " deve ter o formato de um tipo double");
+		}
+
+		if (Double.parseDouble(valor) <= 0) {
+			throw new IllegalArgumentException("Valor nao pode ser menor ou igual a zero para essa operacao");
+
+		}
+	}
+
+	
+	public void validaConversaoStringToInt(String atributo, String valor) {
+		try {
+			Integer.parseInt(valor);
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException(atributo + " deve ter o formato de um tipo int");
+		}
+
+		if (Integer.parseInt(valor) <= 0) {
+			throw new IllegalArgumentException("Valor nao pode ser menor ou igual a zero para essa operacao");
+
+		}
+		
+	}
+
+
+	
+	/**
+	 * Valida um atributo recebido no parâmetro.
+	 * 
+	 * @param atributo
+	 *            o atributo a ser validado.
+	 */
+	public void validaAtributo(String atributo) {
+		this.validaString(atributo, "Atributo");
+	}
+	
+	private void validaString(String atributo, String atributoMsg) {
+		if (atributo == null) {
+			throw new NullPointerException(atributoMsg + " nao pode ser nulo");
+		}
+		if (atributo.trim().isEmpty()) {
+			throw new IllegalArgumentException(atributoMsg + " nao pode ser vazio");
+		}
+	}
+
+	/**
+	 * Valida um valor recebido como parâmetro.
+	 * 
+	 * @param valor
+	 *            o valor a ser validado.
+	 */
+	public void validaValor(String valor) {
+		this.validaString(valor, "Valor");
+	}
+
+
+			
 
 }

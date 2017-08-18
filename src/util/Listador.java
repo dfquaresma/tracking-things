@@ -1,7 +1,6 @@
 package util;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -25,7 +24,7 @@ import usuario.comparator.UsuarioNomeComparator;
  *
  */
 public class Listador {
-	private Validador validador;
+	private ValidadorListagem validador;
 	
 	/**
 	 * Constrói um listador.
@@ -33,7 +32,7 @@ public class Listador {
 	 * @param usuarioController 
 	 */
 	public Listador() {
-		this.validador = new Validador();
+		this.validador = new ValidadorListagem();
 	}
 	
 	/**
@@ -44,7 +43,7 @@ public class Listador {
 	 * @return a listagem dos itens.
 	 */
 	public String listaItensOrdenadosPorNome(List<Item> itens) {
-		this.validador.validaListaParaListagem(itens);
+		this.validador.validaListaDeItensParaListagem(itens);
 		itens.sort(new ItemComparatorNome());
 		return listagemDeItens(itens);
 	}
@@ -57,7 +56,7 @@ public class Listador {
 	 * @return a listagem dos itens.
 	 */
 	public String listaItensOrdenadosPorValor(List<Item> itens ) {
-		this.validador.validaListaParaListagem(itens);
+		this.validador.validaListaDeItensParaListagem(itens);
 		itens.sort(new ItemComparatorValor());
 		return listagemDeItens(itens);
 	}
@@ -71,6 +70,7 @@ public class Listador {
 	}
 		
 	public String listarItensNaoEmprestados(List<Item> itens) {
+		this.validador.validaListaDeItensParaListagem(itens);
 		itens.sort(new ItemComparatorNome());
 		return listagemDeItens(itens);
 	}
@@ -85,6 +85,7 @@ public class Listador {
 	}
 	
 	public String listarTop10Itens(List<Item> itens) {
+		this.validador.validaListaDeItensParaListagem(itens);
 		itens.sort(new ItemComparatorVezesEmprestadas());
 		
 		int count = 1;
@@ -103,6 +104,7 @@ public class Listador {
 	}
 	
 	public String listarEmprestimosUsuarioEmprestando(List<Emprestimo> emprestimos) {
+		this.validador.validaListaDeEmprestimosParaListagem(emprestimos);
 		if (emprestimos.size() == 0) {
 			return "Nenhum item emprestado";
 		}
@@ -111,6 +113,7 @@ public class Listador {
 	}
 	
 	public String listarEmprestimosUsuarioPegandoEmprestado(List<Emprestimo> emprestimos) {
+		this.validador.validaListaDeEmprestimosParaListagem(emprestimos);
 		if (emprestimos.size() == 0) {
 			return "Nenhum item pego emprestado";
 		}
@@ -119,6 +122,7 @@ public class Listador {
 	}
 	
 	public String listarEmprestimosItem(List<Emprestimo> emprestimos) {
+		this.validador.validaListaDeEmprestimosParaListagem(emprestimos);
 		emprestimos.sort(new EmprestimosComparatorDataEmprestimo());
 		if (emprestimos.size() == 0) {
 			return "Nenhum emprestimo associado ao item";
