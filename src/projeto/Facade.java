@@ -415,6 +415,18 @@ public class Facade {
 		List<Emprestimo> emprestimos = this.emprestimoController.getEmprestimosItem(nomeItem);
 		return this.listador.listarEmprestimosItem(emprestimos);
 	}
+	
+	public String listarCaloteiros() {
+		return this.listador.listarCaloteiros(this.usuarioController.getUsuariosNoSistema());
+	}
+	
+	public String listarTop10MelhoresUsuarios() {
+		return this.listador.listarTop10MelhoresUsuarios(this.usuarioController.getUsuariosNoSistema());
+	}
+	
+	public String listarTop10PioresUsuarios() {
+		return this.listador.listarTop10PioresUsuarios(this.usuarioController.getUsuariosNoSistema());
+	}
 
 	/**
 	 * Fecha o sistema de apostas.

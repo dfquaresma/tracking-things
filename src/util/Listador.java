@@ -1,7 +1,6 @@
 package util;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -14,6 +13,8 @@ import item.comparator.ItemComparatorValor;
 import item.comparator.ItemComparatorVezesEmprestadas;
 import usuario.Usuario;
 import usuario.comparator.UsuarioNomeComparator;
+import usuario.comparator.UsuarioReputacaoComparator;
+import usuario.comparator.UsuarioReputacaoReversaComparator;
 
 /**
  * Representa um listador de objetos.
@@ -138,9 +139,9 @@ public class Listador {
 		String repr = "Lista de usuarios com reputacao negativa: ";
 		List<Usuario> usuariosCaloteiros = new ArrayList<Usuario>();
 		for (Usuario usuario: usuarios) {
-			//if (usuario.isCaloteiro()) { COISA DE ÍCARO
-			//	usuariosCaloteiros.add(usuario);
-			//}
+			if (usuario.getReputacao() < 0) {
+				usuariosCaloteiros.add(usuario);
+			}
 		}
 		
 		usuariosCaloteiros.sort(new UsuarioNomeComparator());
@@ -149,6 +150,27 @@ public class Listador {
 		}
 		
 		return repr;
+	}
+	
+	private String listarPelaReputacao(List<Usuario> usuarios) {
+		String repr = "";
+		for (int i = 0; i < usuarios.size() && i < 10; i++) {
+			Usuario usuario = usuarios.get(i);
+			
+			repr += (i + 1) + ": " + usuario.getNome() + " - " + "Reputacao: " + String.format("%.2f", usuario.getReputacao()) + "|";
+		}
+		
+		return repr;
+	}
+	
+	public String listarTop10MelhoresUsuarios(List<Usuario> usuarios) {
+		usuarios.sort(new UsuarioReputacaoComparator());
+		return this.listarPelaReputacao(usuarios);
+	}
+	
+	public String listarTop10PioresUsuarios(List<Usuario> usuarios) {
+		usuarios.sort(new UsuarioReputacaoReversaComparator());
+		return this.listarPelaReputacao(usuarios);
 	}
 	
 }
