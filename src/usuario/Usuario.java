@@ -456,6 +456,6 @@ public class Usuario {
 	 */
 	@Override
 	public String toString() {
-		return this.nome + ", " + this.telefone + ", " + this.email;
+		return this.nome + ", " + this.email + ", " + this.telefone;
 	}
 }

@@ -169,12 +169,12 @@ public class Listador {
 	}
 	
 	public String listarTop10MelhoresUsuarios(List<Usuario> usuarios) {
-		usuarios.sort(new UsuarioReputacaoComparator());
+		usuarios.sort(new UsuarioReputacaoReversaComparator());
 		return this.listarPelaReputacao(usuarios);
 	}
 	
 	public String listarTop10PioresUsuarios(List<Usuario> usuarios) {
-		usuarios.sort(new UsuarioReputacaoReversaComparator());
+		usuarios.sort(new UsuarioReputacaoComparator());
 		return this.listarPelaReputacao(usuarios);
 	}
 	

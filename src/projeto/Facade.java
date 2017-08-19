@@ -423,33 +423,20 @@ public class Facade {
 	}
 	
 	public String listarCaloteiros() {
-		return this.listador.listarCaloteiros(this.usuarioController.getUsuariosNoSistema());
-	}
-	
-	public String listarTop10MelhoresUsuarios() {
-		return this.listador.listarTop10MelhoresUsuarios(this.usuarioController.getUsuariosNoSistema());
-	}
-	
-	public String listarTop10PioresUsuarios() {
-		return this.listador.listarTop10PioresUsuarios(this.usuarioController.getUsuariosNoSistema());
-	}
-
-	public String listarCaloteiros() {
 		List<Usuario> usuarios = this.usuarioController.getUsuariosNoSistema();
 		return this.listador.listarCaloteiros(usuarios);
 	}
+
 	
 	public String listarTop10MelhoresUsuarios() {
 		List<Usuario> usuarios = this.usuarioController.getUsuariosNoSistema();
-		return "";
+		return this.listador.listarTop10MelhoresUsuarios(usuarios);
 	}
 	
 	public String listarTop10PioresUsuarios() {
 		List<Usuario> usuarios = this.usuarioController.getUsuariosNoSistema();
-		return "";
+		return this.listador.listarTop10PioresUsuarios(usuarios);
 	}
-	
-	
 	
 	/**
 	 * Fecha o sistema de apostas.
