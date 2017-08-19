@@ -9,6 +9,11 @@ import excecoes.OperacaoNaoPermitidaNoMomentoExcecao;
 import item.Item;
 import item.bluray.Temporada;
 import item.jogo.JogoTabuleiro;
+import usuario.fidelidade.BomAmigo;
+import usuario.fidelidade.Caloteiro;
+import usuario.fidelidade.CartaoFidelidade;
+import usuario.fidelidade.FreeRyder;
+import usuario.fidelidade.Noob;
 import util.ValidadorUsuario;
 
 /**
@@ -25,6 +30,7 @@ public class Usuario {
 	private Map<String, Item> itens;
 	private ValidadorUsuario validador;
 	private Reputacao reputacao;
+	private CartaoFidelidade cartao;
 
 	/**
 	 * Constrói um usuário com nome, telefone e email.
@@ -46,7 +52,7 @@ public class Usuario {
 		this.email = email;
 		this.itens = new HashMap<>();
 		this.reputacao = new Reputacao();
-
+		this.cartao = new FreeRyder();
 	}
 
 	/**
@@ -60,6 +66,7 @@ public class Usuario {
 		this.itens.put(nomeDoItem, item);
 		
 		this.reputacao.adicionandoItemParaEmprestimo(item.getPreco());
+		attCartao();
 	}
 	
 	/**
@@ -192,6 +199,7 @@ public class Usuario {
 		item.setEmprestado(true);
 		
 		this.reputacao.emprestandoItem(item.getPreco());
+		attCartao();
 	}
 
 	/**
@@ -216,6 +224,7 @@ public class Usuario {
 	public void devolveItem(double valorItem, int diasAtraso)
 	{	
 		this.reputacao.devolvendoItem(valorItem, diasAtraso);
+		attCartao();
 	}
 
 	/**
@@ -246,6 +255,35 @@ public class Usuario {
 		}
 
 	}
+	/**
+	 * Atualiza a classificacao do usuario de acordo com os cartoes fidelidade
+	 */
+	public void attCartao(){
+		if(this.reputacao.getReputacao() > 0 && reputacao.getReputacao() <= 100 && !(itens.isEmpty())) {
+			this.cartao = new Noob();
+		} else if(reputacao.getReputacao() < 0){
+			this.cartao = new Caloteiro();
+		} else {
+			this.cartao = new BomAmigo();
+		}
+	}
+	/**
+	 * Retorna se um usuario esta na classificacao de caloteiro
+	 * @return true se for caloteiro,false se nao for
+	 */
+	public boolean isCaloteiro(){
+		if(this.reputacao.getReputacao() < 0){
+			return true;
+		}
+		return false;
+	}
+	/**
+	 * Retorna o periodo que um usuario pode pegar itens emprestado
+	 * @return o periodo
+	 */
+	public int getPeriodoEmprestado(){
+		return this.cartao.getPeriodo();
+	}
 
 	/**
 	 * Recupera um atributo específico do usuário.
@@ -266,6 +304,8 @@ public class Usuario {
 			return getEmail();
 		case ("Reputacao"):
 			return Double.toString(this.getReputacao());
+		case ("Cartao"):
+			return this.cartao.toString();
 		default:
 			throw new IllegalArgumentException("Atributo invalido.");
 		}
@@ -311,7 +351,10 @@ public class Usuario {
 	public String getEmail() {
 		return this.email;
 	}
-	
+	/**
+	 * Retorna a reputacao do usuario
+	 * @return reputacao do usuario
+	 */
 	public double getReputacao()
 	{
 		return this.reputacao.getReputacao();
