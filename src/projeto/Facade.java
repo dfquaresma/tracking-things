@@ -422,6 +422,23 @@ public class Facade {
 		return this.listador.listarEmprestimosItem(emprestimos);
 	}
 
+	public String listarCaloteiros() {
+		List<Usuario> usuarios = this.usuarioController.getUsuariosNoSistema();
+		return this.listador.listarCaloteiros(usuarios);
+	}
+	
+	public String listarTop10MelhoresUsuarios() {
+		List<Usuario> usuarios = this.usuarioController.getUsuariosNoSistema();
+		return "";
+	}
+	
+	public String listarTop10PioresUsuarios() {
+		List<Usuario> usuarios = this.usuarioController.getUsuariosNoSistema();
+		return "";
+	}
+	
+	
+	
 	/**
 	 * Fecha o sistema de apostas.
 	 */

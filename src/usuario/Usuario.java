@@ -321,7 +321,7 @@ public class Usuario {
 
 	private void validaAttNomeDeItem(String nomeItem)
 	{
-		if(this.itens.containsKey(nomeItem))///FIXME: ISSO OBRIGA UM USUARIO TER APENAS ITENS COM DIFERENTES NOMES, TOTALLY TRUE?
+		if(this.itens.containsKey(nomeItem))
 			throw new IllegalArgumentException();
 	}
 
