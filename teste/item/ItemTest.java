@@ -169,4 +169,22 @@ public class ItemTest {
 		assertEquals("220.0", filmeTest.getInfo("Preco"));
 	}
 	
+	@Test
+	public void testAtualizaAtributo()
+	{
+		this.filmeTest.atualizaAtributo("Preco", "10000.0");
+		assertEquals(10000.0, this.filmeTest.getPreco(), 0.000005);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testAtualizaAtributoPrecoInvalido()
+	{
+		this.filmeTest.atualizaAtributo("Preco", "nao sou numero");
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testAtualizaAtributoPrecoZero()
+	{
+		this.filmeTest.atualizaAtributo("Preco", "0");
+	}
 }

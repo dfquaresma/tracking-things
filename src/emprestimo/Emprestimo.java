@@ -51,7 +51,7 @@ public class Emprestimo {
 
 		this.dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		try {
-			this.dataEmprestimo = dateFormat.parse(dataEmprestimo);
+			this.dataEmprestimo = this.dateFormat.parse(dataEmprestimo);
 		} catch (ParseException e) {
 			throw new IllegalArgumentException("O formato da data inserido está incorreto, utilize dd/MM/yyyy");
 		}
@@ -79,10 +79,26 @@ public class Emprestimo {
 		} catch (ParseException e) {
 			throw new IllegalArgumentException("O formato da data inserido está incorreto, utilize dd/MM/yyyy");
 		}
-		this.finalizado = true;
-		this.dono.recebeItem(getNomeItem());
+		this.validador.validaDataDevolucao(this.dataEmprestimo, this.dataRealDaDevolucaoDoItem);
 		
-		//this.requerente.devolveItem(diasAtraso); COISA DE PAULO
+		this.finalizado = true;
+		
+		int diasAtraso = this.getDiasDeEmprestimo() - this.periodo;
+		
+		this.requerente.devolveItem(this.item.getPreco(), diasAtraso);
+		
+		this.dono.recebeItem(getNomeItem());
+	}
+	
+	/**
+	 * Calcula quantos dias o item ficou emprestado com o usuario requerente.
+	 * 
+	 * @return
+	 * 		inteiro que representa quantos dias um item ficou emprestado ao usuario requerente.
+	 */
+	public int getDiasDeEmprestimo()
+	{
+		return (int) ((this.dataRealDaDevolucaoDoItem.getTime() - this.dataEmprestimo.getTime())/(60*60*24*1000));
 	}
 
 	/**

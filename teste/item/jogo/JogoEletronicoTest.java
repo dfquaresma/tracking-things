@@ -162,6 +162,7 @@ public class JogoEletronicoTest {
 	@Test
 	public void testGetInfo() {
 		assertEquals("PC", this.jogo.getInfo("Plataforma"));
+		assertEquals("Super Mario", this.jogo.getInfo("Nome"));
 	}
 
 	/**
@@ -208,6 +209,8 @@ public class JogoEletronicoTest {
 	public void testAtualizaAtributo() {
 		this.jogo.atualizaAtributo("Plataforma", "OUTRO");
 		assertEquals("OUTRO", this.jogo.getPlataforma());
+		this.jogo.atualizaAtributo("Nome", "Arma3");
+		assertEquals("Arma3", this.jogo.getNome());
 	}
 
 	/**

@@ -88,8 +88,11 @@ public class JogoTabuleiroTest {
 	 * Testa o ToString de um JogoTabuleiro.
 	 */
 	@Test
-	public void testToString() {
+	public void testToString()
+	{
 		assertEquals("JOGO DE TABULEIRO: xadrex, R$ 333.66, Nao emprestado, COMPLETO", this.jogo.toString());
+		this.jogo.adicionarPecaPerdida("cavalo");
+		assertEquals("JOGO DE TABULEIRO: xadrex, R$ 333.66, Nao emprestado, COM PECAS PERDIDAS", this.jogo.toString());
 	}
 
 }

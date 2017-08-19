@@ -142,7 +142,7 @@ public class Listador {
 		String repr = "Lista de usuarios com reputacao negativa: ";
 		List<Usuario> usuariosCaloteiros = new ArrayList<Usuario>();
 		for (Usuario usuario: usuarios) {
-			//if (usuario.isCaloteiro()) { COISA DE ÍCARO
+			//if (usuario.isCaloteiro()) { COISA DE ÍCARO TODO
 			//	usuariosCaloteiros.add(usuario);
 			//}
 		}
