@@ -45,6 +45,13 @@ public class EmprestimoTest {
 		this.emprestimo = new Emprestimo(user1, user2, item.getNome(), "08/08/2017", 7);
 	}
 	
+	@Test(expected=IllegalArgumentException.class)
+	public void testEmprestimoDataSemFormato() //FIXME: Emprestimo nao deveria deixar criar a nova instancia de emprestimo, porem ela cria e ainda associa com a data do emprestimo da anterior
+	{
+		this.emprestimo.finaliza("09/09/2017");
+		(new Emprestimo(this.user1, this.user2, this.item.getNome(), "222/17/17", 2)).getDataEmprestimo();
+	}
+	
 	@Test
 	public void testConstrutorFalhaUsuarioInvalido() {
 		try {
