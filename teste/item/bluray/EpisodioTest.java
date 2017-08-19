@@ -42,5 +42,18 @@ public class EpisodioTest {
 	public void testEpisodioComDuracaoInvalida() {
 		new Episodio(0);
 	}
+	
+	@Test
+	public void testSetEpisodioDuracao()
+	{
+		this.episodio.setDuracao(1);
+		assertEquals(1, this.episodio.getDuracao());
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testSetEpisodioDuracaoInvalido()
+	{
+		this.episodio.setDuracao(0);
+	}
 
 }

@@ -8,7 +8,7 @@ import java.util.Date;
 import excecoes.OperacaoNaoPermitidaNoMomentoExcecao;
 import item.Item;
 import usuario.Usuario;
-import util.Validador;
+import util.ValidadorEmprestimo;
 
 /**
  * Representação de um emprestimo.
@@ -25,7 +25,7 @@ public class Emprestimo {
 	private DateFormat dateFormat;
 	private int periodo;
 	private Date dataRealDaDevolucaoDoItem;
-	private Validador validador;
+	private ValidadorEmprestimo validador;
 	private boolean finalizado;
 
 	/**
@@ -39,7 +39,7 @@ public class Emprestimo {
 	 * @param periodo
 	 */
 	public Emprestimo(Usuario dono, Usuario requerente, String nomeItem, String dataEmprestimo, int periodo) {
-		this.validador = new Validador();
+		this.validador = new ValidadorEmprestimo();
 		this.validador.validaDono(dono);
 		this.validador.validaRequerente(requerente);
 		this.validador.validaData(dataEmprestimo);
@@ -51,14 +51,22 @@ public class Emprestimo {
 
 		this.dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		try {
-			this.dataEmprestimo = dateFormat.parse(dataEmprestimo);
+			this.dataEmprestimo = this.dateFormat.parse(dataEmprestimo);
 		} catch (ParseException e) {
 			throw new IllegalArgumentException("O formato da data inserido está incorreto, utilize dd/MM/yyyy");
 		}
-
+		
 		this.periodo = periodo;
 		this.finalizado = false;
-
+		
+		if(requerente.isCaloteiro()){
+			throw new IllegalArgumentException("Usuario nao pode pegar nenhum item emprestado");
+		}
+		
+		if(this.periodo > requerente.getPeriodoEmprestado()){
+			throw new IllegalArgumentException("Usuario impossiblitado de pegar emprestado por esse periodo");
+		}
+		
 		this.dono.emprestaItem(getNomeItem());
 	}
 	
@@ -79,10 +87,26 @@ public class Emprestimo {
 		} catch (ParseException e) {
 			throw new IllegalArgumentException("O formato da data inserido está incorreto, utilize dd/MM/yyyy");
 		}
-		this.finalizado = true;
-		this.dono.recebeItem(getNomeItem());
+		this.validador.validaDataDevolucao(this.dataEmprestimo, this.dataRealDaDevolucaoDoItem);
 		
-		//this.requerente.devolveItem(diasAtraso); COISA DE PAULO
+		this.finalizado = true;
+		
+		int diasAtraso = this.getDiasDeEmprestimo() - this.periodo;
+		
+		this.requerente.devolveItem(this.item.getPreco(), diasAtraso);
+		
+		this.dono.recebeItem(getNomeItem());
+	}
+	
+	/**
+	 * Calcula quantos dias o item ficou emprestado com o usuario requerente.
+	 * 
+	 * @return
+	 * 		inteiro que representa quantos dias um item ficou emprestado ao usuario requerente.
+	 */
+	public int getDiasDeEmprestimo()
+	{
+		return (int) ((this.dataRealDaDevolucaoDoItem.getTime() - this.dataEmprestimo.getTime())/(60*60*24*1000));
 	}
 
 	/**

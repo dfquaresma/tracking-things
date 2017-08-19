@@ -1,9 +1,10 @@
-package item;
+package item.comparator;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import item.Item;
 import item.bluray.Show;
 import item.comparator.ItemComparatorValor;
 import item.jogo.JogoEletronico;
@@ -25,7 +26,7 @@ public class ItemComparatorValorTest {
 	 * ComparadorPorValor.
 	 */
 	@Test
-	public void test() {
+	public void testCompare() {
 		ItemComparatorValor comparador = new ItemComparatorValor();
 		Item itemA = new JogoTabuleiro("Xadrez", 200);
 		Item itemB = new JogoEletronico("Dota", 200, "PC");

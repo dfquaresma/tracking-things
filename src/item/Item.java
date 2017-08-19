@@ -1,6 +1,6 @@
 package item;
 
-import util.Validador;
+import util.ValidadorItem;
 
 /**
  * Representação de um item.
@@ -17,7 +17,7 @@ public abstract class Item {
 	private double preco;
 	private boolean emprestado;
 	private int qtdVezesEmprestado;
-	protected Validador validador;
+	protected ValidadorItem validador;
 
 	/**
 	 * Constrói um item com nome e preço.
@@ -28,8 +28,8 @@ public abstract class Item {
 	 *            o preço do item.
 	 */
 	public Item(String nome, double preco) {
-		this.validador = new Validador();
-		this.validador.validaNome(nome);
+		this.validador = new ValidadorItem();
+		this.validador.validaNomeItem(nome);
 		this.validador.validaPreco(preco);
 
 		this.nome = nome;
@@ -63,7 +63,7 @@ public abstract class Item {
 	 *            o novo nome deste item.
 	 */
 	public void setNome(String nome) {
-		this.validador.validaNome(nome);
+		this.validador.validaNomeItem(nome);
 		this.nome = nome;
 	}
 

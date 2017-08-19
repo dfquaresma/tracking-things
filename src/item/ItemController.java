@@ -8,17 +8,14 @@ import item.bluray.Show;
 import item.bluray.Temporada;
 import item.jogo.JogoEletronico;
 import item.jogo.JogoTabuleiro;
-import usuario.UsuarioController;
-import util.Validador;
+import util.ValidadorItem;
 
 public class ItemController {
 
-	private UsuarioController usuarioController;
-	private Validador validador; 
+	private ValidadorItem validador; 
 
-	public ItemController(UsuarioController usuarioController) {
-		this.usuarioController = usuarioController;
-		this.validador = new Validador();
+	public ItemController() {
+		this.validador = new ValidadorItem();
 	}
 
 	/**
@@ -33,11 +30,10 @@ public class ItemController {
 	 * @param plataforma
 	 *            a plataforma do jogo.
 	 */
-	public void cadastrarEletronico(String nome, String telefone, String nomeItem, double preco, String plataforma) {
+	public Item cadastrarEletronico(String nome, String telefone, String nomeItem, double preco, String plataforma) {
 		this.validador.validaAtributosDeCadastroDeItem(nomeItem, preco);
 		this.validador.validaPlataforma(plataforma);
-		Item novoItem = new JogoEletronico(nomeItem, preco, plataforma);
-		this.usuarioController.adicionaItem(nome, telefone, novoItem);
+		return new JogoEletronico(nomeItem, preco, plataforma);
 	}
 	
 	/**
@@ -50,10 +46,9 @@ public class ItemController {
 	 * @param preco
 	 *            o preço do jogo.
 	 */
-	public void cadastrarJogoTabuleiro(String nome, String telefone, String nomeItem, double preco) {
+	public Item cadastrarJogoTabuleiro(String nome, String telefone, String nomeItem, double preco) {
 		this.validador.validaAtributosDeCadastroDeItem(nomeItem, preco);
-		Item novoItem = new JogoTabuleiro(nomeItem, preco);
-		this.usuarioController.adicionaItem(nome, telefone, novoItem);
+		return new JogoTabuleiro(nomeItem, preco);
 	}
 
 	/**
@@ -74,15 +69,14 @@ public class ItemController {
 	 * @param anoLancamento
 	 *            o ano de lançamento do filme.
 	 */
-	public void cadastrarBlurayFilme(String nome, String telefone, String nomeItem, double preco, int duracao, String genero, String classificacao,
+	public Item cadastrarBlurayFilme(String nome, String telefone, String nomeItem, double preco, int duracao, String genero, String classificacao,
 			int anoLancamento) {
 		this.validador.validaAtributosDeCadastroDeItem(nomeItem, preco);
 		this.validador.validaAtributosDeCadastroDeBluRays(duracao, classificacao);
 		this.validador.validaGenero(genero);
 		this.validador.validaAnoLancamento(anoLancamento);
 
-		Item novoItem = new Filme(nomeItem, preco, duracao, genero, classificacao, anoLancamento);
-		this.usuarioController.adicionaItem(nome, telefone, novoItem);
+		return new Filme(nomeItem, preco, duracao, genero, classificacao, anoLancamento);
 	}
 
 	/**
@@ -105,15 +99,15 @@ public class ItemController {
 	 * @param temporada
 	 *            a temporada da temporada.
 	 */
-	public void cadastrarBluRaySerie(String nome, String telefone, String nomeItem, double preco, String descricao, int duracao, String classificacao,
+	public Item cadastrarBluRaySerie(String nome, String telefone, String nomeItem, double preco, String descricao, int duracao, String classificacao,
 			String genero, int temporada) {
 		this.validador.validaAtributosDeCadastroDeItem(nomeItem, preco);
 		this.validador.validaAtributosDeCadastroDeBluRays(duracao, classificacao);
 		this.validador.validaDescricao(descricao);
 		this.validador.validaGenero(genero);
 		this.validador.validaTemporada(temporada);
-		Item novoItem = new Temporada(nomeItem, preco, descricao, duracao, classificacao, genero, temporada);
-		this.usuarioController.adicionaItem(nome, telefone, novoItem);
+		return new Temporada(nomeItem, preco, descricao, duracao, classificacao, genero, temporada);
+		
 	}
 
 	/**
@@ -134,20 +128,18 @@ public class ItemController {
 	 * @param classificacao
 	 *            a classificação do show.
 	 */
-	public void cadastrarBlurayShow(String nome, String telefone, String nomeItem, double preco, int duracao, int numeroFaixas, String artista,
+	public Item cadastrarBlurayShow(String nome, String telefone, String nomeItem, double preco, int duracao, int numeroFaixas, String artista,
 			String classificacao) {
 		this.validador.validaAtributosDeCadastroDeItem(nomeItem, preco);
 		this.validador.validaAtributosDeCadastroDeBluRays(duracao, classificacao);
 		this.validador.validaNumeroDeFaixas(numeroFaixas);
 		this.validador.validaArtista(artista);
 
-		Item novoItem = new Show(nomeItem, preco, duracao, numeroFaixas, artista, classificacao);
-		this.usuarioController.adicionaItem(nome, telefone, novoItem);
+		return new Show(nomeItem, preco, duracao, numeroFaixas, artista, classificacao);
+		
 	}
 
-	public List<Item> getItensNaoEmprestados() {
-		List<Item> itens = this.usuarioController.getItensNoSistema();
-		
+	public List<Item> getItensNaoEmprestados(List<Item> itens) {		
 		Iterator<Item> itr = itens.iterator();
 		while (itr.hasNext()) {
 			if (itr.next().isEmprestado()) {

@@ -9,7 +9,12 @@ import excecoes.OperacaoNaoPermitidaNoMomentoExcecao;
 import item.Item;
 import item.bluray.Temporada;
 import item.jogo.JogoTabuleiro;
-import util.Validador;
+import usuario.fidelidade.BomAmigo;
+import usuario.fidelidade.Caloteiro;
+import usuario.fidelidade.CartaoFidelidade;
+import usuario.fidelidade.FreeRyder;
+import usuario.fidelidade.Noob;
+import util.ValidadorUsuario;
 
 /**
  * Representação de um usuário no sistema.
@@ -23,8 +28,9 @@ public class Usuario {
 	private String telefone;
 	private String email;
 	private Map<String, Item> itens;
-	private Validador validador;
+	private ValidadorUsuario validador;
 	private Reputacao reputacao;
+	private CartaoFidelidade cartao;
 
 	/**
 	 * Constrói um usuário com nome, telefone e email.
@@ -37,7 +43,7 @@ public class Usuario {
 	 *            o email do usuário.
 	 */
 	public Usuario(String nome, String telefone, String email) {
-		this.validador = new Validador();
+		this.validador = new ValidadorUsuario();
 		this.validador.validaNome(nome);
 		this.validador.validaTelefone(telefone);
 		this.validador.validaEmail(email);
@@ -46,7 +52,7 @@ public class Usuario {
 		this.email = email;
 		this.itens = new HashMap<>();
 		this.reputacao = new Reputacao();
-
+		this.cartao = new FreeRyder();
 	}
 
 	/**
@@ -55,11 +61,12 @@ public class Usuario {
 	 * @param item
 	 */
 	public void adicionaItem(Item item) {
+		this.validador.validaItem(item);
 		String nomeDoItem = item.getNome();
-		this.validador.validaAtributosDeCadastroDeItem(nomeDoItem, item.getPreco());
 		this.itens.put(nomeDoItem, item);
 		
 		this.reputacao.adicionandoItemParaEmprestimo(item.getPreco());
+		attCartao();
 	}
 	
 	/**
@@ -69,7 +76,7 @@ public class Usuario {
 	 *            o nome do item.
 	 */
 	public void removerItem(String nomeItem) {
-		this.validaItemParaUso(nomeItem);
+		this.validaNomeItemParaUso(nomeItem);
 		Item item = this.getItem(nomeItem);
 		
 		this.itens.remove(nomeItem);
@@ -86,8 +93,7 @@ public class Usuario {
 	 *            a peça a ser adicionada.
 	 */
 	public void addPecaPerdida(String nomeItem, String nomePeca) {
-		this.validaItemParaUso(nomeItem);
-		this.validador.validaPeca(nomePeca);
+		this.validaNomeItemParaUso(nomeItem);
 
 		Item item = getItem(nomeItem);
 		if (!(item instanceof JogoTabuleiro)) {
@@ -107,8 +113,6 @@ public class Usuario {
 	 *            a duração do episódio.
 	 */
 	public void addBlueray(String nomeBlueray, int duracao) {
-		this.validador.validaNome(nomeBlueray);
-		this.validador.validaDuracao(duracao);
 
 		Item item = getItem(nomeBlueray);
 		if (!(item instanceof Temporada)) {
@@ -173,7 +177,7 @@ public class Usuario {
 	 * @return os detalhes do item.
 	 */
 	public String getDetalhesItem(String nomeItem) {
-		this.validaItemParaUso(nomeItem);
+		this.validaNomeItemParaUso(nomeItem);
 
 		Item item = getItem(nomeItem);
 		return item.toString();
@@ -186,7 +190,7 @@ public class Usuario {
 	 *            o nome do item que está sendo emprestado.
 	 */
 	public void emprestaItem(String nomeItem) {
-		this.validaItemParaUso(nomeItem);
+		this.validaNomeItemParaUso(nomeItem);
 
 		Item item = this.getItem(nomeItem);
 		if (item.isEmprestado()) {
@@ -195,6 +199,7 @@ public class Usuario {
 		item.setEmprestado(true);
 		
 		this.reputacao.emprestandoItem(item.getPreco());
+		attCartao();
 	}
 
 	/**
@@ -204,7 +209,7 @@ public class Usuario {
 	 *            o nome do item que está sendo devolvido.
 	 */
 	public void recebeItem(String nomeItem) {
-		this.validaItemParaUso(nomeItem);
+		this.validaNomeItemParaUso(nomeItem);
 
 		Item item = this.getItem(nomeItem);
 		if (!item.isEmprestado()) {
@@ -216,12 +221,10 @@ public class Usuario {
 	/**
 	 * 
 	 */
-	public void devolveItem(String nomeItem, int diasAtraso)
-	{
-		this.validaItemParaUso(nomeItem);
-		
-		Item item = this.getItem(nomeItem);
-		//this.reputacao.devolveItem(dias); ACHO QUE É CÓDIGO DE PAULO
+	public void devolveItem(double valorItem, int diasAtraso)
+	{	
+		this.reputacao.devolvendoItem(valorItem, diasAtraso);
+		attCartao();
 	}
 
 	/**
@@ -252,6 +255,35 @@ public class Usuario {
 		}
 
 	}
+	/**
+	 * Atualiza a classificacao do usuario de acordo com os cartoes fidelidade
+	 */
+	public void attCartao(){
+		if(this.reputacao.getReputacao() > 0 && reputacao.getReputacao() <= 100 && !(itens.isEmpty())) {
+			this.cartao = new Noob();
+		} else if(reputacao.getReputacao() < 0){
+			this.cartao = new Caloteiro();
+		} else {
+			this.cartao = new BomAmigo();
+		}
+	}
+	/**
+	 * Retorna se um usuario esta na classificacao de caloteiro
+	 * @return true se for caloteiro,false se nao for
+	 */
+	public boolean isCaloteiro(){
+		if(this.reputacao.getReputacao() < 0){
+			return true;
+		}
+		return false;
+	}
+	/**
+	 * Retorna o periodo que um usuario pode pegar itens emprestado
+	 * @return o periodo
+	 */
+	public int getPeriodoEmprestado(){
+		return this.cartao.getPeriodo();
+	}
 
 	/**
 	 * Recupera um atributo específico do usuário.
@@ -271,13 +303,15 @@ public class Usuario {
 		case ("Email"):
 			return getEmail();
 		case ("Reputacao"):
-			return String.format("%f", this.getReputacao());
+			return Double.toString(this.getReputacao());
+		case ("Cartao"):
+			return this.cartao.toString();
 		default:
 			throw new IllegalArgumentException("Atributo invalido.");
 		}
 	}
 	
-	private void validaItemParaUso(String nomeItem) {
+	private void validaNomeItemParaUso(String nomeItem) {
 		this.validador.validaNomeItem(nomeItem);
 
 		if (!(itens.containsKey(nomeItem))) {
@@ -285,12 +319,10 @@ public class Usuario {
 		}
 	}
 
-	private void validaAttNomeDeItem(String nomeItem) {
-
-		if (this.itens.containsKey(nomeItem)) {
+	private void validaAttNomeDeItem(String nomeItem)
+	{
+		if(this.itens.containsKey(nomeItem))
 			throw new IllegalArgumentException();
-		}
-
 	}
 
 	/**
@@ -319,7 +351,10 @@ public class Usuario {
 	public String getEmail() {
 		return this.email;
 	}
-	
+	/**
+	 * Retorna a reputacao do usuario
+	 * @return reputacao do usuario
+	 */
 	public double getReputacao()
 	{
 		return this.reputacao.getReputacao();
@@ -366,7 +401,7 @@ public class Usuario {
 	 * @return o item.
 	 */
 	public Item getItem(String nomeItem) {
-		this.validaItemParaUso(nomeItem);
+		this.validaNomeItemParaUso(nomeItem);
 		return this.itens.get(nomeItem);
 	}
 

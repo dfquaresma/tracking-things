@@ -31,6 +31,26 @@ public class JogoTabuleiro extends Item {
 		this.pecasPerdidas = new ArrayList<>();
 	}
 
+	/**
+	 * Adiciona uma peça a lista de peças perdidas.
+	 * 
+	 * @param nomePeca
+	 *            o nome da peça perdida.
+	 */
+	public void adicionarPecaPerdida(String nomePeca) {
+		this.validador.validaPeca(nomePeca);
+		this.pecasPerdidas.add(nomePeca);
+	}
+
+	/**
+	 * Recupera um booleano indicando se o jogo de tabuleiro está completo.
+	 * 
+	 * @return true caso esteja completo, false caso contrário.
+	 */
+	public boolean isCompleto() {
+		return this.pecasPerdidas.size() == 0;
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -56,26 +76,6 @@ public class JogoTabuleiro extends Item {
 		if(!pecasPerdidas.equals(other.pecasPerdidas))
 			return false;
 		return true;
-	}
-
-	/**
-	 * Adiciona uma peça a lista de peças perdidas.
-	 * 
-	 * @param nomePeca
-	 *            o nome da peça perdida.
-	 */
-	public void adicionarPecaPerdida(String nomePeca) {
-		this.validador.validaPeca(nomePeca);
-		this.pecasPerdidas.add(nomePeca);
-	}
-
-	/**
-	 * Recupera um booleano indicando se o jogo de tabuleiro está completo.
-	 * 
-	 * @return true caso esteja completo, false caso contrário.
-	 */
-	public boolean isCompleto() {
-		return this.pecasPerdidas.size() == 0;
 	}
 
 	/**

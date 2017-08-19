@@ -70,6 +70,8 @@ public class BluRayTest
 		assertEquals(1000, this.blurayFilme.getDuracao());
 		this.blurayFilme.atualizaAtributo("Classificacao", "QUATORZE_ANOS");
 		assertEquals("QUATORZE_ANOS", this.blurayFilme.getClassificacao());
+		this.blurayFilme.atualizaAtributo("Nome", "Os Simpsons");
+		assertEquals("Os Simpsons", this.blurayFilme.getNome());
 	}
 	/**
 	 * Testa atualizar um atributo do bluray passando como atributo null

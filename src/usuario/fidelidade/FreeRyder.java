@@ -1,6 +1,6 @@
 package usuario.fidelidade;
 
-public class FreeRider implements CartaoFidelidade {
+public class FreeRyder implements CartaoFidelidade {
 	
 	private final int PERIODO = 5;
 	
@@ -16,7 +16,7 @@ public class FreeRider implements CartaoFidelidade {
 	
 	@Override
 	public String toString(){
-		return "FreeRider";
+		return "FreeRyder";
 	}
 
 

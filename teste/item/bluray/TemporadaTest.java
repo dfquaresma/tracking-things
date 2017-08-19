@@ -30,17 +30,6 @@ public class TemporadaTest {
 	}
 
 	/**
-	 * Testa se uma temporada pode ser emprestada
-	 */
-	@Test
-	public void testPodeSerEmprestado() {
-		assertEquals(false, this.temporada.podeSerEmprestado());
-		this.temporada.addBlueray(500);
-		this.temporada.addBlueray(500);
-		assertEquals(true, this.temporada.podeSerEmprestado());
-	}
-
-	/**
 	 * Testa pegar informacoes de uma temporada
 	 */
 	@Test
@@ -149,6 +138,40 @@ public class TemporadaTest {
 	public void testTemporadaClassificacaoNull() {
 		new Temporada("South park", 1000.10, "Primeira temporada de South park", 1000, null, "COMEDIA", 1);
 	}
+	
+	/**
+	 * Testa se uma temporada pode ser emprestada
+	 */
+	@Test
+	public void testPodeSerEmprestado() {
+		assertEquals(false, this.temporada.podeSerEmprestado());
+		this.temporada.addBlueray(500);
+		this.temporada.addBlueray(500);
+		assertEquals(true, this.temporada.podeSerEmprestado());
+		this.temporada.setEmprestado(true);
+		assertEquals(false, this.temporada.podeSerEmprestado());
+	}
+	
+	@Test
+	public void testAtualizaAtributo()
+	{
+		this.temporada.atualizaAtributo("Descricao", "temporada legal");
+		assertEquals("temporada legal", this.temporada.getDescricao());
+		this.temporada.atualizaAtributo("Genero", "EROTICO");
+		assertEquals("EROTICO", this.temporada.getGenero());
+		this.temporada.atualizaAtributo("Temporada", "3");
+		assertEquals(3, this.temporada.getTemporada());
+		this.temporada.atualizaAtributo("Duracao", "30");
+		assertEquals(30, this.temporada.getDuracao());
+	}
+	
+	@Test
+	public void testGetInfo()
+	{
+		assertEquals("Primeira temporada de South park", this.temporada.getInfo("Descricao"));
+		assertEquals("COMEDIA", this.temporada.getInfo("Genero"));
+		assertEquals("1", this.temporada.getInfo("Temporada"));
+	}
 
 	/**
 	 * Testa instanciar uma temporada com genero nulo
@@ -156,5 +179,34 @@ public class TemporadaTest {
 	@Test(expected = NullPointerException.class)
 	public void testTemporadaGeneroNull() {
 		new Temporada("South park", 1000.10, "Primeira temporada de South park", 1000, "DEZOITO_ANOS", null, 1);
+	}
+	
+	@Test
+	public void testSetDescricao()
+	{
+		this.temporada.setDescricao("Essa temporada eh muito legal");
+		assertEquals("Essa temporada eh muito legal", this.temporada.getDescricao());
+	}
+	
+	@Test
+	public void testSetGenero()
+	{
+		this.temporada.setGenero("FAROESTE");
+		assertEquals("FAROESTE", this.temporada.getGenero());
+	}
+	
+	@Test
+	public void testSetTemporada()
+	{
+		this.temporada.setTemporada(20);
+		assertEquals(20, this.temporada.getTemporada());
+	}
+	
+	@Test
+	public void testToString()
+	{
+		//new Temporada("South park", 1000.10, "Primeira temporada de South park", 1000, "DEZOITO_ANOS",
+				//"COMEDIA", 1);
+		assertEquals("SERIE: South park, R$ 1000.1, Nao emprestado, 1000 min, DEZOITO_ANOS, COMEDIA, Temporada 1", this.temporada.toString());
 	}
 }
