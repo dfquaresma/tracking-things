@@ -3,6 +3,9 @@ package usuario;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+import item.Item;
+import item.jogo.JogoEletronico;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -103,6 +106,51 @@ public class UsuarioTest {
 	@Test(expected = NullPointerException.class)
 	public void testUsuarioEmailNulo() {
 		this.usuario = new Usuario("Higor", "9879878997", null);
+	}
+	
+	@Test
+	public void testAdicionaItem()
+	{
+		assertEquals(0, this.usuario.getItens().size());
+		Item item = new JogoEletronico("Arma3", 345.00, "PC");
+		this.usuario.adicionaItem(item);
+		assertEquals(1, this.usuario.getItens().size());
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testAdicionaItemNull()
+	{
+		this.usuario.adicionaItem(null);
+	}
+	
+	@Test
+	public void testRemoverItem()
+	{
+		Item item = new JogoEletronico("Arma3", 345.00, "PC");
+		this.usuario.adicionaItem(item);
+		assertEquals(1, this.usuario.getItens().size());
+		
+		this.usuario.removerItem("Arma3");
+		assertEquals(0, this.usuario.getItens().size());
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testRemoverItemInvalido()
+	{
+		Item item = new JogoEletronico("Arma3", 345.00, "PC");
+		this.usuario.adicionaItem(item);
+		assertEquals(1, this.usuario.getItens().size());
+		
+		this.usuario.removerItem("Arma3");
+		assertEquals(0, this.usuario.getItens().size());
+		
+		this.usuario.removerItem("Arma3");
+	}
+	
+	@Test
+	public void testAddPecaPerdida()
+	{
+		
 	}
 
 	/**

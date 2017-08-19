@@ -52,6 +52,79 @@ public class Temporada extends BluRay {
 	}
 
 	/**
+	 * Adiciona um episódio á temporada.
+	 * 
+	 * @param duracao
+	 *            a duração do episódio a ser adicionado.
+	 */
+	public void addBlueray(int duracao) {
+		this.validador.validaDuracao(duracao);
+		this.episodios.add(new Episodio(duracao));
+	}
+
+	/**
+	 * Recupera um booleano informando se o item pode ser emprestado.
+	 * 
+	 * @return true caso possa ser emprestado, false caso contrário.
+	 */
+	@Override
+	public boolean podeSerEmprestado() {
+		int duracaoTotalEpisodios = 0;
+
+		for (Episodio ep : this.episodios)
+			duracaoTotalEpisodios += ep.getDuracao();
+
+		return (duracaoTotalEpisodios == super.getDuracao()) && super.podeSerEmprestado();
+	}
+	
+	/**
+	 * Sobrescreve o método da classe mãe para verificar se o atributo a ser
+	 * atualizado pertence a esta classe. Caso não seja, o método da classe mãe
+	 * é chamado.
+	 */
+	@Override
+	public void atualizaAtributo(String atributo, String valor) {
+		this.validador.validaAtributo(atributo);
+		this.validador.validaValor(valor);
+		
+		if (atributo.equals("Descricao")) {
+			this.descricao = valor;
+			
+		} else if (atributo.equals("Genero")) {
+			this.genero = Genero.valueOf(valor);
+			
+		} else if (atributo.equals("Temporada")) {
+			this.validador.validaConversaoStringToInt(atributo, valor);
+			this.temporada = Integer.parseInt(valor);
+			
+		} else {
+			super.atualizaAtributo(atributo, valor);
+		}	
+	}
+	
+	/**
+	 * Sobrescreve o método da classe mãe para verificar se o atributo a ser
+	 * recuperado pertence a esta classe. Caso não seja, o método da classe mãe
+	 * é chamado.
+	 */
+	@Override
+	public String getInfo(String atributo) {
+		this.validador.validaAtributo(atributo);
+
+		switch (atributo) {
+		case ("Descricao"):
+			return this.descricao;
+		case ("Genero"):
+			return this.genero.toString();
+		case ("Temporada"):
+			return String.valueOf(this.temporada);
+		default:
+			return super.getInfo(atributo);
+		}
+
+	}
+	
+	/**
 	 * Recupera a descrição da temporada.
 	 * 
 	 * @return uma string representando a descrição.
@@ -112,54 +185,6 @@ public class Temporada extends BluRay {
 	}
 
 	/**
-	 * Adiciona um episódio á temporada.
-	 * 
-	 * @param duracao
-	 *            a duração do episódio a ser adicionado.
-	 */
-	public void addBlueray(int duracao) {
-		this.validador.validaDuracao(duracao);
-		this.episodios.add(new Episodio(duracao));
-	}
-
-	/**
-	 * Sobrescreve o método da classe mãe para verificar se o atributo a ser
-	 * recuperado pertence a esta classe. Caso não seja, o método da classe mãe
-	 * é chamado.
-	 */
-	@Override
-	public String getInfo(String atributo) {
-		this.validador.validaAtributo(atributo);
-
-		switch (atributo) {
-		case ("Descricao"):
-			return this.descricao;
-		case ("Genero"):
-			return this.genero.toString();
-		case ("Temporada"):
-			return String.valueOf(this.temporada);
-		default:
-			return super.getInfo(atributo);
-		}
-
-	}
-
-	/**
-	 * Recupera um booleano informando se o item pode ser emprestado.
-	 * 
-	 * @return true caso possa ser emprestado, false caso contrário.
-	 */
-	@Override
-	public boolean podeSerEmprestado() {
-		int duracaoTotalEpisodios = 0;
-
-		for (Episodio ep : this.episodios)
-			duracaoTotalEpisodios += ep.getDuracao();
-
-		return (duracaoTotalEpisodios == super.getDuracao()) && super.podeSerEmprestado();
-	}
-
-	/**
 	 * Retorna uma representação em string deste jogo.
 	 */
 	@Override
@@ -167,32 +192,6 @@ public class Temporada extends BluRay {
 		return "SERIE: " + this.getNome() + ", R$ " + String.valueOf(this.getPreco()) + ", "
 				+ this.getEstadoEmprestimo() + ", " + this.getDuracao() + " min, " + this.getClassificacao() + ", "
 				+ this.getGenero() + ", Temporada " + this.getTemporada();
-	}
-	
-	/**
-	 * Sobrescreve o método da classe mãe para verificar se o atributo a ser
-	 * atualizado pertence a esta classe. Caso não seja, o método da classe mãe
-	 * é chamado.
-	 */
-	@Override
-	public void atualizaAtributo(String atributo, String valor) {
-		this.validador.validaAtributo(atributo);
-		this.validador.validaValor(valor);
-		
-		if (atributo.equals("Descricao")) {
-			this.descricao = valor;
-			
-		} else if (atributo.equals("Genero")) {
-			this.genero = Genero.valueOf(valor);
-			
-		} else if (atributo.equals("Temporada")) {
-			this.validador.validaConversaoStringToInt(atributo, valor);
-			this.temporada = Integer.parseInt(valor);
-			
-		} else {
-			super.atualizaAtributo(atributo, valor);
-		}
-		
 	}
 
 }

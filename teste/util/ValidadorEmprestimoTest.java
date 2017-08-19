@@ -1,5 +1,9 @@
 package util;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -66,5 +70,24 @@ public class ValidadorEmprestimoTest {
 	public void testValidaPeriodoInvalido() {
 		this.validador.validaPeriodo(0);
 	}
-
+	
+	@Test
+	public void testValidaDataDevolucao() throws ParseException
+	{
+		Date dataEmprestimo = (new SimpleDateFormat("dd/MM/yyyy")).parse("15/12/1996");
+		Date dataDevolucao = (new SimpleDateFormat("dd/MM/yyyy")).parse("15/12/1996");
+		this.validador.validaDataDevolucao(dataEmprestimo, dataDevolucao);
+		
+		dataEmprestimo = (new SimpleDateFormat("dd/MM/yyyy")).parse("15/12/1996");
+		dataDevolucao = (new SimpleDateFormat("dd/MM/yyyy")).parse("16/12/1996");
+		this.validador.validaDataDevolucao(dataEmprestimo, dataDevolucao);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testValidaDataDevolucaoInvalida() throws ParseException
+	{
+		Date dataEmprestimo = (new SimpleDateFormat("dd/MM/yyyy")).parse("15/12/1996");
+		Date dataDevolucao = (new SimpleDateFormat("dd/MM/yyyy")).parse("14/12/1996");
+		this.validador.validaDataDevolucao(dataEmprestimo, dataDevolucao);
+	}
 }

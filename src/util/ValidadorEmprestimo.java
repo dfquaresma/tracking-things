@@ -1,5 +1,7 @@
 package util;
 
+import java.util.Date;
+
 import usuario.Usuario;
 
 public class ValidadorEmprestimo {
@@ -53,6 +55,20 @@ public class ValidadorEmprestimo {
 	 */
 	public void validaData(String data) {
 		this.validaString(data, "Data");
+	}
+	
+	/**
+	 * Verifica se a data de devolucao de um emprestimo esta coerente com a data de emprestimo. 
+	 * 
+	 * @param dataEmprestimo
+	 * 			a data do emprestimo do item
+	 * @param dataDevolucao
+	 * 			a data de devolucao do item
+	 */
+	public void validaDataDevolucao(Date dataEmprestimo, Date dataDevolucao)
+	{
+		if(dataDevolucao.before(dataEmprestimo))
+			throw new IllegalArgumentException("A data de devolucao nao pode ser estritamente menor do que a data de emprestimo");
 	}
 	
 	

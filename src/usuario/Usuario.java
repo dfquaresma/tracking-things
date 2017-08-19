@@ -213,12 +213,9 @@ public class Usuario {
 	/**
 	 * 
 	 */
-	public void devolveItem(String nomeItem, int diasAtraso)
-	{
-		this.validaNomeItemParaUso(nomeItem);
-		
-		Item item = this.getItem(nomeItem);
-		//this.reputacao.devolveItem(dias); ACHO QUE É CÓDIGO DE PAULO
+	public void devolveItem(double valorItem, int diasAtraso)
+	{	
+		this.reputacao.devolvendoItem(valorItem, diasAtraso);
 	}
 
 	/**
@@ -268,7 +265,7 @@ public class Usuario {
 		case ("Email"):
 			return getEmail();
 		case ("Reputacao"):
-			return String.format("%f", this.getReputacao());
+			return Double.toString(this.getReputacao());
 		default:
 			throw new IllegalArgumentException("Atributo invalido.");
 		}
