@@ -55,10 +55,18 @@ public class Emprestimo {
 		} catch (ParseException e) {
 			throw new IllegalArgumentException("O formato da data inserido está incorreto, utilize dd/MM/yyyy");
 		}
-
+		
 		this.periodo = periodo;
 		this.finalizado = false;
-
+		
+		if(requerente.isCaloteiro()){
+			throw new IllegalArgumentException("Usuario nao pode pegar nenhum item emprestado");
+		}
+		
+		if(this.periodo > requerente.getPeriodoEmprestado()){
+			throw new IllegalArgumentException("Usuario impossiblitado de pegar emprestado por esse periodo");
+		}
+		
 		this.dono.emprestaItem(getNomeItem());
 	}
 	
