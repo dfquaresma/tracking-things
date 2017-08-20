@@ -2,23 +2,43 @@ package usuario.fidelidade;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
-
+/**
+ * Testa os metodos da classe Noob
+ * @author Amanda V. A. de Luna e Costa
+ * @author David Ferreira Quaresma
+ * @author Ícaro Dantas de Araújo Lima
+ * @author Paulo Felipe Feitosa da Silva 
+ *
+ */
 public class NoobTest {
 
+private CartaoFidelidade cartao;
+	
+	@Before
+	public void setup(){
+		this.cartao = new Noob();
+	}
+	/**
+	 * Testa o periodo maximo que o usuario da categoria pode pegar um item emprestado
+	 */
 	@Test
 	public void testGetPeriodo() {
-		fail("Not yet implemented");
+		assertEquals(7, cartao.getPeriodo());
 	}
-
+	/**
+	 * Testa se o usuario da categoria pode pegar itens emprestado
+	 */
 	@Test
 	public void testPodePegarEmprestado() {
-		fail("Not yet implemented");
+		assertTrue(cartao.podePegarEmprestado());
 	}
-
+	/**
+	 * Testa a representacao string da categoria
+	 */
 	@Test
 	public void testToString() {
-		fail("Not yet implemented");
+		assertEquals("Noob", cartao.toString());
 	}
-
 }
