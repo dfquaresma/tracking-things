@@ -77,11 +77,11 @@ public class Usuario {
 	 */
 	public void removerItem(String nomeItem) {
 		this.validaNomeItemParaUso(nomeItem);
-		Item item = this.getItem(nomeItem);
+		//Item item = this.getItem(nomeItem);
 		
 		this.itens.remove(nomeItem);
 		
-		this.reputacao.removendoItemParaEmprestimo(item.getPreco());
+		//this.reputacao.removendoItemParaEmprestimo(item.getPreco());
 	}
 	
 	/**
