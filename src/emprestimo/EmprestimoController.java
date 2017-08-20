@@ -10,10 +10,10 @@ import item.Item;
 import usuario.Usuario;
 
 public class EmprestimoController {
-	private Set<Emprestimo> emprestimos;
+	private List<Emprestimo> emprestimos;
 
 	public EmprestimoController() {
-		this.emprestimos = new HashSet<>();
+		this.emprestimos = new ArrayList<>();
 	}
 
 	/**
@@ -120,7 +120,7 @@ public class EmprestimoController {
 	public List<Emprestimo> getEmprestimosUserEmprestando(Usuario user) {
 
 		List<Emprestimo> emprestimos = new ArrayList<>();
-
+		
 		for (Emprestimo emprestimo : this.emprestimos) {
 			if (emprestimo.getDono().equals(user)) {
 				emprestimos.add(emprestimo);
@@ -159,13 +159,12 @@ public class EmprestimoController {
 	public List<Emprestimo> getEmprestimosNaoFinalizados() {
 		List<Emprestimo> emprestimos = new ArrayList<>();
 
-		Iterator<Emprestimo> itr = this.emprestimos.iterator();
-		while (itr.hasNext()) {
-			Emprestimo emprestimo = itr.next();
-			if (!emprestimo.isFinalizado()) {
-				emprestimos.add(emprestimo);
-			}
+		for (Emprestimo emprestimo: this.emprestimos) {
+		    if (!emprestimo.isFinalizado()) {
+			emprestimos.add(emprestimo);
+		    }
 		}
+		
 		return emprestimos;
 
 	}
