@@ -42,7 +42,7 @@ public class EmprestimoTest {
 		this.user2 = new Usuario("Outro", "3371-0002", "outro@gmail.com");
 		this.item = new JogoEletronico("Bola Quadrada", 100000, "PC");
 		this.user1.adicionaItem(this.item);
-		this.emprestimo = new Emprestimo(user1, user2, item.getNome(), "08/08/2017", 7);
+		this.emprestimo = new Emprestimo(user1, user2, item.getNome(), "08/08/2017", 4);
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
@@ -119,9 +119,9 @@ public class EmprestimoTest {
 		this.emprestimo.setDataEmprestimo("09/08/2017");
 		assertEquals("09/08/2017", this.emprestimo.getDataEmprestimo());
 
-		assertEquals(7, this.emprestimo.getPeriodo());
-		this.emprestimo.setPeriodo(8);
-		assertEquals(8, this.emprestimo.getPeriodo());
+		assertEquals(4, this.emprestimo.getPeriodo());
+		this.emprestimo.setPeriodo(5);
+		assertEquals(5, this.emprestimo.getPeriodo());
 
 		assertEquals("Alguem", this.emprestimo.getNomeDono());
 		assertEquals("Outro", this.emprestimo.getNomeRequerente());
@@ -144,7 +144,7 @@ public class EmprestimoTest {
 	public void testEqualsObject() {
 
 		try {
-			emprestimo = new Emprestimo(this.user1, this.user2, this.item.getNome(), "08/08/2017", 134);
+			emprestimo = new Emprestimo(this.user1, this.user2, this.item.getNome(), "08/08/2017", 5);
 			fail();
 		} catch (Exception e) {
 			assertEquals("Item emprestado no momento", e.getMessage());
@@ -154,28 +154,28 @@ public class EmprestimoTest {
 		Usuario user2 = new Usuario("Outro", "3371-0002", "outro@gmail.com");
 		Item item = new JogoEletronico("Bola Quadrada", 100000, "PC");
 		user1.adicionaItem(item);
-		Emprestimo emprestimo = new Emprestimo(user1, user2, item.getNome(), "08/08/2017", 7);
+		Emprestimo emprestimo = new Emprestimo(user1, user2, item.getNome(), "08/08/2017", 4);
 		assertTrue(this.emprestimo.equals(emprestimo));
 
 		user1 = new Usuario("Alguem", "3371-0001", "alguem@gmail.com");
 		user2 = new Usuario("Outro", "3371-0002", "outro@gmail.com");
 		item = new JogoEletronico("Bola Quadrada", 100000, "PC");
 		user1.adicionaItem(item);
-		emprestimo = new Emprestimo(user1, user2, item.getNome(), "08/08/2018", 7);
+		emprestimo = new Emprestimo(user1, user2, item.getNome(), "08/08/2018", 4);
 		assertFalse(this.emprestimo.equals(emprestimo));
 
 		user1 = new Usuario("Alguem", "3371-0001", "alguem@gmail.com");
 		user2 = new Usuario("Outro", "3371-0002", "outro@gmail.com");
 		item = new JogoEletronico("Bola Quadrada", 100000, "PC");
 		user2.adicionaItem(item);
-		emprestimo = new Emprestimo(user2, user1, item.getNome(), "08/08/2017", 7);
+		emprestimo = new Emprestimo(user2, user1, item.getNome(), "08/08/2017", 4);
 		assertFalse(this.emprestimo.equals(emprestimo));
 
 		user1 = new Usuario("Alguem", "3371-0001", "alguem@gmail.com");
 		item = new JogoEletronico("Bola Quadrada", 100000, "PC");
 		user1.adicionaItem(item);
 		emprestimo = new Emprestimo(user1, new Usuario("Abra", "3371-0003", "abriu@gmail.com"), this.item.getNome(),
-				"08/08/2017", 134);
+				"08/08/2017", 5);
 		assertFalse(this.emprestimo.equals(emprestimo));
 
 		user1 = new Usuario("Alguem", "3371-0001", "alguem@gmail.com");
@@ -183,7 +183,7 @@ public class EmprestimoTest {
 		item = new JogoTabuleiro("Damas", 1.99);
 		user1.adicionaItem(item);
 		emprestimo = new Emprestimo(user1, user2, item.getNome(), "08/08/2017",
-				134);
+				5);
 		assertFalse(this.emprestimo.equals(emprestimo));
 
 	}
@@ -242,7 +242,7 @@ public class EmprestimoTest {
 
 	@Test
 	public void testGetPeriodo() {
-		assertEquals(7, this.emprestimo.getPeriodo());
+		assertEquals(4, this.emprestimo.getPeriodo());
 	}
 
 	@Test
@@ -262,9 +262,9 @@ public class EmprestimoTest {
 
 	@Test
 	public void testSetPeriodo() {
-		assertEquals(7, this.emprestimo.getPeriodo());
-		this.emprestimo.setPeriodo(8);
-		assertEquals(8, this.emprestimo.getPeriodo());
+		assertEquals(4, this.emprestimo.getPeriodo());
+		this.emprestimo.setPeriodo(5);
+		assertEquals(5, this.emprestimo.getPeriodo());
 	}
 
 	@Test
@@ -284,7 +284,7 @@ public class EmprestimoTest {
 
 	@Test
 	public void testToString() {
-		assertEquals("EMPRESTIMO - De: Alguem, Para: Outro, Bola Quadrada, 08/08/2017, 7 dias, ENTREGA: Emprestimo em andamento", this.emprestimo.toString());
+		assertEquals("EMPRESTIMO - De: Alguem, Para: Outro, Bola Quadrada, 08/08/2017, 4 dias, ENTREGA: Emprestimo em andamento", this.emprestimo.toString());
 		
 	}
 

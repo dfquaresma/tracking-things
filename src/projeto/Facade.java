@@ -116,7 +116,7 @@ public class Facade {
 	 *            a plataforma do jogo.
 	 */
 	public void cadastrarEletronico(String nome, String telefone, String nomeItem, double preco, String plataforma) {
-		Item novoItem = this.itemController.cadastrarEletronico(nome, telefone, nomeItem, preco, plataforma);
+		Item novoItem = this.itemController.cadastrarEletronico(nomeItem, preco, plataforma);
 		this.usuarioController.adicionaItem(nome, telefone, novoItem);
 	}
 
@@ -133,7 +133,7 @@ public class Facade {
 	 *            o preço do jogo.
 	 */
 	public void cadastrarJogoTabuleiro(String nome, String telefone, String nomeItem, double preco) {
-		Item novoItem = this.itemController.cadastrarJogoTabuleiro(nome, telefone, nomeItem, preco);
+		Item novoItem = this.itemController.cadastrarJogoTabuleiro(nomeItem, preco);
 		this.usuarioController.adicionaItem(nome, telefone, novoItem);
 	}
 
@@ -176,7 +176,7 @@ public class Facade {
 	 */
 	public void cadastrarBluRayFilme(String nome, String telefone, String nomeItem, double preco, int duracao,
 			String genero, String classificacao, int anoLancamento) {
-		Item novoItem = this.itemController.cadastrarBlurayFilme(nome, telefone, nomeItem, preco, duracao, genero,
+		Item novoItem = this.itemController.cadastrarBlurayFilme(nomeItem, preco, duracao, genero,
 				classificacao, anoLancamento);
 		this.usuarioController.adicionaItem(nome, telefone, novoItem);
 	}
@@ -205,7 +205,7 @@ public class Facade {
 	 */
 	public void cadastrarBluRaySerie(String nome, String telefone, String nomeItem, double preco, String descricao,
 			int duracao, String classificacao, String genero, int temporada) {
-		Item novoItem = this.itemController.cadastrarBluRaySerie(nome, telefone, nomeItem, preco, descricao, duracao,
+		Item novoItem = this.itemController.cadastrarBluRaySerie(nomeItem, preco, descricao, duracao,
 				classificacao, genero, temporada);
 		this.usuarioController.adicionaItem(nome, telefone, novoItem);
 	}
@@ -232,7 +232,7 @@ public class Facade {
 	 */
 	public void cadastrarBluRayShow(String nome, String telefone, String nomeItem, double preco, int duracao,
 			int numeroFaixas, String artista, String classificacao) {
-		Item novoItem = this.itemController.cadastrarBlurayShow(nome, telefone, nomeItem, preco, duracao, numeroFaixas,
+		Item novoItem = this.itemController.cadastrarBlurayShow(nomeItem, preco, duracao, numeroFaixas,
 				artista, classificacao);
 		this.usuarioController.adicionaItem(nome, telefone, novoItem);
 	}
