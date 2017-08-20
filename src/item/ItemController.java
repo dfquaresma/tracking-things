@@ -30,7 +30,7 @@ public class ItemController {
 	 * @param plataforma
 	 *            a plataforma do jogo.
 	 */
-	public Item cadastrarEletronico(String nome, String telefone, String nomeItem, double preco, String plataforma) {
+	public Item cadastrarEletronico(String nomeItem, double preco, String plataforma) {
 		this.validador.validaAtributosDeCadastroDeItem(nomeItem, preco);
 		this.validador.validaPlataforma(plataforma);
 		return new JogoEletronico(nomeItem, preco, plataforma);
@@ -46,7 +46,7 @@ public class ItemController {
 	 * @param preco
 	 *            o preço do jogo.
 	 */
-	public Item cadastrarJogoTabuleiro(String nome, String telefone, String nomeItem, double preco) {
+	public Item cadastrarJogoTabuleiro(String nomeItem, double preco) {
 		this.validador.validaAtributosDeCadastroDeItem(nomeItem, preco);
 		return new JogoTabuleiro(nomeItem, preco);
 	}
@@ -69,7 +69,7 @@ public class ItemController {
 	 * @param anoLancamento
 	 *            o ano de lançamento do filme.
 	 */
-	public Item cadastrarBlurayFilme(String nome, String telefone, String nomeItem, double preco, int duracao, String genero, String classificacao,
+	public Item cadastrarBlurayFilme(String nomeItem, double preco, int duracao, String genero, String classificacao,
 			int anoLancamento) {
 		this.validador.validaAtributosDeCadastroDeItem(nomeItem, preco);
 		this.validador.validaAtributosDeCadastroDeBluRays(duracao, classificacao);
@@ -99,7 +99,7 @@ public class ItemController {
 	 * @param temporada
 	 *            a temporada da temporada.
 	 */
-	public Item cadastrarBluRaySerie(String nome, String telefone, String nomeItem, double preco, String descricao, int duracao, String classificacao,
+	public Item cadastrarBluRaySerie(String nomeItem, double preco, String descricao, int duracao, String classificacao,
 			String genero, int temporada) {
 		this.validador.validaAtributosDeCadastroDeItem(nomeItem, preco);
 		this.validador.validaAtributosDeCadastroDeBluRays(duracao, classificacao);
@@ -128,7 +128,7 @@ public class ItemController {
 	 * @param classificacao
 	 *            a classificação do show.
 	 */
-	public Item cadastrarBlurayShow(String nome, String telefone, String nomeItem, double preco, int duracao, int numeroFaixas, String artista,
+	public Item cadastrarBlurayShow(String nomeItem, double preco, int duracao, int numeroFaixas, String artista,
 			String classificacao) {
 		this.validador.validaAtributosDeCadastroDeItem(nomeItem, preco);
 		this.validador.validaAtributosDeCadastroDeBluRays(duracao, classificacao);
