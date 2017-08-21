@@ -1,5 +1,6 @@
 package item;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -8,12 +9,25 @@ import item.bluray.Show;
 import item.bluray.Temporada;
 import item.jogo.JogoEletronico;
 import item.jogo.JogoTabuleiro;
+import usuario.Usuario;
 import util.ValidadorItem;
 
+/**
+ * Representa um controlador de itens. 
+ * 
+ * @author Amanda V. A. de Luna e Costa
+ * @author David Ferreira Quaresma
+ * @author Ícaro Dantas de Araújo Lima
+ * @author Paulo Felipe Feitosa da Silva
+ *
+ */
 public class ItemController {
 
-	private ValidadorItem validador; 
+	private ValidadorItem validador;
 
+	/**
+	 * Constrói um controlador de itens.
+	 */
 	public ItemController() {
 		this.validador = new ValidadorItem();
 	}
@@ -22,29 +36,27 @@ public class ItemController {
 	 * Cadastra um jogo eletrônico.
 	 * 
 	 * @param nomeItem
-	 *            o nome do jogo.
-	 * @param nomeItem2 
-	 * @param telefone 
+	 *            o nome do jogo a ser cadastrado.
 	 * @param preco
 	 *            o preço do jogo.
 	 * @param plataforma
 	 *            a plataforma do jogo.
+	 * @return o jogo eletrônico criado.
 	 */
 	public Item cadastrarEletronico(String nomeItem, double preco, String plataforma) {
 		this.validador.validaAtributosDeCadastroDeItem(nomeItem, preco);
 		this.validador.validaPlataforma(plataforma);
 		return new JogoEletronico(nomeItem, preco, plataforma);
 	}
-	
+
 	/**
 	 * Cadastra um jogo de tabuleiro.
 	 * 
 	 * @param nomeItem
 	 *            o nome do jogo.
-	 * @param nomeItem2 
-	 * @param telefone 
 	 * @param preco
 	 *            o preço do jogo.
+	 * @return o jogo de tabuleiro criado.
 	 */
 	public Item cadastrarJogoTabuleiro(String nomeItem, double preco) {
 		this.validador.validaAtributosDeCadastroDeItem(nomeItem, preco);
@@ -56,8 +68,6 @@ public class ItemController {
 	 * 
 	 * @param nomeItem
 	 *            o nome do filme.
-	 * @param nomeItem 
-	 * @param telefone 
 	 * @param preco
 	 *            o preço do filme.
 	 * @param duracao
@@ -68,6 +78,7 @@ public class ItemController {
 	 *            a classificação do filme.
 	 * @param anoLancamento
 	 *            o ano de lançamento do filme.
+	 * @return o filme criado.
 	 */
 	public Item cadastrarBlurayFilme(String nomeItem, double preco, int duracao, String genero, String classificacao,
 			int anoLancamento) {
@@ -84,8 +95,6 @@ public class ItemController {
 	 * 
 	 * @param nomeItem
 	 *            o nome da temporada.
-	 * @param nomeItem 
-	 * @param telefone 
 	 * @param preco
 	 *            o preço da temporada.
 	 * @param descricao
@@ -98,6 +107,7 @@ public class ItemController {
 	 *            o gênero da temporada.
 	 * @param temporada
 	 *            a temporada da temporada.
+	 * @return
 	 */
 	public Item cadastrarBluRaySerie(String nomeItem, double preco, String descricao, int duracao, String classificacao,
 			String genero, int temporada) {
@@ -107,7 +117,7 @@ public class ItemController {
 		this.validador.validaGenero(genero);
 		this.validador.validaTemporada(temporada);
 		return new Temporada(nomeItem, preco, descricao, duracao, classificacao, genero, temporada);
-		
+
 	}
 
 	/**
@@ -115,8 +125,6 @@ public class ItemController {
 	 * 
 	 * @param nomeItem
 	 *            o nome do show.
-	 * @param nomeItem2 
-	 * @param telefone 
 	 * @param preco
 	 *            o preço do show.
 	 * @param duracao
@@ -127,6 +135,7 @@ public class ItemController {
 	 *            o artista do show.
 	 * @param classificacao
 	 *            a classificação do show.
+	 * @return
 	 */
 	public Item cadastrarBlurayShow(String nomeItem, double preco, int duracao, int numeroFaixas, String artista,
 			String classificacao) {
@@ -136,10 +145,18 @@ public class ItemController {
 		this.validador.validaArtista(artista);
 
 		return new Show(nomeItem, preco, duracao, numeroFaixas, artista, classificacao);
-		
+
 	}
 
-	public List<Item> getItensNaoEmprestados(List<Item> itens) {		
+	/**
+	 * Recupera uma lista de itens que não estão emprestados a partir de uma
+	 * lista de itens.
+	 * 
+	 * @param itens
+	 *            os itens a serem filtrados.
+	 * @return uma lista com itens não emprestados.
+	 */
+	public List<Item> getItensNaoEmprestados(List<Item> itens) {
 		Iterator<Item> itr = itens.iterator();
 		while (itr.hasNext()) {
 			if (itr.next().isEmprestado()) {
@@ -147,12 +164,21 @@ public class ItemController {
 			}
 		}
 		return itens;
-		
+
 	}
 	
+	/**
+	 * Recupera os itens no sistema.
+	 * 
+	 * @return uma lista com os itens do sistema.
+	 */
+	public List<Item> getItensNoSistema(List<Usuario> usuarios) {
+		List<Item> itens = new ArrayList<>();
 
+		for (Usuario user : usuarios) {
+			itens.addAll(user.getItens());
+		}
+		return itens;
+	}
 
-	
-	
-	
 }

@@ -3,7 +3,7 @@ package usuario.fidelidade;
 public class Caloteiro implements CartaoFidelidade {
 
 	private final int PERIODO = 0;
-	
+
 	@Override
 	public int getPeriodo() {
 		return this.PERIODO;
@@ -13,11 +13,10 @@ public class Caloteiro implements CartaoFidelidade {
 	public boolean podePegarEmprestado() {
 		return false;
 	}
-	
+
 	@Override
-	public String toString(){
+	public String toString() {
 		return "Caloteiro";
 	}
-
 
 }

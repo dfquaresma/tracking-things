@@ -1,7 +1,8 @@
 package item.bluray;
 
 /**
- * Representação de um filme blu-ray.
+ * Representação de um filme blu-ray. Guarda as informações básicas para o que é
+ * classificado com filme neste sistema.
  * 
  * @author Amanda V. A. de Luna e Costa
  * @author David Ferreira Quaresma

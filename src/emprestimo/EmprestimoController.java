@@ -6,9 +6,23 @@ import java.util.List;
 import item.Item;
 import usuario.Usuario;
 
+/**
+ * Representação de um controlador de emprestimos. Nele estão guardados todos os
+ * emprestimos do sistema.
+ * 
+ * @author Amanda V. A. de Luna e Costa
+ * @author David Ferreira Quaresma
+ * @author Ícaro Dantas de Araújo Lima
+ * @author Paulo Felipe Feitosa da Silva
+ *
+ */
 public class EmprestimoController {
+
 	private List<Emprestimo> emprestimos;
 
+	/**
+	 * Constrói um controlador de emprestimos.
+	 */
 	public EmprestimoController() {
 		this.emprestimos = new ArrayList<>();
 	}
@@ -16,14 +30,10 @@ public class EmprestimoController {
 	/**
 	 * Registra um emprestimo de um item.
 	 * 
-	 * @param nomeDono
-	 *            o nome do usuário dono do item.
-	 * @param telefoneDono
-	 *            o telefone do usuário dono do item.
-	 * @param nomeRequerente
-	 *            o nome do usuário requerente do item.
-	 * @param telefoneRequerente
-	 *            o telefone do usuário requerente do item.
+	 * @param userEmprestador
+	 *            o usuário que está emprestando o item.
+	 * @param userRequerente
+	 *            o usuário que está pegando emprestado o item.
 	 * @param nomeItem
 	 *            o nome do item.
 	 * @param dataEmprestimo
@@ -40,18 +50,14 @@ public class EmprestimoController {
 	}
 
 	/**
-	 * Devolve um item.
+	 * Finaliza um emprestimo em que o item foi devolvido.
 	 * 
-	 * @param nomeDono
-	 *            o nome do usuário dono do item.
-	 * @param telefoneDono
-	 *            o telefone do usuário dono do item.
-	 * @param nomeRequerente
-	 *            o nome do usuário requerente do item.
-	 * @param telefoneRequerente
-	 *            o telefone do usuário requerente do item.
+	 * @param userEmprestador
+	 *            o usuário que emprestou o item.
+	 * @param userRequerente
+	 *            o usuário que pegou emprestado o item e o está devolvendo.
 	 * @param nomeItem
-	 *            o nome do item.
+	 *            o nome do item pego emprestado.
 	 * @param dataEmprestimo
 	 *            a data em que o emprestimo foi iniciado.
 	 * @param dataDevolucao
@@ -64,6 +70,19 @@ public class EmprestimoController {
 
 	}
 
+	/**
+	 * Recupera um emprestimo no sistema.
+	 * 
+	 * @param userEmprestador
+	 *            o usuário quem emprestou o item.
+	 * @param userRequerente
+	 *            o usuário que pegou emprestado o item.
+	 * @param nomeItem
+	 *            o nome do item que foi emprestado.
+	 * @param dataEmprestimo
+	 *            a data em que o emprestimo aconteceu.
+	 * @return o emprestimo de interesse.
+	 */
 	public Emprestimo getEmprestimo(Usuario userEmprestador, Usuario userRequerente, String nomeItem,
 			String dataEmprestimo) {
 
@@ -114,10 +133,18 @@ public class EmprestimoController {
 		return true;
 	}
 
+	/**
+	 * Recupera uma lista de emprestimos de um determinado usuário ao emprestar
+	 * itens.
+	 * 
+	 * @param user
+	 *            o usuário quem emprestou o item.
+	 * @return os emprestimos associados a este usuário como emprestador.
+	 */
 	public List<Emprestimo> getEmprestimosUserEmprestando(Usuario user) {
 
 		List<Emprestimo> emprestimos = new ArrayList<>();
-		
+
 		for (Emprestimo emprestimo : this.emprestimos) {
 			if (emprestimo.getDono().equals(user)) {
 				emprestimos.add(emprestimo);
@@ -127,6 +154,15 @@ public class EmprestimoController {
 		return emprestimos;
 	}
 
+	/**
+	 * Recupera uma lista de emprestimos de um determinado usuário ao pegar
+	 * emprestado itens.
+	 * 
+	 * @param user
+	 *            o usuário quem pegou emprestado o item.
+	 * @return os emprestimos associados a este usuário como quem pegou
+	 *         emprestado.
+	 */
 	public List<Emprestimo> getEmprestimosUserPegandoEmprestado(Usuario user) {
 
 		List<Emprestimo> emprestimos = new ArrayList<>();
@@ -140,6 +176,14 @@ public class EmprestimoController {
 		return emprestimos;
 	}
 
+	/**
+	 * Recupera um lista com os emprestimos associados o item recebido como
+	 * parâmetro.
+	 * 
+	 * @param nomeItem
+	 *            o nome do item.
+	 * @return uma lista de emprestimos associados o item.
+	 */
 	public List<Emprestimo> getEmprestimosItem(String nomeItem) {
 		List<Emprestimo> emprestimos = new ArrayList<>();
 
@@ -153,15 +197,21 @@ public class EmprestimoController {
 
 	}
 
+	/**
+	 * Recupera um lista de emprestimos que ainda não foram finalizados no
+	 * sistema.
+	 * 
+	 * @return uma lista de emprestimos não finalizados.
+	 */
 	public List<Emprestimo> getEmprestimosNaoFinalizados() {
 		List<Emprestimo> emprestimos = new ArrayList<>();
 
-		for (Emprestimo emprestimo: this.emprestimos) {
-		    if (!emprestimo.isFinalizado()) {
-			emprestimos.add(emprestimo);
-		    }
+		for (Emprestimo emprestimo : this.emprestimos) {
+			if (!emprestimo.isFinalizado()) {
+				emprestimos.add(emprestimo);
+			}
 		}
-		
+
 		return emprestimos;
 
 	}

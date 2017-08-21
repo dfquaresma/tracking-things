@@ -3,7 +3,8 @@ package item;
 import util.ValidadorItem;
 
 /**
- * Representação de um item.
+ * Representação de um item. Guarda as informações básicas para o que é
+ * classificado com item neste sistema.
  * 
  * @author Amanda V. A. de Luna e Costa
  * @author David Ferreira Quaresma
@@ -122,7 +123,7 @@ public abstract class Item {
 		}
 		this.emprestado = emprestado;
 		if (emprestado) {
-			this.qtdVezesEmprestado++;			
+			this.qtdVezesEmprestado++;
 		}
 	}
 

@@ -3,7 +3,7 @@ package usuario.fidelidade;
 public class BomAmigo implements CartaoFidelidade {
 
 	private final int PERIODO = 14;
-	
+
 	@Override
 	public int getPeriodo() {
 		return this.PERIODO;
@@ -13,9 +13,9 @@ public class BomAmigo implements CartaoFidelidade {
 	public boolean podePegarEmprestado() {
 		return true;
 	}
-	
+
 	@Override
-	public String toString(){
+	public String toString() {
 		return "BomAmigo";
 	}
 

@@ -1,7 +1,8 @@
 package item.bluray;
 
 /**
- * Representação de um show em blu-ray.
+ * Representação de um show em blu-ray. Guarda as informações básicas para o que é
+ * classificado com show neste sistema.
  * 
  * @author Amanda V. A. de Luna e Costa
  * @author David Ferreira Quaresma

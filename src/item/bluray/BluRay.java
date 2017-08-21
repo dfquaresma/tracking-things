@@ -3,7 +3,8 @@ package item.bluray;
 import item.Item;
 
 /**
- * Representação de um Blu-Ray.
+ * Representação de um Blu-Ray. Guarda as informações básicas para o que é
+ * classificado com blue-ray neste sistema.
  * 
  * @author Amanda V. A. de Luna e Costa
  * @author David Ferreira Quaresma
