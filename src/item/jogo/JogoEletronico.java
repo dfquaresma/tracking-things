@@ -3,7 +3,8 @@ package item.jogo;
 import item.Item;
 
 /**
- * Representação de um jogo eletrônico.
+ * Representação de um jogo eletrônico. Guarda as informações básicas para o que é
+ * classificado com um jogo eletrônico neste sistema.
  * 
  * @author Amanda V. A. de Luna e Costa
  * @author David Ferreira Quaresma
@@ -96,6 +97,9 @@ public class JogoEletronico extends Item {
 
 	}
 	
+	/**
+	 * Indica quando um outro objeto é igual a este.
+	 */
 	@Override
 	public boolean equals(Object obj)
 	{

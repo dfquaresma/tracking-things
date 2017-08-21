@@ -5,7 +5,8 @@ import java.util.Comparator;
 import item.Item;
 
 /**
- * Representação de um comparador de itens.
+ * Representação de um comparador de itens. O critério de comparação são os
+ * valores associados aos itens.
  * 
  * @author Amanda V. A. de Luna e Costa
  * @author David Ferreira Quaresma

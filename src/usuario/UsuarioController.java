@@ -10,9 +10,13 @@ import item.Item;
 import util.ValidadorUsuario;
 
 /**
- * Representação de um sistema de emprestimos de itens entre usuários.
+ * Representa um controlador de usuários. Nele estão todos os usuários do
+ * sistema.
  * 
- * @author David Ferreira
+ * @author Amanda V. A. de Luna e Costa
+ * @author David Ferreira Quaresma
+ * @author Ícaro Dantas de Araújo Lima
+ * @author Paulo Felipe Feitosa da Silva
  *
  */
 public class UsuarioController {
@@ -21,7 +25,7 @@ public class UsuarioController {
 	private ValidadorUsuario validador;
 
 	/**
-	 * Constrói um sistema de emprestimos.
+	 * Constrói um controlador de usuários.
 	 */
 	public UsuarioController() {
 		this.usuarios = new HashMap<>();
@@ -52,6 +56,15 @@ public class UsuarioController {
 		this.usuarios.put(id, user);
 	}
 
+	/**
+	 * Recupera um usuário a partir do seu nome e telefone.
+	 * 
+	 * @param nome
+	 *            o nome do usuário que se deseja recuperar.
+	 * @param telefone
+	 *            o telefone do usuário que se deseja recuperar.
+	 * @return o usuário a ser recuperado.
+	 */
 	public Usuario getUser(String nome, String telefone) {
 		this.validador.validaDadosDeIdentificacao(nome, telefone);
 		IdUsuario id = new IdUsuario(nome, telefone);
@@ -128,14 +141,24 @@ public class UsuarioController {
 
 	}
 
+	/**
+	 * Adiciona um idem a um usuário específico.
+	 * 
+	 * @param nome
+	 *            o nome do usuário.
+	 * @param telefone
+	 *            o telefone do usuário.
+	 * @param item
+	 *            o item a ser adicionado.
+	 */
 	public void adicionaItem(String nome, String telefone, Item item) {
 		this.validador.validaDadosDeIdentificacao(nome, telefone);
 
 		Usuario user = getUser(nome, telefone);
-		user.adicionaItem(item);		
-		
+		user.adicionaItem(item);
+
 	}
-	
+
 	/**
 	 * Recupera um atributo de um item de um usuário específico.
 	 * 
@@ -153,7 +176,7 @@ public class UsuarioController {
 		this.validador.validaDadosDeIdentificacao(nome, telefone);
 		this.validador.validaNomeItem(nomeItem);
 		this.validador.validaAtributo(atributo);
-		
+
 		Usuario user = getUser(nome, telefone);
 		return user.getInfoItem(nomeItem, atributo);
 	}
@@ -176,7 +199,7 @@ public class UsuarioController {
 		Usuario user = getUser(nome, telefone);
 		return user.getDetalhesItem(nomeItem);
 	}
-	
+
 	/**
 	 * Adiciona uma peça perdida a um jogo de tabuleiro de um usuário
 	 * específico.
@@ -259,15 +282,6 @@ public class UsuarioController {
 		user.attItem(nomeItem, atributo, valor);
 	}
 
-	public List<Item> getItensNoSistema() {
-		List<Item> itens = new ArrayList<>();
-
-		for (Usuario user : this.usuarios.values()) {
-			itens.addAll(user.getItens());
-		}
-		return itens;
-	}
-
 	private void validaIdeParaUso(IdUsuario id) {
 		if (!this.usuarios.containsKey(id)) {
 			throw new IllegalArgumentException("Usuario invalido");
@@ -291,7 +305,12 @@ public class UsuarioController {
 			throw new UsuarioJaExistenteExcecao("Usuario ja existente");
 		}
 	}
-	
+
+	/**
+	 * Recupera os usuários do sistema.
+	 * 
+	 * @return uma lista com os usuários do sistema.
+	 */
 	public List<Usuario> getUsuariosNoSistema() {
 		return new ArrayList<Usuario>(this.usuarios.values());
 	}

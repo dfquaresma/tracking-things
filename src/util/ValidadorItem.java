@@ -4,6 +4,15 @@ import item.bluray.Classificacao;
 import item.bluray.Genero;
 import item.jogo.Plataforma;
 
+/**
+ * Represetanção de um validador de elementos associados a itens.
+ * 
+ * @author Amanda V. A. de Luna e Costa
+ * @author David Ferreira Quaresma
+ * @author Ícaro Dantas de Araújo Lima
+ * @author Paulo Felipe Feitosa da Silva
+ *
+ */
 public class ValidadorItem {
 
 	/**
@@ -178,7 +187,15 @@ public class ValidadorItem {
 	public void validaPeca(String nomePeca) {
 		this.validaString(nomePeca, "Nome da peca");
 	}
-	
+
+	/**
+	 * Valida multiplos atributos de cadastro de blu-ray.
+	 * 
+	 * @param duracao
+	 *            a duração a ser validada.
+	 * @param classificacao
+	 *            a classificação a ser validada.
+	 */
 	public void validaAtributosDeCadastroDeBluRays(int duracao, String classificacao) {
 		this.validaDuracao(duracao);
 		this.validaClassificacao(classificacao);
@@ -197,7 +214,6 @@ public class ValidadorItem {
 		this.validaPreco(preco);
 	}
 
-	
 	/**
 	 * Valida uma duração recebida como parâmetro.
 	 * 
@@ -209,7 +225,16 @@ public class ValidadorItem {
 			throw new IllegalArgumentException("Duracao nao pode ser menor ou igual a zero");
 		}
 	}
-	
+
+	/**
+	 * Valida conversão de string para double.
+	 * 
+	 * @param atributo
+	 *            o atributo que deve ser apresentado na exceção caso a
+	 *            conversão seja inválida.
+	 * @param valor
+	 *            a string com o possível double a ser convertido.
+	 */
 	public void validaConversaoStringToDouble(String atributo, String valor) {
 		try {
 			Double.parseDouble(valor);
@@ -223,7 +248,15 @@ public class ValidadorItem {
 		}
 	}
 
-	
+	/**
+	 * Valida conversão de string para inteiro.
+	 * 
+	 * @param atributo
+	 *            o atributo que deve ser apresentado na exceção caso a
+	 *            conversão seja inválida.
+	 * @param valor
+	 *            a string com o possível inteiro a ser convertido.
+	 */
 	public void validaConversaoStringToInt(String atributo, String valor) {
 		try {
 			Integer.parseInt(valor);
@@ -235,11 +268,9 @@ public class ValidadorItem {
 			throw new IllegalArgumentException("Valor nao pode ser menor ou igual a zero para essa operacao");
 
 		}
-		
+
 	}
 
-
-	
 	/**
 	 * Valida um atributo recebido no parâmetro.
 	 * 
@@ -249,7 +280,7 @@ public class ValidadorItem {
 	public void validaAtributo(String atributo) {
 		this.validaString(atributo, "Atributo");
 	}
-	
+
 	private void validaString(String atributo, String atributoMsg) {
 		if (atributo == null) {
 			throw new NullPointerException(atributoMsg + " nao pode ser nulo");
@@ -268,8 +299,5 @@ public class ValidadorItem {
 	public void validaValor(String valor) {
 		this.validaString(valor, "Valor");
 	}
-
-
-			
 
 }

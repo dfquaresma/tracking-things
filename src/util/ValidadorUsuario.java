@@ -2,8 +2,17 @@ package util;
 
 import item.Item;
 
+/**
+ * Represetanção de um validador de elementos associados a usuários.
+ * 
+ * @author Amanda V. A. de Luna e Costa
+ * @author David Ferreira Quaresma
+ * @author Ícaro Dantas de Araújo Lima
+ * @author Paulo Felipe Feitosa da Silva
+ *
+ */
 public class ValidadorUsuario {
-	
+
 	/**
 	 * Valida um nome recebido como parâmetro.
 	 * 
@@ -33,13 +42,27 @@ public class ValidadorUsuario {
 	public void validaEmail(String email) {
 		this.validaString(email, "Email");
 	}
-	
+
+	/**
+	 * Valida um item recebido como parâmetro, lançando exceção sempre que o
+	 * item for nulo.
+	 * 
+	 * @param item
+	 *            o item a ser validado.
+	 */
 	public void validaItem(Item item) {
 		if (item == null) {
 			throw new IllegalArgumentException("Item nao pode ser nulo");
 		}
 	}
 
+	/**
+	 * Valida o nome de item recebido no parâmetro. lança exceção sempre que o
+	 * nome for vazio ou nulo.
+	 * 
+	 * @param nomeItem
+	 *            o nome a ser validado.
+	 */
 	public void validaNomeItem(String nomeItem) {
 		this.validaString(nomeItem, "Nome do item");
 	}
@@ -56,10 +79,7 @@ public class ValidadorUsuario {
 		this.validaNome(nome);
 		this.validaTelefone(telefone);
 	}
-	
-	
-	
-	
+
 	private void validaString(String atributo, String atributoMsg) {
 		if (atributo == null) {
 			throw new NullPointerException(atributoMsg + " nao pode ser nulo");
@@ -68,7 +88,7 @@ public class ValidadorUsuario {
 			throw new IllegalArgumentException(atributoMsg + " nao pode ser vazio");
 		}
 	}
-	
+
 	/**
 	 * Valida um atributo recebido no parâmetro.
 	 * 
@@ -79,7 +99,6 @@ public class ValidadorUsuario {
 		this.validaString(atributo, "Atributo");
 	}
 
-	
 	/**
 	 * Valida um valor recebido como parâmetro.
 	 * 
@@ -90,5 +109,4 @@ public class ValidadorUsuario {
 		this.validaString(valor, "Valor");
 	}
 
-			
 }

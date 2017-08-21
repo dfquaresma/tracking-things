@@ -11,9 +11,13 @@ import usuario.Usuario;
 import util.ValidadorEmprestimo;
 
 /**
- * Representação de um emprestimo.
+ * Representação de um emprestimo. Guarda informações referentes a um emprestimo
+ * entre usuários de um item pertencente a um dos envolvidos.
  * 
- * @author David Ferreira
+ * @author Amanda V. A. de Luna e Costa
+ * @author David Ferreira Quaresma
+ * @author Ícaro Dantas de Araújo Lima
+ * @author Paulo Felipe Feitosa da Silva
  *
  */
 public class Emprestimo {
@@ -29,14 +33,19 @@ public class Emprestimo {
 	private boolean finalizado;
 
 	/**
-	 * Constrói um emprestimo com o dono do item, o requerente do item, o item, a
-	 * data de emprestimo e o período de emprestimo.
+	 * Constrói um emprestimo com o dono do item, o requerente do item, o item,
+	 * a data de emprestimo e o período de emprestimo.
 	 * 
 	 * @param dono
+	 *            o dono do item a ser emprestado.
 	 * @param requerente
+	 *            quem receberá o item emprestado.
 	 * @param item
+	 *            o item a ser emprestado.
 	 * @param dataEmprestimo
+	 *            a data de quando começou o emprestimo.
 	 * @param periodo
+	 *            o período em que o item irá passar emprestado.
 	 */
 	public Emprestimo(Usuario dono, Usuario requerente, String nomeItem, String dataEmprestimo, int periodo) {
 		this.validador = new ValidadorEmprestimo();
@@ -55,22 +64,21 @@ public class Emprestimo {
 		} catch (ParseException e) {
 			throw new IllegalArgumentException("O formato da data inserido está incorreto, utilize dd/MM/yyyy");
 		}
-		
+
 		this.periodo = periodo;
 		this.finalizado = false;
-		
-		if(requerente.isCaloteiro()){
+
+		if (requerente.isCaloteiro()) {
 			throw new IllegalArgumentException("Usuario nao pode pegar nenhum item emprestado");
 		}
-		
-		if(this.periodo > requerente.getPeriodoEmprestado()){
+
+		if (this.periodo > requerente.getPeriodoEmprestado()) {
 			throw new IllegalArgumentException("Usuario impossiblitado de pegar emprestado por esse periodo");
 		}
-		
+
 		this.dono.emprestaItem(getNomeItem());
 	}
-	
-	
+
 	/**
 	 * Finaliza esse emprestimo.
 	 * 
@@ -88,25 +96,25 @@ public class Emprestimo {
 			throw new IllegalArgumentException("O formato da data inserido está incorreto, utilize dd/MM/yyyy");
 		}
 		this.validador.validaDataDevolucao(this.dataEmprestimo, this.dataRealDaDevolucaoDoItem);
-		
+
 		this.finalizado = true;
-		
+
 		int diasAtraso = this.getDiasDeEmprestimo() - this.periodo;
-		
+
 		this.requerente.devolveItem(this.item.getPreco(), diasAtraso);
-		
+
 		this.dono.recebeItem(getNomeItem());
 	}
-	
+
 	/**
 	 * Calcula quantos dias o item ficou emprestado com o usuario requerente.
 	 * 
-	 * @return
-	 * 		inteiro que representa quantos dias um item ficou emprestado ao usuario requerente.
+	 * @return inteiro que representa quantos dias um item ficou emprestado ao
+	 *         usuario requerente.
 	 */
-	public int getDiasDeEmprestimo()
-	{
-		return (int) ((this.dataRealDaDevolucaoDoItem.getTime() - this.dataEmprestimo.getTime())/(60*60*24*1000));
+	public int getDiasDeEmprestimo() {
+		return (int) ((this.dataRealDaDevolucaoDoItem.getTime() - this.dataEmprestimo.getTime())
+				/ (60 * 60 * 24 * 1000));
 	}
 
 	/**
@@ -193,8 +201,8 @@ public class Emprestimo {
 	}
 
 	/**
-	 * Recupera o período de dias que o item passará (ou passou, caso o emprestimo
-	 * tenha sido finalizado) emprestado.
+	 * Recupera o período de dias que o item passará (ou passou, caso o
+	 * emprestimo tenha sido finalizado) emprestado.
 	 * 
 	 * @return o período de dias.
 	 */
@@ -321,6 +329,9 @@ public class Emprestimo {
 		return true;
 	}
 
+	/**
+	 * Retorna uma representação em string deste emprestimo.
+	 */
 	@Override
 	public String toString() {
 

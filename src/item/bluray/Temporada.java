@@ -3,7 +3,8 @@ package item.bluray;
 import java.util.ArrayList;
 
 /**
- * Representação de uma temporada de série com episódios.
+ * Representação de uma temporada de série com episódios. Guarda as informações
+ * básicas para o que é classificado com série neste sistema.
  * 
  * @author Amanda V. A. de Luna e Costa
  * @author David Ferreira Quaresma
@@ -44,7 +45,7 @@ public class Temporada extends BluRay {
 		this.validador.validaDescricao(descricao);
 		this.validador.validaGenero(genero);
 		this.validador.validaTemporada(temporada);
-		
+
 		this.descricao = descricao;
 		this.genero = Genero.valueOf(genero);
 		this.temporada = temporada;
@@ -76,7 +77,7 @@ public class Temporada extends BluRay {
 
 		return (duracaoTotalEpisodios == super.getDuracao()) && super.podeSerEmprestado();
 	}
-	
+
 	/**
 	 * Sobrescreve o método da classe mãe para verificar se o atributo a ser
 	 * atualizado pertence a esta classe. Caso não seja, o método da classe mãe
@@ -86,22 +87,22 @@ public class Temporada extends BluRay {
 	public void atualizaAtributo(String atributo, String valor) {
 		this.validador.validaAtributo(atributo);
 		this.validador.validaValor(valor);
-		
+
 		if (atributo.equals("Descricao")) {
 			this.descricao = valor;
-			
+
 		} else if (atributo.equals("Genero")) {
 			this.genero = Genero.valueOf(valor);
-			
+
 		} else if (atributo.equals("Temporada")) {
 			this.validador.validaConversaoStringToInt(atributo, valor);
 			this.temporada = Integer.parseInt(valor);
-			
+
 		} else {
 			super.atualizaAtributo(atributo, valor);
-		}	
+		}
 	}
-	
+
 	/**
 	 * Sobrescreve o método da classe mãe para verificar se o atributo a ser
 	 * recuperado pertence a esta classe. Caso não seja, o método da classe mãe
@@ -123,7 +124,7 @@ public class Temporada extends BluRay {
 		}
 
 	}
-	
+
 	/**
 	 * Recupera a descrição da temporada.
 	 * 

@@ -308,7 +308,8 @@ public class Facade {
 	 * @return a listagem.
 	 */
 	public String listarItensOrdenadosPorNome() {
-		List<Item> itens = this.usuarioController.getItensNoSistema();
+		List<Usuario> usuarios = this.usuarioController.getUsuariosNoSistema();
+		List<Item> itens = this.itemController.getItensNoSistema(usuarios);
 		return this.listador.listaItensOrdenadosPorNome(itens);
 	}
 
@@ -318,7 +319,8 @@ public class Facade {
 	 * @return a listagem.
 	 */
 	public String listarItensOrdenadosPorValor() {
-		List<Item> itens = this.usuarioController.getItensNoSistema();
+		List<Usuario> usuarios = this.usuarioController.getUsuariosNoSistema();
+		List<Item> itens = this.itemController.getItensNoSistema(usuarios);
 		return this.listador.listaItensOrdenadosPorValor(itens);
 	}
 
@@ -390,7 +392,8 @@ public class Facade {
 	}
 
 	public String listarItensNaoEmprestados() {
-		List<Item> itens = this.usuarioController.getItensNoSistema();
+		List<Usuario> usuarios = this.usuarioController.getUsuariosNoSistema();
+		List<Item> itens = this.itemController.getItensNoSistema(usuarios);
 		List<Item> itensNaoEmprestados = this.itemController.getItensNaoEmprestados(itens);
 		return this.listador.listarItensNaoEmprestados(itensNaoEmprestados);
 	}
@@ -401,7 +404,8 @@ public class Facade {
 	}
 
 	public String listarTop10Itens() {
-		List<Item> itens = this.usuarioController.getItensNoSistema();
+		List<Usuario> usuarios = this.usuarioController.getUsuariosNoSistema();
+		List<Item> itens = this.itemController.getItensNoSistema(usuarios);
 		return this.listador.listarTop10Itens(itens);
 	}
 

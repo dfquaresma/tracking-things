@@ -6,7 +6,8 @@ import java.util.Collections;
 import item.Item;
 
 /**
- * Representação de um jogo de tabuleiro.
+ * Representação de um jogo de tabuleiro. Guarda as informações básicas para o
+ * que é classificado com jogo de tabuleiro neste sistema.
  * 
  * @author Amanda V. A. de Luna e Costa
  * @author David Ferreira Quaresma
@@ -50,7 +51,10 @@ public class JogoTabuleiro extends Item {
 	public boolean isCompleto() {
 		return this.pecasPerdidas.size() == 0;
 	}
-	
+
+	/**
+	 * Indica quando um outro objeto é igual a este.
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -60,20 +64,17 @@ public class JogoTabuleiro extends Item {
 		if (getClass() != obj.getClass())
 			return false;
 		JogoTabuleiro other = (JogoTabuleiro) obj;
-		if (pecasPerdidas == null)
-		{
+		if (pecasPerdidas == null) {
 			if (other.pecasPerdidas != null)
 				return false;
-		}
-		else if(other.pecasPerdidas == null)
+		} else if (other.pecasPerdidas == null)
 			return false;
-		else
-		{
+		else {
 			Collections.sort(this.pecasPerdidas);
 			Collections.sort(other.pecasPerdidas);
 		}
-		
-		if(!pecasPerdidas.equals(other.pecasPerdidas))
+
+		if (!pecasPerdidas.equals(other.pecasPerdidas))
 			return false;
 		return true;
 	}

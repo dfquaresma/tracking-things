@@ -4,8 +4,16 @@ import java.util.Date;
 
 import usuario.Usuario;
 
+/**
+ * Represetanção de um validador de elementos associados a emprestimos.
+ * 
+ * @author Amanda V. A. de Luna e Costa
+ * @author David Ferreira Quaresma
+ * @author Ícaro Dantas de Araújo Lima
+ * @author Paulo Felipe Feitosa da Silva
+ *
+ */
 public class ValidadorEmprestimo {
-
 
 	/**
 	 * Valida um usuario, recebido no parâmetro, dono de um item.
@@ -27,7 +35,6 @@ public class ValidadorEmprestimo {
 		this.validaObjetos(requerente, "Usuario requerente");
 	}
 
-
 	private void validaObjetos(Object o, String msg) {
 		if (o == null) {
 			throw new IllegalArgumentException(msg + " nao pode ser nulo");
@@ -44,7 +51,6 @@ public class ValidadorEmprestimo {
 		if (periodo <= 0) {
 			throw new IllegalArgumentException("Periodo nao pode ser menor ou iguals a zero.");
 		}
-
 	}
 
 	/**
@@ -56,22 +62,22 @@ public class ValidadorEmprestimo {
 	public void validaData(String data) {
 		this.validaString(data, "Data");
 	}
-	
+
 	/**
-	 * Verifica se a data de devolucao de um emprestimo esta coerente com a data de emprestimo. 
+	 * Verifica se a data de devolucao de um emprestimo esta coerente com a data
+	 * de emprestimo.
 	 * 
 	 * @param dataEmprestimo
-	 * 			a data do emprestimo do item
+	 *            a data do emprestimo do item
 	 * @param dataDevolucao
-	 * 			a data de devolucao do item
+	 *            a data de devolucao do item
 	 */
-	public void validaDataDevolucao(Date dataEmprestimo, Date dataDevolucao)
-	{
-		if(dataDevolucao.before(dataEmprestimo))
-			throw new IllegalArgumentException("A data de devolucao nao pode ser estritamente menor do que a data de emprestimo");
+	public void validaDataDevolucao(Date dataEmprestimo, Date dataDevolucao) {
+		if (dataDevolucao.before(dataEmprestimo))
+			throw new IllegalArgumentException(
+					"A data de devolucao nao pode ser estritamente menor do que a data de emprestimo");
 	}
-	
-	
+
 	private void validaString(String atributo, String atributoMsg) {
 		if (atributo == null) {
 			throw new NullPointerException(atributoMsg + " nao pode ser nulo");

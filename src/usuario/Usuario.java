@@ -64,11 +64,11 @@ public class Usuario {
 		this.validador.validaItem(item);
 		String nomeDoItem = item.getNome();
 		this.itens.put(nomeDoItem, item);
-		
+
 		this.reputacao.adicionandoItemParaEmprestimo(item.getPreco());
 		attCartao();
 	}
-	
+
 	/**
 	 * Remove um item de um usuário específico.
 	 * 
@@ -77,13 +77,13 @@ public class Usuario {
 	 */
 	public void removerItem(String nomeItem) {
 		this.validaNomeItemParaUso(nomeItem);
-		//Item item = this.getItem(nomeItem);
-		
+		// Item item = this.getItem(nomeItem);
+
 		this.itens.remove(nomeItem);
-		
-		//this.reputacao.removendoItemParaEmprestimo(item.getPreco());
+
+		// this.reputacao.removendoItemParaEmprestimo(item.getPreco());
 	}
-	
+
 	/**
 	 * Adiciona uma peça perdida a um jogo de tabuleiro.
 	 * 
@@ -197,7 +197,7 @@ public class Usuario {
 			throw new OperacaoNaoPermitidaNoMomentoExcecao("Item emprestado no momento");
 		}
 		item.setEmprestado(true);
-		
+
 		this.reputacao.emprestandoItem(item.getPreco());
 		attCartao();
 	}
@@ -217,12 +217,12 @@ public class Usuario {
 		}
 		item.setEmprestado(false);
 	}
-	
+
 	/**
-	 * 
+	 * Devolve o item que pegou emprestado, atualizando sua reputação no
+	 * sistema.
 	 */
-	public void devolveItem(double valorItem, int diasAtraso)
-	{	
+	public void devolveItem(double valorItem, int diasAtraso) {
 		this.reputacao.devolvendoItem(valorItem, diasAtraso);
 		attCartao();
 	}
@@ -255,33 +255,38 @@ public class Usuario {
 		}
 
 	}
+
 	/**
 	 * Atualiza a classificacao do usuario de acordo com os cartoes fidelidade
 	 */
-	public void attCartao(){
-		if(this.reputacao.getReputacao() > 0 && reputacao.getReputacao() <= 100 && !(itens.isEmpty())) {
+	public void attCartao() {
+		if (this.reputacao.getReputacao() > 0 && reputacao.getReputacao() <= 100 && !(itens.isEmpty())) {
 			this.cartao = new Noob();
-		} else if(reputacao.getReputacao() < 0){
+		} else if (reputacao.getReputacao() < 0) {
 			this.cartao = new Caloteiro();
 		} else {
 			this.cartao = new BomAmigo();
 		}
 	}
+
 	/**
 	 * Retorna se um usuario esta na classificacao de caloteiro
+	 * 
 	 * @return true se for caloteiro,false se nao for
 	 */
-	public boolean isCaloteiro(){
-		if(this.reputacao.getReputacao() < 0){
+	public boolean isCaloteiro() {
+		if (this.reputacao.getReputacao() < 0) {
 			return true;
 		}
 		return false;
 	}
+
 	/**
 	 * Retorna o periodo que um usuario pode pegar itens emprestado
+	 * 
 	 * @return o periodo
 	 */
-	public int getPeriodoEmprestado(){
+	public int getPeriodoEmprestado() {
 		return this.cartao.getPeriodo();
 	}
 
@@ -310,7 +315,7 @@ public class Usuario {
 			throw new IllegalArgumentException("Atributo invalido.");
 		}
 	}
-	
+
 	private void validaNomeItemParaUso(String nomeItem) {
 		this.validador.validaNomeItem(nomeItem);
 
@@ -319,9 +324,8 @@ public class Usuario {
 		}
 	}
 
-	private void validaAttNomeDeItem(String nomeItem)
-	{
-		if(this.itens.containsKey(nomeItem))
+	private void validaAttNomeDeItem(String nomeItem) {
+		if (this.itens.containsKey(nomeItem))
 			throw new IllegalArgumentException();
 	}
 
@@ -351,12 +355,13 @@ public class Usuario {
 	public String getEmail() {
 		return this.email;
 	}
+
 	/**
 	 * Retorna a reputacao do usuario
+	 * 
 	 * @return reputacao do usuario
 	 */
-	public double getReputacao()
-	{
+	public double getReputacao() {
 		return this.reputacao.getReputacao();
 	}
 
@@ -391,8 +396,8 @@ public class Usuario {
 	public void setEmail(String email) {
 		this.validador.validaEmail(email);
 		this.email = email;
-	}	
-	
+	}
+
 	/**
 	 * Recupera um item deste usuário.
 	 * 

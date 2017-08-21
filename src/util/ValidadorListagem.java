@@ -7,7 +7,7 @@ import excecoes.OperacaoNaoPermitidaNoMomentoExcecao;
 import item.Item;
 
 /**
- * Represetanção de um validador.
+ * Represetanção de um validador de elementos associados a listagens.
  * 
  * @author Amanda V. A. de Luna e Costa
  * @author David Ferreira Quaresma
@@ -17,9 +17,9 @@ import item.Item;
  */
 public class ValidadorListagem {
 
-	
 	/**
-	 * Valida uma lista de itens recebida no parâmetro.
+	 * Valida uma lista de itens recebida no parâmetro. Lança exceção sempre que
+	 * itens é null, itens tem tamanho 0 ou se há algum item null em itens.
 	 * 
 	 * @param itens
 	 *            uma lista de itens a ser validada.
@@ -38,17 +38,25 @@ public class ValidadorListagem {
 		}
 
 	}
-	
+
+	/**
+	 * Valida uma lista de emprestimos recebida no parâmetro. Lança exceção
+	 * sempre que emprestimos é null ou se há algum emprestimo null em
+	 * emprestimos.
+	 * 
+	 * @param emprestimos
+	 *            uma lista de emprestimos a ser validada.
+	 */
 	public void validaListaDeEmprestimosParaListagem(List<Emprestimo> emprestimos) {
 		if (emprestimos == null)
 			throw new NullPointerException("A lista de emprestimos para listagem nao pode ser nula");
 
-		for (Emprestimo emprestimo: emprestimos) {
+		for (Emprestimo emprestimo : emprestimos) {
 			if (emprestimo == null)
-				throw new NullPointerException("A lista de emprestimos para listagem nao pode possuir emprestimos nulos");
+				throw new NullPointerException(
+						"A lista de emprestimos para listagem nao pode possuir emprestimos nulos");
 		}
 
 	}
-
 
 }
