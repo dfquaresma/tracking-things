@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import excecoes.UsuarioJaExistenteExcecao;
 import usuario.UsuarioController;
 
 /**
@@ -139,6 +140,22 @@ public class UsuarioControllerTest {
 
 		} catch (NullPointerException npe) {
 			assertEquals("Email nao pode ser nulo", npe.getMessage());
+		}
+	}
+	
+	/**
+	 * Testa cadastrar um usuario com email nulo
+	 */
+	@Test
+	public void cadastrarUsuarioNomeExistente() {
+
+		try {
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@gmail.com");
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@gmail.com");
+			fail();
+
+		} catch (UsuarioJaExistenteExcecao ujee) {
+			assertEquals("Usuario ja cadastrado", ujee.getMessage());
 		}
 	}
 

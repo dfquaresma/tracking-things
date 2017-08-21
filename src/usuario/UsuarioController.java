@@ -46,7 +46,7 @@ public class UsuarioController {
 		Usuario user = new Usuario(nome, telefone, email);
 
 		if (this.usuarios.containsKey(id)) {
-			throw new IllegalArgumentException("Usuario ja cadastrado");
+			throw new UsuarioJaExistenteExcecao("Usuario ja cadastrado");
 		}
 
 		this.usuarios.put(id, user);
@@ -288,7 +288,7 @@ public class UsuarioController {
 
 	private void validaIdeParaAtt(IdUsuario id) {
 		if (this.usuarios.containsKey(id)) {
-			throw new UsuarioJaExistenteExcecao("Usuario invalido");
+			throw new UsuarioJaExistenteExcecao("Usuario ja existente");
 		}
 	}
 	
