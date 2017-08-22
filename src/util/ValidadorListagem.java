@@ -5,6 +5,7 @@ import java.util.List;
 import emprestimo.Emprestimo;
 import excecoes.OperacaoNaoPermitidaNoMomentoExcecao;
 import item.Item;
+import usuario.Usuario;
 
 /**
  * Represetanção de um validador de elementos associados a listagens.
@@ -55,6 +56,24 @@ public class ValidadorListagem {
 			if (emprestimo == null)
 				throw new NullPointerException(
 						"A lista de emprestimos para listagem nao pode possuir emprestimos nulos");
+		}
+
+	}
+
+	/**
+	 * Valida uma lista de usuarios recebida no parâmetro. Lança exceção sempre
+	 * que usuarios é null ou se há algum usuario null em usuarios.
+	 * 
+	 * @param usuarios
+	 *            uma lista de emprestimos a ser validada.
+	 */
+	public void validaListaDeUsuariosParaListagem(List<Usuario> usuarios) {
+		if (usuarios == null)
+			throw new NullPointerException("A lista de usuarios para listagem nao pode ser nula");
+
+		for (Usuario usuario : usuarios) {
+			if (usuario == null)
+				throw new NullPointerException("A lista de usuarios para listagem nao pode possuir emprestimos nulos");
 		}
 
 	}

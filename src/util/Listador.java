@@ -95,6 +95,8 @@ public class Listador {
 	 * @return a representação em string dos itens emprestados.
 	 */
 	public String listarItensEmprestados(List<Emprestimo> emprestimosNaoFinalizados) {
+		this.validador.validaListaDeEmprestimosParaListagem(emprestimosNaoFinalizados);
+
 		emprestimosNaoFinalizados.sort(new EmprestimoComparatorNomeDono());
 		String listagem = "";
 		for (Emprestimo emprestimo : emprestimosNaoFinalizados) {
@@ -197,6 +199,7 @@ public class Listador {
 	 * @return a representação dos caloteiros no sistema.
 	 */
 	public String listarCaloteiros(List<Usuario> usuarios) {
+		this.validador.validaListaDeUsuariosParaListagem(usuarios);
 		String repr = "Lista de usuarios com reputacao negativa: ";
 		List<Usuario> usuariosCaloteiros = new ArrayList<Usuario>();
 		for (Usuario usuario : usuarios) {
@@ -222,6 +225,7 @@ public class Listador {
 	 * @return a representação em string dessa listagem.
 	 */
 	public String listarTop10MelhoresUsuarios(List<Usuario> usuarios) {
+		this.validador.validaListaDeUsuariosParaListagem(usuarios);
 		usuarios.sort(new UsuarioReputacaoReversaComparator());
 		return this.listarPelaReputacao(usuarios);
 	}
@@ -235,6 +239,7 @@ public class Listador {
 	 * @return a representação em string dessa listagem.
 	 */
 	public String listarTop10PioresUsuarios(List<Usuario> usuarios) {
+		this.validador.validaListaDeUsuariosParaListagem(usuarios);
 		usuarios.sort(new UsuarioReputacaoComparator());
 		return this.listarPelaReputacao(usuarios);
 	}
@@ -250,4 +255,5 @@ public class Listador {
 
 		return repr;
 	}
+
 }
