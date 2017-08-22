@@ -7,7 +7,9 @@ import org.junit.Test;
 
 import excecoes.UsuarioJaExistenteExcecao;
 import item.Item;
+import item.bluray.Temporada;
 import item.jogo.JogoEletronico;
+import item.jogo.JogoTabuleiro;
 import usuario.UsuarioController;
 
 /**
@@ -399,13 +401,90 @@ public class UsuarioControllerTest {
 			assertEquals("Usuario invalido", iae.getMessage());
 		}
 	}
-
+	/**
+	 * Testa adicionar um item e pegar detalhes dele
+	 */
 	@Test
 	public void addItemEGetDetalhesItem() {
 		sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
 		Item item = new JogoEletronico("Bioshock", 345.00, "PC");
 		sistema.adicionaItem("Rick", "4002-8922",item);
-		assertEquals("JOGO ELETRONICO: Bioshock, R$ 345.0, Nao emprestado, PC", sistema.getDetalhesItem("Rick", "4002-8922", "Bioshock"));
-		
+		assertEquals("JOGO ELETRONICO: Bioshock, R$ 345.0, Nao emprestado, PC", sistema.getDetalhesItem("Rick", "4002-8922", "Bioshock"));	
 	}
+	/**
+	 * Testa adicionar uma peca perdida
+	 */
+	@Test
+	public void addPecaPerdida() {
+		sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+		Item item = new JogoTabuleiro("D&D", 333.66);
+		sistema.adicionaItem("Rick", "4002-8922",item);	
+		sistema.addPecaPerdida("Rick", "4002-8922", "D&D", "Dado");
+		assertEquals("JOGO DE TABULEIRO: D&D, R$ 333.66, Nao emprestado, COM PECAS PERDIDAS",sistema.getDetalhesItem("Rick", "4002-8922", "D&D"));
+	}
+	/**
+	 * Testa pegar uma informacao especifica de um item
+	 */
+	@Test
+	public void getInfoItem() {
+		sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+		Item item = new JogoTabuleiro("D&D", 333.66);
+		sistema.adicionaItem("Rick", "4002-8922",item);	
+		assertEquals("333.66",sistema.getInfoItem("Rick", "4002-8922", "D&D", "Preco"));
+	}
+	/**
+	 * Testa adicionar um episodio em uma temporada
+	 */
+	@Test
+	public void addBluray() {
+		sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+		Item item = new Temporada("Rick e Morty", 1000.00, "Primeira temporada de Rick e Morty", 120, "DEZOITO_ANOS","COMEDIA", 1);
+		sistema.adicionaItem("Rick", "4002-8922", item);
+		sistema.addBluray("Rick", "4002-8922", "Rick e Morty", 120);	
+		assertEquals("1000.0",sistema.getInfoItem("Rick", "4002-8922", "Rick e Morty", "Preco"));
+	}
+	/**
+	 * Testa remover um item
+	 */
+	@Test
+	public void removerItem() {
+		sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+		Item item = new JogoEletronico("Bioshock", 345.00, "PC");
+		sistema.adicionaItem("Rick", "4002-8922",item);
+		assertEquals("JOGO ELETRONICO: Bioshock, R$ 345.0, Nao emprestado, PC", sistema.getDetalhesItem("Rick", "4002-8922", "Bioshock"));
+		sistema.removerItem("Rick", "4002-8922", "Bioshock");
+		try {
+			sistema.getDetalhesItem("Rick", "4002-8922", "Bioshock");
+			fail();
+		} catch (IllegalArgumentException iae) {
+			assertEquals("Item nao encontrado", iae.getMessage());
+		}		
+	}
+	/**
+	 * Testa atualizar um item
+	 */
+	@Test
+	public void attItem() {
+		sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+		Item item = new JogoEletronico("Bioshock", 345.00, "PC");
+		sistema.adicionaItem("Rick", "4002-8922",item);
+		assertEquals("JOGO ELETRONICO: Bioshock, R$ 345.0, Nao emprestado, PC", sistema.getDetalhesItem("Rick", "4002-8922", "Bioshock"));	
+		sistema.attItem("Rick", "4002-8922", "Bioshock", "Nome", "Bioshock 2");
+		assertEquals("345.0", sistema.getInfoItem("Rick", "4002-8922", "Bioshock 2", "Preco"));
+	}
+	/**
+	 * Testa cadastrar um usuari ja existente
+	 */
+	@Test
+	public void CadastrarUsuarioJaExistente() {
+		try {
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+			sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+
+		} catch (UsuarioJaExistenteExcecao ujee) {
+			assertEquals("Usuario ja cadastrado", ujee.getMessage());
+		}
+	}
+	
+	
 }

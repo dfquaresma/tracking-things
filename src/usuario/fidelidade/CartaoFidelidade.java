@@ -43,4 +43,11 @@ public class CartaoFidelidade {
 	public String toString() {
 		return this.fidelidade.toString();
 	}
+	/**
+	 * Retorna se o usuario pode pegar itens emprestado
+	 * @return
+	 */
+	public boolean podePegarEmprestado(){
+		return this.fidelidade.podePegarEmprestado();
+	}
 }
