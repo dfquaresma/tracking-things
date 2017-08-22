@@ -14,14 +14,29 @@ import item.bluray.Temporada;
 import item.jogo.JogoEletronico;
 import item.jogo.JogoTabuleiro;
 
+/**
+ * Testa as funcionalidades da clase ItemControllerTest.
+ * 
+ * @author Amanda V. A. de Luna e Costa
+ * @author David Ferreira Quaresma
+ * @author Ícaro Dantas de Araújo Lima
+ * @author Paulo Felipe Feitosa da Silva
+ *
+ */
 public class ItemControllerTest {
 	private ItemController controller;
 
+	/**
+	 * Inicializa um ItemController antes de cada método marcado com @Test.
+	 */
 	@Before
 	public void setUp() {
 		this.controller = new ItemController();
 	}
 
+	/**
+	 * Testa se está cadastrando um Eletronico.
+	 */
 	@Test
 	public void testCadastrarEletronico() {
 		JogoEletronico jogo = new JogoEletronico("Dota 2", 20, "PC");
@@ -29,6 +44,9 @@ public class ItemControllerTest {
 		assertEquals(jogoTest, jogo);
 	}
 
+	/**
+	 * Testa se está cadastrando JogoTabuleiro.
+	 */
 	@Test
 	public void testCadastrarJogoTabuleiro() {
 		JogoTabuleiro jogo = new JogoTabuleiro("Xadrez", 20);
@@ -36,6 +54,9 @@ public class ItemControllerTest {
 		assertEquals(jogoTest, jogo);
 	}
 
+	/**
+	 * Testa se está cadastrando um Blueray de Filme.
+	 */
 	@Test
 	public void testCadastrarBlurayFilme() {
 		Filme filme = new Filme("Senhor do aneis", 9999999, 9999999, "FICCAO", "DEZ_ANOS", 2002);
@@ -44,6 +65,9 @@ public class ItemControllerTest {
 		assertEquals(filmeTest, filme);
 	}
 
+	/**
+	 * Testa se está cadastrando um Blueray de Serie.
+	 */
 	@Test
 	public void testCadastrarBluRaySerie() {
 		Temporada temporada = new Temporada("GoT", 999999, "Sem comentários", 67, "DEZ_ANOS", "FICCAO", 1);
@@ -52,6 +76,9 @@ public class ItemControllerTest {
 		assertEquals(temporadaTest, temporada);
 	}
 
+	/**
+	 * Testa se está cadastrando um Blueray de Show.
+	 */
 	@Test
 	public void testCadastrarBlurayShow() {
 		Show show = new Show("AC_DC Live", 10000, 120, 12, "AC DC", "DEZ_ANOS");
@@ -59,6 +86,9 @@ public class ItemControllerTest {
 		assertEquals(showTest, show);
 	}
 
+	/**
+	 * Testa o método getItensNaoEmprestados da classe ItemController.
+	 */
 	@Test
 	public void testGetItensNaoEmprestados() {
 		List<Item> itens = new ArrayList<>();
