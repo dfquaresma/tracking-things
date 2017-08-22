@@ -105,9 +105,8 @@ public class Listador {
 	}
 
 	/**
-	 * Recupera uma representação em string dos 10 itens mais emprestados
-	 * ordenados de forma decrescente, ou seja, o mais emprestado ocupa a
-	 * posição 1.
+	 * Recupera uma representação em string dos 10 itens mais emprestados ordenados
+	 * de forma decrescente, ou seja, o mais emprestado ocupa a posição 1.
 	 * 
 	 * @param itens
 	 *            os itens no sistema.
@@ -158,8 +157,8 @@ public class Listador {
 	}
 
 	/**
-	 * Recupera uma representação em string dos emprestimos associados a algum
-	 * item em ordem de registro.
+	 * Recupera uma representação em string dos emprestimos associados a algum item
+	 * em ordem de registro.
 	 * 
 	 * @param emprestimos
 	 *            os emprestimos associados a algum item.
@@ -250,4 +249,5 @@ public class Listador {
 
 		return repr;
 	}
+
 }
