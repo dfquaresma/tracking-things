@@ -44,12 +44,18 @@ public class EmprestimoTest {
 		this.emprestimo = new Emprestimo(user1, user2, item.getNome(), "08/08/2017", 4);
 	}
 
+	/**
+	 * Testa se vai dar um IllegalArgumentException por conta da data em um formato incorreto.
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testEmprestimoDataSemFormato() {
 		this.emprestimo.finaliza("09/09/2017");
 		(new Emprestimo(this.user1, this.user2, this.item.getNome(), "222/17/17", 2)).getDataEmprestimo();
 	}
 
+	/**
+	 * Testa o que acontece no caso de um nome de usuário (tanto o emprestador como o requerente) nulo no construtor de emprestimo, deve gerar uma exception.
+	 */
 	@Test
 	public void testConstrutorFalhaUsuarioInvalido() {
 		try {
@@ -67,6 +73,9 @@ public class EmprestimoTest {
 		}
 	}
 
+	/**
+	 * Testa o que acontece quando o item é nulo no construtor do empréstimo, deve gerar uma exception.
+	 */
 	@Test
 	public void testConstrutorFalhaItemInvalido() {
 		try {
@@ -77,6 +86,9 @@ public class EmprestimoTest {
 		}
 	}
 
+	/**
+	 * Testa o caso da data inválida no construtor de um empréstimo, tanto para null, como para vazio e também para formato inválido.
+	 */
 	@Test
 	public void testConstrutorFalhaDataInvalida() {
 		try {
@@ -101,6 +113,9 @@ public class EmprestimoTest {
 		}
 	}
 
+	/**
+	 * Testa o construtor para quando o período for inválido.
+	 */
 	@Test
 	public void testConstrutorFalhaPeriodoInvalido() {
 		try {
@@ -110,7 +125,18 @@ public class EmprestimoTest {
 			assertEquals("Periodo nao pode ser menor ou iguals a zero.", e.getMessage());
 		}
 	}
+	
+	/**
+	 * Testa apenas o hashCode.
+	 */
+	@Test
+	public void testHashCode() {
+		assertEquals(this.emprestimo.hashCode(), this.emprestimo.hashCode());
+	}
 
+	/**
+	 * Testa um construtor válido de Emprestimo.
+	 */
 	@Test
 	public void testEmprestimo() {
 		assertEquals("08/08/2017", this.emprestimo.getDataEmprestimo());
@@ -138,6 +164,9 @@ public class EmprestimoTest {
 
 	}
 
+	/**
+	 * Testa o equals de Emprestimo.
+	 */
 	@Test
 	public void testEqualsObject() {
 
@@ -182,9 +211,16 @@ public class EmprestimoTest {
 		user1.adicionaItem(item);
 		emprestimo = new Emprestimo(user1, user2, item.getNome(), "08/08/2017", 5);
 		assertFalse(this.emprestimo.equals(emprestimo));
+		
+		assertTrue(this.emprestimo.equals(this.emprestimo));
+		assertFalse(this.emprestimo.equals(null));
+		assertFalse(this.emprestimo.equals(new String()));
 
 	}
 
+	/**
+	 * Testa a finalização de um Emprestimo.
+	 */
 	@Test
 	public void testFinaliza() {
 		assertFalse(this.emprestimo.isFinalizado());
@@ -192,56 +228,89 @@ public class EmprestimoTest {
 		assertTrue(this.emprestimo.isFinalizado());
 	}
 
+	/**
+	 * Testa o método getDono.
+	 */
 	@Test
 	public void testGetDono() {
 		assertEquals(this.user1, this.emprestimo.getDono());
 	}
 
+	/**
+	 * Testa o método getRequerente.
+	 */
 	@Test
 	public void testGetRequerente() {
 		assertEquals(this.user2, this.emprestimo.getRequerente());
 	}
 
+	/**
+	 * Testa o método getItem.
+	 */
 	@Test
 	public void testGetItem() {
 		assertEquals(this.item, this.emprestimo.getItem());
 	}
 
+	/**
+	 * Testa o método getNomeDono.
+	 */
 	@Test
 	public void testGetNomeDono() {
 		assertEquals("Alguem", this.emprestimo.getNomeDono());
 	}
 
+	/**
+	 * Testa o método getTelefoneDono.
+	 */
 	@Test
 	public void testGetTelefoneDono() {
 		assertEquals("3371-0001", this.emprestimo.getTelefoneDono());
 	}
 
+	/**
+	 * Testa o método getNomeRequerente.
+	 */
 	@Test
 	public void testGetNomeRequerente() {
 		assertEquals("Outro", this.emprestimo.getNomeRequerente());
 	}
 
+	/**
+	 * Testa o método getTelefoneRequerente.
+	 */
 	@Test
 	public void testGetTelefoneRequerente() {
 		assertEquals("3371-0002", this.emprestimo.getTelefoneRequerente());
 	}
 
+	/**
+	 * Testa o método getNomeItem.
+	 */
 	@Test
 	public void testGetNomeItem() {
 		assertEquals("Bola Quadrada", this.emprestimo.getNomeItem());
 	}
 
+	/**
+	 * Testa o método getDataEmprestimo.
+	 */
 	@Test
 	public void testGetDataEmprestimo() {
 		assertEquals("08/08/2017", this.emprestimo.getDataEmprestimo());
 	}
 
+	/**
+	 * Testa o método getPeriodo.
+	 */
 	@Test
 	public void testGetPeriodo() {
 		assertEquals(4, this.emprestimo.getPeriodo());
 	}
 
+	/**
+	 * Testa o método isFinalizado.
+	 */
 	@Test
 	public void testIsFinalizado() {
 		assertFalse(this.emprestimo.isFinalizado());
@@ -250,6 +319,9 @@ public class EmprestimoTest {
 
 	}
 
+	/**
+	 * Testa o método setDataEmprestimo.
+	 */
 	@Test
 	public void testSetDataEmprestimo() {
 		assertEquals("08/08/2017", this.emprestimo.getDataEmprestimo());
@@ -257,6 +329,9 @@ public class EmprestimoTest {
 		assertEquals("22/01/2200", this.emprestimo.getDataEmprestimo());
 	}
 
+	/**
+	 * Testa o método setPeriodo.
+	 */
 	@Test
 	public void testSetPeriodo() {
 		assertEquals(4, this.emprestimo.getPeriodo());
@@ -264,12 +339,18 @@ public class EmprestimoTest {
 		assertEquals(5, this.emprestimo.getPeriodo());
 	}
 
+	/**
+	 * Testa o método getDataRealDaDevolucaoDoItem.
+	 */
 	@Test
 	public void testGetDataRealDaDevolucaoDoItem() {
 		this.emprestimo.finaliza("22/01/2200");
 		assertEquals("22/01/2200", this.emprestimo.getDataRealDaDevolucaoDoItem());
 	}
 
+	/**
+	 * Testa setDataRealDaDevolucaoDoItem.
+	 */
 	@Test
 	public void testSetDataRealDaDevolucaoDoItem() {
 		this.emprestimo.finaliza("22/01/2200");
@@ -279,14 +360,25 @@ public class EmprestimoTest {
 
 	}
 
+	/**
+	 * Testa o método toString, tanto quando é em andamento e quando está finalizado..
+	 */
 	@Test
 	public void testToString() {
 		assertEquals(
 				"EMPRESTIMO - De: Alguem, Para: Outro, Bola Quadrada, 08/08/2017, 4 dias, ENTREGA: Emprestimo em andamento",
 				this.emprestimo.toString());
 
+		this.emprestimo.finaliza("20/09/2021");
+
+		assertEquals(
+				"EMPRESTIMO - De: Alguem, Para: Outro, Bola Quadrada, 08/08/2017, 4 dias, ENTREGA: 20/09/2021",
+				this.emprestimo.toString());
 	}
 
+	/**
+	 * Testa o método getDataDoEmprestimo, verifica se está no formato correto.
+	 */
 	@Test
 	public void testGetDataDoEmprestimo() {
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
