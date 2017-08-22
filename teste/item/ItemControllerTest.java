@@ -11,8 +11,10 @@ import org.junit.Test;
 import item.bluray.Filme;
 import item.bluray.Show;
 import item.bluray.Temporada;
+import item.comparator.ItemComparatorNome;
 import item.jogo.JogoEletronico;
 import item.jogo.JogoTabuleiro;
+import usuario.Usuario;
 
 /**
  * Testa as funcionalidades da clase ItemControllerTest.
@@ -116,6 +118,42 @@ public class ItemControllerTest {
 		show.setEmprestado(true);
 		assertEquals(0, this.controller.getItensNaoEmprestados(itens).size());
 
+	}
+
+	@Test
+	public void testGetItensNoSistema() {
+		List<Usuario> usuarios = new ArrayList<>();
+
+		usuarios.add(new Usuario("Ícaro", "(83) 9.9384-7651", "icaro.lima@ccc.ufcg.edu.br"));
+		usuarios.add(new Usuario("David", "(83) 9.2345-6780", "david.ferreira@ccc.ufcg.edu.br"));
+		usuarios.add(new Usuario("Amanda", "(83) 9.5783-3450", "amanda.vivian@ccc.ufcg.edu.br"));
+
+		Usuario icaro = usuarios.get(0);
+		icaro.adicionaItem(this.controller.cadastrarEletronico("Messiah", 16.99, "PC"));
+		icaro.adicionaItem(this.controller.cadastrarJogoTabuleiro("Monopoli", 155.59));
+		Usuario david = usuarios.get(1);
+		david.adicionaItem(
+				this.controller.cadastrarBlurayFilme("Expresso Polar", 4.00, 140, "AVENTURA", "LIVRE", 1997));
+		david.adicionaItem(this.controller.cadastrarBluRaySerie("O Sócio", 10.00,
+				"Marcus Lemmonys é o sócio e ajuda negócios ao redor do mundo.", 60, "LIVRE", "OUTRO", 1));
+		Usuario amanda = usuarios.get(2);
+		amanda.adicionaItem(this.controller.cadastrarBlurayShow("Scorpions", 22.90, 200, 25, "Fulano", "DOZE_ANOS"));
+		amanda.adicionaItem(this.controller.cadastrarJogoTabuleiro("Jogo da Vida", 90.54));
+
+		List<Item> itens = new ArrayList<>();
+		itens.add(icaro.getItem("Messiah"));
+		itens.add(icaro.getItem("Monopoli"));
+		itens.add(david.getItem("Expresso Polar"));
+		itens.add(david.getItem("O Sócio"));
+		itens.add(amanda.getItem("Scorpions"));
+		itens.add(amanda.getItem("Jogo da Vida"));
+		
+		List<Item> itensController = this.controller.getItensNoSistema(usuarios);
+		
+		itens.sort(new ItemComparatorNome());
+		itensController.sort(new ItemComparatorNome());
+		
+		assertEquals(itens, itensController);
 	}
 
 }
