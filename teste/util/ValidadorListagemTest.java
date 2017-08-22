@@ -10,9 +10,6 @@ import excecoes.OperacaoNaoPermitidaNoMomentoExcecao;
 import item.Item;
 import item.bluray.Temporada;
 
-
-// FALTA CODAR TESTES PARA VALIDACAO DE EMPRESTIMOS E USUARIOS
-
 /**
  * Testa a classe de validação.
  * 

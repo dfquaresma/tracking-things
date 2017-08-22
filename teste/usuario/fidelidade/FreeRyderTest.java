@@ -4,8 +4,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+
 /**
- * Testa os metodos da classe FreeRyder
+ * Testa a classe do cartão de fidelidade FreeRyder.
+ * 
  * @author Amanda V. A. de Luna e Costa
  * @author David Ferreira Quaresma
  * @author Ícaro Dantas de Araújo Lima
@@ -14,19 +16,25 @@ import org.junit.Test;
  */
 public class FreeRyderTest {
 
-private CartaoFidelidade cartao;
-	
+	private CartaoFidelidade cartao;
+
+	/**
+	 * Prepara o ambiente de testes.
+	 */
 	@Before
-	public void setup(){
+	public void setup() {
 		this.cartao = new FreeRyder();
 	}
+
 	/**
-	 * Testa o periodo maximo que o usuario da categoria pode pegar um item emprestado
+	 * Testa o periodo maximo que o usuario da categoria pode pegar um item
+	 * emprestado
 	 */
 	@Test
 	public void testGetPeriodo() {
 		assertEquals(5, cartao.getPeriodo());
 	}
+
 	/**
 	 * Testa se o usuario da categoria pode pegar itens emprestado
 	 */
@@ -34,6 +42,7 @@ private CartaoFidelidade cartao;
 	public void testPodePegarEmprestado() {
 		assertTrue(cartao.podePegarEmprestado());
 	}
+
 	/**
 	 * Testa a representacao string da categoria
 	 */

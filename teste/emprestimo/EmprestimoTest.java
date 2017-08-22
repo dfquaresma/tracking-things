@@ -31,7 +31,6 @@ public class EmprestimoTest {
 	private Usuario user1;
 	private Usuario user2;
 	private Item item;
-	
 
 	/**
 	 * Configura o ambiente de testes para garantir a eficiência dos testes.
@@ -44,14 +43,13 @@ public class EmprestimoTest {
 		this.user1.adicionaItem(this.item);
 		this.emprestimo = new Emprestimo(user1, user2, item.getNome(), "08/08/2017", 4);
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testEmprestimoDataSemFormato() //FIXME: Emprestimo nao deveria deixar criar a nova instancia de emprestimo, porem ela cria e ainda associa com a data do emprestimo da anterior
-	{
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testEmprestimoDataSemFormato() {
 		this.emprestimo.finaliza("09/09/2017");
 		(new Emprestimo(this.user1, this.user2, this.item.getNome(), "222/17/17", 2)).getDataEmprestimo();
 	}
-	
+
 	@Test
 	public void testConstrutorFalhaUsuarioInvalido() {
 		try {
@@ -68,7 +66,7 @@ public class EmprestimoTest {
 			assertEquals("Usuario requerente nao pode ser nulo", e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testConstrutorFalhaItemInvalido() {
 		try {
@@ -102,7 +100,7 @@ public class EmprestimoTest {
 			assertEquals("Periodo nao pode ser menor ou iguals a zero.", e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testConstrutorFalhaPeriodoInvalido() {
 		try {
@@ -182,8 +180,7 @@ public class EmprestimoTest {
 		user2 = new Usuario("Outro", "3371-0002", "outro@gmail.com");
 		item = new JogoTabuleiro("Damas", 1.99);
 		user1.adicionaItem(item);
-		emprestimo = new Emprestimo(user1, user2, item.getNome(), "08/08/2017",
-				5);
+		emprestimo = new Emprestimo(user1, user2, item.getNome(), "08/08/2017", 5);
 		assertFalse(this.emprestimo.equals(emprestimo));
 
 	}
@@ -250,7 +247,7 @@ public class EmprestimoTest {
 		assertFalse(this.emprestimo.isFinalizado());
 		this.emprestimo.finaliza("22/01/2200");
 		assertTrue(this.emprestimo.isFinalizado());
-		
+
 	}
 
 	@Test
@@ -279,17 +276,19 @@ public class EmprestimoTest {
 		assertEquals("22/01/2200", this.emprestimo.getDataRealDaDevolucaoDoItem());
 		this.emprestimo.setDataRealDaDevolucaoDoItem("10/12/2222");
 		assertEquals("10/12/2222", this.emprestimo.getDataRealDaDevolucaoDoItem());
-		
+
 	}
 
 	@Test
 	public void testToString() {
-		assertEquals("EMPRESTIMO - De: Alguem, Para: Outro, Bola Quadrada, 08/08/2017, 4 dias, ENTREGA: Emprestimo em andamento", this.emprestimo.toString());
-		
+		assertEquals(
+				"EMPRESTIMO - De: Alguem, Para: Outro, Bola Quadrada, 08/08/2017, 4 dias, ENTREGA: Emprestimo em andamento",
+				this.emprestimo.toString());
+
 	}
 
 	@Test
-	public void testGetDataDoEmprestimo()  {
+	public void testGetDataDoEmprestimo() {
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		try {
 			Date dataEmprestimo = dateFormat.parse("08/08/2017");
@@ -298,6 +297,5 @@ public class EmprestimoTest {
 			fail();
 		}
 	}
-	
-	
+
 }

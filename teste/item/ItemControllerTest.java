@@ -16,7 +16,7 @@ import item.jogo.JogoTabuleiro;
 
 public class ItemControllerTest {
 	private ItemController controller;
-	
+
 	@Before
 	public void setUp() {
 		this.controller = new ItemController();
@@ -39,14 +39,16 @@ public class ItemControllerTest {
 	@Test
 	public void testCadastrarBlurayFilme() {
 		Filme filme = new Filme("Senhor do aneis", 9999999, 9999999, "FICCAO", "DEZ_ANOS", 2002);
-		Item filmeTest = this.controller.cadastrarBlurayFilme("Senhor do aneis", 9999999, 9999999, "FICCAO", "DEZ_ANOS", 2002);
+		Item filmeTest = this.controller.cadastrarBlurayFilme("Senhor do aneis", 9999999, 9999999, "FICCAO", "DEZ_ANOS",
+				2002);
 		assertEquals(filmeTest, filme);
 	}
 
 	@Test
 	public void testCadastrarBluRaySerie() {
 		Temporada temporada = new Temporada("GoT", 999999, "Sem comentários", 67, "DEZ_ANOS", "FICCAO", 1);
-		Item temporadaTest = this.controller.cadastrarBluRaySerie("GoT", 999999, "Sem comentários", 67, "DEZ_ANOS", "FICCAO", 1);
+		Item temporadaTest = this.controller.cadastrarBluRaySerie("GoT", 999999, "Sem comentários", 67, "DEZ_ANOS",
+				"FICCAO", 1);
 		assertEquals(temporadaTest, temporada);
 	}
 
@@ -65,25 +67,25 @@ public class ItemControllerTest {
 		Filme filme = new Filme("Senhor do aneis", 9999999, 9999999, "FICCAO", "DEZ_ANOS", 2002);
 		Temporada temporada = new Temporada("GoT", 999999, "Sem comentários", 67, "DEZ_ANOS", "FICCAO", 1);
 		Show show = new Show("AC_DC Live", 10000, 120, 12, "AC DC", "DEZ_ANOS");
-		
+
 		itens.add(jogoE);
 		itens.add(jogoT);
 		itens.add(filme);
 		itens.add(temporada);
 		itens.add(show);
-		
-		this.controller.getItensNaoEmprestados(itens);		
+
+		this.controller.getItensNaoEmprestados(itens);
 		assertEquals(5, this.controller.getItensNaoEmprestados(itens).size());
-		
+
 		jogoE.setEmprestado(true);
 		filme.setEmprestado(true);
 		assertEquals(3, this.controller.getItensNaoEmprestados(itens).size());
-		
+
 		jogoT.setEmprestado(true);
 		temporada.setEmprestado(true);
 		show.setEmprestado(true);
 		assertEquals(0, this.controller.getItensNaoEmprestados(itens).size());
-		
+
 	}
 
 }

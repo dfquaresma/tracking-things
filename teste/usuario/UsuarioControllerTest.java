@@ -142,7 +142,7 @@ public class UsuarioControllerTest {
 			assertEquals("Email nao pode ser nulo", npe.getMessage());
 		}
 	}
-	
+
 	/**
 	 * Testa cadastrar um usuario com email nulo
 	 */

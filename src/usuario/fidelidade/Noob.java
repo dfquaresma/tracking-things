@@ -1,6 +1,7 @@
 package usuario.fidelidade;
+
 /**
- * Representacao da categoria Noob do cartao fidelidade
+ * Representacao da categoria Noob do cartao fidelidade.
  *
  * @author Amanda V. A. de Luna e Costa
  * @author David Ferreira Quaresma
@@ -18,6 +19,7 @@ public class Noob implements CartaoFidelidade {
 	public int getPeriodo() {
 		return PERIODO;
 	}
+
 	/**
 	 * Retorna se a categoria pode pegar itens emprestado
 	 */
@@ -25,6 +27,7 @@ public class Noob implements CartaoFidelidade {
 	public boolean podePegarEmprestado() {
 		return true;
 	}
+
 	/**
 	 * Retorna a representacao em string da categoria
 	 */

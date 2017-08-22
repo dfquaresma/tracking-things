@@ -1,8 +1,8 @@
 package usuario;
 
 /**
- * Classe que representa a pontuacao da reputacao de um usuario de acordo com
- * seu comportamento.
+ * Classe que representa a reputacao de um usuario de acordo com seu
+ * comportamento.
  * 
  * 
  * @author Amanda V. A. de Luna e Costa

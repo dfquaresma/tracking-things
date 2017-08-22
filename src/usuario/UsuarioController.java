@@ -237,7 +237,7 @@ public class UsuarioController {
 		this.validador.validaDadosDeIdentificacao(nome, telefone);
 
 		Usuario user = getUser(nome, telefone);
-		user.addBlueray(nomeBluray, duracao);
+		user.addBluray(nomeBluray, duracao);
 	}
 
 	/**
