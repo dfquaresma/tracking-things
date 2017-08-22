@@ -45,7 +45,6 @@ public class ListadorTest {
 	 */
 	@Before
 	public void setUp() {
-		this.itens = new ArrayList<>();
 		this.itemA = new JogoEletronico("Dota", 30, "PC");
 		this.itemB = new JogoTabuleiro("Xadrez", 20);
 		this.itemC = new Show("AC_DC - LIVE in River Plate", 50, 2, 11, "AC_DC", "DEZ_ANOS");
@@ -62,8 +61,9 @@ public class ListadorTest {
 		this.emprestimo3 = new Emprestimo(user3, user1, itemC.getNome(), "15/08/2017", 3);
 
 		this.listador = new Listador();
-		this.usuarios = new ArrayList<>();
+		this.itens = new ArrayList<>();
 		this.emprestimos = new ArrayList<>();
+		this.usuarios = new ArrayList<>();
 	}
 
 	/**
@@ -107,7 +107,7 @@ public class ListadorTest {
 	 * se lança exceção quando necessário.
 	 */
 	@Test
-	public void listarItensNaoEmprestados() {
+	public void testlistarItensNaoEmprestados() {
 		try {
 			listador.listarItensNaoEmprestados(null);
 			fail();
@@ -128,7 +128,7 @@ public class ListadorTest {
 	 * lança exceção quando necessário.
 	 */
 	@Test
-	public void listarItensEmprestados() {
+	public void testlistarItensEmprestados() {
 		try {
 			listador.listarItensEmprestados(null);
 			fail();
@@ -169,6 +169,12 @@ public class ListadorTest {
 		adicionaItensAListaDeItens();
 		assertEquals("1) 3 emprestimos - " + itemA.toString() + "|2) 2 emprestimos - " + itemB.toString()
 				+ "|3) 1 emprestimos - " + itemC.toString() + "|", listador.listarTop10Itens(itens));
+		
+		Item item = new JogoTabuleiro("War", 30);
+		this.itens.add(item);
+		
+		assertEquals("1) 3 emprestimos - " + itemA.toString() + "|2) 2 emprestimos - " + itemB.toString()
+		+ "|3) 1 emprestimos - " + itemC.toString() + "|", listador.listarTop10Itens(itens));
 	}
 
 	private void adicionaItensAListaDeItens() {
@@ -182,7 +188,7 @@ public class ListadorTest {
 	 * como esperado e se lança exceção quando necessário.
 	 */
 	@Test
-	public void listarEmprestimosUsuarioEmprestando() {
+	public void testlistarEmprestimosUsuarioEmprestando() {
 		try {
 			listador.listarEmprestimosUsuarioEmprestando(null);
 			fail();
@@ -190,8 +196,9 @@ public class ListadorTest {
 			assertEquals("A lista de emprestimos para listagem nao pode ser nula", e.getMessage());
 		}
 
+		assertEquals("Nenhum item emprestado", listador.listarEmprestimosUsuarioEmprestando(this.emprestimos));
+		
 		adicionaEmprestimosAListaDeEmprestimos();
-
 		assertEquals("Emprestimos: " + emprestimo3.toString() + "|" + emprestimo2.toString() + "|"
 				+ emprestimo1.toString() + "|", listador.listarEmprestimosUsuarioEmprestando(emprestimos));
 	}
@@ -201,7 +208,7 @@ public class ListadorTest {
 	 * funciona como esperado e se lança exceção quando necessário.
 	 */
 	@Test
-	public void listarEmprestimosUsuarioPegandoEmprestado() {
+	public void testlistarEmprestimosUsuarioPegandoEmprestado() {
 		try {
 			listador.listarEmprestimosUsuarioPegandoEmprestado(null);
 			fail();
@@ -209,8 +216,9 @@ public class ListadorTest {
 			assertEquals("A lista de emprestimos para listagem nao pode ser nula", e.getMessage());
 		}
 
-		adicionaEmprestimosAListaDeEmprestimos();
+		assertEquals("Nenhum item pego emprestado", listador.listarEmprestimosUsuarioPegandoEmprestado(this.emprestimos));
 
+		adicionaEmprestimosAListaDeEmprestimos();
 		assertEquals(
 				"Emprestimos pegos: " + emprestimo3.toString() + "|" + emprestimo2.toString() + "|"
 						+ emprestimo1.toString() + "|",
@@ -222,20 +230,19 @@ public class ListadorTest {
 	 * como esperado e se lança exceção quando necessário.
 	 */
 	@Test
-	public void listarEmprestimosItem() {
+	public void testlistarEmprestimosItem() {
 		try {
-			listador.listarEmprestimosUsuarioPegandoEmprestado(null);
+			listador.listarEmprestimosItem(null);
 			fail();
 		} catch (Exception e) {
 			assertEquals("A lista de emprestimos para listagem nao pode ser nula", e.getMessage());
 		}
 
-		adicionaEmprestimosAListaDeEmprestimos();
-
-		assertEquals(
-				"Emprestimos pegos: " + emprestimo3.toString() + "|" + emprestimo2.toString() + "|"
-						+ emprestimo1.toString() + "|",
-				listador.listarEmprestimosUsuarioPegandoEmprestado(emprestimos));
+		assertEquals("Nenhum emprestimo associado ao item", listador.listarEmprestimosItem(this.emprestimos));
+		
+		this.emprestimos.add(emprestimo3);
+		assertEquals("Emprestimos associados ao item: " + emprestimo3.toString() + "|",
+				listador.listarEmprestimosItem(emprestimos));
 	}
 
 	private void adicionaEmprestimosAListaDeEmprestimos() {
@@ -272,7 +279,7 @@ public class ListadorTest {
 	 * esperado e se lança exceção quando necessário.
 	 */
 	@Test
-	public void listarTop10MelhoresUsuarios() {
+	public void testlistarTop10MelhoresUsuarios() {
 		try {
 			listador.listarTop10MelhoresUsuarios(null);
 			fail();
@@ -295,7 +302,7 @@ public class ListadorTest {
 	 * esperado e se lança exceção quando necessário.
 	 */
 	@Test
-	public void listarTop10PioresUsuarios() {
+	public void testlistarTop10PioresUsuarios() {
 		try {
 			listador.listarTop10PioresUsuarios(null);
 			fail();
