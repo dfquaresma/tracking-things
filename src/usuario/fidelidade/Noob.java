@@ -10,11 +10,12 @@ package usuario.fidelidade;
  *
  */
 public class Noob implements Fidelidade {
+
+	private final int PERIODO = 7;
+
 	/**
 	 * Retorna o periodo que a categoria pode pegar um item emprestado
 	 */
-	private final int PERIODO = 7;
-
 	@Override
 	public int getPeriodo() {
 		return PERIODO;

@@ -58,7 +58,7 @@ public class ValidadorListagemTest {
 
 		this.validador.validaListaDeItensParaListagem(itens);
 	}
-	
+
 	/**
 	 * Metodo para testar se, quando é passado uma lista de itens vazia, uma
 	 * excecao é lancada.
@@ -76,7 +76,7 @@ public class ValidadorListagemTest {
 	public void testValidaItensParaListagemNull() {
 		this.validador.validaListaDeItensParaListagem(null);
 	}
-	
+
 	/**
 	 * Metodo para testar se, quando é passado uma lista de itens com elementos
 	 * null, uma excecao é lancada.
@@ -117,7 +117,7 @@ public class ValidadorListagemTest {
 		this.validador.validaListaDeEmprestimosParaListagem(emprestimos);
 
 	}
-	
+
 	/**
 	 * Metodo para testar se, quando é passado uma lista de emprestimos null,
 	 * uma excecao é lancada.
@@ -126,7 +126,7 @@ public class ValidadorListagemTest {
 	public void testValidaEmprestimosParaListagemNull() {
 		this.validador.validaListaDeEmprestimosParaListagem(null);
 	}
-	
+
 	/**
 	 * Metodo para testar se, quando é passado uma lista de emprestimos com
 	 * elementos null, uma excecao é lancada.
@@ -146,25 +146,24 @@ public class ValidadorListagemTest {
 		Usuario user1 = new Usuario("Amandio", "3371-0000", "amandio@gmail.com");
 		Usuario user2 = new Usuario("Testandio", "3371-0001", "testandio@ccc.ufcg.edu.com");
 		Usuario user3 = new Usuario("Errandio", "3371-0002", "errandio@hotmail.com");
-		
+
 		this.usuarios.add(user1);
 		this.usuarios.add(user2);
 		this.usuarios.add(user3);
-		
+
 		this.validador.validaListaDeUsuariosParaListagem(this.usuarios);
-		
 
 	}
 
 	/**
-	 * Metodo para testar se, quando é passado uma lista de usuários null,
-	 * uma excecao é lancada.
+	 * Metodo para testar se, quando é passado uma lista de usuários null, uma
+	 * excecao é lancada.
 	 */
 	@Test(expected = NullPointerException.class)
 	public void testValidaUsuariosParaListagemNull() {
 		this.validador.validaListaDeUsuariosParaListagem(null);
 	}
-	
+
 	/**
 	 * Metodo para testar se, quando é passado uma lista de emprestimos com
 	 * elementos null, uma excecao é lancada.

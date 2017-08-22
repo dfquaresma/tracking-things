@@ -147,12 +147,12 @@ public class ItemControllerTest {
 		itens.add(david.getItem("O Sócio"));
 		itens.add(amanda.getItem("Scorpions"));
 		itens.add(amanda.getItem("Jogo da Vida"));
-		
+
 		List<Item> itensController = this.controller.getItensNoSistema(usuarios);
-		
+
 		itens.sort(new ItemComparatorNome());
 		itensController.sort(new ItemComparatorNome());
-		
+
 		assertEquals(itens, itensController);
 	}
 

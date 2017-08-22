@@ -40,7 +40,7 @@ public class Emprestimo {
 	 *            o dono do item a ser emprestado.
 	 * @param requerente
 	 *            quem receberá o item emprestado.
-	 * @param item
+	 * @param nomeItem
 	 *            o item a ser emprestado.
 	 * @param dataEmprestimo
 	 *            a data de quando começou o emprestimo.
@@ -192,7 +192,7 @@ public class Emprestimo {
 	}
 
 	/**
-	 * Recupera a data em que o item foi emprestado.
+	 * Recupera uma string representando a data em que o item foi emprestado.
 	 * 
 	 * @return a data em que o item foi emprestado.
 	 */
@@ -347,6 +347,11 @@ public class Emprestimo {
 				+ modificador;
 	}
 
+	/**
+	 * Recupera um objeto representando a data em que o item foi emprestado.
+	 * 
+	 * @return a data em que o item foi emprestimo.
+	 */
 	public Date getDataDoEmprestimo() {
 		return this.dataEmprestimo;
 	}

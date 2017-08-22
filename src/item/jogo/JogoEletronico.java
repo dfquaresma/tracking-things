@@ -3,8 +3,8 @@ package item.jogo;
 import item.Item;
 
 /**
- * Representação de um jogo eletrônico. Guarda as informações básicas para o que é
- * classificado com um jogo eletrônico neste sistema.
+ * Representação de um jogo eletrônico. Guarda as informações básicas para o que
+ * é classificado com um jogo eletrônico neste sistema.
  * 
  * @author Amanda V. A. de Luna e Costa
  * @author David Ferreira Quaresma
@@ -87,8 +87,7 @@ public class JogoEletronico extends Item {
 		this.validador.validaAtributo(atributo);
 		this.validador.validaValor(valor);
 
-		if (atributo.equals("Plataforma"))
-		{
+		if (atributo.equals("Plataforma")) {
 			this.setPlataforma(valor);
 
 		} else {
@@ -96,13 +95,12 @@ public class JogoEletronico extends Item {
 		}
 
 	}
-	
+
 	/**
 	 * Indica quando um outro objeto é igual a este.
 	 */
 	@Override
-	public boolean equals(Object obj)
-	{
+	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
 		if (!super.equals(obj))

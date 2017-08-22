@@ -23,13 +23,13 @@ public class UsuarioReputacaoReversaComparator implements Comparator<Usuario> {
 	 * reputação menor que usuarioA.
 	 */
 	@Override
-	public int compare(Usuario o1, Usuario o2) {
-		if (o1.getReputacao() == o2.getReputacao()) {
+	public int compare(Usuario usuarioA, Usuario usuarioB) {
+		if (usuarioA.getReputacao() == usuarioB.getReputacao()) {
 			return 0;
-		} else if (o1.getReputacao() < o2.getReputacao()) {
-			return 1;
-		} else {
+		} else if (usuarioA.getReputacao() < usuarioB.getReputacao()) {
 			return -1;
+		} else {
+			return 1;
 		}
 	}
 

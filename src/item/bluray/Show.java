@@ -1,8 +1,8 @@
 package item.bluray;
 
 /**
- * Representação de um show em blu-ray. Guarda as informações básicas para o que é
- * classificado com show neste sistema.
+ * Representação de um show em blu-ray. Guarda as informações básicas para o que
+ * é classificado com show neste sistema.
  * 
  * @author Amanda V. A. de Luna e Costa
  * @author David Ferreira Quaresma
@@ -36,7 +36,7 @@ public class Show extends BluRay {
 		super(nome, preco, duracao, classificacao);
 		this.validador.validaNumeroDeFaixas(numDeFaixas);
 		this.validador.validaArtista(artista);
-		
+
 		this.numDeFaixas = numDeFaixas;
 		this.artista = artista;
 	}
@@ -106,11 +106,11 @@ public class Show extends BluRay {
 	 */
 	@Override
 	public String toString() {
-		return "SHOW: " + this.getNome() + ", R$ " + String.valueOf(this.getPreco())
-				+ ", " + this.getEstadoEmprestimo() + ", " + this.getDuracao() + " min, " + this.getClassificacao() + ", "
-				+ this.getArtista() + ", " + this.getNumDeFaixas() + " faixas";
+		return "SHOW: " + this.getNome() + ", R$ " + String.valueOf(this.getPreco()) + ", " + this.getEstadoEmprestimo()
+				+ ", " + this.getDuracao() + " min, " + this.getClassificacao() + ", " + this.getArtista() + ", "
+				+ this.getNumDeFaixas() + " faixas";
 	}
-	
+
 	/**
 	 * Sobrescreve o método da classe mãe para verificar se o atributo a ser
 	 * atualizado pertence a esta classe. Caso não seja, o método da classe mãe
@@ -120,18 +120,18 @@ public class Show extends BluRay {
 	public void atualizaAtributo(String atributo, String valor) {
 		this.validador.validaAtributo(atributo);
 		this.validador.validaValor(valor);
-		
+
 		if (atributo.equals("Artista")) {
-			this.artista = valor;			
-			
+			this.artista = valor;
+
 		} else if (atributo.equals("Numero de faixas")) {
 			this.validador.validaConversaoStringToInt(atributo, valor);
 			this.numDeFaixas = Integer.parseInt(valor);
-		
+
 		} else {
 			super.atualizaAtributo(atributo, valor);
 		}
-		
+
 	}
 
 }

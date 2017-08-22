@@ -1,7 +1,8 @@
 package usuario.fidelidade;
+
 /**
  * Representa um cartao fidelidade
-
+ * 
  * @author Amanda V. A. de Luna e Costa
  * @author David Ferreira Quaresma
  * @author Ícaro Dantas de Araújo Lima
@@ -9,9 +10,12 @@ package usuario.fidelidade;
  *
  */
 public class CartaoFidelidade {
-	
+
 	private Fidelidade fidelidade;
 
+	/**
+	 * Constrói um cartão de fidelidade iniciado com fidelidade FreeRyder.
+	 */
 	public CartaoFidelidade() {
 		this.fidelidade = new FreeRyder();
 	}
@@ -24,8 +28,14 @@ public class CartaoFidelidade {
 	public int getPeriodoEmprestado() {
 		return this.fidelidade.getPeriodo();
 	}
+
 	/**
 	 * Atualiza a classificacao do usuario de acordo com os cartoes fidelidade
+	 *
+	 * @param reputacao
+	 *            a reputação do usuário de posse deste cartão.
+	 * @param temItens
+	 *            se o usuário tem itens.
 	 */
 	public void attCartao(double reputacao, boolean temItens) {
 		if (reputacao > 0 && reputacao <= 100 && !temItens) {
@@ -36,6 +46,7 @@ public class CartaoFidelidade {
 			this.fidelidade = new BomAmigo();
 		}
 	}
+
 	/**
 	 * Retorna a representacao em string do cartao
 	 */
@@ -43,11 +54,14 @@ public class CartaoFidelidade {
 	public String toString() {
 		return this.fidelidade.toString();
 	}
+
 	/**
 	 * Retorna se o usuario pode pegar itens emprestado
-	 * @return
+	 * 
+	 * @return true se o usuário puder pegar itens emprestado, false caso
+	 *         contrário.
 	 */
-	public boolean podePegarEmprestado(){
+	public boolean podePegarEmprestado() {
 		return this.fidelidade.podePegarEmprestado();
 	}
 }

@@ -11,8 +11,21 @@ import item.jogo.JogoEletronico;
 import item.jogo.JogoTabuleiro;
 import usuario.Usuario;
 
+/**
+ * Testa as funcionalidades da clase UsuarioReputacaoReversaComparator.
+ * 
+ * @author Amanda V. A. de Luna e Costa
+ * @author David Ferreira Quaresma
+ * @author Ícaro Dantas de Araújo Lima
+ * @author Paulo Felipe Feitosa da Silva
+ *
+ */
 public class UsuarioReputacaoReversaComparatorTest {
 
+	/**
+	 * Faz alguns testes de comparação entre usuários a partir da reputação dos
+	 * usuários envolvidos.
+	 */
 	@Test
 	public void testCompare() {
 		UsuarioReputacaoReversaComparator comparador = new UsuarioReputacaoReversaComparator();
@@ -30,9 +43,9 @@ public class UsuarioReputacaoReversaComparatorTest {
 		controller.registrarEmprestimo(user1, user3, itemB.getNome(), "20/08/2018", 4);
 		controller.registrarEmprestimo(user2, user3, itemC.getNome(), "20/08/2018", 4);
 
-		assertTrue(comparador.compare(user1, user2) < 0);
-		assertTrue(comparador.compare(user2, user3) < 0);
-		assertTrue(comparador.compare(user3, user1) > 0);
+		assertTrue(comparador.compare(user1, user2) > 0);
+		assertTrue(comparador.compare(user2, user3) > 0);
+		assertTrue(comparador.compare(user3, user1) < 0);
 		assertTrue(comparador.compare(user1, user1) == 0);
 	}
 

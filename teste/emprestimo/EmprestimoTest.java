@@ -45,7 +45,8 @@ public class EmprestimoTest {
 	}
 
 	/**
-	 * Testa se vai dar um IllegalArgumentException por conta da data em um formato incorreto.
+	 * Testa se vai dar um IllegalArgumentException por conta da data em um
+	 * formato incorreto.
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testEmprestimoDataSemFormato() {
@@ -54,7 +55,9 @@ public class EmprestimoTest {
 	}
 
 	/**
-	 * Testa o que acontece no caso de um nome de usuário (tanto o emprestador como o requerente) nulo no construtor de emprestimo, deve gerar uma exception.
+	 * Testa o que acontece no caso de um nome de usuário (tanto o emprestador
+	 * como o requerente) nulo no construtor de emprestimo, deve gerar uma
+	 * exception.
 	 */
 	@Test
 	public void testConstrutorFalhaUsuarioInvalido() {
@@ -74,7 +77,8 @@ public class EmprestimoTest {
 	}
 
 	/**
-	 * Testa o que acontece quando o item é nulo no construtor do empréstimo, deve gerar uma exception.
+	 * Testa o que acontece quando o item é nulo no construtor do empréstimo,
+	 * deve gerar uma exception.
 	 */
 	@Test
 	public void testConstrutorFalhaItemInvalido() {
@@ -87,7 +91,8 @@ public class EmprestimoTest {
 	}
 
 	/**
-	 * Testa o caso da data inválida no construtor de um empréstimo, tanto para null, como para vazio e também para formato inválido.
+	 * Testa o caso da data inválida no construtor de um empréstimo, tanto para
+	 * null, como para vazio e também para formato inválido.
 	 */
 	@Test
 	public void testConstrutorFalhaDataInvalida() {
@@ -125,7 +130,7 @@ public class EmprestimoTest {
 			assertEquals("Periodo nao pode ser menor ou iguals a zero.", e.getMessage());
 		}
 	}
-	
+
 	/**
 	 * Testa apenas o hashCode.
 	 */
@@ -211,7 +216,7 @@ public class EmprestimoTest {
 		user1.adicionaItem(item);
 		emprestimo = new Emprestimo(user1, user2, item.getNome(), "08/08/2017", 5);
 		assertFalse(this.emprestimo.equals(emprestimo));
-		
+
 		assertTrue(this.emprestimo.equals(this.emprestimo));
 		assertFalse(this.emprestimo.equals(null));
 		assertFalse(this.emprestimo.equals(new String()));
@@ -361,7 +366,8 @@ public class EmprestimoTest {
 	}
 
 	/**
-	 * Testa o método toString, tanto quando é em andamento e quando está finalizado..
+	 * Testa o método toString, tanto quando é em andamento e quando está
+	 * finalizado..
 	 */
 	@Test
 	public void testToString() {
@@ -371,8 +377,7 @@ public class EmprestimoTest {
 
 		this.emprestimo.finaliza("20/09/2021");
 
-		assertEquals(
-				"EMPRESTIMO - De: Alguem, Para: Outro, Bola Quadrada, 08/08/2017, 4 dias, ENTREGA: 20/09/2021",
+		assertEquals("EMPRESTIMO - De: Alguem, Para: Outro, Bola Quadrada, 08/08/2017, 4 dias, ENTREGA: 20/09/2021",
 				this.emprestimo.toString());
 	}
 

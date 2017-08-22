@@ -270,7 +270,6 @@ public class JogoEletronicoTest {
 	/**
 	 * Verifica se o equals funciona como esperado.
 	 */
-	@SuppressWarnings("unlikely-arg-type")
 	@Test
 	public void testEquals() {
 		JogoEletronico equalJogo = new JogoEletronico("Super Mario", 100.0, "PC");

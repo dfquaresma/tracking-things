@@ -33,7 +33,7 @@ public abstract class BluRay extends Item {
 		super(nome, preco);
 		this.validador.validaDuracao(duracao);
 		this.validador.validaClassificacao(classificacao);
-		
+
 		this.duracao = duracao;
 		this.classificacao = Classificacao.valueOf(classificacao);
 
@@ -98,7 +98,7 @@ public abstract class BluRay extends Item {
 		}
 
 	}
-	
+
 	/**
 	 * Sobrescreve o método da classe mãe para verificar se o atributo a ser
 	 * atualizado pertence a esta classe. Caso não seja, o método da classe mãe
@@ -106,25 +106,20 @@ public abstract class BluRay extends Item {
 	 */
 	@Override
 	public void atualizaAtributo(String atributo, String valor) {
-		
+
 		this.validador.validaAtributo(atributo);
 		this.validador.validaValor(valor);
-		
-		if (atributo.equals("Duracao"))
-		{
+
+		if (atributo.equals("Duracao")) {
 			this.validador.validaConversaoStringToInt(atributo, valor);
-			
+
 			this.setDuracao(Integer.parseInt(valor));
-		}
-		else if (atributo.equals("Classificacao"))
-		{
+		} else if (atributo.equals("Classificacao")) {
 			this.setClassificacao(valor);
-		}
-		else
-		{
+		} else {
 			super.atualizaAtributo(atributo, valor);
 		}
-		
+
 	}
-	
+
 }

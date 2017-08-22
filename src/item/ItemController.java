@@ -13,7 +13,7 @@ import usuario.Usuario;
 import util.ValidadorItem;
 
 /**
- * Representa um controlador de itens. 
+ * Representa um controlador de itens.
  * 
  * @author Amanda V. A. de Luna e Costa
  * @author David Ferreira Quaresma
@@ -107,7 +107,7 @@ public class ItemController {
 	 *            o gênero da temporada.
 	 * @param temporada
 	 *            a temporada da temporada.
-	 * @return
+	 * @return um item blu-ray de série.
 	 */
 	public Item cadastrarBluRaySerie(String nomeItem, double preco, String descricao, int duracao, String classificacao,
 			String genero, int temporada) {
@@ -135,7 +135,7 @@ public class ItemController {
 	 *            o artista do show.
 	 * @param classificacao
 	 *            a classificação do show.
-	 * @return
+	 * @return um item blu-ray de um show.
 	 */
 	public Item cadastrarBlurayShow(String nomeItem, double preco, int duracao, int numeroFaixas, String artista,
 			String classificacao) {
@@ -166,10 +166,12 @@ public class ItemController {
 		return itens;
 
 	}
-	
+
 	/**
 	 * Recupera os itens no sistema.
 	 * 
+	 * @param usuarios
+	 *            os usuários do sistema.
 	 * @return uma lista com os itens do sistema.
 	 */
 	public List<Item> getItensNoSistema(List<Usuario> usuarios) {

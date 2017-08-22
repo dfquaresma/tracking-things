@@ -9,16 +9,13 @@ import excecoes.OperacaoNaoPermitidaNoMomentoExcecao;
 import item.Item;
 import item.bluray.Temporada;
 import item.jogo.JogoTabuleiro;
-import usuario.fidelidade.BomAmigo;
-import usuario.fidelidade.Caloteiro;
 import usuario.fidelidade.CartaoFidelidade;
-import usuario.fidelidade.Fidelidade;
-import usuario.fidelidade.FreeRyder;
-import usuario.fidelidade.Noob;
 import util.ValidadorUsuario;
 
 /**
- * Representação de um usuário no sistema.
+ * Representação de um usuário no sistema. Nele, então guardados seus dados
+ * pessoais como nome, telefone e email. Além dos itens que possui, também
+ * guarda o cartão fidelidade e a reputação no sistema.
  * 
  * @author Amanda V. A. de Luna e Costa
  * @author David Ferreira Quaresma
@@ -63,6 +60,7 @@ public class Usuario {
 	 * Adiciona um item a um usuário específico.
 	 * 
 	 * @param item
+	 *            o item a ser adicionado.
 	 */
 	public void adicionaItem(Item item) {
 		this.validador.validaItem(item);
@@ -114,9 +112,9 @@ public class Usuario {
 	 * @param duracao
 	 *            a duração do episódio.
 	 */
-	public void addBluray(String nomeBlueray, int duracao) {
+	public void addBluray(String nomeBluray, int duracao) {
 
-		Item item = getItem(nomeBlueray);
+		Item item = getItem(nomeBluray);
 		if (!(item instanceof Temporada)) {
 			throw new ItemNaoEhDoTipoEsperadoExcecao("O item de nome informado nao é do tipo temporada");
 		}
@@ -223,6 +221,11 @@ public class Usuario {
 	/**
 	 * Devolve o item que pegou emprestado, atualizando sua reputação no
 	 * sistema.
+	 * 
+	 * @param valorItem
+	 *            o valor do item devolvido.
+	 * @param diasAtraso
+	 *            os dias de atraso da entrega do item.
 	 */
 	public void devolveItem(double valorItem, int diasAtraso) {
 		this.reputacao.devolvendoItem(valorItem, diasAtraso);
@@ -287,18 +290,22 @@ public class Usuario {
 			throw new IllegalArgumentException("Atributo invalido.");
 		}
 	}
+
 	/**
 	 * Retorna se o usuario é caloteiro
-	 * @return
+	 * 
+	 * @return true se o usuário for caloteiro, false caso contrário.
 	 */
 	public boolean isCaloteiro() {
-		if(!cartao.podePegarEmprestado()) {
+		if (!cartao.podePegarEmprestado()) {
 			return true;
 		}
 		return false;
 	}
+
 	/**
 	 * Retorna o periodo que o usuario pode pegar coisas emprestado
+	 * 
 	 * @return o periodo
 	 */
 	public int getPeriodo() {

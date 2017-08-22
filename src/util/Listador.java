@@ -27,15 +27,28 @@ import usuario.comparator.UsuarioReputacaoReversaComparator;
  */
 public class Listador {
 	private ValidadorListagem validador;
+	private ItemComparatorNome comparaItemPorNome;
+	private ItemComparatorValor comparaItemPorValor;
+	private EmprestimoComparatorNomeDono comparaEmprestimoDono;
+	private ItemComparatorVezesEmprestadas comparaItemVezesEmprestadas;
+	private EmprestimosComparatorDataEmprestimo comparaEmprestimosPorDataRegistro;
+	private UsuarioNomeComparator comparaUsuarioPorNome;
+	private UsuarioReputacaoComparator comparaUsuarioPorReputacao;
+	private UsuarioReputacaoReversaComparator comparaUsuarioPorReputacaoInvertida;
 
 	/**
 	 * Constrói um listador.
-	 * 
-	 * @param emprestimoController
-	 * @param usuarioController
 	 */
 	public Listador() {
 		this.validador = new ValidadorListagem();
+		this.comparaItemPorNome = new ItemComparatorNome();
+		this.comparaItemPorValor = new ItemComparatorValor();
+		this.comparaEmprestimoDono = new EmprestimoComparatorNomeDono();
+		this.comparaItemVezesEmprestadas = new ItemComparatorVezesEmprestadas();
+		this.comparaEmprestimosPorDataRegistro = new EmprestimosComparatorDataEmprestimo();
+		this.comparaUsuarioPorNome = new UsuarioNomeComparator();
+		this.comparaUsuarioPorReputacao = new UsuarioReputacaoComparator();
+		this.comparaUsuarioPorReputacaoInvertida = new UsuarioReputacaoReversaComparator();
 	}
 
 	/**
@@ -47,7 +60,7 @@ public class Listador {
 	 */
 	public String listaItensOrdenadosPorNome(List<Item> itens) {
 		this.validador.validaListaDeItensParaListagem(itens);
-		itens.sort(new ItemComparatorNome());
+		itens.sort(this.comparaItemPorNome);
 		return listagemDeItens(itens);
 	}
 
@@ -60,7 +73,7 @@ public class Listador {
 	 */
 	public String listaItensOrdenadosPorValor(List<Item> itens) {
 		this.validador.validaListaDeItensParaListagem(itens);
-		itens.sort(new ItemComparatorValor());
+		itens.sort(this.comparaItemPorValor);
 		return listagemDeItens(itens);
 	}
 
@@ -82,7 +95,7 @@ public class Listador {
 	 */
 	public String listarItensNaoEmprestados(List<Item> itensNaoEmprestados) {
 		this.validador.validaListaDeItensParaListagem(itensNaoEmprestados);
-		itensNaoEmprestados.sort(new ItemComparatorNome());
+		itensNaoEmprestados.sort(this.comparaItemPorNome);
 		return listagemDeItens(itensNaoEmprestados);
 	}
 
@@ -97,7 +110,7 @@ public class Listador {
 	public String listarItensEmprestados(List<Emprestimo> emprestimosNaoFinalizados) {
 		this.validador.validaListaDeEmprestimosParaListagem(emprestimosNaoFinalizados);
 
-		emprestimosNaoFinalizados.sort(new EmprestimoComparatorNomeDono());
+		emprestimosNaoFinalizados.sort(this.comparaEmprestimoDono);
 		String listagem = "";
 		for (Emprestimo emprestimo : emprestimosNaoFinalizados) {
 			listagem += "Dono do item: " + emprestimo.getNomeDono() + ", Nome do item emprestado: "
@@ -117,7 +130,7 @@ public class Listador {
 	 */
 	public String listarTop10Itens(List<Item> itens) {
 		this.validador.validaListaDeItensParaListagem(itens);
-		itens.sort(new ItemComparatorVezesEmprestadas());
+		itens.sort(this.comparaItemVezesEmprestadas);
 
 		int count = 1;
 		String repr = "";
@@ -179,7 +192,7 @@ public class Listador {
 		if (emprestimos.size() == 0) {
 			return msgListagemComZeroElementos;
 		}
-		emprestimos.sort(new EmprestimosComparatorDataEmprestimo());
+		emprestimos.sort(this.comparaEmprestimosPorDataRegistro);
 		return msgListagemValida + listagemDeEmprestimos(emprestimos);
 	}
 
@@ -208,7 +221,7 @@ public class Listador {
 			}
 		}
 
-		usuariosCaloteiros.sort(new UsuarioNomeComparator());
+		usuariosCaloteiros.sort(this.comparaUsuarioPorNome);
 		for (Usuario usuario : usuariosCaloteiros) {
 			repr += usuario.toString() + "|";
 		}
@@ -226,7 +239,7 @@ public class Listador {
 	 */
 	public String listarTop10MelhoresUsuarios(List<Usuario> usuarios) {
 		this.validador.validaListaDeUsuariosParaListagem(usuarios);
-		usuarios.sort(new UsuarioReputacaoReversaComparator());
+		usuarios.sort(this.comparaUsuarioPorReputacao);
 		return this.listarPelaReputacao(usuarios);
 	}
 
@@ -240,7 +253,7 @@ public class Listador {
 	 */
 	public String listarTop10PioresUsuarios(List<Usuario> usuarios) {
 		this.validador.validaListaDeUsuariosParaListagem(usuarios);
-		usuarios.sort(new UsuarioReputacaoComparator());
+		usuarios.sort(this.comparaUsuarioPorReputacaoInvertida);
 		return this.listarPelaReputacao(usuarios);
 	}
 

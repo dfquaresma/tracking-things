@@ -169,12 +169,12 @@ public class ListadorTest {
 		adicionaItensAListaDeItens();
 		assertEquals("1) 3 emprestimos - " + itemA.toString() + "|2) 2 emprestimos - " + itemB.toString()
 				+ "|3) 1 emprestimos - " + itemC.toString() + "|", listador.listarTop10Itens(itens));
-		
+
 		Item item = new JogoTabuleiro("War", 30);
 		this.itens.add(item);
-		
+
 		assertEquals("1) 3 emprestimos - " + itemA.toString() + "|2) 2 emprestimos - " + itemB.toString()
-		+ "|3) 1 emprestimos - " + itemC.toString() + "|", listador.listarTop10Itens(itens));
+				+ "|3) 1 emprestimos - " + itemC.toString() + "|", listador.listarTop10Itens(itens));
 	}
 
 	private void adicionaItensAListaDeItens() {
@@ -197,7 +197,7 @@ public class ListadorTest {
 		}
 
 		assertEquals("Nenhum item emprestado", listador.listarEmprestimosUsuarioEmprestando(this.emprestimos));
-		
+
 		adicionaEmprestimosAListaDeEmprestimos();
 		assertEquals("Emprestimos: " + emprestimo3.toString() + "|" + emprestimo2.toString() + "|"
 				+ emprestimo1.toString() + "|", listador.listarEmprestimosUsuarioEmprestando(emprestimos));
@@ -216,7 +216,8 @@ public class ListadorTest {
 			assertEquals("A lista de emprestimos para listagem nao pode ser nula", e.getMessage());
 		}
 
-		assertEquals("Nenhum item pego emprestado", listador.listarEmprestimosUsuarioPegandoEmprestado(this.emprestimos));
+		assertEquals("Nenhum item pego emprestado",
+				listador.listarEmprestimosUsuarioPegandoEmprestado(this.emprestimos));
 
 		adicionaEmprestimosAListaDeEmprestimos();
 		assertEquals(
@@ -239,7 +240,7 @@ public class ListadorTest {
 		}
 
 		assertEquals("Nenhum emprestimo associado ao item", listador.listarEmprestimosItem(this.emprestimos));
-		
+
 		this.emprestimos.add(emprestimo3);
 		assertEquals("Emprestimos associados ao item: " + emprestimo3.toString() + "|",
 				listador.listarEmprestimosItem(emprestimos));

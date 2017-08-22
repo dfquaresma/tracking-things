@@ -118,7 +118,8 @@ public class EmprestimoControllerTest {
 	}
 
 	/**
-	 * Testa se está pegando empréstimo do usuário que está pegando emprestado (requerente).
+	 * Testa se está pegando empréstimo do usuário que está pegando emprestado
+	 * (requerente).
 	 */
 	@Test
 	public void testGetEmprestimosUserPegandoEmprestado() {

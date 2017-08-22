@@ -31,8 +31,8 @@ public class ReputacaoTest {
 	}
 
 	/**
-	 * Método que testa o comportamento do método que atualiza o valor da Reputação
-	 * quando o usuário adiciona um item para empréstimo.
+	 * Método que testa o comportamento do método que atualiza o valor da
+	 * Reputação quando o usuário adiciona um item para empréstimo.
 	 */
 	@Test
 	public void testAdicionandoItemParaEmprestimo() {
@@ -41,8 +41,8 @@ public class ReputacaoTest {
 	}
 
 	/**
-	 * Método que testa o comportamento do método que atualiza o valor da Reputação
-	 * quando o usuário empresta um item a outro usuário.
+	 * Método que testa o comportamento do método que atualiza o valor da
+	 * Reputação quando o usuário empresta um item a outro usuário.
 	 */
 	@Test
 	public void testEmprestandoItem() {
@@ -51,8 +51,8 @@ public class ReputacaoTest {
 	}
 
 	/**
-	 * Método que testa o comportamento do método que atualiza o valor da Reputação
-	 * quando o usuário devolve um item que pegou emprestado.
+	 * Método que testa o comportamento do método que atualiza o valor da
+	 * Reputação quando o usuário devolve um item que pegou emprestado.
 	 */
 	@Test
 	public void testDevolvendo() {

@@ -19,17 +19,17 @@ public class UsuarioReputacaoComparator implements Comparator<Usuario> {
 	/**
 	 * Comparada o usuarioA com o usuarioB. Retorna 0 caso estes usuários tenham
 	 * reputações iguais, um valor maior que zero se usuarioA tiver maior
-	 * reputação que usuarioBe uma valor negativo caso o usuarioB tenha uma
+	 * reputação que usuarioB e uma valor negativo caso o usuarioB tenha uma
 	 * reputação maior que usuarioA.
 	 */
 	@Override
-	public int compare(Usuario arg0, Usuario arg1) {
-		if (arg0.getReputacao() == arg1.getReputacao()) {
+	public int compare(Usuario usuarioA, Usuario usuarioB) {
+		if (usuarioA.getReputacao() == usuarioB.getReputacao()) {
 			return 0;
-		} else if (arg0.getReputacao() < arg1.getReputacao()) {
-			return -1;
-		} else {
+		} else if (usuarioA.getReputacao() < usuarioB.getReputacao()) {
 			return 1;
+		} else {
+			return -1;
 		}
 	}
 

@@ -1,7 +1,12 @@
+emprestimo
+emprestimo.comparador
 excecoes
 item
 item.bluray
+item.comparator
 item.jogo
-sistema
+projeto
 usuario
+usuario.comparator
+usuario.fidelidade
 util
