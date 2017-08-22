@@ -16,6 +16,15 @@ import item.jogo.JogoEletronico;
 import item.jogo.JogoTabuleiro;
 import usuario.Usuario;
 
+/**
+ * Testa as funcionalidades da clase EmprestimoController.
+ * 
+ * @author Amanda V. A. de Luna e Costa
+ * @author David Ferreira Quaresma
+ * @author Ícaro Dantas de Araújo Lima
+ * @author Paulo Felipe Feitosa da Silva
+ *
+ */
 public class EmprestimoControllerTest {
 	private EmprestimoController controller;
 	private Usuario user1;
@@ -23,6 +32,10 @@ public class EmprestimoControllerTest {
 	private JogoEletronico item1;
 	private JogoTabuleiro item2;
 
+	/**
+	 * Apenas inicializa algumas variáveis (antes de cada @Test) que serão úteis
+	 * durante os testes.
+	 */
 	@Before
 	public void testEmprestimoController() {
 		this.controller = new EmprestimoController();
@@ -36,6 +49,9 @@ public class EmprestimoControllerTest {
 		this.controller.registrarEmprestimo(user2, user1, item2.getNome(), "08/08/2017", 4);
 	}
 
+	/**
+	 * Testa se está registrando empréstimo corretamente.
+	 */
 	@Test
 	public void testRegistrarEmprestimo() {
 		Usuario user3 = new Usuario("Novo na budega", "3371-0000", "noov@gmil.com");
@@ -54,6 +70,10 @@ public class EmprestimoControllerTest {
 
 	}
 
+	/**
+	 * Testa se está devolvendo um item, primeiro verifica que está emprestado,
+	 * devolve e verifica que não está emprestado.
+	 */
 	@Test
 	public void testDevolverItem() {
 		assertTrue(this.item1.isEmprestado());
@@ -61,6 +81,9 @@ public class EmprestimoControllerTest {
 		assertFalse(this.item1.isEmprestado());
 	}
 
+	/**
+	 * Testa se está pegando um empréstimo corretamente.
+	 */
 	@Test
 	public void testGetEmprestimo() {
 		Usuario user1 = new Usuario("Alguem", "3371-0001", "alguem@gmail.com");
@@ -71,6 +94,9 @@ public class EmprestimoControllerTest {
 		assertEquals(emprestimo, this.controller.getEmprestimo(user1, user2, item1.getNome(), "08/08/2017"));
 	}
 
+	/**
+	 * Testa se está pegando empréstimo do usuário que está emprestando.
+	 */
 	@Test
 	public void testGetEmprestimosUserEmprestando() {
 		List<Emprestimo> emprestimos = this.controller.getEmprestimosUserEmprestando(this.user1);
@@ -91,18 +117,27 @@ public class EmprestimoControllerTest {
 
 	}
 
+	/**
+	 * Testa se está pegando empréstimo do usuário que está pegando emprestado (requerente).
+	 */
 	@Test
 	public void testGetEmprestimosUserPegandoEmprestado() {
 		List<Emprestimo> emprestimos = this.controller.getEmprestimosUserPegandoEmprestado(this.user1);
 		assertEquals(1, emprestimos.size());
 	}
 
+	/**
+	 * Testa se está pegando os empréstimos de um certo item.
+	 */
 	@Test
 	public void testGetEmprestimosItem() {
 		List<Emprestimo> emprestimos = this.controller.getEmprestimosItem("Xadrez Quadrado");
 		assertEquals(1, emprestimos.size());
 	}
 
+	/**
+	 * Testa se está pegando os empréstimos não finalizados.
+	 */
 	@Test
 	public void testGetEmprestimosNaoFinalizados() {
 		List<Emprestimo> emprestimos = this.controller.getEmprestimosNaoFinalizados();
