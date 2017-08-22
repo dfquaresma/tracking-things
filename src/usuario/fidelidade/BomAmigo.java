@@ -1,6 +1,7 @@
 package usuario.fidelidade;
+
 /**
- * Representacao da categoria BomAmigo do cartao fidelidade
+ * Representacao da categoria BomAmigo do cartao fidelidade.
  *
  * @author Amanda V. A. de Luna e Costa
  * @author David Ferreira Quaresma
@@ -11,6 +12,7 @@ package usuario.fidelidade;
 public class BomAmigo implements CartaoFidelidade {
 
 	private final int PERIODO = 14;
+
 	/**
 	 * Retorna o periodo que a categoria pode pegar um item emprestado
 	 */
@@ -18,6 +20,7 @@ public class BomAmigo implements CartaoFidelidade {
 	public int getPeriodo() {
 		return this.PERIODO;
 	}
+
 	/**
 	 * Retorna se a categoria pode pegar itens emprestado
 	 */
@@ -25,6 +28,7 @@ public class BomAmigo implements CartaoFidelidade {
 	public boolean podePegarEmprestado() {
 		return true;
 	}
+
 	/**
 	 * Retorna a representacao em string da categoria
 	 */

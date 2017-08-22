@@ -138,7 +138,7 @@ public class TemporadaTest {
 	public void testTemporadaClassificacaoNull() {
 		new Temporada("South park", 1000.10, "Primeira temporada de South park", 1000, null, "COMEDIA", 1);
 	}
-	
+
 	/**
 	 * Testa se uma temporada pode ser emprestada
 	 */
@@ -151,10 +151,12 @@ public class TemporadaTest {
 		this.temporada.setEmprestado(true);
 		assertEquals(false, this.temporada.podeSerEmprestado());
 	}
-	
+
+	/**
+	 * testa se o método atualizaAtributo() está atualizando corretamente.
+	 */
 	@Test
-	public void testAtualizaAtributo()
-	{
+	public void testAtualizaAtributo() {
 		this.temporada.atualizaAtributo("Descricao", "temporada legal");
 		assertEquals("temporada legal", this.temporada.getDescricao());
 		this.temporada.atualizaAtributo("Genero", "EROTICO");
@@ -164,10 +166,13 @@ public class TemporadaTest {
 		this.temporada.atualizaAtributo("Duracao", "30");
 		assertEquals(30, this.temporada.getDuracao());
 	}
-	
+
+	/**
+	 * testa se o método getInfo() está recuperando corretamente os valores dos
+	 * atributos.
+	 */
 	@Test
-	public void testGetInfo()
-	{
+	public void testGetInfo() {
 		assertEquals("Primeira temporada de South park", this.temporada.getInfo("Descricao"));
 		assertEquals("COMEDIA", this.temporada.getInfo("Genero"));
 		assertEquals("1", this.temporada.getInfo("Temporada"));
@@ -180,33 +185,28 @@ public class TemporadaTest {
 	public void testTemporadaGeneroNull() {
 		new Temporada("South park", 1000.10, "Primeira temporada de South park", 1000, "DEZOITO_ANOS", null, 1);
 	}
-	
+
+	/**
+	 * Verifica se os setters estão funcionando corretamente.
+	 */
 	@Test
-	public void testSetDescricao()
-	{
+	public void testSetters() {
 		this.temporada.setDescricao("Essa temporada eh muito legal");
 		assertEquals("Essa temporada eh muito legal", this.temporada.getDescricao());
-	}
-	
-	@Test
-	public void testSetGenero()
-	{
+
 		this.temporada.setGenero("FAROESTE");
 		assertEquals("FAROESTE", this.temporada.getGenero());
-	}
-	
-	@Test
-	public void testSetTemporada()
-	{
+
 		this.temporada.setTemporada(20);
 		assertEquals(20, this.temporada.getTemporada());
 	}
-	
+
+	/**
+	 * Verifica se a representação em string segue conforme desejado.
+	 */
 	@Test
-	public void testToString()
-	{
-		//new Temporada("South park", 1000.10, "Primeira temporada de South park", 1000, "DEZOITO_ANOS",
-				//"COMEDIA", 1);
-		assertEquals("SERIE: South park, R$ 1000.1, Nao emprestado, 1000 min, DEZOITO_ANOS, COMEDIA, Temporada 1", this.temporada.toString());
+	public void testToString() {
+		assertEquals("SERIE: South park, R$ 1000.1, Nao emprestado, 1000 min, DEZOITO_ANOS, COMEDIA, Temporada 1",
+				this.temporada.toString());
 	}
 }

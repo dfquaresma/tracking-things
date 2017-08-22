@@ -112,7 +112,7 @@ public class Usuario {
 	 * @param duracao
 	 *            a duração do episódio.
 	 */
-	public void addBlueray(String nomeBlueray, int duracao) {
+	public void addBluray(String nomeBlueray, int duracao) {
 
 		Item item = getItem(nomeBlueray);
 		if (!(item instanceof Temporada)) {
@@ -326,7 +326,7 @@ public class Usuario {
 
 	private void validaAttNomeDeItem(String nomeItem) {
 		if (this.itens.containsKey(nomeItem))
-			throw new IllegalArgumentException();
+			throw new OperacaoNaoPermitidaNoMomentoExcecao("Nome do item já existente");
 	}
 
 	/**

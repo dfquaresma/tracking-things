@@ -18,7 +18,7 @@ public class JogoTabuleiroTest {
 	private JogoTabuleiro jogo;
 
 	/**
-	 * Apenas instancia o jogoTabuleiro.
+	 * Prepara o ambiente para os testes.
 	 */
 	@Before
 	public void criaJogoTabuleiro() {

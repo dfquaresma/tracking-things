@@ -176,8 +176,8 @@ public class Facade {
 	 */
 	public void cadastrarBluRayFilme(String nome, String telefone, String nomeItem, double preco, int duracao,
 			String genero, String classificacao, int anoLancamento) {
-		Item novoItem = this.itemController.cadastrarBlurayFilme(nomeItem, preco, duracao, genero,
-				classificacao, anoLancamento);
+		Item novoItem = this.itemController.cadastrarBlurayFilme(nomeItem, preco, duracao, genero, classificacao,
+				anoLancamento);
 		this.usuarioController.adicionaItem(nome, telefone, novoItem);
 	}
 
@@ -205,8 +205,8 @@ public class Facade {
 	 */
 	public void cadastrarBluRaySerie(String nome, String telefone, String nomeItem, double preco, String descricao,
 			int duracao, String classificacao, String genero, int temporada) {
-		Item novoItem = this.itemController.cadastrarBluRaySerie(nomeItem, preco, descricao, duracao,
-				classificacao, genero, temporada);
+		Item novoItem = this.itemController.cadastrarBluRaySerie(nomeItem, preco, descricao, duracao, classificacao,
+				genero, temporada);
 		this.usuarioController.adicionaItem(nome, telefone, novoItem);
 	}
 
@@ -232,8 +232,8 @@ public class Facade {
 	 */
 	public void cadastrarBluRayShow(String nome, String telefone, String nomeItem, double preco, int duracao,
 			int numeroFaixas, String artista, String classificacao) {
-		Item novoItem = this.itemController.cadastrarBlurayShow(nomeItem, preco, duracao, numeroFaixas,
-				artista, classificacao);
+		Item novoItem = this.itemController.cadastrarBlurayShow(nomeItem, preco, duracao, numeroFaixas, artista,
+				classificacao);
 		this.usuarioController.adicionaItem(nome, telefone, novoItem);
 	}
 
@@ -391,6 +391,12 @@ public class Facade {
 				dataDevolucao);
 	}
 
+	/**
+	 * Recupera uma representação em string dos itens não emprestados no sistema
+	 * ordenados pelo nome.
+	 * 
+	 * @return a representação em string dos itens não emprestados.
+	 */
 	public String listarItensNaoEmprestados() {
 		List<Usuario> usuarios = this.usuarioController.getUsuariosNoSistema();
 		List<Item> itens = this.itemController.getItensNoSistema(usuarios);
@@ -398,50 +404,107 @@ public class Facade {
 		return this.listador.listarItensNaoEmprestados(itensNaoEmprestados);
 	}
 
+	/**
+	 * Recupera uma representação em string dos itens não emprestados no sistema
+	 * ordenados pelo nome.
+	 * 
+	 * @return a representação em string dos itens não emprestados.
+	 */
 	public String listarItensEmprestados() {
 		List<Emprestimo> emprestimos = this.emprestimoController.getEmprestimosNaoFinalizados();
 		return this.listador.listarItensEmprestados(emprestimos);
 	}
 
+	/**
+	 * Recupera uma representação em string dos 10 itens mais emprestados
+	 * ordenados de forma decrescente, ou seja, o mais emprestado ocupa a
+	 * posição 1.
+	 * 
+	 * @return a representação do top 10 itens mais emprestados.
+	 */
 	public String listarTop10Itens() {
 		List<Usuario> usuarios = this.usuarioController.getUsuariosNoSistema();
 		List<Item> itens = this.itemController.getItensNoSistema(usuarios);
 		return this.listador.listarTop10Itens(itens);
 	}
 
+	/**
+	 * Recupera uma representação em string dos emprestimos de um usuario ao
+	 * emprestar itens, em ordem de registro.
+	 * 
+	 * @param nome
+	 *            o nome do usuário.
+	 * @param telefone
+	 *            o telefone do usuário.
+	 * @return a representação dos emprestimos do usuário.
+	 */
 	public String listarEmprestimosUsuarioEmprestando(String nome, String telefone) {
 		Usuario user = this.usuarioController.getUser(nome, telefone);
 		List<Emprestimo> emprestimos = this.emprestimoController.getEmprestimosUserEmprestando(user);
 		return this.listador.listarEmprestimosUsuarioEmprestando(emprestimos);
 	}
 
+	/**
+	 * Recupera uma representação em string dos emprestimos de um usuario ao
+	 * pegar emprestado itens, em ordem de registro.
+	 * 
+	 * @param nome
+	 *            o nome do usuário.
+	 * @param telefone
+	 *            o telefone do usuário.
+	 * @return a representação dos emprestimos do usuário.
+	 */
 	public String listarEmprestimosUsuarioPegandoEmprestado(String nome, String telefone) {
 		Usuario user = this.usuarioController.getUser(nome, telefone);
 		List<Emprestimo> emprestimos = this.emprestimoController.getEmprestimosUserPegandoEmprestado(user);
 		return this.listador.listarEmprestimosUsuarioPegandoEmprestado(emprestimos);
 	}
 
+	/**
+	 * Recupera uma representação em string dos emprestimos associados ao item
+	 * de nome recebido no parâmetro. em ordem de registro.
+	 * 
+	 * @param nomeItem
+	 *            o nome do item de interesse.
+	 * @return a representação em string da listagem.
+	 */
 	public String listarEmprestimosItem(String nomeItem) {
 		List<Emprestimo> emprestimos = this.emprestimoController.getEmprestimosItem(nomeItem);
 		return this.listador.listarEmprestimosItem(emprestimos);
 	}
-	
+
+	/**
+	 * Recupera uma representação em string dos usuários caloteiros no sistema.
+	 * 
+	 * @return a representação dos caloteiros no sistema.
+	 */
 	public String listarCaloteiros() {
 		List<Usuario> usuarios = this.usuarioController.getUsuariosNoSistema();
 		return this.listador.listarCaloteiros(usuarios);
 	}
 
-	
+	/**
+	 * Recupera uma representação em string listando os 10 usuários com melhor
+	 * reputação no sitema.
+	 * 
+	 * @return a representação em string dessa listagem.
+	 */
 	public String listarTop10MelhoresUsuarios() {
 		List<Usuario> usuarios = this.usuarioController.getUsuariosNoSistema();
 		return this.listador.listarTop10MelhoresUsuarios(usuarios);
 	}
-	
+
+	/**
+	 * Recupera uma representação em string listando os 10 usuários com melhor
+	 * reputação no sitema.
+	 * 
+	 * @return a representação em string dessa listagem.
+	 */
 	public String listarTop10PioresUsuarios() {
 		List<Usuario> usuarios = this.usuarioController.getUsuariosNoSistema();
 		return this.listador.listarTop10PioresUsuarios(usuarios);
 	}
-	
+
 	/**
 	 * Fecha o sistema de apostas.
 	 */

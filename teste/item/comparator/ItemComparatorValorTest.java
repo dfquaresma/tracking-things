@@ -11,7 +11,7 @@ import item.jogo.JogoEletronico;
 import item.jogo.JogoTabuleiro;
 
 /**
- * Testa se o comparadro de itens por valor funciona corretamente.
+ * Testa se o comparador de itens por valor funciona corretamente.
  * 
  * @author Amanda V. A. de Luna e Costa
  * @author David Ferreira Quaresma
@@ -23,7 +23,7 @@ public class ItemComparatorValorTest {
 
 	/**
 	 * Executa a bateria de testes a fim de verificar a corretude da classe
-	 * ComparadorPorValor.
+	 * comparador por valor.
 	 */
 	@Test
 	public void testCompare() {

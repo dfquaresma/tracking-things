@@ -8,7 +8,7 @@ import org.junit.Test;
 import item.bluray.Episodio;
 
 /**
- * Testa a criacao de um episodio
+ * Testa a criacao de um episodio.
  * 
  * @author Amanda V. A. de Luna e Costa
  * @author David Ferreira Quaresma
@@ -42,17 +42,22 @@ public class EpisodioTest {
 	public void testEpisodioComDuracaoInvalida() {
 		new Episodio(0);
 	}
-	
+
+	/**
+	 * Testa se esta atualizando corretamente a duração do episódio.
+	 */
 	@Test
-	public void testSetEpisodioDuracao()
-	{
+	public void testSetEpisodioDuracao() {
 		this.episodio.setDuracao(1);
 		assertEquals(1, this.episodio.getDuracao());
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testSetEpisodioDuracaoInvalido()
-	{
+
+	/**
+	 * Testa se é lançada exceção quando tenta-se atualizar a duração para o
+	 * valor 0.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testSetEpisodioDuracaoInvalido() {
 		this.episodio.setDuracao(0);
 	}
 

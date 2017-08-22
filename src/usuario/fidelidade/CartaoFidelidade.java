@@ -1,6 +1,7 @@
 package usuario.fidelidade;
+
 /**
- * Interface que contem os metodos dos cartoes fidelidade
+ * Interface que contem os metodos dos cartoes fidelidade.
  *
  * @author Amanda V. A. de Luna e Costa
  * @author David Ferreira Quaresma
@@ -11,11 +12,14 @@ package usuario.fidelidade;
 public interface CartaoFidelidade {
 	/**
 	 * Retorna o periodo da categoria
+	 * 
 	 * @return o periodo
 	 */
 	public int getPeriodo();
+
 	/**
 	 * Retorna se a categoria pode pegar itens emprestado
+	 * 
 	 * @return true se sim, false se nao
 	 */
 	public boolean podePegarEmprestado();

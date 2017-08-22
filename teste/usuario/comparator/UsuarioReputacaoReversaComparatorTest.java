@@ -29,7 +29,7 @@ public class UsuarioReputacaoReversaComparatorTest {
 		controller.registrarEmprestimo(user1, user2, itemA.getNome(), "20/08/2018", 4);
 		controller.registrarEmprestimo(user1, user3, itemB.getNome(), "20/08/2018", 4);
 		controller.registrarEmprestimo(user2, user3, itemC.getNome(), "20/08/2018", 4);
-		
+
 		assertTrue(comparador.compare(user1, user2) < 0);
 		assertTrue(comparador.compare(user2, user3) < 0);
 		assertTrue(comparador.compare(user3, user1) > 0);

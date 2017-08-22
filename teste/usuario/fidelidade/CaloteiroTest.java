@@ -5,21 +5,36 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Testa a classe do cartão de fidelidade Caloteiro.
+ * 
+ * @author Amanda V. A. de Luna e Costa
+ * @author David Ferreira Quaresma
+ * @author Ícaro Dantas de Araújo Lima
+ * @author Paulo Felipe Feitosa da Silva
+ *
+ */
 public class CaloteiroTest {
 
-private CartaoFidelidade cartao;
-	
+	private CartaoFidelidade cartao;
+
+	/**
+	 * Prepara o ambiente de testes.
+	 */
 	@Before
-	public void setup(){
+	public void setup() {
 		this.cartao = new Caloteiro();
 	}
+
 	/**
-	 * Testa o periodo maximo que o usuario da categoria pode pegar um item emprestado
+	 * Testa o periodo maximo que o usuario da categoria pode pegar um item
+	 * emprestado
 	 */
 	@Test
 	public void testGetPeriodo() {
 		assertEquals(0, cartao.getPeriodo());
 	}
+
 	/**
 	 * Testa se o usuario da categoria pode pegar itens emprestado
 	 */
@@ -27,6 +42,7 @@ private CartaoFidelidade cartao;
 	public void testPodePegarEmprestado() {
 		assertFalse(cartao.podePegarEmprestado());
 	}
+
 	/**
 	 * Testa a representacao string da categoria
 	 */

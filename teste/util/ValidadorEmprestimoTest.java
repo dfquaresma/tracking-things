@@ -70,22 +70,33 @@ public class ValidadorEmprestimoTest {
 	public void testValidaPeriodoInvalido() {
 		this.validador.validaPeriodo(0);
 	}
-	
+
+	/**
+	 * Testa a validação de data de devolução de um item().
+	 * 
+	 * @throws ParseException
+	 *             quando há falha na conversão de data.
+	 */
 	@Test
-	public void testValidaDataDevolucao() throws ParseException
-	{
+	public void testValidaDataDevolucao() throws ParseException {
 		Date dataEmprestimo = (new SimpleDateFormat("dd/MM/yyyy")).parse("15/12/1996");
 		Date dataDevolucao = (new SimpleDateFormat("dd/MM/yyyy")).parse("15/12/1996");
 		this.validador.validaDataDevolucao(dataEmprestimo, dataDevolucao);
-		
+
 		dataEmprestimo = (new SimpleDateFormat("dd/MM/yyyy")).parse("15/12/1996");
 		dataDevolucao = (new SimpleDateFormat("dd/MM/yyyy")).parse("16/12/1996");
 		this.validador.validaDataDevolucao(dataEmprestimo, dataDevolucao);
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testValidaDataDevolucaoInvalida() throws ParseException
-	{
+
+	/**
+	 * Testa se está sendo lançado exceção quando a data de devolução é antes da
+	 * data de emprestimo.
+	 * 
+	 * @throws ParseException
+	 *             quando há falha na conversão de data.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testValidaDataDevolucaoInvalida() throws ParseException {
 		Date dataEmprestimo = (new SimpleDateFormat("dd/MM/yyyy")).parse("15/12/1996");
 		Date dataDevolucao = (new SimpleDateFormat("dd/MM/yyyy")).parse("14/12/1996");
 		this.validador.validaDataDevolucao(dataEmprestimo, dataDevolucao);

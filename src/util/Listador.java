@@ -27,16 +27,17 @@ import usuario.comparator.UsuarioReputacaoReversaComparator;
  */
 public class Listador {
 	private ValidadorListagem validador;
-	
+
 	/**
 	 * Constrói um listador.
-	 * @param emprestimoController 
-	 * @param usuarioController 
+	 * 
+	 * @param emprestimoController
+	 * @param usuarioController
 	 */
 	public Listador() {
 		this.validador = new ValidadorListagem();
 	}
-	
+
 	/**
 	 * Lista itens ordenando-os por nome.
 	 * 
@@ -57,7 +58,7 @@ public class Listador {
 	 *            os itens a serem listados.
 	 * @return a listagem dos itens.
 	 */
-	public String listaItensOrdenadosPorValor(List<Item> itens ) {
+	public String listaItensOrdenadosPorValor(List<Item> itens) {
 		this.validador.validaListaDeItensParaListagem(itens);
 		itens.sort(new ItemComparatorValor());
 		return listagemDeItens(itens);
@@ -70,112 +71,183 @@ public class Listador {
 		}
 		return repr;
 	}
-		
-	public String listarItensNaoEmprestados(List<Item> itens) {
-		this.validador.validaListaDeItensParaListagem(itens);
-		itens.sort(new ItemComparatorNome());
-		return listagemDeItens(itens);
+
+	/**
+	 * Recupera uma representação em string dos itens não emprestados no sistema
+	 * ordenados pelo nome.
+	 * 
+	 * @param itensNaoEmprestados
+	 *            os itens que estão no sistema.
+	 * @return a representação em string dos itens não emprestados.
+	 */
+	public String listarItensNaoEmprestados(List<Item> itensNaoEmprestados) {
+		this.validador.validaListaDeItensParaListagem(itensNaoEmprestados);
+		itensNaoEmprestados.sort(new ItemComparatorNome());
+		return listagemDeItens(itensNaoEmprestados);
 	}
-	
-	public String listarItensEmprestados(List<Emprestimo> emprestimos) {
-		emprestimos.sort(new EmprestimoComparatorNomeDono());
+
+	/**
+	 * Recupera uma representação em string dos itens emprestados no sistema
+	 * ordenados pelo nome do dono.
+	 * 
+	 * @param emprestimosNaoFinalizados
+	 *            os emprestimos no sistema que ainda não foram finalizados.
+	 * @return a representação em string dos itens emprestados.
+	 */
+	public String listarItensEmprestados(List<Emprestimo> emprestimosNaoFinalizados) {
+		emprestimosNaoFinalizados.sort(new EmprestimoComparatorNomeDono());
 		String listagem = "";
-		for (Emprestimo emprestimo : emprestimos) {
-			listagem += "Dono do item: " + emprestimo.getNomeDono() + ", Nome do item emprestado: " + emprestimo.getNomeItem() + "|";
+		for (Emprestimo emprestimo : emprestimosNaoFinalizados) {
+			listagem += "Dono do item: " + emprestimo.getNomeDono() + ", Nome do item emprestado: "
+					+ emprestimo.getNomeItem() + "|";
 		}
 		return listagem;
 	}
-	
+
+	/**
+	 * Recupera uma representação em string dos 10 itens mais emprestados
+	 * ordenados de forma decrescente, ou seja, o mais emprestado ocupa a
+	 * posição 1.
+	 * 
+	 * @param itens
+	 *            os itens no sistema.
+	 * @return a representação do top 10 itens mais emprestados.
+	 */
 	public String listarTop10Itens(List<Item> itens) {
 		this.validador.validaListaDeItensParaListagem(itens);
 		itens.sort(new ItemComparatorVezesEmprestadas());
-		
+
 		int count = 1;
 		String repr = "";
-		Iterator<Item> itr = itens.iterator();		
+		Iterator<Item> itr = itens.iterator();
 		while (itr.hasNext() && count <= 10) {
 			Item item = itr.next();
 			if (item.getQtdVezesEmprestado() == 0) {
-				break;				
+				break;
 			}
 			repr += count + ") " + item.getQtdVezesEmprestado() + " emprestimos - " + item + "|";
 			count++;
 		}
 		return repr;
-		
+
 	}
-	
+
+	/**
+	 * Recupera uma representação em string dos emprestimos de algum usuario ao
+	 * emprestar itens em ordem de registro.
+	 * 
+	 * @param emprestimos
+	 *            os emprestimos de um usuário.
+	 * @return a representação dos emprestimos.
+	 */
 	public String listarEmprestimosUsuarioEmprestando(List<Emprestimo> emprestimos) {
-		this.validador.validaListaDeEmprestimosParaListagem(emprestimos);
-		if (emprestimos.size() == 0) {
-			return "Nenhum item emprestado";
-		}
-		emprestimos.sort(new EmprestimosComparatorDataEmprestimo());
-		return "Emprestimos: " + listagemDeEmprestimos(emprestimos);
+		return this.listaEmprestimosEmOrdemDeRegistro(emprestimos, "Emprestimos: ", "Nenhum item emprestado");
 	}
-	
+
+	/**
+	 * Recupera uma representação em string dos emprestimos de algum usuario ao
+	 * pegar emprestado itens em ordem de registro.
+	 * 
+	 * @param emprestimos
+	 *            os emprestimos de um usuário.
+	 * @return a representação dos emprestimos.
+	 */
 	public String listarEmprestimosUsuarioPegandoEmprestado(List<Emprestimo> emprestimos) {
-		this.validador.validaListaDeEmprestimosParaListagem(emprestimos);
-		if (emprestimos.size() == 0) {
-			return "Nenhum item pego emprestado";
-		}
-		emprestimos.sort(new EmprestimosComparatorDataEmprestimo());
-		return "Emprestimos pegos: " + listagemDeEmprestimos(emprestimos);
+		return this.listaEmprestimosEmOrdemDeRegistro(emprestimos, "Emprestimos pegos: ",
+				"Nenhum item pego emprestado");
 	}
-	
+
+	/**
+	 * Recupera uma representação em string dos emprestimos associados a algum
+	 * item em ordem de registro.
+	 * 
+	 * @param emprestimos
+	 *            os emprestimos associados a algum item.
+	 * @return a representação em string da listagem.
+	 */
 	public String listarEmprestimosItem(List<Emprestimo> emprestimos) {
-		this.validador.validaListaDeEmprestimosParaListagem(emprestimos);
-		emprestimos.sort(new EmprestimosComparatorDataEmprestimo());
-		if (emprestimos.size() == 0) {
-			return "Nenhum emprestimo associado ao item";
-		}
-		return "Emprestimos associados ao item: " + listagemDeEmprestimos(emprestimos);
+		return this.listaEmprestimosEmOrdemDeRegistro(emprestimos, "Emprestimos associados ao item: ",
+				"Nenhum emprestimo associado ao item");
+
 	}
-	
-	private String listagemDeEmprestimos(List<Emprestimo> emprestimos) {	
+
+	private String listaEmprestimosEmOrdemDeRegistro(List<Emprestimo> emprestimos, String msgListagemValida,
+			String msgListagemComZeroElementos) {
+		this.validador.validaListaDeEmprestimosParaListagem(emprestimos);
+		if (emprestimos.size() == 0) {
+			return msgListagemComZeroElementos;
+		}
+		emprestimos.sort(new EmprestimosComparatorDataEmprestimo());
+		return msgListagemValida + listagemDeEmprestimos(emprestimos);
+	}
+
+	private String listagemDeEmprestimos(List<Emprestimo> emprestimos) {
 		String repr = "";
 		for (Emprestimo emprestimo : emprestimos) {
 			repr += emprestimo + "|";
 		}
 		return repr;
 	}
-	
+
+	/**
+	 * Recupera uma representação em string dos usuários caloteiros no sistema.
+	 * 
+	 * @param usuarios
+	 *            os usuários no sistema.
+	 * @return a representação dos caloteiros no sistema.
+	 */
 	public String listarCaloteiros(List<Usuario> usuarios) {
 		String repr = "Lista de usuarios com reputacao negativa: ";
 		List<Usuario> usuariosCaloteiros = new ArrayList<Usuario>();
-		for (Usuario usuario: usuarios) {
+		for (Usuario usuario : usuarios) {
 			if (usuario.getReputacao() < 0) {
 				usuariosCaloteiros.add(usuario);
 			}
 		}
-		
+
 		usuariosCaloteiros.sort(new UsuarioNomeComparator());
-		for (Usuario usuario: usuariosCaloteiros) {
+		for (Usuario usuario : usuariosCaloteiros) {
 			repr += usuario.toString() + "|";
 		}
-		
+
 		return repr;
 	}
-	
-	private String listarPelaReputacao(List<Usuario> usuarios) {
-		String repr = "";
-		for (int i = 0; i < usuarios.size() && i < 10; i++) {
-			Usuario usuario = usuarios.get(i);
-			
-			repr += (i + 1) + ": " + usuario.getNome() + " - " + "Reputacao: " + String.format("%.2f", usuario.getReputacao()) + "|";
-		}
-		
-		return repr;
-	}
-	
+
+	/**
+	 * Recupera uma representação em string listando os 10 usuários com melhor
+	 * reputação no sitema.
+	 * 
+	 * @param usuarios
+	 *            os usuários do sistema.
+	 * @return a representação em string dessa listagem.
+	 */
 	public String listarTop10MelhoresUsuarios(List<Usuario> usuarios) {
 		usuarios.sort(new UsuarioReputacaoReversaComparator());
 		return this.listarPelaReputacao(usuarios);
 	}
-	
+
+	/**
+	 * Recupera uma representação em string listando os 10 usuários com pior
+	 * reputação no sitema.
+	 * 
+	 * @param usuarios
+	 *            os usuários do sistema.
+	 * @return a representação em string dessa listagem.
+	 */
 	public String listarTop10PioresUsuarios(List<Usuario> usuarios) {
 		usuarios.sort(new UsuarioReputacaoComparator());
 		return this.listarPelaReputacao(usuarios);
 	}
-	
+
+	private String listarPelaReputacao(List<Usuario> usuarios) {
+		String repr = "";
+		for (int i = 0; i < usuarios.size() && i < 10; i++) {
+			Usuario usuario = usuarios.get(i);
+
+			repr += (i + 1) + ": " + usuario.getNome() + " - " + "Reputacao: "
+					+ String.format("%.2f", usuario.getReputacao()) + "|";
+		}
+
+		return repr;
+	}
 }
