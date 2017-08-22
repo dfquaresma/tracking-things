@@ -12,7 +12,7 @@ import item.jogo.JogoTabuleiro;
 import usuario.Usuario;
 
 /**
- * Testa as funcionalidades da clase EmprestimoComparatorNomeDonoTest.
+ * Testa as funcionalidades da clase EmprestimoComparatorNomeDono.
  * 
  * @author Amanda V. A. de Luna e Costa
  * @author David Ferreira Quaresma
