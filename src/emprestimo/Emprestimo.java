@@ -72,7 +72,7 @@ public class Emprestimo {
 			throw new IllegalArgumentException("Usuario nao pode pegar nenhum item emprestado");
 		}
 
-		if (this.periodo > requerente.getPeriodoEmprestado()) {
+		if (this.periodo > requerente.getPeriodo()) {
 			throw new IllegalArgumentException("Usuario impossiblitado de pegar emprestado por esse periodo");
 		}
 

@@ -9,7 +9,7 @@ package usuario.fidelidade;
  * @author Paulo Felipe Feitosa da Silva
  *
  */
-public class BomAmigo implements CartaoFidelidade {
+public class BomAmigo implements Fidelidade {
 
 	private final int PERIODO = 14;
 

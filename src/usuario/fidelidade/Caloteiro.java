@@ -9,7 +9,7 @@ package usuario.fidelidade;
  * @author Paulo Felipe Feitosa da Silva
  *
  */
-public class Caloteiro implements CartaoFidelidade {
+public class Caloteiro implements Fidelidade {
 
 	private final int PERIODO = 0;
 
