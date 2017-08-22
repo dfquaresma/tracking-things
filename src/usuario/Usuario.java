@@ -292,7 +292,7 @@ public class Usuario {
 	 * @return
 	 */
 	public boolean isCaloteiro() {
-		if(getReputacao() < 0) {
+		if(!cartao.podePegarEmprestado()) {
 			return true;
 		}
 		return false;
