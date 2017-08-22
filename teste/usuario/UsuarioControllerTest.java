@@ -6,6 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import excecoes.UsuarioJaExistenteExcecao;
+import item.Item;
+import item.jogo.JogoEletronico;
 import usuario.UsuarioController;
 
 /**
@@ -398,4 +400,12 @@ public class UsuarioControllerTest {
 		}
 	}
 
+	@Test
+	public void addItemEGetDetalhesItem() {
+		sistema.cadastrarUsuario("Rick", "4002-8922", "rick@mail.com");
+		Item item = new JogoEletronico("Bioshock", 345.00, "PC");
+		sistema.adicionaItem("Rick", "4002-8922",item);
+		assertEquals("JOGO ELETRONICO: Bioshock, R$ 345.0, Nao emprestado, PC", sistema.getDetalhesItem("Rick", "4002-8922", "Bioshock"));
+		
+	}
 }

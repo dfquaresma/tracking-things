@@ -9,7 +9,7 @@ package usuario.fidelidade;
  * @author Paulo Felipe Feitosa da Silva
  *
  */
-public class FreeRyder implements CartaoFidelidade {
+public class FreeRyder implements Fidelidade {
 
 	private final int PERIODO = 5;
 

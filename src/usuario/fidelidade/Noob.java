@@ -9,7 +9,7 @@ package usuario.fidelidade;
  * @author Paulo Felipe Feitosa da Silva
  *
  */
-public class Noob implements CartaoFidelidade {
+public class Noob implements Fidelidade {
 	/**
 	 * Retorna o periodo que a categoria pode pegar um item emprestado
 	 */

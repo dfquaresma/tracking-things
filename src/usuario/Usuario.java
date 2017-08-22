@@ -12,6 +12,7 @@ import item.jogo.JogoTabuleiro;
 import usuario.fidelidade.BomAmigo;
 import usuario.fidelidade.Caloteiro;
 import usuario.fidelidade.CartaoFidelidade;
+import usuario.fidelidade.Fidelidade;
 import usuario.fidelidade.FreeRyder;
 import usuario.fidelidade.Noob;
 import util.ValidadorUsuario;
@@ -19,7 +20,10 @@ import util.ValidadorUsuario;
 /**
  * Representação de um usuário no sistema.
  * 
- * @author David Ferreira
+ * @author Amanda V. A. de Luna e Costa
+ * @author David Ferreira Quaresma
+ * @author Ícaro Dantas de Araújo Lima
+ * @author Paulo Felipe Feitosa da Silva
  *
  */
 public class Usuario {
@@ -52,7 +56,7 @@ public class Usuario {
 		this.email = email;
 		this.itens = new HashMap<>();
 		this.reputacao = new Reputacao();
-		this.cartao = new FreeRyder();
+		this.cartao = new CartaoFidelidade();
 	}
 
 	/**
@@ -77,11 +81,9 @@ public class Usuario {
 	 */
 	public void removerItem(String nomeItem) {
 		this.validaNomeItemParaUso(nomeItem);
-		// Item item = this.getItem(nomeItem);
 
 		this.itens.remove(nomeItem);
 
-		// this.reputacao.removendoItemParaEmprestimo(item.getPreco());
 	}
 
 	/**
@@ -173,7 +175,7 @@ public class Usuario {
 	 * Recupera os detalhes de um item.
 	 * 
 	 * @param nomeItem
-	 *            o nome do item.
+	 *            o nome do itecartaom.
 	 * @return os detalhes do item.
 	 */
 	public String getDetalhesItem(String nomeItem) {
@@ -227,6 +229,10 @@ public class Usuario {
 		attCartao();
 	}
 
+	private void attCartao() {
+		this.cartao.attCartao(reputacao.getReputacao(), itens.isEmpty());
+	}
+
 	/**
 	 * Atualiza um atributo específico do usuário.
 	 * 
@@ -257,40 +263,6 @@ public class Usuario {
 	}
 
 	/**
-	 * Atualiza a classificacao do usuario de acordo com os cartoes fidelidade
-	 */
-	public void attCartao() {
-		if (this.reputacao.getReputacao() > 0 && reputacao.getReputacao() <= 100 && !(itens.isEmpty())) {
-			this.cartao = new Noob();
-		} else if (reputacao.getReputacao() < 0) {
-			this.cartao = new Caloteiro();
-		} else {
-			this.cartao = new BomAmigo();
-		}
-	}
-
-	/**
-	 * Retorna se um usuario esta na classificacao de caloteiro
-	 * 
-	 * @return true se for caloteiro,false se nao for
-	 */
-	public boolean isCaloteiro() {
-		if (this.reputacao.getReputacao() < 0) {
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * Retorna o periodo que um usuario pode pegar itens emprestado
-	 * 
-	 * @return o periodo
-	 */
-	public int getPeriodoEmprestado() {
-		return this.cartao.getPeriodo();
-	}
-
-	/**
 	 * Recupera um atributo específico do usuário.
 	 * 
 	 * @param atributo
@@ -314,6 +286,23 @@ public class Usuario {
 		default:
 			throw new IllegalArgumentException("Atributo invalido.");
 		}
+	}
+	/**
+	 * Retorna se o usuario é caloteiro
+	 * @return
+	 */
+	public boolean isCaloteiro() {
+		if(getReputacao() < 0) {
+			return true;
+		}
+		return false;
+	}
+	/**
+	 * Retorna o periodo que o usuario pode pegar coisas emprestado
+	 * @return o periodo
+	 */
+	public int getPeriodo() {
+		return this.cartao.getPeriodoEmprestado();
 	}
 
 	private void validaNomeItemParaUso(String nomeItem) {

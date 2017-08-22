@@ -16,7 +16,7 @@ import org.junit.Test;
  */
 public class FreeRyderTest {
 
-	private CartaoFidelidade cartao;
+	private Fidelidade cartao;
 
 	/**
 	 * Prepara o ambiente de testes.
