@@ -1,5 +1,6 @@
 package item.bluray;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -12,8 +13,13 @@ import java.util.ArrayList;
  * @author Paulo Felipe Feitosa da Silva
  *
  */
-public class Temporada extends BluRay {
+public class Temporada extends BluRay implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private String descricao;
 	private Genero genero;
 	private int temporada;

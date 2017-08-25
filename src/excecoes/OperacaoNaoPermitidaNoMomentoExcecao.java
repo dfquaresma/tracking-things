@@ -1,5 +1,7 @@
 package excecoes;
 
+import java.io.Serializable;
+
 /**
  * Lançado para indicar que a operação não é permitida no momento.
  * 
@@ -9,7 +11,7 @@ package excecoes;
  * @author Paulo Felipe Feitosa da Silva
  *
  */
-public class OperacaoNaoPermitidaNoMomentoExcecao extends RuntimeException {
+public class OperacaoNaoPermitidaNoMomentoExcecao extends RuntimeException implements Serializable {
 
 	private static final long serialVersionUID = 5861420653202594172L;
 

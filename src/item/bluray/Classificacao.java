@@ -1,5 +1,7 @@
 package item.bluray;
 
+import java.io.Serializable;
+
 /**
  * Representação das classificações disponíveis.
  * 
@@ -9,7 +11,7 @@ package item.bluray;
  * @author Paulo Felipe Feitosa da Silva
  *
  */
-public enum Classificacao {
+public enum Classificacao implements Serializable {
 
 	LIVRE("LIVRE"), DEZ_ANOS("DEZ_ANOS"), DOZE_ANOS("DOZE_ANOS"), QUATORZE_ANOS("QUATORZE_ANOS"), DEZESSEIS_ANOS(
 			"DEZESSEIS_ANOS"), DEZOITO_ANOS("DEZOITO_ANOS");

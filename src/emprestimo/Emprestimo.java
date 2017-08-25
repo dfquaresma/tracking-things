@@ -1,5 +1,6 @@
 package emprestimo;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,8 +21,13 @@ import util.ValidadorEmprestimo;
  * @author Paulo Felipe Feitosa da Silva
  *
  */
-public class Emprestimo {
+public class Emprestimo implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private Usuario dono;
 	private Usuario requerente;
 	private Item item;

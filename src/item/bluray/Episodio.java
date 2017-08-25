@@ -1,5 +1,7 @@
 package item.bluray;
 
+import java.io.Serializable;
+
 import util.ValidadorItem;
 
 /**
@@ -11,8 +13,13 @@ import util.ValidadorItem;
  * @author Paulo Felipe Feitosa da Silva
  *
  */
-public class Episodio {
+public class Episodio implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private int duracao;
 	private ValidadorItem validador;
 

@@ -1,5 +1,7 @@
 package item.bluray;
 
+import java.io.Serializable;
+
 /**
  * Representação dos gêneros disponíveis.
  * 
@@ -9,7 +11,7 @@ package item.bluray;
  * @author Paulo Felipe Feitosa da Silva
  *
  */
-public enum Genero {
+public enum Genero implements Serializable {
 
 	ACAO("ACAO"), ANIMACAO("ANIMACAO"), AVENTURA("AVENTURA"), COMEDIA("COMEDIA"), DOCUMENTARIO("DOCUMENTARIO"), DRAMA(
 			"DRAMA"), EROTICO("EROTICO"), FAROESTE("FAROESTE"), FICCAO("FICCAO"), MUSICAL("MUSICAL"), POLICIAL(

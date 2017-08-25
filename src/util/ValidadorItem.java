@@ -1,5 +1,7 @@
 package util;
 
+import java.io.Serializable;
+
 import item.bluray.Classificacao;
 import item.bluray.Genero;
 import item.jogo.Plataforma;
@@ -13,7 +15,12 @@ import item.jogo.Plataforma;
  * @author Paulo Felipe Feitosa da Silva
  *
  */
-public class ValidadorItem {
+public class ValidadorItem implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Valida um nome de item recebido como parâmetro.

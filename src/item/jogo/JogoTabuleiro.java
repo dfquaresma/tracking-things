@@ -1,5 +1,6 @@
 package item.jogo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -15,8 +16,13 @@ import item.Item;
  * @author Paulo Felipe Feitosa da Silva
  *
  */
-public class JogoTabuleiro extends Item {
+public class JogoTabuleiro extends Item implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private ArrayList<String> pecasPerdidas;
 
 	/**

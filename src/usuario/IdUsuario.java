@@ -1,5 +1,7 @@
 package usuario;
 
+import java.io.Serializable;
+
 import util.ValidadorUsuario;
 
 /**
@@ -11,8 +13,13 @@ import util.ValidadorUsuario;
  * @author Paulo Felipe Feitosa da Silva
  *
  */
-public class IdUsuario {
+public class IdUsuario implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private String nome;
 	private String telefone;
 	private ValidadorUsuario validador;

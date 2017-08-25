@@ -1,5 +1,6 @@
 package util;
 
+import java.io.Serializable;
 import java.util.List;
 
 import emprestimo.Emprestimo;
@@ -16,7 +17,12 @@ import usuario.Usuario;
  * @author Paulo Felipe Feitosa da Silva
  *
  */
-public class ValidadorListagem {
+public class ValidadorListagem implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Valida uma lista de itens recebida no parâmetro. Lança exceção sempre que

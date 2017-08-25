@@ -1,5 +1,7 @@
 package usuario.fidelidade;
 
+import java.io.Serializable;
+
 /**
  * Representa um cartao fidelidade
  * 
@@ -9,8 +11,13 @@ package usuario.fidelidade;
  * @author Paulo Felipe Feitosa da Silva
  *
  */
-public class CartaoFidelidade {
+public class CartaoFidelidade implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private Fidelidade fidelidade;
 
 	/**

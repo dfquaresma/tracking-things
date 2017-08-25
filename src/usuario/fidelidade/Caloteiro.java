@@ -1,5 +1,7 @@
 package usuario.fidelidade;
 
+import java.io.Serializable;
+
 /**
  * Representacao da categoria Caloteiro do cartao fidelidade.
  *
@@ -9,8 +11,13 @@ package usuario.fidelidade;
  * @author Paulo Felipe Feitosa da Silva
  *
  */
-public class Caloteiro implements Fidelidade {
+public class Caloteiro implements Fidelidade, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private final int PERIODO = 0;
 
 	/**

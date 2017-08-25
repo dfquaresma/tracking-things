@@ -1,5 +1,7 @@
 package item.bluray;
 
+import java.io.Serializable;
+
 /**
  * Representação de um filme blu-ray. Guarda as informações básicas para o que é
  * classificado com filme neste sistema.
@@ -10,8 +12,13 @@ package item.bluray;
  * @author Paulo Felipe Feitosa da Silva
  * 
  */
-public class Filme extends BluRay {
+public class Filme extends BluRay implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private Genero genero;
 	private int anoDeLancamento;
 

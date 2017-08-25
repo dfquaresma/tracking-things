@@ -1,5 +1,6 @@
 package usuario;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,8 +20,13 @@ import util.ValidadorUsuario;
  * @author Paulo Felipe Feitosa da Silva
  *
  */
-public class UsuarioController {
+public class UsuarioController implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private Map<IdUsuario, Usuario> usuarios;
 	private ValidadorUsuario validador;
 

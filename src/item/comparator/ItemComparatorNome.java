@@ -1,5 +1,6 @@
 package item.comparator;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
 import item.Item;
@@ -14,7 +15,12 @@ import item.Item;
  * @author Paulo Felipe Feitosa da Silva
  *
  */
-public class ItemComparatorNome implements Comparator<Item> {
+public class ItemComparatorNome implements Comparator<Item>, Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Comparada o itemA com o itemB. Retorna 0 caso estes itens forem iguais,

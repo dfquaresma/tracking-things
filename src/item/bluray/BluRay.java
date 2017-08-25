@@ -1,5 +1,7 @@
 package item.bluray;
 
+import java.io.Serializable;
+
 import item.Item;
 
 /**
@@ -12,8 +14,13 @@ import item.Item;
  * @author Paulo Felipe Feitosa da Silva
  *
  */
-public abstract class BluRay extends Item {
+public abstract class BluRay extends Item implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private int duracao;
 	private Classificacao classificacao;
 

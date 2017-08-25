@@ -1,5 +1,6 @@
 package item;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -21,8 +22,13 @@ import util.ValidadorItem;
  * @author Paulo Felipe Feitosa da Silva
  *
  */
-public class ItemController {
+public class ItemController implements Serializable  {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private ValidadorItem validador;
 
 	/**

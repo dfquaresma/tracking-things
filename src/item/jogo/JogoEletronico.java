@@ -1,5 +1,7 @@
 package item.jogo;
 
+import java.io.Serializable;
+
 import item.Item;
 
 /**
@@ -12,8 +14,13 @@ import item.Item;
  * @author Paulo Felipe Feitosa da Silva
  *
  */
-public class JogoEletronico extends Item {
+public class JogoEletronico extends Item implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private Plataforma plataforma;
 
 	/**

@@ -1,5 +1,7 @@
 package item.bluray;
 
+import java.io.Serializable;
+
 /**
  * Representação de um show em blu-ray. Guarda as informações básicas para o que
  * é classificado com show neste sistema.
@@ -10,8 +12,13 @@ package item.bluray;
  * @author Paulo Felipe Feitosa da Silva
  *
  */
-public class Show extends BluRay {
+public class Show extends BluRay implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private int numDeFaixas;
 	private String artista;
 

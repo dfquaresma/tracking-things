@@ -1,5 +1,6 @@
 package emprestimo.comparador;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
 import emprestimo.Emprestimo;
@@ -14,7 +15,12 @@ import emprestimo.Emprestimo;
  * @author Paulo Felipe Feitosa da Silva
  *
  */
-public class EmprestimoComparatorNomeDono implements Comparator<Emprestimo> {
+public class EmprestimoComparatorNomeDono implements Comparator<Emprestimo>, Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Comparada o emprestimoA com o emprestimoB. Retorna 0 caso estes
