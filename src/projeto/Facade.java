@@ -1,16 +1,18 @@
 package projeto;
 
-import java.util.ArrayList;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import emprestimo.Emprestimo;
 import emprestimo.EmprestimoController;
 import item.Item;
 import item.ItemController;
+import persistencia.Capsula;
+import persistencia.Persistencia;
 import usuario.Usuario;
 import usuario.UsuarioController;
 import util.Listador;
-import util.Persistencia;
 
 /**
  * Representação de uma fachada do tracking things (Sistema de emprestimos de
@@ -38,28 +40,34 @@ public class Facade {
 		this.itemController = new ItemController();
 		this.emprestimoController = new EmprestimoController();
 		this.listador = new Listador();
+		this.persistencia = new Persistencia(
+				"src" + File.separator + "persistencia" + File.separator + "tt_objects.dat");
 	}
 
 	/**
 	 * Inicializa os sistema de emprestimos.
+	 * 
+	 * @throws IOException
+	 * @throws ClassNotFoundException
 	 */
-	public void iniciarSistema() {
-		
-		//FALTA TERMINAR, É SÓ PARA TER UM NOÇÃO...
-		this.usuarioController = (UsuarioController) this.persistencia.carregaObjeto();
-		this.emprestimoController = (EmprestimoController) this.persistencia.carregaObjeto();
+	public void iniciarSistema() throws ClassNotFoundException, IOException {
+		Capsula capsula = (Capsula) this.persistencia.carregaObjeto();
+		this.usuarioController = (UsuarioController) capsula.getObject();
+		this.emprestimoController = (EmprestimoController) capsula.getObject();
 
 	}
 
 	/**
 	 * Fecha o sistema de apostas.
+	 * 
+	 * @throws IOException
 	 */
-	public void fecharSistema() {
-		
-		//FALTA TERMINAR, É SÓ PARA TER UM NOÇÃO...
-		this.persistencia.salvaObjeto(this.usuarioController);
-		this.persistencia.salvaObjeto(this.emprestimoController);
-		
+	public void fecharSistema() throws IOException {
+		Capsula capsula = new Capsula();
+		capsula.addObjeto(usuarioController);
+		capsula.addObjeto(emprestimoController);
+		this.persistencia.salvaObjeto(capsula);
+
 	}
 
 	/**
