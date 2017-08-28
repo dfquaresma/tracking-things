@@ -1,5 +1,7 @@
 package util;
 
+import java.io.Serializable;
+
 import item.Item;
 
 /**
@@ -11,7 +13,12 @@ import item.Item;
  * @author Paulo Felipe Feitosa da Silva
  *
  */
-public class ValidadorUsuario {
+public class ValidadorUsuario implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Valida um nome recebido como parâmetro.

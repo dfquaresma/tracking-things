@@ -1,5 +1,6 @@
 package usuario.comparator;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
 import usuario.Usuario;
@@ -14,7 +15,12 @@ import usuario.Usuario;
  * @author Paulo Felipe Feitosa da Silva
  *
  */
-public class UsuarioReputacaoComparator implements Comparator<Usuario> {
+public class UsuarioReputacaoComparator implements Comparator<Usuario>, Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Comparada o usuarioA com o usuarioB. Retorna 0 caso estes usuários tenham

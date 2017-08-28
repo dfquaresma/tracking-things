@@ -1,5 +1,6 @@
 package emprestimo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,8 +17,13 @@ import usuario.Usuario;
  * @author Paulo Felipe Feitosa da Silva
  *
  */
-public class EmprestimoController {
+public class EmprestimoController implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private List<Emprestimo> emprestimos;
 
 	/**

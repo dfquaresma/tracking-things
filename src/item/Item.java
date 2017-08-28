@@ -1,5 +1,7 @@
 package item;
 
+import java.io.Serializable;
+
 import util.ValidadorItem;
 
 /**
@@ -12,8 +14,13 @@ import util.ValidadorItem;
  * @author Paulo Felipe Feitosa da Silva
  *
  */
-public abstract class Item {
+public abstract class Item implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private String nome;
 	private double preco;
 	private boolean emprestado;

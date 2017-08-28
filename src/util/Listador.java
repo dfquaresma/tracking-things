@@ -1,5 +1,6 @@
 package util;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -25,7 +26,12 @@ import usuario.comparator.UsuarioReputacaoReversaComparator;
  * @author Paulo Felipe Feitosa da Silva
  *
  */
-public class Listador {
+public class Listador implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private ValidadorListagem validador;
 	private ItemComparatorNome comparaItemPorNome;
 	private ItemComparatorValor comparaItemPorValor;

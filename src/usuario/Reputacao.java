@@ -1,5 +1,7 @@
 package usuario;
 
+import java.io.Serializable;
+
 /**
  * Classe que representa a reputacao de um usuario de acordo com seu
  * comportamento.
@@ -11,7 +13,12 @@ package usuario;
  * @author Paulo Felipe Feitosa da Silva
  *
  */
-public class Reputacao {
+public class Reputacao implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private double reputacao;
 
 	/**

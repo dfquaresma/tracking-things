@@ -1,5 +1,6 @@
 package projeto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import emprestimo.Emprestimo;
@@ -9,6 +10,7 @@ import item.ItemController;
 import usuario.Usuario;
 import usuario.UsuarioController;
 import util.Listador;
+import util.Persistencia;
 
 /**
  * Representação de uma fachada do tracking things (Sistema de emprestimos de
@@ -26,6 +28,7 @@ public class Facade {
 	private ItemController itemController;
 	private EmprestimoController emprestimoController;
 	private Listador listador;
+	private Persistencia persistencia;
 
 	/**
 	 * Constrói a fachada de um sistema de emprestimos.
@@ -41,6 +44,22 @@ public class Facade {
 	 * Inicializa os sistema de emprestimos.
 	 */
 	public void iniciarSistema() {
+		
+		//FALTA TERMINAR, É SÓ PARA TER UM NOÇÃO...
+		this.usuarioController = (UsuarioController) this.persistencia.carregaObjeto();
+		this.emprestimoController = (EmprestimoController) this.persistencia.carregaObjeto();
+
+	}
+
+	/**
+	 * Fecha o sistema de apostas.
+	 */
+	public void fecharSistema() {
+		
+		//FALTA TERMINAR, É SÓ PARA TER UM NOÇÃO...
+		this.persistencia.salvaObjeto(this.usuarioController);
+		this.persistencia.salvaObjeto(this.emprestimoController);
+		
 	}
 
 	/**
@@ -503,13 +522,6 @@ public class Facade {
 	public String listarTop10PioresUsuarios() {
 		List<Usuario> usuarios = this.usuarioController.getUsuariosNoSistema();
 		return this.listador.listarTop10PioresUsuarios(usuarios);
-	}
-
-	/**
-	 * Fecha o sistema de apostas.
-	 */
-	public void fecharSistema() {
-
 	}
 
 }

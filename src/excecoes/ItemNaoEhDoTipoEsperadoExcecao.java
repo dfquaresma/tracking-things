@@ -1,5 +1,7 @@
 package excecoes;
 
+import java.io.Serializable;
+
 /**
  * Lançado para indicar que a operação sobre o item de interesse é inválida pois
  * o item não é do tipo esperado para a operação.
@@ -10,7 +12,7 @@ package excecoes;
  * @author Paulo Felipe Feitosa da Silva
  *
  */
-public class ItemNaoEhDoTipoEsperadoExcecao extends RuntimeException {
+public class ItemNaoEhDoTipoEsperadoExcecao extends RuntimeException implements Serializable {
 
 	private static final long serialVersionUID = 296085355876777468L;
 

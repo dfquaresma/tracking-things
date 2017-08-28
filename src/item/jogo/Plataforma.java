@@ -1,5 +1,7 @@
 package item.jogo;
 
+import java.io.Serializable;
+
 /**
  * Representação das plataformas disponíveis.
  * 
@@ -9,7 +11,7 @@ package item.jogo;
  * @author Paulo Felipe Feitosa da Silva
  *
  */
-public enum Plataforma {
+public enum Plataforma implements Serializable {
 
 	PC("PC"), MAC("MAC"), PS3("PS3"), PS4("PS4"), XBOX360("XBOX360"), XBOX_ONE("XBOX_ONE"), NINTENDO_3DS(
 			"NINTENDO_3DS"), OUTRO("OUTRO");

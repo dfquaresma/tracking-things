@@ -1,5 +1,6 @@
 package util;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import usuario.Usuario;
@@ -13,7 +14,12 @@ import usuario.Usuario;
  * @author Paulo Felipe Feitosa da Silva
  *
  */
-public class ValidadorEmprestimo {
+public class ValidadorEmprestimo implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Valida um usuario, recebido no parâmetro, dono de um item.
