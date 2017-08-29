@@ -8,17 +8,16 @@ import easyaccept.EasyAccept;
 public class Main {
 
 	public static void main(String[] args) throws Exception {
-
-		ArrayList<String> testes = new ArrayList<>();
-		testes.add("us" + File.separator + "us1_test.txt");
-		testes.add("us" + File.separator + "us2_test.txt");
-		testes.add("us" + File.separator + "us3_test.txt");
-		testes.add("us" + File.separator + "us4_test.txt");
-		testes.add("us" + File.separator + "us5_test.txt");
-		testes.add("us" + File.separator + "us6_test.txt");
-		testes.add("us" + File.separator + "us7_test.txt");
-		testes.add("us" + File.separator + "us8_test.txt");
-		EasyAccept.executeEasyAcceptTests("projeto.Facade", testes);
+		for (int i = 1; i <= 8; i++) {
+			acceptanceTest(i);
+		}
 	}
 
+	private static void acceptanceTest(int i) throws Exception { 
+		ArrayList<String> testes = new ArrayList<>();
+		testes.add("us" + File.separator + "us" + i + "_test.txt");
+		EasyAccept.executeEasyAcceptTests("projeto.Facade", testes);
+	}
+	
+	
 }

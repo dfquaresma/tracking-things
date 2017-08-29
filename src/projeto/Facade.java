@@ -1,6 +1,5 @@
 package projeto;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -40,8 +39,7 @@ public class Facade {
 		this.itemController = new ItemController();
 		this.emprestimoController = new EmprestimoController();
 		this.listador = new Listador();
-		this.persistencia = new Persistencia(
-				"src" + File.separator + "persistencia" + File.separator + "tt_objects.dat");
+		this.persistencia = new Persistencia();
 	}
 
 	/**

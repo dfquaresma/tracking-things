@@ -24,13 +24,13 @@ public class Capsula implements Serializable {
 
 	public Object getObject() {
 		
-		if (!this.objetos.isEmpty()) {
+		if (this.objetos.size() > 0) {
 			Object objeto = this.objetos.get(0);
 			this.objetos.remove(0);
 			
 			return objeto;			
 		} 
-		return null;
+		return "";
 
 	}
 
