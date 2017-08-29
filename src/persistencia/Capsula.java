@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import excecoes.OperacaoNaoPermitidaNoMomentoExcecao;
+
 /**
  * Representação de uma capsula que guarda objetos.
  * 
@@ -56,7 +58,7 @@ public class Capsula implements Serializable {
 
 			return objeto;
 		}
-		return "";
+		throw new OperacaoNaoPermitidaNoMomentoExcecao("Nao ha mais objetos a serem desencapsulados.");
 
 	}
 

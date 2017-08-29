@@ -9,7 +9,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 /**
- * Entidade responsável pel persistencia do sitema.
+ * Entidade responsável pela persistencia do sitema.
  * 
  * @author Amanda V. A. de Luna e Costa
  * @author David Ferreira Quaresma
@@ -110,4 +110,9 @@ public class Persistencia {
 
 	}
 
+	public void deletarPersistencia() {
+		File file = new File(this.diretorioParaPersistencia);
+		file.delete();
+	}
+	
 }

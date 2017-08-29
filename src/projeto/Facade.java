@@ -65,10 +65,17 @@ public class Facade {
 	 */
 	public void fecharSistema() throws IOException {
 		Capsula capsula = new Capsula();
-		capsula.addObjeto(usuarioController);
-		capsula.addObjeto(emprestimoController);
+		capsula.addObjeto(this.usuarioController);
+		capsula.addObjeto(this.emprestimoController);
 		this.persistencia.salvaObjeto(capsula);
 
+	}
+
+	/**
+	 * Reinicia o sistema deletando todos os dados salvos até então.
+	 */
+	public void reiniciarSistema() {
+		this.persistencia.deletarPersistencia();
 	}
 
 	/**
