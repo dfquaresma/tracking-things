@@ -46,7 +46,9 @@ public class Facade {
 	 * Inicializa os sistema de emprestimos.
 	 * 
 	 * @throws IOException
+	 *             quando alguma operação de entrada e/ou saída não é suportada.
 	 * @throws ClassNotFoundException
+	 *             quando não há objetos serializados salvos.
 	 */
 	public void iniciarSistema() throws ClassNotFoundException, IOException {
 		Capsula capsula = (Capsula) this.persistencia.carregaObjeto();
@@ -59,6 +61,7 @@ public class Facade {
 	 * Fecha o sistema de apostas.
 	 * 
 	 * @throws IOException
+	 *             quando alguma operação de entrada e saída não é suportada.
 	 */
 	public void fecharSistema() throws IOException {
 		Capsula capsula = new Capsula();
