@@ -23,11 +23,32 @@ public class Persistencia {
 	private String diretorioTTDefault;
 
 	/**
-	 * Constrói uma entidade de Persistencia com diretório internos padrão.
+	 * Constrói uma entidade de persistencia com diretórios internos padrão.
 	 */
 	public Persistencia() {
-		this.diretorioTTDefault = "src" + File.separator + "persistencia" + File.separator + "tt_default.dat";
-		this.diretorioParaPersistencia = "src" + File.separator + "persistencia" + File.separator + "tt_objects.dat";
+		this("src" + File.separator + "persistencia" + File.separator + "tt_default.dat",
+				"src" + File.separator + "persistencia" + File.separator + "tt_objects.dat");
+	}
+
+	/**
+	 * Constrói uma entidade de persistencia com diretórios especificados.
+	 * 
+	 * @param diretorioDefault
+	 *            o diretório padrão que guarda o estado base inicial do
+	 *            sistema, quando o mesmo ainda não foi executado.
+	 * @param diretorio
+	 *            o diretório onde será salvo e recuperado o estado do sistema
+	 *            ao ser executado.
+	 */
+	public Persistencia(String diretorioDefault, String diretorio) {
+
+		File file = new File(diretorioDefault);
+		if (!file.exists()) {
+			throw new IllegalArgumentException("DiretoiDefault nao existe.");
+		}
+
+		this.diretorioTTDefault = diretorioDefault;
+		this.diretorioParaPersistencia = diretorio;
 	}
 
 	/**
@@ -39,6 +60,9 @@ public class Persistencia {
 	 *             quando alguma operação de entrada e saída não é suportada.
 	 */
 	public void salvaObjeto(Object obj) throws IOException {
+		if (obj == null) {
+			throw new NullPointerException("Objeto nao pode ser nulo.");
+		}
 
 		FileOutputStream fos = null;
 		ObjectOutputStream oos = null;
@@ -50,7 +74,7 @@ public class Persistencia {
 
 		} catch (IOException ioe) {
 			throw new IOException(
-					"Nao foi possivel salvar o objeto. Diretorio de persistencia nao pode ser criado/modificado.");
+					"Nao foi possivel salvar o objeto. Diretorio de persistencia nao pode ser criado/modificado ou o objeto nao é serializavel.");
 
 		} finally {
 
@@ -88,9 +112,14 @@ public class Persistencia {
 			obj = ois.readObject();
 
 		} catch (FileNotFoundException fnfe) {
-			fis = new FileInputStream(this.diretorioTTDefault);
-			ois = new ObjectInputStream(fis);
-			obj = ois.readObject();
+			try {
+				fis = new FileInputStream(this.diretorioTTDefault);
+				ois = new ObjectInputStream(fis);
+				obj = ois.readObject();
+
+			} catch (Exception e) {
+				throw new IOException("Ocorreu um erro ao tentar utilizar o diretorio default.");
+			}
 
 		} catch (ClassNotFoundException cnfe) {
 			throw new ClassNotFoundException("Nao foi possivel carregar o objeto.");
@@ -114,5 +143,5 @@ public class Persistencia {
 		File file = new File(this.diretorioParaPersistencia);
 		file.delete();
 	}
-	
+
 }

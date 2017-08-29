@@ -52,8 +52,8 @@ public class Facade {
 	 */
 	public void iniciarSistema() throws ClassNotFoundException, IOException {
 		Capsula capsula = (Capsula) this.persistencia.carregaObjeto();
-		this.usuarioController = (UsuarioController) capsula.getObject();
-		this.emprestimoController = (EmprestimoController) capsula.getObject();
+		this.usuarioController = (UsuarioController) capsula.getObjeto();
+		this.emprestimoController = (EmprestimoController) capsula.getObjeto();
 
 	}
 

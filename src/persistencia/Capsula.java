@@ -38,6 +38,10 @@ public class Capsula implements Serializable {
 	 *            o objeto a ser adicionado.
 	 */
 	public void addObjeto(Object obj) {
+		if (obj == null) {
+		throw new NullPointerException("Objeto nao pode ser nulo.");
+		}
+		
 		this.objetos.add(obj);
 
 	}
@@ -50,7 +54,7 @@ public class Capsula implements Serializable {
 	 * 
 	 * @return o objeto a ser recuperado.
 	 */
-	public Object getObject() {
+	public Object getObjeto() {
 
 		if (this.objetos.size() > 0) {
 			Object objeto = this.objetos.get(0);
@@ -59,6 +63,16 @@ public class Capsula implements Serializable {
 			return objeto;
 		}
 		throw new OperacaoNaoPermitidaNoMomentoExcecao("Nao ha mais objetos a serem desencapsulados.");
+
+	}
+
+	/**
+	 * Recupera a quantidade de objetos guardados na capsula.
+	 * 
+	 * @return um inteiro representando a quantidade.
+	 */
+	public int qtdObjetosContidos() {
+		return this.objetos.size();
 
 	}
 
