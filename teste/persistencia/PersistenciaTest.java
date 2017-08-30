@@ -33,7 +33,7 @@ public class PersistenciaTest {
 	@Before
 	public void setUp() {
 
-		this.diretorioDefault = "teste" + File.separator + "persistencia" + File.separator + "tt_default.dat";
+		this.diretorioDefault = "teste" + File.separator + "persistencia" + File.separator + "tt_default_test.dat";
 		this.diretorioParaPersistencia = "teste" + File.separator + "persistencia" + File.separator + "tt_objects.dat";
 		this.persistencia = new Persistencia(this.diretorioDefault, this.diretorioParaPersistencia);
 		this.fileAux = new File(diretorioParaPersistencia);

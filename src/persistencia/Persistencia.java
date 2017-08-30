@@ -139,6 +139,10 @@ public class Persistencia {
 
 	}
 
+	/**
+	 * Deleta todos os dados persistentes de uma instancia de objeto que faz uso
+	 * dessa classe.
+	 */
 	public void deletarPersistencia() {
 		File file = new File(this.diretorioParaPersistencia);
 		file.delete();
