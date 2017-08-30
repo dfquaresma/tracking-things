@@ -199,8 +199,8 @@ public class ListadorTest {
 		assertEquals("Nenhum item emprestado", listador.listarEmprestimosUsuarioEmprestando(this.emprestimos));
 
 		adicionaEmprestimosAListaDeEmprestimos();
-		assertEquals("Emprestimos: " + emprestimo3.toString() + "|" + emprestimo2.toString() + "|"
-				+ emprestimo1.toString() + "|", listador.listarEmprestimosUsuarioEmprestando(emprestimos));
+		assertEquals("Emprestimos: " + emprestimo3.toString() + "|" + emprestimo1.toString() + "|"
+				+ emprestimo2.toString() + "|", listador.listarEmprestimosUsuarioEmprestando(emprestimos));
 	}
 
 	/**
@@ -218,11 +218,11 @@ public class ListadorTest {
 
 		assertEquals("Nenhum item pego emprestado",
 				listador.listarEmprestimosUsuarioPegandoEmprestado(this.emprestimos));
-
+ 
 		adicionaEmprestimosAListaDeEmprestimos();
 		assertEquals(
-				"Emprestimos pegos: " + emprestimo3.toString() + "|" + emprestimo2.toString() + "|"
-						+ emprestimo1.toString() + "|",
+				"Emprestimos pegos: " + emprestimo3.toString() + "|" + emprestimo1.toString() + "|"
+						+ emprestimo2.toString() + "|",
 				listador.listarEmprestimosUsuarioPegandoEmprestado(emprestimos));
 	}
 

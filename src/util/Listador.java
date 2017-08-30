@@ -7,6 +7,7 @@ import java.util.List;
 
 import emprestimo.Emprestimo;
 import emprestimo.comparador.EmprestimoComparatorNomeDono;
+import emprestimo.comparador.EmprestimoComparatorNomeItem;
 import emprestimo.comparador.EmprestimosComparatorDataEmprestimo;
 import item.Item;
 import item.comparator.ItemComparatorNome;
@@ -35,8 +36,9 @@ public class Listador implements Serializable {
 	private ValidadorListagem validador;
 	private ItemComparatorNome comparaItemPorNome;
 	private ItemComparatorValor comparaItemPorValor;
-	private EmprestimoComparatorNomeDono comparaEmprestimoDono;
 	private ItemComparatorVezesEmprestadas comparaItemVezesEmprestadas;
+	private EmprestimoComparatorNomeDono comparaEmprestimoDono;
+	private EmprestimoComparatorNomeItem comparaEmprestimoItem;
 	private EmprestimosComparatorDataEmprestimo comparaEmprestimosPorDataRegistro;
 	private UsuarioNomeComparator comparaUsuarioPorNome;
 	private UsuarioReputacaoComparator comparaUsuarioPorReputacao;
@@ -49,8 +51,9 @@ public class Listador implements Serializable {
 		this.validador = new ValidadorListagem();
 		this.comparaItemPorNome = new ItemComparatorNome();
 		this.comparaItemPorValor = new ItemComparatorValor();
-		this.comparaEmprestimoDono = new EmprestimoComparatorNomeDono();
 		this.comparaItemVezesEmprestadas = new ItemComparatorVezesEmprestadas();
+		this.comparaEmprestimoDono = new EmprestimoComparatorNomeDono();
+		this.comparaEmprestimoItem = new EmprestimoComparatorNomeItem();
 		this.comparaEmprestimosPorDataRegistro = new EmprestimosComparatorDataEmprestimo();
 		this.comparaUsuarioPorNome = new UsuarioNomeComparator();
 		this.comparaUsuarioPorReputacao = new UsuarioReputacaoComparator();
@@ -162,7 +165,7 @@ public class Listador implements Serializable {
 	 * @return a representação dos emprestimos.
 	 */
 	public String listarEmprestimosUsuarioEmprestando(List<Emprestimo> emprestimos) {
-		return this.listaEmprestimosEmOrdemDeRegistro(emprestimos, "Emprestimos: ", "Nenhum item emprestado");
+		return this.listaEmprestimosEmOrdemDeNomeDeItem(emprestimos, "Emprestimos: ", "Nenhum item emprestado");
 	}
 
 	/**
@@ -174,7 +177,7 @@ public class Listador implements Serializable {
 	 * @return a representação dos emprestimos.
 	 */
 	public String listarEmprestimosUsuarioPegandoEmprestado(List<Emprestimo> emprestimos) {
-		return this.listaEmprestimosEmOrdemDeRegistro(emprestimos, "Emprestimos pegos: ",
+		return this.listaEmprestimosEmOrdemDeNomeDeItem(emprestimos, "Emprestimos pegos: ",
 				"Nenhum item pego emprestado");
 	}
 
@@ -190,6 +193,16 @@ public class Listador implements Serializable {
 		return this.listaEmprestimosEmOrdemDeRegistro(emprestimos, "Emprestimos associados ao item: ",
 				"Nenhum emprestimo associado ao item");
 
+	}
+
+	private String listaEmprestimosEmOrdemDeNomeDeItem(List<Emprestimo> emprestimos, String msgListagemValida,
+			String msgListagemComZeroElementos) {
+		this.validador.validaListaDeEmprestimosParaListagem(emprestimos);
+		if (emprestimos.size() == 0) {
+			return msgListagemComZeroElementos;
+		}
+		emprestimos.sort(this.comparaEmprestimoItem);
+		return msgListagemValida + listagemDeEmprestimos(emprestimos);
 	}
 
 	private String listaEmprestimosEmOrdemDeRegistro(List<Emprestimo> emprestimos, String msgListagemValida,
