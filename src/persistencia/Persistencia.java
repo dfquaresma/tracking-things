@@ -26,8 +26,8 @@ public class Persistencia {
 	 * Constrói uma entidade de persistencia com diretórios internos padrão.
 	 */
 	public Persistencia() {
-		this("src" + File.separator + "persistencia" + File.separator + "tt_default.dat",
-				"src" + File.separator + "persistencia" + File.separator + "tt_objects.dat");
+		this("data" + File.separator + "tt_default.dat",
+				"src" + File.separator + "tt_objects.dat");
 	}
 
 	/**
