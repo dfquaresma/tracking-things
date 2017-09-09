@@ -30,7 +30,7 @@ public class Usuario implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private String nome;
 	private String telefone;
 	private String email;
@@ -465,4 +465,14 @@ public class Usuario implements Serializable {
 	public String toString() {
 		return this.nome + ", " + this.email + ", " + this.telefone;
 	}
+
+	/**
+	 * Recupera o serial UID do usuário.
+	 * 
+	 * @return o UID.
+	 */
+	public long getUID() {
+		return Usuario.serialVersionUID;
+	}
+
 }

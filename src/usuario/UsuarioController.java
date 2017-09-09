@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import excecoes.OperacaoNaoPermitidaNoMomentoExcecao;
 import excecoes.UsuarioJaExistenteExcecao;
 import item.Item;
 import util.ValidadorUsuario;
@@ -26,7 +27,7 @@ public class UsuarioController implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private Map<IdUsuario, Usuario> usuarios;
 	private ValidadorUsuario validador;
 
@@ -319,6 +320,37 @@ public class UsuarioController implements Serializable {
 	 */
 	public List<Usuario> getUsuariosNoSistema() {
 		return new ArrayList<Usuario>(this.usuarios.values());
+	}
+
+	/**
+	 * Recupera o mapa de usuários do sistema.
+	 * 
+	 * @return o mapa de usuários.
+	 */
+	public Map<IdUsuario, Usuario> getUsuarios() {
+		return this.usuarios;
+
+	}
+
+	/**
+	 * Atribui ao mapa de usuários o mapa recebido.
+	 * 
+	 * @param usuarios
+	 *            o novo mapa de usuários.
+	 */
+	public void setUsuarios(Map<IdUsuario, Usuario> usuarios) {
+		if (usuarios == null) {
+			throw new NullPointerException("usurios nao pode ser nulo");
+		}
+		if (!usuarios.isEmpty()) {
+			for (Usuario u : usuarios.values()) {
+				if (u.getUID() != 1L) {
+					throw new OperacaoNaoPermitidaNoMomentoExcecao("Persistencia invalida. Usuário(s) obsoleto(s).");
+				}
+			}
+		}
+
+		this.usuarios = usuarios;
 	}
 
 }

@@ -63,7 +63,7 @@ public class Persistencia {
 		if (obj == null) {
 			throw new NullPointerException("Objeto nao pode ser nulo.");
 		}
-
+		
 		FileOutputStream fos = null;
 		ObjectOutputStream oos = null;
 		try {

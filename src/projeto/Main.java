@@ -7,13 +7,15 @@ import easyaccept.EasyAccept;
 
 public class Main {
 
-	public static void main(String[] args) throws Exception {		
+	public static void main(String[] args) throws Exception {
+	
 		for (int i = 1; i <= 8; i++) {
 			acceptanceTest(i);
 		}
 		
 		Facade f = new Facade();
 		f.reiniciarSistema();
+		
 	}
 
 	private static void acceptanceTest(int i) throws Exception { 

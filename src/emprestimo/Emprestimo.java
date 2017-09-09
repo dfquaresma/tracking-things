@@ -27,7 +27,7 @@ public class Emprestimo implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private Usuario dono;
 	private Usuario requerente;
 	private Item item;
@@ -360,6 +360,15 @@ public class Emprestimo implements Serializable {
 	 */
 	public Date getDataDoEmprestimo() {
 		return this.dataEmprestimo;
+	}
+
+	/**
+	 * Recupera o SerialVersionUID do emprestimo.
+	 * 
+	 * @return o UID.
+	 */
+	public long getUID() {
+		return Emprestimo.serialVersionUID;
 	}
 
 }

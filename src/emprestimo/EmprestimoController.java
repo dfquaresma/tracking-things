@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import excecoes.OperacaoNaoPermitidaNoMomentoExcecao;
 import item.Item;
 import usuario.Usuario;
 
@@ -23,7 +24,7 @@ public class EmprestimoController implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private List<Emprestimo> emprestimos;
 
 	/**
@@ -220,6 +221,39 @@ public class EmprestimoController implements Serializable {
 
 		return emprestimos;
 
+	}
+
+	/**
+	 * Recupera a lista de emprestimos.
+	 * 
+	 * @return a lista de emprestimos.
+	 */
+	public List<Emprestimo> getEmprestimos() {
+		return emprestimos;
+	}
+
+	/**
+	 * Atribui a lista de emprestimos a lista recebida.
+	 * 
+	 * @param emprestimos
+	 *            a lista de emprestimos nova.
+	 */
+	public void setEmprestimos(List<Emprestimo> emprestimos) {
+		if (emprestimos == null) {
+			throw new NullPointerException("Emprestimos nao pode ser nulo");
+		}
+		if (!emprestimos.isEmpty()) {
+			if (emprestimos.contains(null)) {
+				throw new IllegalArgumentException("Emprestimos invalido.");
+			}
+			for (Emprestimo e : emprestimos) {
+				if (e.getUID() != 1L) {
+					throw new OperacaoNaoPermitidaNoMomentoExcecao("Persistencia invalida. Emprestimo(s) obsoleto(s).");
+				}
+			}
+		}
+
+		this.emprestimos = emprestimos;
 	}
 
 }

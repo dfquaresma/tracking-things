@@ -2,6 +2,7 @@ package projeto;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import emprestimo.Emprestimo;
 import emprestimo.EmprestimoController;
@@ -9,6 +10,7 @@ import item.Item;
 import item.ItemController;
 import persistencia.Capsula;
 import persistencia.Persistencia;
+import usuario.IdUsuario;
 import usuario.Usuario;
 import usuario.UsuarioController;
 import util.Listador;
@@ -50,11 +52,11 @@ public class Facade {
 	 * @throws ClassNotFoundException
 	 *             quando não há objetos serializados salvos.
 	 */
+	@SuppressWarnings("unchecked")
 	public void iniciarSistema() throws ClassNotFoundException, IOException {
 		Capsula capsula = (Capsula) this.persistencia.carregaObjeto();
-		this.usuarioController = (UsuarioController) capsula.getObjeto();
-		this.emprestimoController = (EmprestimoController) capsula.getObjeto();
-
+		this.usuarioController.setUsuarios((Map<IdUsuario, Usuario>) capsula.getObjeto());
+		this.emprestimoController.setEmprestimos((List<Emprestimo>) capsula.getObjeto());
 	}
 
 	/**
@@ -65,8 +67,8 @@ public class Facade {
 	 */
 	public void fecharSistema() throws IOException {
 		Capsula capsula = new Capsula();
-		capsula.addObjeto(this.usuarioController);
-		capsula.addObjeto(this.emprestimoController);
+		capsula.addObjeto(this.usuarioController.getUsuarios());
+		capsula.addObjeto(this.emprestimoController.getEmprestimos());
 		this.persistencia.salvaObjeto(capsula);
 
 	}
